@@ -4,7 +4,7 @@
 
 1. Clone into the repository with the following command
 ```shell
-git clone github.com/toalaah/config
+git clone https://github.com/toalaah/config
 ```
 
 2. Run the following command from within the directory
