@@ -1,16 +1,17 @@
 # Dotfiles, Configs, & Co
 
-## Setup
+## Installation
 
-Run the following command for each dotfile you want to symlink from your home dir.
-
+1. Clone into the repository with the following command
 ```shell
-
-ln -sv ~/config/FILEHERE ~
-
+git clone github.com/toalaah/config
 ```
 
-## TODO
+2. Run the following command from within the directory
+```shell
+./setup.sh
+```
 
-* Make auto-script
-* Create repo and push
+3. ?
+
+4. Profit
