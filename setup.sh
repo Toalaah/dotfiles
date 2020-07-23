@@ -11,10 +11,10 @@ rm ./log
 echo "* creating new source files...\n"
 
 # create new dotfiles through reference
-echo "source $HOME/config/zsh/.zshrc" >$HOME/.zshrc
-echo "source $HOME/config/vim/.vimrc" >$HOME/.vimrc
-echo "source $HOME/config/tmux/.tmux.conf" >$HOME/.tmux.conf
-mkdir -p $HOME/.config/nvim
-echo "set runtimepath^=~/.vim runtimepath+=~/.vim/after\nlet &packpath = &runtimepath\nsource ~/.vimrc" >$HOME/.config/nvim/init.vim
+echo "source $HOME/config/zsh/zshrc" >$HOME/.zshrc
+echo "source $HOME/config/vim/init.vim" >$HOME/.vimrc
+echo "source $HOME/config/tmux/tmux.conf" >$HOME/.tmux.conf
+#mkdir -p $HOME/.config/nvim
+#echo "set runtimepath^=~/.vim runtimepath+=~/.vim/after\nlet &packpath = &runtimepath\nsource ~/init.vim" >$HOME/.config/nvim/init.vim
 
 echo "* done"
