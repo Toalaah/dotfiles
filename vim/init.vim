@@ -12,7 +12,6 @@ Plug 'tpope/vim-fugitive'
 call plug#end()
 
 "set noshowmode for lightline"
-
 let g:lightline = {
       \ 'colorscheme': 'seoul256',
       \ 'active': {
@@ -28,6 +27,4 @@ colorscheme gruvbox
 set background=dark
 
 nnoremap <CR> :noh<CR><CR>
-
-
 
