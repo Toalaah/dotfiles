@@ -19,13 +19,21 @@ function update_prompt() {
     if [ -z "$BRANCH" ]; then
         PS1+=""
     else
-        # get number of commits ahead
-        COMMITS=$(git rev-list --right-only --count origin/master...@ 2>~/tmp/null)
-        if [ ${COMMITS} -eq 0 ]; then
+        # alternate version which shows changes instead of commits
+        CHANGES=$(git s --short | wc -l | awk '{$1=$1};1')
+        if [ $CHANGES -eq 0 ]; then
             PS1+=", ($BRANCH)"
         else
-            PS1+=", ($BRANCH+$COMMITS)"
+            PS1+=", ($BRANCH+$CHANGES)"
         fi
+    
+        # get number of commits ahead
+        #COMMITS=$(git rev-list --right-only --count origin/master...@ 2>~/tmp/null)
+        #if [ ${COMMITS} -eq 0 ]; then
+        #    PS1+=", ($BRANCH)"
+        #else
+        #    PS1+=", ($BRANCH+$COMMITS)"
+        #fi
     fi
     PS1+="%f"
     PS1+="%B%F{214}]%f%b: "
