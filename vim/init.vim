@@ -5,7 +5,6 @@ source $HOME/config/vim/functions.vim
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'dir': '../pack/coc/coc.nvim-release/plugin/coc.vim'}
 Plug 'morhetz/gruvbox'
-Plug 'davidhalter/jedi-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-fugitive'
