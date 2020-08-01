@@ -1,6 +1,9 @@
-source $HOME/config/vim/key-mappings.vim
-source $HOME/config/vim/preferences.vim
-source $HOME/config/vim/functions.vim
+filetype plugin on
+
+
+source ~/config/vim/key-mappings.vim
+source ~/config/vim/preferences.vim
+source ~/config/vim/functions.vim
 
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'dir': '../pack/coc/coc.nvim-release/plugin/coc.vim'}

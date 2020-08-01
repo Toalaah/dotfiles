@@ -2,6 +2,10 @@
 vnoremap < <gv
 vnoremap > >gv
 
+" enable moving virtual lines
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
 if exists('g:vscode')
 
 " enable tabbing with multiple buffers open

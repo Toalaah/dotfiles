@@ -4,6 +4,7 @@ alias vim=nvim
 alias zip="zip -r -X archive.zip"
 alias ..="cd .."
 alias ...="cd ../../"
+alias server="php -S localhost:8000"
 
 # =======================================================================
 # =============================== PROMPT ================================
@@ -36,7 +37,7 @@ function update_prompt() {
         #fi
     fi
     PS1+="%f"
-    PS1+="%B%F{214}]%f%b: "
+    PS1+="%B%F{214}]%f%b%B%F{167} ❯❯%f%b "
 }
 
 precmd_functions+=(update_prompt)

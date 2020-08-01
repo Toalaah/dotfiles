@@ -1,3 +1,5 @@
+filetype plugin on
+
 autocmd BufWritePost *.tex silent! !pdf <afile>
 augroup WrapLineInTeXFile
     autocmd!
@@ -6,7 +8,7 @@ augroup END
 
 augroup WrapLineInMDFile
     autocmd!
-    autocmd FileType md setlocal wrap
+    autocmd FileType md setlocal  wrap
 augroup END
 
 
