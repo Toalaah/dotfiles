@@ -28,13 +28,6 @@ function update_prompt() {
             PS1+=", ($BRANCH+$CHANGES)"
         fi
     
-        # get number of commits ahead
-        #COMMITS=$(git rev-list --right-only --count origin/master...@ 2>~/tmp/null)
-        #if [ ${COMMITS} -eq 0 ]; then
-        #    PS1+=", ($BRANCH)"
-        #else
-        #    PS1+=", ($BRANCH+$COMMITS)"
-        #fi
     fi
     PS1+="%f"
     PS1+="%B%F{214}]%f%b%B%F{167} ❯❯%f%b "
