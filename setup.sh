@@ -1,20 +1,44 @@
-echo "* beginning setup...\n"
-echo "* searching for pre-existing config files...\n"
+echo "* Beginning setup...\n"
 
-# check for existing files in home dir, make backup
-echo "* creating backups...\n"
-mv ~/.zshrc ~/.zshrc.bak &> ./log
-mv ~/.vimrc ~/.vimrc.bak &> ./log
-mv ~/.tmux.conf ~/.tmux.conf.bak &> ./log
-rm ./log
+echo "* Searching for pre-existing config files...\n"
+# check for any pre-existing config files
+FILE=~/.zshrc
+if test -f "$FILE"; then
+	echo "* Found zshrc at , $FILE, backing up to $FILE.bak."
+	mv ~/.zshrc ~/.zshrc.bak
+fi
 
-echo "* creating new source files...\n"
+FILE=~/.tmux.conf
+if test -f "$FILE"; then
+	echo "* Found tmux config at , $FILE, backing up to $FILE.bak."
+	mv ~/.tmux.conf ~/.tmux.conf.bak
+fi
 
+FILE=~/.config/nvim/init.vim
+if test -f "$FILE"; then
+	echo "* Found nvim config at , $FILE, backing up to $FILE.bak."
+	mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.bak 
+fi
+
+echo "* Backups completed\n"
+
+
+
+echo "* Creating new source files...\n"
 # create new dotfiles through reference
-echo "source ~/config/zsh/zshrc.sh" >~/.zshrc
-echo "source ~/config/vim/init.vim" >~/.vimrc
-echo "source ~/config/tmux/tmux.conf" >~/.tmux.conf
-#mkdir -p ~/.config/nvim
-#echo "set runtimepath^=~/.vim runtimepath+=~/.vim/after\nlet &packpath = &runtimepath\nsource ~/init.vim" >$HOME/.config/nvim/init.vim
+source ~/config/zsh/zshrc.sh >~/.zshrc
+source ~/config/vim/init.vim >~/.vimrc
+source ~/config/tmux/tmux.conf >~/.tmux.conf
 
-echo "* done"
+
+
+echo "* adding git shortcuts...\n"
+# add various git shortcuts
+git config --global alias.s status
+git config --global alias.br branch
+git config --global alias.co checkout
+git config --global alias.cm commit
+
+
+
+echo "* done\n"
