@@ -31,3 +31,5 @@ else
   nnoremap <C-k> <C-w>k
   nnoremap <C-l> <C-w>l
 endif
+
+nnoremap <CR> :noh<CR><CR>

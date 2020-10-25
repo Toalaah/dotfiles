@@ -1,5 +1,3 @@
-filetype plugin on
-
 autocmd BufWritePost *.tex silent! !pdf <afile>
 augroup WrapLineInTeXFile
     autocmd!
@@ -20,4 +18,3 @@ function! CleverTab()
            endif
         endfunction
         inoremap <Tab> <C-R>=CleverTab()<CR>
-
