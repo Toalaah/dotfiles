@@ -21,3 +21,12 @@ cd config
 ```
 
 3. Profit 👍
+
+### Other Optional Steps
+
+Some programs that I will install on the side include, but are not limited to:
+
+- Visual Studio Code
+- Typora, for writing and viewing markdown files
+- Skim (really nice pdf-viewer for auto-rendering latex pdfs on vim writes)
+- Alfred, just plain better than spotlight

@@ -26,7 +26,7 @@
   },
   "Use Custom Window Title" : false,
   "Right Option Key Sends" : 0,
-  "Show Status Bar" : true,
+  "Show Status Bar" : false,
   "Character Encoding" : 4,
   "Selection Color" : {
     "Red Component" : 0.90061241388320923,
@@ -63,6 +63,9 @@
         "configuration" : {
           "knobs" : {
             "path" : "path",
+            "base: compression resistance" : 1,
+            "base: priority" : 5,
+            "minwidth" : 0,
             "shared text color" : {
               "Red Component" : 0.90000000000000002,
               "Color Space" : "sRGB",
@@ -70,9 +73,6 @@
               "Alpha Component" : 1,
               "Green Component" : 0.63
             },
-            "base: priority" : 5,
-            "minwidth" : 0,
-            "base: compression resistance" : 1,
             "maxwidth" : 1.7976931348623157e+308
           },
           "layout advanced configuration dictionary value" : {
@@ -86,10 +86,6 @@
         "class" : "iTermStatusBarGitComponent",
         "configuration" : {
           "knobs" : {
-            "base: compression resistance" : 1,
-            "iTermStatusBarGitComponentPollingIntervalKey" : 2,
-            "base: priority" : 5,
-            "minwidth" : 0,
             "shared text color" : {
               "Red Component" : 0.67859999999999998,
               "Color Space" : "sRGB",
@@ -97,6 +93,10 @@
               "Alpha Component" : 1,
               "Green Component" : 0.90000000000000002
             },
+            "iTermStatusBarGitComponentPollingIntervalKey" : 2,
+            "base: priority" : 5,
+            "minwidth" : 0,
+            "base: compression resistance" : 1,
             "maxwidth" : 1.7976931348623157e+308
           },
           "layout advanced configuration dictionary value" : {
@@ -369,7 +369,7 @@
   "Ansi 2 Color" : {
     "Red Component" : 0.52591603994369507,
     "Color Space" : "Calibrated",
-    "Blue Component" : 0.082894742488861084,
+    "Blue Component" : 0.082894742488861112,
     "Alpha Component" : 1,
     "Green Component" : 0.53061914443969727
   },
@@ -416,7 +416,7 @@
   "Ansi 1 Color" : {
     "Red Component" : 0.74529051780700684,
     "Color Space" : "Calibrated",
-    "Blue Component" : 0.090684391558170319,
+    "Blue Component" : 0.090684391558170346,
     "Alpha Component" : 1,
     "Green Component" : 0.05879192054271698
   },
@@ -509,7 +509,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.43883562088012695
   },
-  "Columns" : 80,
+  "Columns" : 84,
   "Unicode Normalization" : 0,
   "Visual Bell" : false,
   "Custom Directory" : "No",
