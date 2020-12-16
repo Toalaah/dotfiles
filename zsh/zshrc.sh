@@ -38,8 +38,9 @@ precmd_functions+=(update_prompt)
 
 # automatically compiles latex documents on vim-write
 function pdf() {
-pdflatex --interaction=batchmode "$1" && latexmk -c "$1"
+pdflatex "$1" 2>&1 > /dev/null && latexmk -c -quiet
 }
+
 source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 update_prompt
 chpwd() ls;  # auto-ls
