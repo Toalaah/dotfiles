@@ -42,3 +42,6 @@ git config --global alias.cm commit
 
 
 echo "* done\n"
+
+# brew requirements:
+# llvm, zsh-syntax-highlghting, nvim, git, tmux, iterm2
