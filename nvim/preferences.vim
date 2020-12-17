@@ -10,3 +10,5 @@ set tabstop=4
 set shellcmdflag=-ic
 set number relativenumber 
 set clipboard+=unnamedplus
+colorscheme gruvbox
+set background=dark

@@ -5,6 +5,3 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	Plug 'itchyny/vim-gitbranch'
 	Plug 'tpope/vim-fugitive'
 call plug#end()
-
-colorscheme gruvbox
-set background=dark

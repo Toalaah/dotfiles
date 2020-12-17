@@ -54,7 +54,7 @@
     "slogin",
     "telnet"
   ],
-  "Scrollback Lines" : 1000,
+  "Scrollback Lines" : 0,
   "Draw Powerline Glyphs" : false,
   "Status Bar Layout" : {
     "components" : [
@@ -64,8 +64,6 @@
           "knobs" : {
             "path" : "path",
             "maxwidth" : 1.7976931348623157e+308,
-            "base: priority" : 5,
-            "minwidth" : 0,
             "shared text color" : {
               "Red Component" : 0.90000000000000002,
               "Color Space" : "sRGB",
@@ -73,7 +71,9 @@
               "Alpha Component" : 1,
               "Green Component" : 0.63
             },
-            "base: compression resistance" : 1
+            "base: compression resistance" : 1,
+            "minwidth" : 0,
+            "base: priority" : 5
           },
           "layout advanced configuration dictionary value" : {
             "font" : "FiraCode-Light_Medium 12",
@@ -88,8 +88,6 @@
           "knobs" : {
             "maxwidth" : 1.7976931348623157e+308,
             "iTermStatusBarGitComponentPollingIntervalKey" : 2,
-            "base: priority" : 5,
-            "minwidth" : 0,
             "base: compression resistance" : 1,
             "shared text color" : {
               "Red Component" : 0.67859999999999998,
@@ -97,7 +95,9 @@
               "Blue Component" : 0.63,
               "Alpha Component" : 1,
               "Green Component" : 0.90000000000000002
-            }
+            },
+            "minwidth" : 0,
+            "base: priority" : 5
           },
           "layout advanced configuration dictionary value" : {
             "font" : "FiraCode-Light_Medium 12",
@@ -470,7 +470,7 @@
   "Command" : "bash",
   "Terminal Type" : "xterm-256color",
   "Horizontal Spacing" : 1,
-  "Option Key Sends" : 0,
+  "Option Key Sends" : 1,
   "Only The Default BG Color Uses Transparency" : false,
   "Blink Allowed" : false,
   "Ansi 15 Color" : {
