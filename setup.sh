@@ -1,34 +1,31 @@
 echo "* Beginning setup...\n"
 
 echo "* Searching for pre-existing config files...\n"
-# check for any pre-existing config files
 FILE=~/.zshrc
 if test -f "$FILE"; then
 	echo "* Found zshrc at , $FILE, backing up to $FILE.bak."
-	mv ~/.zshrc ~/.zshrc.bak
+	cp ~/.zshrc ~/.zshrc.bak
 fi
 
 FILE=~/.tmux.conf
 if test -f "$FILE"; then
 	echo "* Found tmux config at , $FILE, backing up to $FILE.bak."
-	mv ~/.tmux.conf ~/.tmux.conf.bak
+	cp ~/.tmux.conf ~/.tmux.conf.bak
 fi
 
 FILE=~/.config/nvim/init.vim
 if test -f "$FILE"; then
 	echo "* Found nvim config at , $FILE, backing up to $FILE.bak."
-	mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.bak 
+	cp ~/.config/nvim/init.vim ~/.config/nvim/init.vim.bak 
 fi
 
 echo "* Backups completed\n"
 
-
-
 echo "* Creating new source files...\n"
 # create new dotfiles through reference
-source ~/config/zsh/zshrc.sh >~/.zshrc
-source ~/config/vim/init.vim >~/.vimrc
-source ~/config/tmux/tmux.conf >~/.tmux.conf
+echo source ~/config/zsh/zshrc > ~/.zshrc
+echo source ~/config/vim/init.vim > ~/.config/nvim/init.vim 
+echo source ~/config/tmux/tmux.conf > ~/.tmux.conf
 
 
 
@@ -45,3 +42,11 @@ echo "* done\n"
 
 # brew requirements:
 # llvm, zsh-syntax-highlghting, nvim, git, tmux, iterm2
+
+# nvim requirements / other installs
+# ctrlp-search (http://ctrlpvim.github.io/ctrlp.vim/#installation)
+# coc https://www.chrisatmachine.com/Neovim/04-vim-coc/
+
+#other todos
+# faster dock hiding / appearing
+# disable mouse-acceleration (for when not using trackpad)

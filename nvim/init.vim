@@ -1,5 +1,5 @@
-source $HOME/.config/nvim/vim-plug/plugins.vim
-source $HOME/.config/nvim/plug-config/coc.vim
-source $HOME/.config/nvim/key-mappings.vim
-source $HOME/.config/nvim/functions.vim
-source $HOME/.config/nvim/preferences.vim
+source ~/config/nvim/vim-plug/plugins.vim
+source ~/config/nvim/plug-config/coc.vim
+source ~/config/nvim/key-mappings.vim
+source ~/config/nvim/functions.vim
+source ~/config/nvim/preferences.vim

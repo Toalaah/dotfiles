@@ -71,8 +71,8 @@
               "Alpha Component" : 1,
               "Green Component" : 0.63
             },
-            "base: compression resistance" : 1,
             "minwidth" : 0,
+            "base: compression resistance" : 1,
             "base: priority" : 5
           },
           "layout advanced configuration dictionary value" : {
@@ -89,6 +89,7 @@
             "maxwidth" : 1.7976931348623157e+308,
             "iTermStatusBarGitComponentPollingIntervalKey" : 2,
             "base: compression resistance" : 1,
+            "minwidth" : 0,
             "shared text color" : {
               "Red Component" : 0.67859999999999998,
               "Color Space" : "sRGB",
@@ -96,7 +97,6 @@
               "Alpha Component" : 1,
               "Green Component" : 0.90000000000000002
             },
-            "minwidth" : 0,
             "base: priority" : 5
           },
           "layout advanced configuration dictionary value" : {
@@ -470,7 +470,7 @@
   "Command" : "bash",
   "Terminal Type" : "xterm-256color",
   "Horizontal Spacing" : 1,
-  "Option Key Sends" : 1,
+  "Option Key Sends" : 2,
   "Only The Default BG Color Uses Transparency" : false,
   "Blink Allowed" : false,
   "Ansi 15 Color" : {
@@ -489,7 +489,7 @@
     "Green Component" : 0.55607825517654419
   },
   "Transparency" : 0,
-  "Initial Text" : "clear",
+  "Initial Text" : "",
   "Background Color" : {
     "Red Component" : 0.11759927868843079,
     "Color Space" : "Calibrated",
