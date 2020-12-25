@@ -33,3 +33,8 @@ else
 endif
 
 nnoremap <CR> :noh<CR><CR>
+
+"" Map NERDTreeToggle to CTRL-n
+map <C-n> :NERDTreeToggle<CR>
+"" Activate NERDTree Nodes with spacebar
+let NERDTreeMapActivateNode='<space>'

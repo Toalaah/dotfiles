@@ -44,7 +44,42 @@ function update_prompt() {
 precmd_functions+=(update_prompt)
 
 # =======================================================================
+# ============================= OPTIONS ===============================
+
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zsh_history
+
+# vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
+# tab completion (including for dotfiles)
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)
+
+# edit line in vim with ctrl-e:
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+
+# =======================================================================
 # ============================= FUNCTIONS ===============================
+
+# change cursor to block on vi-mode enter
+zle-line-init() {
+    zle -K viins
+    echo -ne "\e[5 q"
+}
+
+# changes cursor to thin
+thin_cursor() {
+   echo -ne '\e[5 q'
+}
+
+precmd_functions+=(thin_cursor)
 
 # automatically compiles latex documents on vim-write
 function pdf() {
