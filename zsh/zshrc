@@ -1,6 +1,7 @@
 # ==============================  PATH  =================================
 
 PATH=/usr/local/opt/llvm/bin/:$PATH
+EDITOR=nvim
 
 # =======================================================================
 # =============================== ALIASES ===============================
@@ -11,6 +12,10 @@ alias zip="zip -r -X archive.zip"
 alias ..="cd .."
 alias ...="cd ../../"
 alias server="php -S localhost:8000"
+
+# copy passwords to clipboard
+alias pw="pass show -c"
+
 ZSHRC=~/config/zsh/zshrc
 VIMRC=~/config/nvim/init.vim
 TMUXRC=~/config/tmux/tmux.conf
@@ -68,18 +73,41 @@ bindkey '^e' edit-command-line
 # =======================================================================
 # ============================= FUNCTIONS ===============================
 
-# change cursor to block on vi-mode enter
-zle-line-init() {
-    zle -K viins
-    echo -ne "\e[5 q"
+# function to change default cursor when entering / exiting vim-mode
+# solution taken from [https://unix.stackexchange.com/questions/433273]
+function _set_cursor() {
+    if [[ $TMUX = '' ]]; then
+      echo -ne $1
+    else
+      echo -ne "\ePtmux;\e\e$1\e\\"
+    fi
 }
 
-# changes cursor to thin
-thin_cursor() {
-   echo -ne '\e[5 q'
-}
+function block_cursor() { _set_cursor '\e[2 q' }
+function thin_cursor() { _set_cursor '\e[5 q' }
 
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+      block_cursor
+  else
+      thin_cursor
+  fi
+}
+zle -N zle-keymap-select
+# ensure thin beam cursor when starting new terminal
 precmd_functions+=(thin_cursor)
+# ensure insert mode and team cursor when exiting vim
+zle-line-init() { zle -K viins; thin_cursor }
+zle-line-finish() { thin_cursor }
+zle -N zle-line-finish
+
+
+
+
+
+
+
+
 
 # automatically compiles latex documents on vim-write
 function pdf() {
@@ -89,5 +117,5 @@ pdflatex "$1" 2>&1 > /dev/null && latexmk -c -quiet
 update_prompt
 # auto-ls on cd
 chpwd() ls;  
-# requires brew install zsh-syntax-highlighting
+# requires (brew install) zsh-syntax-highlighting
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
