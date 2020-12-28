@@ -1,6 +1,6 @@
 # ==============================  PATH  =================================
 
-PATH=/usr/local/opt/llvm/bin/:$PATH
+PATH=/usr/local/opt/llvm/bin/:~/.scripts:$PATH
 EDITOR=nvim
 
 # =======================================================================
@@ -74,14 +74,8 @@ bindkey '^e' edit-command-line
 # ============================= FUNCTIONS ===============================
 
 # function to change default cursor when entering / exiting vim-mode
-# solution taken from [https://unix.stackexchange.com/questions/433273]
-function _set_cursor() {
-    if [[ $TMUX = '' ]]; then
-      echo -ne $1
-    else
-      echo -ne "\ePtmux;\e\e$1\e\\"
-    fi
-}
+# solution modified from unix.stackexchange.com/questions/433273 
+function _set_cursor() { echo -ne $1 }
 
 function block_cursor() { _set_cursor '\e[2 q' }
 function thin_cursor() { _set_cursor '\e[5 q' }
@@ -100,14 +94,6 @@ precmd_functions+=(thin_cursor)
 zle-line-init() { zle -K viins; thin_cursor }
 zle-line-finish() { thin_cursor }
 zle -N zle-line-finish
-
-
-
-
-
-
-
-
 
 # automatically compiles latex documents on vim-write
 function pdf() {
