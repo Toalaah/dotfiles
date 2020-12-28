@@ -7,11 +7,10 @@ It is recommended to update brew before actually begining with the installation.
 brew update
 ```
 
-Aditionally now would also be the time to install zsh and set it as your default shell:
+Install git with:
 
 ```shell
-brew install zsh
-chsh -s /bin/zsh
+xcode-select --install
 ```
 
 ### Installation
