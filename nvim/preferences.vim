@@ -13,3 +13,4 @@ set clipboard+=unnamedplus
 let g:NERDTreeQuitOnOpen = 1
 colorscheme gruvbox
 set background=dark
+let g:is_posix = 1
