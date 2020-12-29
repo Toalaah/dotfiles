@@ -1,48 +1,124 @@
 #!/bin/sh
 
+
+#########################################################
+# Helper functions                                      #
+#########################################################
+
 printOut() {
   echo "$(tput bold)=>$(tput sgr0) $1"
 }
 
+getVersion() {
+  echo "version: 0.1"
+  exit 0
+}
 
-if [ "$*" == "-noskip" ] 
+
+#########################################################
+# Help menu                                             #
+#########################################################
+
+if [ "$*" == "--help" ] || [ "$*" == "-h" ]
 then
-  printOut "Beginning setup...\n"
-  printOut "Searching for pre-existing config files...\n"
-  FILE=~/.zshrc
-  if test -f "$FILE"; then
-      printOut "Found zshrc at $FILE, backing up to $FILE.bac"
-      cp ~/.zshrc ~/.zshrc.bac
-  fi
+  echo "This script installs common config files for zsh, tmux, nvim by default. Optionally, this setup script will also install additional useful packages and plugins.\n"
+  echo "Usage: setup [--version|-v] [-h|--help] [--purge] [-t] [--all] [--min] [--git] [-zsh] [-itrm] [-llvm] [-tmx]"
+  echo "options:"
+  echo "--version,-v    prints the script version"
+  echo "-h, --help      print this help menu."
+  echo "--purge         purges all backup files create by the script"
+  echo "-t              disables system mouse acceleration and increases dock speed"
+  echo "--all           installs $(tput bold)all$(tput sgr0) optional features"
+  echo "--min           installs core-features only"
+  echo "--git           sets up git shotcuts and credentials"
+  echo "-zsh            installs zsh features"
+  echo "-itrm           installs iterm features"
+  echo "-llvm           installs llvm features (needed for coc.vim)"
+  echo "-tmx            installs tmux features"
+  exit 0
+fi
 
-  FILE=~/.tmux.conf
-  if test -f "$FILE"; then
-      printOut "Found tmux config at $FILE, backing up to $FILE.bac"
-      cp ~/.tmux.conf ~/.tmux.conf.bac
-  fi
+# check for version flag
+if [ "$*" == "--version" ] || [ "$*" == "-v" ]
+then
+  getVersion
+fi
 
-  FILE=~/.config/nvim/init.vim
-  if test -f "$FILE"; then
-      printOut "Found nvim config at $FILE, backing up to $FILE.bac"
-      cp ~/.config/nvim/init.vim ~/.config/nvim/init.vim.bac 
-  fi
+# check for purge flag
+if [ "$*" == "--purge" ]
+then
+  printOut "Purging backup files..."
+  rm -f ~/.zshrc.bac ~/.tmux.conf.bac ~/.config/nvim/init.vim.bac
+  printOut "Done"
+  exit 0
+fi
 
-  printOut "Backups completed\n"
-  printOut "Creating new source files...\n"
+printOut "Beginning setup...\n"
+printOut "Searching for pre-existing config files...\n"
 
-  echo "source ~/config/zsh/zshrc" > ~/.zshrc
-  printOut "Created .zshrc"
+#########################################################
+# Create backups and add configs                        #
+#########################################################
 
-  echo "source ~/config/nvim/init.vim" > ~/.config/nvim/init.vim
-  printOut "Created .vimrc"
+FILE=~/.zshrc
+if test -f "$FILE"; then
+    printOut "Found zshrc at $FILE, backing up to $FILE.bac"
+    cp ~/.zshrc ~/.zshrc.bac
+fi
 
-  echo "source ~/config/tmux/tmux.conf" > ~/.tmux.conf
-  printOut "Created tmux.conf\n"
+FILE=~/.tmux.conf
+if test -f "$FILE"; then
+    printOut "Found tmux config at $FILE, backing up to $FILE.bac"
+    cp ~/.tmux.conf ~/.tmux.conf.bac
+fi
+
+FILE=~/.config/nvim/init.vim
+if test -f "$FILE"; then
+    printOut "Found nvim config at $FILE, backing up to $FILE.bac"
+    cp ~/.config/nvim/init.vim ~/.config/nvim/init.vim.bac 
+fi
+
+printOut "Backups completed\n"
+printOut "Creating new source files...\n"
+
+echo "source ~/config/zsh/zshrc" > ~/.zshrc
+printOut "Created .zshrc"
+
+echo "source ~/config/nvim/init.vim" > ~/.config/nvim/init.vim
+printOut "Created .vimrc"
+
+#########################################################
+# Install vim plugins                                   # 
+#########################################################
+
+# ctrlp
+printOut "Installing ctrlp.vim..."
+git clone https://github.com/ctrlpvim/ctrlp.vim.git ~/.config/ctrlp/ctrlp.vim
+
+# coc
+mkdir ~/.config/nvim/plug-config
+touch ~/.config/nbim/plug-config/coc.vim
+
+
+
+
+echo "source ~/config/tmux/tmux.conf" > ~/.tmux.conf
+printOut "Created tmux.conf\n"
+
+
+# exit program if min flag provided
+if [ "$*" == "-min" ] 
+then
+  printOut "Done"
+  exit 0
 fi
 
 
-# Add various git shortcuts
-if [ "$*" == "-git" ] || [ "$*" == "--git" ]  
+#########################################################
+# Add git functionality                                 # 
+#########################################################
+
+if [ "$*" == "--git" ]
 then
   printOut "Adding git shortcuts..."
   git config --global alias.s status
@@ -56,39 +132,39 @@ then
   printOut "Setting git credentials..."
   git config --global user.name $gitusername
   git config --global user.name $gitemail
-  printOut "Done"
 fi
 
-if [ "$*" == "-min" ] || [ "$*" == "--min" ]
-then
-  printOut "Done"
-  exit 0
-fi
-
+#########################################################
+# Add zsh functionality                                 # 
+#########################################################
 
 if [ "$*" == "-zsh" ] || [ "$*" == "--all" ]
 then
-  # ZSH Installation
   printOut "Installing zsh..."
   brew install zsh
   printOut "Installing zsh syntax highighting..."
   brew install zsh-syntax-highlghting
-  printOut "Done"
 fi
 
 
+#########################################################
+# Add iterm files                                       # 
+#########################################################
+
 if [ "$*" == "-itrm" ] || [ "$*" == "--all" ]
 then
-  # iTerm Installation
   #cp ~/config/iTerm/term-configs.json ~/Library/Application\ Support/iTerm/DynamicProfiles/itermprofiles.json
   printOut "Installing iTerm2..."
   brew install --cask iterm && printOut "Done. Please import pre-existing iTerm config from ~/config/iTerm/term-config.json by opening the application and going to 'Preferences -> Profiles -> Other actions -> Import JSON Profile"
 fi
 
 
+#########################################################
+# Add tmux files                                        # 
+#########################################################
+
 if [ "$*" == "-tmx" ] || [ "$*" == "--all" ]
 then
-  # Tmux installation
   printOut "Installing Tmux"
   brew install tmux
   printOut "Installing Tmux Plugin Manager"
@@ -97,22 +173,25 @@ then
 fi
 
 
+#########################################################
+# Install llvm (needed for coc.vim)                     #
+#########################################################
+
 if [ "$*" == "-llvm" ] || [ "$*" == "--all" ]
 then
-  # llmv installation
   printOut " Installing llvm..."
   brew install llvm
   printOut "Done"
 fi
 
 # TODO nvim requirements / other installs
-# ctrlp-search (http://ctrlpvim.github.io/ctrlp.vim/#installation)
 # coc (https://www.chrisatmachine.com/Neovim/04-vim-coc/)
 # pass integration (with browser support)
-# zsh syntax
 
-# Faster dock hiding / appearing
-#defaults write com.apple.dock autohide-time-modifier -float 0.1 && killall Dock
-# Disable mouse acceleration
-#defaults write .GlobalPreferences com.apple.mouse.scaling -1
+if [ "$*" == "-t" ] 
+then
+  defaults write com.apple.dock autohide-time-modifier -float 0.1 && killall Dock
+  defaults write .GlobalPreferences com.apple.mouse.scaling -1
+fi
+
 printOut "Done"

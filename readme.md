@@ -1,19 +1,21 @@
 ## Config ⚙️
 
-### Prerequisites
-It is recommended to update brew before actually begining with the installation. This can be done with the following command:
+### Dependencies
+
+It is *recommended* to update brew before actually begining with the installation. This can be done with the following command:
 
 ```shell
 brew update
 ```
 
-Install git with:
+Install **git** with (this is required!):
 
 ```shell
 xcode-select --install
 ```
 
 ### Installation
+
 1. Clone into the repository with the following command and navigate into the directory
 
 ```shell
@@ -21,10 +23,10 @@ git clone https://github.com/toalaah/config
 cd config
 ```
 
-2. Run the setup script from **within** the directory
+2. Run the setup script from the directory
 
 ```shell
-./setup.sh
+./setup
 ```
 
 3. Profit 👍
