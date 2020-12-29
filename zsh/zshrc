@@ -26,7 +26,7 @@ TMUXRC=~/config/tmux/tmux.conf
 autoload -U colors && colors # colors
 setopt PROMPT_SUBST
 function update_prompt() {
-    PS1="%B%F{214}[%f%b%F{108}%2d%f"
+    PS1="%B%F{108}[%f%b%F{66}%2d%f"
     PS1+="%F{109}"
 
     # find out if in git repo or not, and if so what branch
@@ -43,7 +43,7 @@ function update_prompt() {
     
     fi
     PS1+="%f"
-    PS1+="%B%F{214}]%f%b%B%F{167} ::%f%b "
+    PS1+="%B%F{108}]%f%b%B%F{250} ::%f%b "
 }
 
 precmd_functions+=(update_prompt)
