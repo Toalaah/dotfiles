@@ -1,0 +1,118 @@
+#!/bin/sh
+
+printOut() {
+  echo "$(tput bold)=>$(tput sgr0) $1"
+}
+
+
+if [ "$*" == "-noskip" ] 
+then
+  printOut "Beginning setup...\n"
+  printOut "Searching for pre-existing config files...\n"
+  FILE=~/.zshrc
+  if test -f "$FILE"; then
+      printOut "Found zshrc at $FILE, backing up to $FILE.bac"
+      cp ~/.zshrc ~/.zshrc.bac
+  fi
+
+  FILE=~/.tmux.conf
+  if test -f "$FILE"; then
+      printOut "Found tmux config at $FILE, backing up to $FILE.bac"
+      cp ~/.tmux.conf ~/.tmux.conf.bac
+  fi
+
+  FILE=~/.config/nvim/init.vim
+  if test -f "$FILE"; then
+      printOut "Found nvim config at $FILE, backing up to $FILE.bac"
+      cp ~/.config/nvim/init.vim ~/.config/nvim/init.vim.bac 
+  fi
+
+  printOut "Backups completed\n"
+  printOut "Creating new source files...\n"
+
+  echo "source ~/config/zsh/zshrc" > ~/.zshrc
+  printOut "Created .zshrc"
+
+  echo "source ~/config/nvim/init.vim" > ~/.config/nvim/init.vim
+  printOut "Created .vimrc"
+
+  echo "source ~/config/tmux/tmux.conf" > ~/.tmux.conf
+  printOut "Created tmux.conf\n"
+fi
+
+
+# Add various git shortcuts
+if [ "$*" == "-git" ] || [ "$*" == "--git" ]  
+then
+  printOut "Adding git shortcuts..."
+  git config --global alias.s status
+  git config --global alias.br branch
+  git config --global alias.co checkout
+  git config --global alias.cm commit
+  echo "Please enter your git username:"
+  read gitusername
+  echo "Please enter your git email:"
+  read gitemail
+  printOut "Setting git credentials..."
+  git config --global user.name $gitusername
+  git config --global user.name $gitemail
+  printOut "Done"
+fi
+
+if [ "$*" == "-min" ] || [ "$*" == "--min" ]
+then
+  printOut "Done"
+  exit 0
+fi
+
+
+if [ "$*" == "-zsh" ] || [ "$*" == "--all" ]
+then
+  # ZSH Installation
+  printOut "Installing zsh..."
+  brew install zsh
+  printOut "Installing zsh syntax highighting..."
+  brew install zsh-syntax-highlghting
+  printOut "Done"
+fi
+
+
+if [ "$*" == "-itrm" ] || [ "$*" == "--all" ]
+then
+  # iTerm Installation
+  #cp ~/config/iTerm/term-configs.json ~/Library/Application\ Support/iTerm/DynamicProfiles/itermprofiles.json
+  printOut "Installing iTerm2..."
+  brew install --cask iterm && printOut "Done. Please import pre-existing iTerm config from ~/config/iTerm/term-config.json by opening the application and going to 'Preferences -> Profiles -> Other actions -> Import JSON Profile"
+fi
+
+
+if [ "$*" == "-tmx" ] || [ "$*" == "--all" ]
+then
+  # Tmux installation
+  printOut "Installing Tmux"
+  brew install tmux
+  printOut "Installing Tmux Plugin Manager"
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  printOut "Done"
+fi
+
+
+if [ "$*" == "-llvm" ] || [ "$*" == "--all" ]
+then
+  # llmv installation
+  printOut " Installing llvm..."
+  brew install llvm
+  printOut "Done"
+fi
+
+# TODO nvim requirements / other installs
+# ctrlp-search (http://ctrlpvim.github.io/ctrlp.vim/#installation)
+# coc (https://www.chrisatmachine.com/Neovim/04-vim-coc/)
+# pass integration (with browser support)
+# zsh syntax
+
+# Faster dock hiding / appearing
+#defaults write com.apple.dock autohide-time-modifier -float 0.1 && killall Dock
+# Disable mouse acceleration
+#defaults write .GlobalPreferences com.apple.mouse.scaling -1
+printOut "Done"
