@@ -1,10 +1,6 @@
 #!/bin/sh
 
-
-#########################################################
-# Helper functions                                      #
-#########################################################
-
+# helper functions                                   
 printOut() {
   echo "$(tput bold)=>$(tput sgr0) $1"
 }
@@ -15,10 +11,7 @@ getVersion() {
 }
 
 
-#########################################################
-# Help menu                                             #
-#########################################################
-
+# help menu                                          
 if [ "$*" == "--help" ] || [ "$*" == "-h" ]
 then
   echo "This script installs common config files for zsh, tmux, nvim by default. Optionally, this setup script will also install additional useful packages and plugins.\n"
@@ -56,16 +49,12 @@ fi
 printOut "Beginning setup...\n"
 printOut "Searching for pre-existing config files...\n"
 
-#########################################################
-# Create backups and add configs                        #
-#########################################################
-
+# create backups and add configs                     
 FILE=~/.zshrc
 if test -f "$FILE"; then
     printOut "Found zshrc at $FILE, backing up to $FILE.bac"
     cp ~/.zshrc ~/.zshrc.bac
 fi
-
 FILE=~/.tmux.conf
 if test -f "$FILE"; then
     printOut "Found tmux config at $FILE, backing up to $FILE.bac"
@@ -81,15 +70,18 @@ fi
 printOut "Backups completed\n"
 printOut "Creating new source files...\n"
 
+# create new source files
 echo "source ~/config/zsh/zshrc" > ~/.zshrc
 printOut "Created .zshrc"
 
 echo "source ~/config/nvim/init.vim" > ~/.config/nvim/init.vim
 printOut "Created .vimrc"
 
-#########################################################
-# Install vim plugins                                   # 
-#########################################################
+echo "source ~/config/tmux/tmux.conf" > ~/.tmux.conf
+printOut "Created tmux.conf\n"
+
+
+# install vim plugins                                 
 
 # ctrlp
 printOut "Installing ctrlp.vim..."
@@ -97,14 +89,7 @@ git clone https://github.com/ctrlpvim/ctrlp.vim.git ~/.config/ctrlp/ctrlp.vim
 
 # coc
 mkdir ~/.config/nvim/plug-config
-touch ~/.config/nbim/plug-config/coc.vim
-
-
-
-
-echo "source ~/config/tmux/tmux.conf" > ~/.tmux.conf
-printOut "Created tmux.conf\n"
-
+touch ~/.config/nvim/plug-config/coc.vim
 
 # exit program if min flag provided
 if [ "$*" == "-min" ] 
@@ -113,11 +98,76 @@ then
   exit 0
 fi
 
+# add zsh functionality                               
+if [ "$*" == "-zsh" ] || [ "$*" == "--all" ]
+then
+  printOut "Installing zsh..."
+  brew install zsh
+  printOut "Installing zsh syntax highighting..."
+  brew install zsh-syntax-highlghting
+fi
 
-#########################################################
-# Add git functionality                                 # 
-#########################################################
+# add iterm files                                     
+if [ "$*" == "-itrm" ] || [ "$*" == "--all" ]
+then
+  printOut "Installing iTerm2..."
+  brew install --cask iterm && printOut "Done. Please import pre-existing iTerm config from ~/config/iTerm/term-config.json by opening the application and going to 'Preferences -> Profiles -> Other actions -> Import JSON Profile"
+fi
 
+# add tmux files                                      
+if [ "$*" == "-tmx" ] || [ "$*" == "--all" ]
+then
+  printOut "Installing Tmux"
+  brew install tmux
+  printOut "Installing Tmux Plugin Manager"
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  printOut "Done"
+fi
+
+# install llvm (needed for coc.vim)                     
+if [ "$*" == "-llvm" ] || [ "$*" == "--all" ]
+then
+  printOut " Installing llvm..."
+  brew install llvm
+  printOut "Done"
+fi
+
+# install pass                                          
+if [ "$*" == "-pass" ] || [ "$*" == "--all" ]
+then
+  # pass
+  printOut "Installing pass..."
+  brew install pass 
+  printOut "Installed pass"
+  echo "Please enter the directory of your public gpg key"
+  read gpgPub
+  echo "Please enter the directory of your private gpg key"
+  read gpgPriv
+  printOut "Importing gpg keys..."
+  gpg --import gpgPub
+  gpg --import gpgPriv
+  gpg --list-keys
+  echo "Please enter the fingerprint of your gpg key (last column of 'pub' row)"
+  read fingerprint
+  printOut "Initializing pass storage"
+  pass init $fingerprint
+  echo "Please enter the repository link to your pass storage"
+  read $repolink
+  git clone $repolink passStorageTemp
+  mv passStorageTemp ~/.pass_store
+  # browserpass extension
+  printOut "Installing browserpass extension..."
+  brew install pinentry-mac
+  brew tap amar1729/formulae
+  brew install browserpass
+  printOut "Installing native messaging hosts, requesting sudo..."
+  sudo PREFIX=/usr/local make hosts-chrome -C /usr/local/lib/browserpass
+  echo "pinenty-program /usr/local/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
+  gpgconf --kill gpg-agent
+  printOut "Installed browserpass extension..."
+fi
+
+# add git functionality                               
 if [ "$*" == "--git" ]
 then
   printOut "Adding git shortcuts..."
@@ -134,60 +184,7 @@ then
   git config --global user.name $gitemail
 fi
 
-#########################################################
-# Add zsh functionality                                 # 
-#########################################################
-
-if [ "$*" == "-zsh" ] || [ "$*" == "--all" ]
-then
-  printOut "Installing zsh..."
-  brew install zsh
-  printOut "Installing zsh syntax highighting..."
-  brew install zsh-syntax-highlghting
-fi
-
-
-#########################################################
-# Add iterm files                                       # 
-#########################################################
-
-if [ "$*" == "-itrm" ] || [ "$*" == "--all" ]
-then
-  #cp ~/config/iTerm/term-configs.json ~/Library/Application\ Support/iTerm/DynamicProfiles/itermprofiles.json
-  printOut "Installing iTerm2..."
-  brew install --cask iterm && printOut "Done. Please import pre-existing iTerm config from ~/config/iTerm/term-config.json by opening the application and going to 'Preferences -> Profiles -> Other actions -> Import JSON Profile"
-fi
-
-
-#########################################################
-# Add tmux files                                        # 
-#########################################################
-
-if [ "$*" == "-tmx" ] || [ "$*" == "--all" ]
-then
-  printOut "Installing Tmux"
-  brew install tmux
-  printOut "Installing Tmux Plugin Manager"
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-  printOut "Done"
-fi
-
-
-#########################################################
-# Install llvm (needed for coc.vim)                     #
-#########################################################
-
-if [ "$*" == "-llvm" ] || [ "$*" == "--all" ]
-then
-  printOut " Installing llvm..."
-  brew install llvm
-  printOut "Done"
-fi
-
-# TODO nvim requirements / other installs
-# coc (https://www.chrisatmachine.com/Neovim/04-vim-coc/)
 # pass integration (with browser support)
-
 if [ "$*" == "-t" ] 
 then
   defaults write com.apple.dock autohide-time-modifier -float 0.1 && killall Dock
@@ -195,3 +192,4 @@ then
 fi
 
 printOut "Done"
+exit 0
