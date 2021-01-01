@@ -148,7 +148,7 @@ then
   read gitemail
   printOut "Setting git credentials..."
   git config --global user.name $gitusername
-  git config --global user.name $gitemail
+  git config --global user.email $gitemail
 fi
 
 [[ "$@" =~ "-t" ]] && defaults write com.apple.dock autohide-time-modifier -float 0.1 && killall Dock; defaults write .GlobalPreferences com.apple.mouse.scaling -1
