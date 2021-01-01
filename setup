@@ -61,6 +61,7 @@ if test -f "$FILE"; then
     cp ~/.tmux.conf ~/.tmux.conf.bac
 fi
 
+
 FILE=~/.config/nvim/init.vim
 if test -f "$FILE"; then
     printOut "Found nvim config at $FILE, backing up to $FILE.bac"
@@ -71,15 +72,11 @@ printOut "Backups completed\n"
 printOut "Creating new source files...\n"
 
 # create new source files
-echo "source ~/config/zsh/zshrc" > ~/.zshrc
-printOut "Created .zshrc"
-
-echo "source ~/config/nvim/init.vim" > ~/.config/nvim/init.vim
-printOut "Created .vimrc"
-
-echo "source ~/config/tmux/tmux.conf" > ~/.tmux.conf
-printOut "Created tmux.conf\n"
-
+echo "source ~/config/zsh/zshrc" > ~/.zshrc && printOut "Created .zshrc"
+# make sure autoload dir exists
+[ -d ~/.config/nvim/autoload ] || mkdir -p ~/.config/nvim/autoload
+echo "source ~/config/nvim/init.vim" > ~/.config/nvim/init.vim && printOut "Created .vimrc"
+echo "source ~/config/tmux/tmux.conf" > ~/.tmux.conf && printOut "Created tmux.conf\n"
 
 # install vim plugins                                 
 
@@ -88,7 +85,8 @@ printOut "Installing ctrlp.vim..."
 git clone https://github.com/ctrlpvim/ctrlp.vim.git ~/.config/ctrlp/ctrlp.vim
 
 # coc
-mkdir ~/.config/nvim/plug-config
+[ -d ~/.config/nvim/plug-config ] || mkdir -p ~/.config/nvim/plug-config
+mkdir -p ~/.config/nvim/plug-config
 touch ~/.config/nvim/plug-config/coc.vim
 
 # exit program if min flag provided
@@ -102,24 +100,25 @@ fi
 if [ "$*" == "-zsh" ] || [ "$*" == "--all" ]
 then
   printOut "Installing zsh..."
-  brew install zsh
+  #brew install zsh
   printOut "Installing zsh syntax highighting..."
-  brew install zsh-syntax-highlghting
+  brew install zsh-syntax-highlighting
 fi
 
 # add iterm files                                     
 if [ "$*" == "-itrm" ] || [ "$*" == "--all" ]
 then
-  printOut "Installing iTerm2..."
-  brew install --cask iterm && printOut "Done. Please import pre-existing iTerm config from ~/config/iTerm/term-config.json by opening the application and going to 'Preferences -> Profiles -> Other actions -> Import JSON Profile"
+  #printOut "Installing iTerm2..."
+  brew install --cask iterm2 && printOut "Done. Please import pre-existing iTerm config from ~/config/iTerm/term-config.json by opening the application and going to 'Preferences -> Profiles -> Other actions -> Import JSON Profile"
 fi
 
 # add tmux files                                      
 if [ "$*" == "-tmx" ] || [ "$*" == "--all" ]
 then
   printOut "Installing Tmux"
-  brew install tmux
+  #brew install tmux
   printOut "Installing Tmux Plugin Manager"
+  [ -d ~/.tmux/plugins ] || mkdir -p ~/.tmux/plugins 
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   printOut "Done"
 fi
@@ -128,12 +127,12 @@ fi
 if [ "$*" == "-llvm" ] || [ "$*" == "--all" ]
 then
   printOut " Installing llvm..."
-  brew install llvm
+  #brew install llvm
   printOut "Done"
 fi
 
 # install pass                                          
-if [ "$*" == "-pass" ] || [ "$*" == "--all" ]
+if [ "$*" == "-pass" ]
 then
   # pass
   printOut "Installing pass..."
@@ -168,23 +167,22 @@ then
 fi
 
 # add git functionality                               
-if [ "$*" == "--git" ]
+if [ "$*" == "-git" ]
 then
   printOut "Adding git shortcuts..."
   git config --global alias.s status
   git config --global alias.br branch
   git config --global alias.co checkout
   git config --global alias.cm commit
-  echo "Please enter your git username:"
-  read gitusername
-  echo "Please enter your git email:"
-  read gitemail
-  printOut "Setting git credentials..."
-  git config --global user.name $gitusername
-  git config --global user.name $gitemail
+  #echo "Please enter your git username:"
+  #read gitusername
+  #echo "Please enter your git email:"
+  #read gitemail
+  #printOut "Setting git credentials..."
+  #git config --global user.name $gitusername
+  #git config --global user.name $gitemail
 fi
 
-# pass integration (with browser support)
 if [ "$*" == "-t" ] 
 then
   defaults write com.apple.dock autohide-time-modifier -float 0.1 && killall Dock
