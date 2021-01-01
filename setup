@@ -100,7 +100,7 @@ fi
 if [ "$*" == "-zsh" ] || [ "$*" == "--all" ]
 then
   printOut "Installing zsh..."
-  #brew install zsh
+  brew install zsh
   printOut "Installing zsh syntax highighting..."
   brew install zsh-syntax-highlighting
 fi
@@ -108,7 +108,7 @@ fi
 # add iterm files                                     
 if [ "$*" == "-itrm" ] || [ "$*" == "--all" ]
 then
-  #printOut "Installing iTerm2..."
+  printOut "Installing iTerm2..."
   brew install --cask iterm2 && printOut "Done. Please import pre-existing iTerm config from ~/config/iTerm/term-config.json by opening the application and going to 'Preferences -> Profiles -> Other actions -> Import JSON Profile"
 fi
 
@@ -116,7 +116,7 @@ fi
 if [ "$*" == "-tmx" ] || [ "$*" == "--all" ]
 then
   printOut "Installing Tmux"
-  #brew install tmux
+  brew install tmux
   printOut "Installing Tmux Plugin Manager"
   [ -d ~/.tmux/plugins ] || mkdir -p ~/.tmux/plugins 
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -127,7 +127,7 @@ fi
 if [ "$*" == "-llvm" ] || [ "$*" == "--all" ]
 then
   printOut " Installing llvm..."
-  #brew install llvm
+  brew install llvm
   printOut "Done"
 fi
 
@@ -167,20 +167,20 @@ then
 fi
 
 # add git functionality                               
-if [ "$*" == "-git" ]
+if [ "$*" == "-git" ] || [ "$*" == "--all" ]
 then
   printOut "Adding git shortcuts..."
   git config --global alias.s status
   git config --global alias.br branch
   git config --global alias.co checkout
   git config --global alias.cm commit
-  #echo "Please enter your git username:"
-  #read gitusername
-  #echo "Please enter your git email:"
-  #read gitemail
-  #printOut "Setting git credentials..."
-  #git config --global user.name $gitusername
-  #git config --global user.name $gitemail
+  echo "Please enter your git username:"
+  read gitusername
+  echo "Please enter your git email:"
+  read gitemail
+  printOut "Setting git credentials..."
+  git config --global user.name $gitusername
+  git config --global user.name $gitemail
 fi
 
 if [ "$*" == "-t" ] 
