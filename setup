@@ -151,6 +151,6 @@ then
   git config --global user.name $gitemail
 fi
 
-[ "$*" == "-t" ] && defaults write com.apple.dock autohide-time-modifier -float 0.1 && killall Dock; defaults write .GlobalPreferences com.apple.mouse.scaling -1
+[[ "$@" =~ "-t" ]] && defaults write com.apple.dock autohide-time-modifier -float 0.1 && killall Dock; defaults write .GlobalPreferences com.apple.mouse.scaling -1
 
 printOut "Done"
