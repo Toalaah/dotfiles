@@ -5,40 +5,25 @@ printOut() {
   echo "$(tput bold)=>$(tput sgr0) $1"
 }
 
-getVersion() {
-  echo "version: 0.1"
-  exit 0
-}
-
-
 # help menu                                          
-if [ "$*" == "--help" ] || [ "$*" == "-h" ]
+if [[ "$@" =~ "--help" ]] || [[ "$@" =~ "-h" ]]
 then
-  echo "This script installs common config files for zsh, tmux, nvim by default. Optionally, this setup script will also install additional useful packages and plugins.\n"
-  echo "Usage: setup [--version|-v] [-h|--help] [--purge] [-t] [--all] [--min] [--git] [-zsh] [-itrm] [-llvm] [-tmx]"
-  echo "options:"
-  echo "--version,-v    prints the script version"
-  echo "-h, --help      print this help menu."
-  echo "--purge         purges all backup files create by the script"
-  echo "-t              disables system mouse acceleration and increases dock speed"
-  echo "--all           installs $(tput bold)all$(tput sgr0) optional features"
-  echo "--min           installs core-features only"
-  echo "--git           sets up git shotcuts and credentials"
-  echo "-zsh            installs zsh features"
-  echo "-itrm           installs iterm features"
-  echo "-llvm           installs llvm features (needed for coc.vim)"
-  echo "-tmx            installs tmux features"
+  echo "Usage: setup [options]"
+  echo "$(tput bold)options:$(tput sgr0)"
+  echo "-h, --help       print this help menu and exit"
+  echo "--purge          purges all backup files create by the script"
+  echo "--all            installs $(tput bold)all$(tput sgr0) features and programs"
+  echo "--min            installs config files only (suggested for non-fresh systems)"
+  echo "-git             sets up git shotcuts and credentials"
+  echo "-zsh             installs zsh"
+  echo "-iterm           installs iterm"
+  echo "-tmux            installs tmux"
+  echo "-t               disables mouse acceleration and quickens dock hide / appear speed"
   exit 0
-fi
-
-# check for version flag
-if [ "$*" == "--version" ] || [ "$*" == "-v" ]
-then
-  getVersion
 fi
 
 # check for purge flag
-if [ "$*" == "--purge" ]
+if [[ "$@" =~ "--purge" ]]
 then
   printOut "Purging backup files..."
   rm -f ~/.zshrc.bac ~/.tmux.conf.bac ~/.config/nvim/init.vim.bac
@@ -51,123 +36,106 @@ printOut "Searching for pre-existing config files...\n"
 
 # create backups and add configs                     
 FILE=~/.zshrc
-if test -f "$FILE"; then
-    printOut "Found zshrc at $FILE, backing up to $FILE.bac"
-    cp ~/.zshrc ~/.zshrc.bac
-fi
+[ -f "$FILE" ] && printOut "Found zshrc at $FILE, backing up to $FILE.bac" && cp ~/.zshrc ~/.zshrc.bac
 FILE=~/.tmux.conf
-if test -f "$FILE"; then
-    printOut "Found tmux config at $FILE, backing up to $FILE.bac"
-    cp ~/.tmux.conf ~/.tmux.conf.bac
-fi
-
-
+[ -f "$FILE" ] && printOut "Found tmux config at $FILE, backing up to $FILE.bac" && cp ~/.tmux.conf ~/.tmux.conf.bac
 FILE=~/.config/nvim/init.vim
-if test -f "$FILE"; then
-    printOut "Found nvim config at $FILE, backing up to $FILE.bac"
-    cp ~/.config/nvim/init.vim ~/.config/nvim/init.vim.bac 
-fi
+[ -f "$FILE" ] && printOut "Found nvim config at $FILE, backing up to $FILE.bac" && cp ~/.config/nvim/init.vim ~/.config/nvim/init.vim.bac 
 
 printOut "Backups completed\n"
 printOut "Creating new source files...\n"
 
 # create new source files
-echo "source ~/config/zsh/zshrc" > ~/.zshrc && printOut "Created .zshrc"
-# make sure autoload dir exists
-[ -d ~/.config/nvim/autoload ] || mkdir -p ~/.config/nvim/autoload
+[ -d ~/.config/nvim/autoload ] || mkdir -p ~/.config/nvim/autoload # make sure autoload dir exists
 echo "source ~/config/nvim/init.vim" > ~/.config/nvim/init.vim && printOut "Created .vimrc"
+echo "source ~/config/zsh/zshrc" > ~/.zshrc && printOut "Created .zshrc"
 echo "source ~/config/tmux/tmux.conf" > ~/.tmux.conf && printOut "Created tmux.conf\n"
 
 # install vim plugins                                 
-
-# ctrlp
-printOut "Installing ctrlp.vim..."
+# test if nvim installed
+nvim -version 2>/dev/null || brew install nvim 
+printOut "Installing ctrlp.vim..." # ctrlp
 git clone https://github.com/ctrlpvim/ctrlp.vim.git ~/.config/ctrlp/ctrlp.vim
 
-# coc
-[ -d ~/.config/nvim/plug-config ] || mkdir -p ~/.config/nvim/plug-config
+[ -d ~/.config/nvim/plug-config ] || mkdir -p ~/.config/nvim/plug-config #coc
 mkdir -p ~/.config/nvim/plug-config
 touch ~/.config/nvim/plug-config/coc.vim
+printOut "Installing llvm" && brew install llvm
 
 # exit program if min flag provided
-if [ "$*" == "-min" ] 
-then
-  printOut "Done"
-  exit 0
-fi
+[[ "$@" =~ "-min" ]] && printOut "Done" && exit 0
 
-# add zsh functionality                               
-if [ "$*" == "-zsh" ] || [ "$*" == "--all" ]
+# install zsh
+if [[ "$@" =~ "-zsh" ]] || [[ "$@" =~ "--all" ]]
 then
   printOut "Installing zsh..."
   brew install zsh
   printOut "Installing zsh syntax highighting..."
   brew install zsh-syntax-highlighting
+  printOut "Done"
+  echo "Set zsh as default shell [y/n]"
+  read answer
+  ([ $answer == "y" ] && chsh -s /bin/zsh) || printOut "Skipping..."
 fi
 
-# add iterm files                                     
-if [ "$*" == "-itrm" ] || [ "$*" == "--all" ]
+# install iterm                                     
+if [[ "$@" =~ "-iterm" ]] || [[ "$@" =~ "--all" ]]
 then
   printOut "Installing iTerm2..."
-  brew install --cask iterm2 && printOut "Done. Please import pre-existing iTerm config from ~/config/iTerm/term-config.json by opening the application and going to 'Preferences -> Profiles -> Other actions -> Import JSON Profile"
+  brew install --cask iterm2 && printOut "Installed iTerm successfully. Please import pre-existing iTerm config from ~/config/iTerm/term-config.json by opening the application and going to 'Preferences -> Profiles -> Other actions -> Import JSON Profile"
 fi
 
 # add tmux files                                      
-if [ "$*" == "-tmx" ] || [ "$*" == "--all" ]
+if [[ "$@" =~ "-tmux" ]] || [[ "$@" =~ "--all" ]]
 then
   printOut "Installing Tmux"
-  brew install tmux
+  tmux -V 2>/dev/null || brew install tmux
   printOut "Installing Tmux Plugin Manager"
   [ -d ~/.tmux/plugins ] || mkdir -p ~/.tmux/plugins 
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-  printOut "Done"
-fi
-
-# install llvm (needed for coc.vim)                     
-if [ "$*" == "-llvm" ] || [ "$*" == "--all" ]
-then
-  printOut " Installing llvm..."
-  brew install llvm
-  printOut "Done"
 fi
 
 # install pass                                          
-if [ "$*" == "-pass" ]
+if [[ "$@" =~ "-pass" ]] || [[ "$x" =~ "--all" ]]
 then
   # pass
-  printOut "Installing pass..."
-  brew install pass 
-  printOut "Installed pass"
-  echo "Please enter the directory of your public gpg key"
-  read gpgPub
-  echo "Please enter the directory of your private gpg key"
-  read gpgPriv
-  printOut "Importing gpg keys..."
-  gpg --import gpgPub
-  gpg --import gpgPriv
-  gpg --list-keys
-  echo "Please enter the fingerprint of your gpg key (last column of 'pub' row)"
-  read fingerprint
-  printOut "Initializing pass storage"
-  pass init $fingerprint
-  echo "Please enter the repository link to your pass storage"
-  read $repolink
-  git clone $repolink passStorageTemp
-  mv passStorageTemp ~/.pass_store
+  echo "Note: you will need access to your public and private gpg keys in order to procede. Do you wish to continue? [y/n]"
+  read answer
+  ([ $answer == "y" ] && 
+  printOut "Installing pass..." &&
+  (pass version 2>/dev/null || brew install pass) &&
+  printOut "Installed pass" &&
+  echo "Please enter the directory of your public gpg key" &&
+  read gpgPub &&
+  echo "Please enter the directory of your private gpg key" &&
+  read gpgPriv &&
+  printOut "Importing gpg keys..." &&
+  gpg --import gpgPub &&
+  gpg --import gpgPriv &&
+  gpg --list-keys &&
+  echo "Please enter the fingerprint of your gpg key (last column of 'pub' row)" &&
+  read fingerprint &&
+  printOut "Initializing pass storage" &&
+  pass init $fingerprint &&
+  echo "Please enter the repository link to your pass storage" &&
+  read $repolink &&
+  git clone $repolink passStorageTemp &&
+  mv passStorageTemp ~/.pass_store &&
   # browserpass extension
-  printOut "Installing browserpass extension..."
-  brew install pinentry-mac
-  brew tap amar1729/formulae
-  brew install browserpass
-  printOut "Installing native messaging hosts, requesting sudo..."
-  sudo PREFIX=/usr/local make hosts-chrome -C /usr/local/lib/browserpass
-  echo "pinenty-program /usr/local/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
-  gpgconf --kill gpg-agent
+  printOut "Installing browserpass extension..." &&
+  brew install pinentry-mac &&
+  brew tap amar1729/formulae &&
+  brew install browserpass &&
+  printOut "Installing native messaging hosts, requesting sudo..." &&
+  sudo PREFIX=/usr/local make hosts-chrome -C /usr/local/lib/browserpass &&
+  echo "pinenty-program /usr/local/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf &&
+  gpgconf --kill gpg-agent &&
   printOut "Installed browserpass extension..."
+  ) || echo "Skipping pass installation..."
 fi
 
 # add git functionality                               
-if [ "$*" == "-git" ] || [ "$*" == "--all" ]
+if [[ "$@" =~ "-git" ]] || [[ "$@" =~ "--all" ]]
 then
   printOut "Adding git shortcuts..."
   git config --global alias.s status
@@ -183,11 +151,6 @@ then
   git config --global user.name $gitemail
 fi
 
-if [ "$*" == "-t" ] 
-then
-  defaults write com.apple.dock autohide-time-modifier -float 0.1 && killall Dock
-  defaults write .GlobalPreferences com.apple.mouse.scaling -1
-fi
+[ "$*" == "-t" ] && defaults write com.apple.dock autohide-time-modifier -float 0.1 && killall Dock; defaults write .GlobalPreferences com.apple.mouse.scaling -1
 
 printOut "Done"
-exit 0
