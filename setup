@@ -61,6 +61,8 @@ git clone https://github.com/ctrlpvim/ctrlp.vim.git ~/.config/ctrlp/ctrlp.vim
 mkdir -p ~/.config/nvim/plug-config
 touch ~/.config/nvim/plug-config/coc.vim
 printOut "Installing llvm" && brew install llvm
+printOut "Installing node" && brew install node
+
 
 # exit program if min flag provided
 [[ "$@" =~ "-min" ]] && printOut "Done" && exit 0
@@ -153,4 +155,4 @@ fi
 
 [[ "$@" =~ "-t" ]] && defaults write com.apple.dock autohide-time-modifier -float 0.1 && killall Dock; defaults write .GlobalPreferences com.apple.mouse.scaling -1
 
-printOut "Done"
+printOut "Done. You may need to fix homebrew permissions upon starting a new zsh shell, to do so run:\n $(tput bold)compaudit | xargs chmod g-w$(tput sgr0)"
