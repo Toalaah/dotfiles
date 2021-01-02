@@ -139,19 +139,20 @@ then
   gpg --list-keys
   echo "Please enter the fingerprint of your gpg key (last column of 'pub' row):"
   printOut "Initializing pass storage..."
-  pass init $(gpg --list-keys | awk 'NR==9 {print $1}')
+  fingerPrint = $(gpg --list-keys | awk 'NR==9 {print $1}')
+  pass init $fingerPrint
   echo "Please enter the repository link to your pass storage:"
   read repolink
   git clone $repolink passStorageTemp
-  mv passStorageTemp ~/.password-store
+  mv -f passStorageTemp/* ~/.password-store && rmdir passStorageTemp
   # browserpass extension
   printOut "Installing browserpass extension..."
   brew install pinentry-mac
   brew tap amar1729/formulae
   brew install browserpass
-  printOut "Installing native messaging hosts, requesting sudo..."
   echo "For which program would you like to install native the messaging host?\n Options: [chrome, chromium, firefox]"
   read prefBrowser
+  printOut "Installing native messaging hosts, requesting sudo..."
   sudo PREFIX=/usr/local make hosts-$prefBrowser -C /usr/local/lib/browserpass
   echo "pinenty-program /usr/local/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
   gpgconf --kill gpg-agent
