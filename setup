@@ -1,50 +1,47 @@
 #!/bin/sh
 
-# helper functions                                   
+# pretty-printer
 printOut() {
   echo "$(tput setaf 6)$(tput bold)==>$(tput sgr0) $1"
 }
 
-# help menu                                          
-if [[ "$@" =~ "--help" ]] || [[ "$@" =~ "-h" ]]
+# help menu
+if [[ "$@" =~ "--help" ]]
 then
-  echo "Usage: setup [options]"
-  echo "$(tput bold)options:$(tput sgr0)"
-  echo "-h, --help       print this help menu and exit"
-  echo "--purge          purges all backup files create by the script"
-  echo "--all            installs $(tput bold)all$(tput sgr0) features and programs"
-  echo "--min            installs config files only (suggested for non-fresh systems)"
-  echo "-git             sets up git shotcuts and credentials"
-  echo "-zsh             installs zsh"
-  echo "-iterm           installs iterm"
-  echo "-tmux            installs tmux"
-  echo "-pass            sets up pass and browser pass extension" 
-  echo "-t               disables mouse acceleration and quickens dock hide / appear speed"
+  echo "Usage: $0 [options]"
+  echo "options:"
+  echo "$(tput bold)--help$(tput sgr0)\t print this help menu and exits"
+  echo "$(tput bold)--purge$(tput sgr0)\t purges all backup files create by the script"
+  echo "$(tput bold)--all$(tput sgr0)\t installs $(tput smul)all$(tput sgr0) optional features and programs\n\t (alias for $(tput bold)-git, -zsh, -tmux, -iterm -pass -apps$(tput sgr0))"
+  echo "$(tput bold)--min$(tput sgr0)\t installs config files only\n\t (suggested for $(tput smul)non-fresh systems$(tput sgr0))"
+  echo "$(tput bold)-git$(tput sgr0)\t sets up git shotcuts and credentials"
+  echo "$(tput bold)-zsh$(tput sgr0)\t installs zsh"
+  echo "$(tput bold)-iterm$(tput sgr0)\t installs iterm"
+  echo "$(tput bold)-tmux$(tput sgr0)\t installs tmux"
+  echo "$(tput bold)-pass$(tput sgr0)\t sets up pass and browser pass extension"
+  echo "$(tput bold)-nopass$(tput sgr0)\t overrides pass setup if $(tput bold)--all$(tput sgr0) is passed"
+  echo "$(tput bold)-apps$(tput sgr0)\t downloads a number of useful applications\n\t (see $(tput smul)readme$(tput sgr0) for more info)"
+  echo "$(tput bold)-noapps$(tput sgr0)\t overrides download of apps if $(tput bold)--all$(tput sgr0) is passed"
+  echo "$(tput bold)-t$(tput sgr0)\t disables mouse acceleration and\n\t quickens dock hide / appear speed"
   exit 0
 fi
 
-# check for purge flag
-if [[ "$@" =~ "--purge" ]]
-then
-  printOut "Purging backup files..."
-  rm -f ~/.zshrc.bac ~/.tmux.conf.bac ~/.config/nvim/init.vim.bac
-  printOut "Done"
-  exit 0
-fi
+# purge files and exit if flag provided
+[[ "$@" =~ "--purge" ]] && printOut "Purging backup files..." && rm -f ~/.zshrc.bac ~/.tmux.conf.bac ~/.config/nvim/init.vim.bac && printOut "Done" && exit 0
 
-printOut "Beginning setup...\n"
-printOut "Searching for pre-existing config files...\n"
+printOut "Beginning setup..."
+printOut "Searching for pre-existing config files..."
 
-# create backups and add configs                     
+# create backups and add configs
 FILE=~/.zshrc
 [ -f "$FILE" ] && printOut "Found zshrc at $FILE, backing up to $FILE.bac" && cp ~/.zshrc ~/.zshrc.bac
 FILE=~/.tmux.conf
 [ -f "$FILE" ] && printOut "Found tmux config at $FILE, backing up to $FILE.bac" && cp ~/.tmux.conf ~/.tmux.conf.bac
 FILE=~/.config/nvim/init.vim
-[ -f "$FILE" ] && printOut "Found nvim config at $FILE, backing up to $FILE.bac" && cp ~/.config/nvim/init.vim ~/.config/nvim/init.vim.bac 
+[ -f "$FILE" ] && printOut "Found nvim config at $FILE, backing up to $FILE.bac" && cp ~/.config/nvim/init.vim ~/.config/nvim/init.vim.bac
 
-printOut "Backups completed\n"
-printOut "Creating new source files...\n"
+printOut "Backups completed"
+printOut "Creating new source files..."
 
 # create new source files
 [ -d ~/.config/nvim/autoload ] || mkdir -p ~/.config/nvim/autoload # make sure autoload dir exists
@@ -52,23 +49,21 @@ echo "source ~/config/nvim/init.vim" > ~/.config/nvim/init.vim && printOut "Crea
 echo "source ~/config/zsh/zshrc" > ~/.zshrc && printOut "Created .zshrc"
 echo "source ~/config/tmux/tmux.conf" > ~/.tmux.conf && printOut "Created tmux.conf\n"
 
-# install vim plugins                                 
-# test if nvim installed
-nvim -version 2>/dev/null || brew install nvim 
+# exit program if min flag provided
+[[ "$@" =~ "--min" ]] && printOut "Done. You may need to fix homebrew permissions upon\nstarting a new zsh shell, to do so run:\n$(tput bold)compaudit | xargs chmod g-w$(tput sgr0)" && exit 0
+
+# install vim plugins
+nvim -version 2>/dev/null || brew install nvim # test if nvim already installed
 printOut "Installing ctrlp.vim..." # ctrlp
 git clone https://github.com/ctrlpvim/ctrlp.vim.git ~/.config/ctrlp/ctrlp.vim
 
 [ -d ~/.config/nvim/plug-config ] || mkdir -p ~/.config/nvim/plug-config #coc
-mkdir -p ~/.config/nvim/plug-config
 touch ~/.config/nvim/plug-config/coc.vim
-printOut "Installing llvm" && brew install llvm
+# dependencies, at least on my machine
+printOut "Installing llvm" && brew install llvm 
 printOut "Installing node" && brew install node
 
-
-# exit program if min flag provided
-[[ "$@" =~ "-min" ]] && printOut "Done" && exit 0
-
-# add git functionality                               
+# add git credentials / shortcuts
 if [[ "$@" =~ "-git" ]] || [[ "$@" =~ "--all" ]]
 then
   printOut "Adding git shortcuts..."
@@ -98,34 +93,45 @@ then
   ([ $answer == "y" ] && chsh -s /bin/zsh) || printOut "Skipping..."
 fi
 
-# install iterm                                     
+# install iterm
 if [[ "$@" =~ "-iterm" ]] || [[ "$@" =~ "--all" ]]
 then
   printOut "Installing iTerm2..."
   brew install --cask iterm2 && printOut "Installed iTerm successfully. Please import pre-existing iTerm config from ~/config/iTerm/term-config.json by opening the application and going to 'Preferences -> Profiles -> Other actions -> Import JSON Profile"
 fi
 
-# add tmux files                                      
+# install tmux
 if [[ "$@" =~ "-tmux" ]] || [[ "$@" =~ "--all" ]]
 then
   printOut "Installing Tmux"
   tmux -V 2>/dev/null || brew install tmux
   printOut "Installing Tmux Plugin Manager"
-  [ -d ~/.tmux/plugins ] || mkdir -p ~/.tmux/plugins 
+  [ -d ~/.tmux/plugins ] || mkdir -p ~/.tmux/plugins
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
 
-# install pass                                          
-if [[ "$@" =~ "-pass" ]] || [[ "$@" =~ "--all" ]]
+if ! [[ "$@" =~ "-noapps" ]] && ([[ "$@" =~ "-apps" ]] || [[ "$@" =~ "--all" ]])
 then
-  # pass
+  printOut "Installing additional applications..."
+  printOut "Installing chromium..." && brew fetch --cask eloston-chromium && brew install --cask eloston-chromium
+  printOut "Installing skim..." && brew install --cask skim
+  printOut "Installing the unarchiver..." && brew install --cask the-unarchiver
+  printOut "Installing vs-code" && brew install --cask visual-studio-code
+  printOut "Installing vlc..." && brew install --cask vlc
+  printOut "Installing discord... " && brew install --cask discord
+  printOut "Installing spotify... " && brew install --cask spotify
+fi
+
+# install pass
+if ! [[ "$@" =~ "-nopass" ]] && ([[ "$@" =~ "-pass" ]] || [[ "$@" =~ "--all" ]])
+then
   echo "Note: you will need access to your public and private gpg keys in order to procede. Do you wish to continue? [y/n]"
   read answer
-  ([ $answer == "y" ] && 
+  ([ $answer == "y" ] &&
     (pass version > /dev/null 2>&1 || (printOut "Installing pass..." && brew install pass && printOut "Installed pass"))
-  echo "Please enter the $(tput bold)full$(tput sgr0) directory of your public gpg key"
+      echo "Please enter the $(tput bold)full$(tput sgr0) directory (from /) of your public gpg key"
   read gpgPub
-  echo "Please enter the $(tput bold)full$(tput sgr0) directory of your private gpg key"
+  echo "Please enter the $(tput bold)full$(tput sgr0) directory (from /) of your private gpg key"
   read gpgPriv
   printOut "Importing gpg keys..."
   gpg --import $gpgPub
@@ -153,7 +159,5 @@ then
   ) || echo "Skipping pass installation..."
 fi
 
-
-[[ "$@" =~ "-t" ]] && defaults write com.apple.dock autohide-time-modifier -float 0.1 && killall Dock; defaults write .GlobalPreferences com.apple.mouse.scaling -1
-
+[[ "$@" =~ "-t" ]] || [[ "$@" =~ "--all" ]] && defaults write com.apple.dock autohide-time-modifier -float 0.1 && killall Dock; defaults write .GlobalPreferences com.apple.mouse.scaling -1
 printOut "Done. You may need to fix homebrew permissions upon starting a new zsh shell, to do so run:\n $(tput bold)compaudit | xargs chmod g-w$(tput sgr0)"
