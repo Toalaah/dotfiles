@@ -2,7 +2,7 @@
 
 # helper functions                                   
 printOut() {
-  echo "$(tput bold)=>$(tput sgr0) $1"
+  echo "$(tput setaf 6)$(tput bold)==>$(tput sgr0) $1"
 }
 
 # help menu                                          
@@ -18,6 +18,7 @@ then
   echo "-zsh             installs zsh"
   echo "-iterm           installs iterm"
   echo "-tmux            installs tmux"
+  echo "-pass            sets up pass and browser pass extension" 
   echo "-t               disables mouse acceleration and quickens dock hide / appear speed"
   exit 0
 fi
@@ -115,7 +116,7 @@ then
 fi
 
 # install pass                                          
-if [[ "$@" =~ "-pass" ]] || [[ "$x" =~ "--all" ]]
+if [[ "$@" =~ "-pass" ]] || [[ "$@" =~ "--all" ]]
 then
   # pass
   echo "Note: you will need access to your public and private gpg keys in order to procede. Do you wish to continue? [y/n]"
