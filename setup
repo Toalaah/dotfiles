@@ -65,6 +65,23 @@ printOut "Installing llvm" && brew install llvm
 # exit program if min flag provided
 [[ "$@" =~ "-min" ]] && printOut "Done" && exit 0
 
+# add git functionality                               
+if [[ "$@" =~ "-git" ]] || [[ "$@" =~ "--all" ]]
+then
+  printOut "Adding git shortcuts..."
+  git config --global alias.s status
+  git config --global alias.br branch
+  git config --global alias.co checkout
+  git config --global alias.cm commit
+  echo "Please enter your git username:"
+  read gitusername
+  echo "Please enter your git email:"
+  read gitemail
+  printOut "Setting git credentials..."
+  git config --global user.name $gitusername
+  git config --global user.email $gitemail
+fi
+
 # install zsh
 if [[ "$@" =~ "-zsh" ]] || [[ "$@" =~ "--all" ]]
 then
@@ -73,7 +90,7 @@ then
   printOut "Installing zsh syntax highighting..."
   brew install zsh-syntax-highlighting
   printOut "Done"
-  echo "Set zsh as default shell [y/n]"
+  echo "Set zsh as default shell? [y/n]"
   read answer
   ([ $answer == "y" ] && chsh -s /bin/zsh) || printOut "Skipping..."
 fi
@@ -102,54 +119,37 @@ then
   echo "Note: you will need access to your public and private gpg keys in order to procede. Do you wish to continue? [y/n]"
   read answer
   ([ $answer == "y" ] && 
-  printOut "Installing pass..." &&
-  (pass version 2>/dev/null || brew install pass) &&
-  printOut "Installed pass" &&
-  echo "Please enter the directory of your public gpg key" &&
-  read gpgPub &&
-  echo "Please enter the directory of your private gpg key" &&
-  read gpgPriv &&
-  printOut "Importing gpg keys..." &&
-  gpg --import gpgPub &&
-  gpg --import gpgPriv &&
-  gpg --list-keys &&
-  echo "Please enter the fingerprint of your gpg key (last column of 'pub' row)" &&
-  read fingerprint &&
-  printOut "Initializing pass storage" &&
-  pass init $fingerprint &&
-  echo "Please enter the repository link to your pass storage" &&
-  read $repolink &&
-  git clone $repolink passStorageTemp &&
-  mv passStorageTemp ~/.pass_store &&
+    (pass version > /dev/null 2>&1 || (printOut "Installing pass..." && brew install pass && printOut "Installed pass"))
+  echo "Please enter the $(tput bold)full$(tput sgr0) directory of your public gpg key"
+  read gpgPub
+  echo "Please enter the $(tput bold)full$(tput sgr0) directory of your private gpg key"
+  read gpgPriv
+  printOut "Importing gpg keys..."
+  gpg --import $gpgPub
+  gpg --import $gpgPriv
+  gpg --list-keys
+  echo "Please enter the fingerprint of your gpg key (last column of 'pub' row):"
+  printOut "Initializing pass storage..."
+  pass init $(gpg --list-keys | awk 'NR==9 {print $1}')
+  echo "Please enter the repository link to your pass storage:"
+  read repolink
+  git clone $repolink passStorageTemp
+  mv passStorageTemp ~/.password-store
   # browserpass extension
-  printOut "Installing browserpass extension..." &&
-  brew install pinentry-mac &&
-  brew tap amar1729/formulae &&
-  brew install browserpass &&
-  printOut "Installing native messaging hosts, requesting sudo..." &&
-  sudo PREFIX=/usr/local make hosts-chrome -C /usr/local/lib/browserpass &&
-  echo "pinenty-program /usr/local/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf &&
-  gpgconf --kill gpg-agent &&
+  printOut "Installing browserpass extension..."
+  brew install pinentry-mac
+  brew tap amar1729/formulae
+  brew install browserpass
+  printOut "Installing native messaging hosts, requesting sudo..."
+  echo "For which program would you like to install native the messaging host?\n Options: [chrome, chromium, firefox]"
+  read prefBrowser
+  sudo PREFIX=/usr/local make hosts-$prefBrowser -C /usr/local/lib/browserpass
+  echo "pinenty-program /usr/local/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf
+  gpgconf --kill gpg-agent
   printOut "Installed browserpass extension..."
   ) || echo "Skipping pass installation..."
 fi
 
-# add git functionality                               
-if [[ "$@" =~ "-git" ]] || [[ "$@" =~ "--all" ]]
-then
-  printOut "Adding git shortcuts..."
-  git config --global alias.s status
-  git config --global alias.br branch
-  git config --global alias.co checkout
-  git config --global alias.cm commit
-  echo "Please enter your git username:"
-  read gitusername
-  echo "Please enter your git email:"
-  read gitemail
-  printOut "Setting git credentials..."
-  git config --global user.name $gitusername
-  git config --global user.email $gitemail
-fi
 
 [[ "$@" =~ "-t" ]] && defaults write com.apple.dock autohide-time-modifier -float 0.1 && killall Dock; defaults write .GlobalPreferences com.apple.mouse.scaling -1
 
