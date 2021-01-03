@@ -129,10 +129,12 @@ then
   read answer
   ([ $answer == "y" ] &&
     (pass version > /dev/null 2>&1 || (printOut "Installing pass..." && brew install pass && printOut "Installed pass"))
-      echo "Please enter the $(tput bold)full$(tput sgr0) directory (from /) of your public gpg key"
+  echo "Please enter the directory of your public gpg key:"
   read gpgPub
-  echo "Please enter the $(tput bold)full$(tput sgr0) directory (from /) of your private gpg key"
+  gpgPub=$(echo $gpgPub | sed "s,~,${HOME},g; s,\$HOME,${HOME},g")
+  echo "Please enter the directory of your private gpg key:"
   read gpgPriv
+  gpgPriv=$(echo $gpgPriv | sed "s,~,${HOME},g; s,\$HOME,${HOME},g")
   printOut "Importing gpg keys..."
   gpg --import $gpgPub
   gpg --import $gpgPriv
