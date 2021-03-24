@@ -5,6 +5,8 @@ vnoremap > >gv
 " enable moving virtual lines
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+noremap <silent> <expr> $ (v:count == 0 ? 'g$' : '$')
+noremap <silent> <expr> ^ (v:count == 0 ? 'g^' : '^')
 
 if exists('g:vscode')
 

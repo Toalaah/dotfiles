@@ -12,6 +12,7 @@ alias zip="zip -r -X archive.zip"
 alias ..="cd .."
 alias ...="cd ../../"
 alias server="php -S localhost:8000"
+alias la="ls -A"
 
 # copy passwords to clipboard
 alias pw="pass show -c"
@@ -32,6 +33,7 @@ precmd_functions+=(update_prompt)
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
+setopt autocd
 
 # vi mode
 bindkey -v

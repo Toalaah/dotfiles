@@ -165,3 +165,5 @@ fi
 
 [[ "$@" =~ "-t" ]] || [[ "$@" =~ "--all" ]] && defaults write com.apple.dock autohide-time-modifier -float 0.1 && killall Dock; defaults write .GlobalPreferences com.apple.mouse.scaling -1
 printOut "Done. You may need to fix homebrew permissions upon starting a new zsh shell, to do so run:\n $(tput bold)compaudit | xargs chmod g-w$(tput sgr0)"
+
+#curl -s -o ./testrc -LO https://raw.githubusercontent.com/Toalaah/config/master/zsh/zshrc
