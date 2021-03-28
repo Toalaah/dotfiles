@@ -15,7 +15,7 @@ brew install git
 
 ### Installation
 
-1. Clone into the repository and run the setup script:
+1. Clone into the repository and run the setup script
 
 ```shell
 git clone https://github.com/toalaah/config
