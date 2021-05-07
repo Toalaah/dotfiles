@@ -1,30 +1,18 @@
-# ==============================  PATH  =================================
-
-PATH=/usr/local/opt/llvm/bin/:~/.scripts:$PATH
-EDITOR=nvim
-
 # =======================================================================
 # =============================== ALIASES ===============================
 
-alias reload="source ~/.zshrc"
 alias vim=nvim
 alias zip="zip -r -X archive.zip"
 alias ..="cd .."
 alias ...="cd ../../"
-alias server="php -S localhost:8000"
-alias la="ls -A"
 
-# copy passwords to clipboard
-alias pw="pass show -c"
-
-ZSHRC=$HOME/config/zsh/zshrc
-VIMRC=$HOME/config/nvim/init.vim
-TMUXRC=$HOME/config/tmux/tmux.conf
+ZSHRC=$HOME/.zshrc
+VIMRC=$HOME/.config/nvim/init.vim
 
 # =======================================================================
 # =============================== PROMPT ================================
 
-source $HOME/config/zsh/prompt.sh
+source $HOME/prompt.sh
 precmd_functions+=(update_prompt)
 
 # =======================================================================
@@ -83,5 +71,3 @@ pdflatex "$1" 2>&1 > /dev/null && latexmk -c -quiet
 update_prompt
 # auto-ls on cd
 chpwd() ls;  
-# requires (brew install) zsh-syntax-highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
