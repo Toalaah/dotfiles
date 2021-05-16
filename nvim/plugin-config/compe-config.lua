@@ -4,8 +4,9 @@ require'compe'.setup {
   enabled = true;
   autocomplete = true;
   debug = false;
+  auto_preselect = false;
   min_length = 1;
-  preselect = 'enable';
+  preselect = 'disable';
   throttle_time = 80;
   source_timeout = 200;
   incomplete_delay = 400;

@@ -5,8 +5,13 @@
 " \ V /| | | | | | | | | (__   v2
 "  \_/ |_|_| |_| |_|_|  \___|  05/21
 
-source ~/.config/nvim/plugins.vim
+source ~/.config/nvim/plugin-config/plugins.vim
 source ~/.config/nvim/settings.vim
 source ~/.config/nvim/mappings.vim
-luafile ~/.config/nvim/compeConfig.lua
-luafile ~/.config/nvim/languageServers.lua
+luafile ~/.config/nvim/plugin-config/compe-config.lua
+luafile ~/.config/nvim/plugin-config/language-servers.lua
+luafile ~/.config/nvim/plugin-config/telescope-settings.lua
+
+
+
+" TODO: Add ripgrep for telescope

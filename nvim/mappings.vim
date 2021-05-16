@@ -7,6 +7,10 @@
 "
 " Remaps
 
+" General QOL remaps
+nnoremap <leader>w <cmd>w<CR>
+
+
 " Enable tabbing through open buffers
 nnoremap <silent> <TAB> :bnext<CR>
 nnoremap <silent> <S-TAB> :bprevious<CR>
@@ -27,18 +31,25 @@ noremap <silent> <expr> ^ (v:count == 0 ? 'g^' : '^')
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" LSP config (the mappings used in the default file don't quite work right)
+" Vim-commentary mappings
+nnoremap <silent> <leader>/ <cmd>Commentary<CR>
+vnoremap <silent> <leader>/ :'<,'>Commentary<CR>
+
+
+" LSP mappings 
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>
 
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" Telescope mappings
+nnoremap <leader>ff <cmd>Telescope find_files find_command=rg,--hidden,--ignore,--files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>gb <cmd>Telescope git_branches<cr>
+nnoremap <leader>gc <cmd>Telescope git_commits<cr>
 
-" Improved indentation in V mode
+" Improved indentation in visual mode
 vnoremap < <gv
 vnoremap > >gv
