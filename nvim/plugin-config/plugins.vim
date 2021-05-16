@@ -18,14 +18,12 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-lua/popup.nvim'                  " Requirement for telescope
     Plug 'nvim-lua/plenary.nvim'                " Requirement for telescope
     Plug 'nvim-telescope/telescope.nvim'        " Cross-file fuzzyfinder
-    Plug 'sheerun/vim-polyglot'                 " Improved syntax highlighting
     Plug 'airblade/vim-gitgutter'               " Show git changes in sidebar
+    Plug 'mhinz/vim-startify'                   " Nice starup-interface
+    Plug 'tpope/vim-commentary'                 " Better commenting
 call plug#end() 
 
-
-
 " Lightline configuration
-
 let g:lightline = {
     \ 'colorscheme': 'jellybeans',
     \ 'active': {
@@ -46,3 +44,10 @@ let g:lightline = {
     \   'buffers': 'tabsel'
     \ }
     \ }
+
+
+
+let g:startify_bookmarks = [
+            \ { 'i': '~/.config/nvim/init.vim' },
+            \ { 'z': '~/.zshrc' },
+            \ ]
