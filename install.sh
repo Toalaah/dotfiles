@@ -1,7 +1,5 @@
 #!/usr/bin/sh
 
-# This script must be run as sudo!
-
 CYAN=$(tput setaf 6)
 NORM=$(tput sgr0)
 
@@ -18,10 +16,10 @@ install()
 # First we install neovim nightly through an appimage along with all dependencies for language servers
 
 # Download nvim appimage
-status "Getting latest neovim nightly build..."
-curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage ./nvim.appimage
-chmod u+x ./nvim.appimage && sudo mv ./nvim.appimage /usr/bin/nvim
-status "Installed neovim"
+#status "Getting latest neovim nightly build..."
+#curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage ./nvim.appimage
+#chmod u+x ./nvim.appimage && sudo mv ./nvim.appimage /usr/bin/nvim
+#status "Installed neovim"
 
 # Install vim-plug
 status "Installing vim-plug..."
@@ -32,7 +30,7 @@ status "Installed vim-plug"
 # Copy  config files
 status "Copying config files to $HOME/.config/nvim ..."
 mkdir -p $HOME/.config # Check if directory does not exists, and if so create it
-cp -r ./nvim $HOME/.config/nvim
+cp -r ./nvim $HOME/.config/
 status "Copied config files"
 
 # Install node / sudo npm
