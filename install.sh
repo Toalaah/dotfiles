@@ -2,9 +2,12 @@
 
 # This script must be run as sudo!
 
+CYAN=$(tput setaf 6)
+NORM=$(tput sgr0)
+
 status()
 {
-  [ $# -eq 0 ] || echo "%B=>%b" $1
+  [ $# -eq 0 ] || echo "${CYAN}=>${NORM}" $1
 } 
 
 install()
@@ -73,5 +76,5 @@ status "Installing bash language server..."
 sudo npm i -g bash-language-server
 status "Installed bash language server"
 
-status "Neovim Install complete"
+status "Neovim install complete"
 
