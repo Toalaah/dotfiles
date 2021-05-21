@@ -16,10 +16,10 @@ install()
 # First we install neovim nightly through an appimage along with all dependencies for language servers
 
 # Download nvim appimage
-#status "Getting latest neovim nightly build..."
-#curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage ./nvim.appimage
-#chmod u+x ./nvim.appimage && sudo mv ./nvim.appimage /usr/bin/nvim
-#status "Installed neovim"
+status "Getting latest neovim nightly build..."
+curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+chmod u+x ./nvim.appimage && sudo mv ./nvim.appimage /usr/local/bin/nvim
+status "Installed neovim"
 
 # Install vim-plug
 status "Installing vim-plug..."
@@ -36,7 +36,7 @@ status "Copied config files"
 # Install node / sudo npm
 status "Installing language server dependencies..."
 status "Installing npm..."
-install "npm"
+install "npm" sudo npm i -g npm
 status "Installed npm"
 
 # Install cargo [ This is needed to install texlab LSP ]
