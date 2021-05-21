@@ -51,7 +51,7 @@ status "Installed texlab"
 
 # Install clang LSP
 status "Installing clangd language server"
-install "clangd-9"
+install "clangd"
 status "Installed clangd"
 
 # Install python LSP
