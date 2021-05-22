@@ -10,13 +10,15 @@ status()
 
 install()
 {
-  [ $# -eq 0 ] || sudo apt-get install $1
+  [ $# -eq 0 ] || sudo apt-get -y install $1
 }
 
 # First we install neovim nightly through an appimage along with all dependencies for language servers
 
 # Download nvim appimage
 status "Getting latest neovim nightly build..."
+# Check if curl installed
+curl --version >/dev/null 2&>1 || (status "Installing curl..." && sudo apt-get install curl)
 curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 chmod u+x ./nvim.appimage && sudo mv ./nvim.appimage /usr/local/bin/nvim
 status "Installed neovim"
@@ -36,7 +38,8 @@ status "Copied config files"
 # Install node / sudo npm
 status "Installing language server dependencies..."
 status "Installing npm..."
-install "npm" sudo npm i -g npm
+install "npm" 
+sudo npm i -g npm
 status "Installed npm"
 
 # Install cargo [ This is needed to install texlab LSP ]
@@ -46,7 +49,7 @@ status "Installed cargo"
 
 # Install Latex-LSP
 status "Installing texlab..."
-cargo install --git https://github.com/latex-lsp/texlab.git --locked
+cargo install --git https://github.com/latex-lsp/texlab.git --locked | sh
 status "Installed texlab"
 
 # Install clang LSP
