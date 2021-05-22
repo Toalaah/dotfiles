@@ -18,7 +18,7 @@ install()
 # Download nvim appimage
 status "Getting latest neovim nightly build..."
 # Check if curl installed
-curl --version >/dev/null 2&>1 || (status "Installing curl..." && sudo apt-get install curl)
+curl --version >/dev/null 2>&1 || (status "Installing curl..." && sudo apt-get install curl)
 curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 chmod u+x ./nvim.appimage && sudo mv ./nvim.appimage /usr/local/bin/nvim
 status "Installed neovim"
