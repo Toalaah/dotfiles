@@ -98,6 +98,6 @@ status "Done"
 
 tmux --version >/dev/null 2>&1 || 
   (status "Installing tmux..." && install "tmux")       # Check if tmux installed
-cp tmux/tmux.conf $HOME/.tmux.conf
+cp tmux/.tmux.conf $HOME/.tmux.conf
 status "Done"
 
