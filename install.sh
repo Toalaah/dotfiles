@@ -18,7 +18,7 @@ install()
 # Download nvim appimage
 status "Getting latest neovim nightly build..."
 # Check if curl installed
-curl --version >/dev/null 2>&1 || (status "Installing curl..." && sudo apt-get install curl)
+curl --version >/dev/null 2>&1 || (status "Installing curl..." && install "curl")
 curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 chmod u+x ./nvim.appimage && sudo mv ./nvim.appimage /usr/local/bin/nvim
 status "Installed neovim"
@@ -55,7 +55,8 @@ status "Installing texlab..."
 curl -LO https://github.com/latex-lsp/texlab/releases/download/v3.0.0/texlab-x86_64-linux.tar.gz
 tar -xf texlab-x86_64-linux.tar.gz
 mkdir -p $HOME/.cargo/bin # Check if directory does not exists, and if so create it
-sudo mv texlab-x86_64-linux $HOME/.cargo/bin/
+sudo mv texlab $HOME/.cargo/bin/
+rm texlab-x86_64-linux.tar.gz
 status "Installed texlab"
 
 # Install clang LSP
