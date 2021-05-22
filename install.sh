@@ -52,7 +52,10 @@ status "Installed cargo"
 
 # Install Latex-LSP
 status "Installing texlab..."
-cargo install --git https://github.com/latex-lsp/texlab.git --locked | sh
+curl -LO https://github.com/latex-lsp/texlab/releases/download/v3.0.0/texlab-x86_64-linux.tar.gz
+tar -xf texlab-x86_64-linux.tar.gz
+mkdir -p $HOME/.cargo/bin # Check if directory does not exists, and if so create it
+sudo mv texlab-x86_64-linux $HOME/.cargo/bin/
 status "Installed texlab"
 
 # Install clang LSP
