@@ -12,24 +12,7 @@ VIMRC=$HOME/.config/nvim/init.vim
 # =======================================================================
 # =============================== PROMPT ================================
 
-function update_prompt() {
-  PS1="%F{blue}%2~%f"
-  # find out if in git repo or not, and if so what branch
-  BRANCH=$(git symbolic-ref --short HEAD 2> /dev/null)
-  if [ -z "$BRANCH" ]; then
-      PS1+=""
-  else
-      CHANGES=$(git s --short | wc -l | awk '{$1=$1};1')
-      if [ $CHANGES -eq 0 ]; then
-          PS1+=" on %F{blue}$BRANCH%f"
-      else
-        PS1+=" on %F{blue}$BRANCH%f (+$CHANGES)"
-      fi
-  
-  fi
-  PS1+=" > "
-}
-
+source $HOME/.prompt
 precmd_functions+=(update_prompt)
 
 # =======================================================================
@@ -54,3 +37,6 @@ bindkey '^e' edit-command-line
 update_prompt
 # auto-ls on cd
 chpwd() ls;  
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

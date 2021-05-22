@@ -13,76 +13,91 @@ install()
   [ $# -eq 0 ] || sudo apt-get -y install $1
 }
 
-# First we install neovim nightly through an appimage along with all dependencies for language servers
+# --------------------------------------------
+# Neovim Installation and Plugin Configuration 
+# --------------------------------------------
 
-# Download nvim appimage
-status "Getting latest neovim nightly build..."
-# Check if curl installed
-curl --version >/dev/null 2>&1 || (status "Installing curl..." && install "curl")
+status "Getting latest neovim nightly build..."         # Download nvim appimage
+curl --version >/dev/null 2>&1 || 
+  (status "Installing curl..." && install "curl")       # Check if curl installed
 curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 chmod u+x ./nvim.appimage && sudo mv ./nvim.appimage /usr/local/bin/nvim
-status "Installed neovim"
+status "Done"
 
-# Install vim-plug
-status "Installing vim-plug..."
+status "Installing vim-plug..."                         # Install vim-plug
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-status "Installed vim-plug"
+status "Done"
 
-# Copy  config files
-status "Copying config files to $HOME/.config/nvim ..."
-mkdir -p $HOME/.config # Check if directory does not exists, and if so create it
+status "Copying config files to $HOME/.config/nvim ..." # Copy  config files
+mkdir -p $HOME/.config                                  # Make directories (if necessary)
 cp -r ./nvim $HOME/.config/
-status "Copied config files"
+status "Done"
 
-# Install node / sudo npm
-status "Installing language server dependencies..."
+status "Installing language server dependencies..."     # Install node / npm
 status "Installing node.js / npm..."
 install "npm" 
 sudo npm install -g npm
 sudo npm cache clean -f
 sudo npm install -g n
 sudo n stable
-status "Installed node.js / npm"
+status "Done"
 
-# Install cargo [ This is needed to install texlab LSP ]
-status "Installing cargo..."
+status "Installing cargo..."                            # Install cargo 
+                                                        # [ This is needed to install texlab LSP ]
 curl https://sh.rustup.rs -sSf | sh
-status "Installed cargo"
+status "Done"
 
-# Install Latex-LSP
-status "Installing texlab..."
+status "Installing texlab..."                           # Install Latex-LSP
 curl -LO https://github.com/latex-lsp/texlab/releases/download/v3.0.0/texlab-x86_64-linux.tar.gz
 tar -xf texlab-x86_64-linux.tar.gz
-mkdir -p $HOME/.cargo/bin # Check if directory does not exists, and if so create it
+mkdir -p $HOME/.cargo/bin 
 sudo mv texlab $HOME/.cargo/bin/
 rm texlab-x86_64-linux.tar.gz
-status "Installed texlab"
+status "Done"
 
-# Install clang LSP
-status "Installing clangd language server"
+status "Installing clangd language server"              # Install clang LSP
 install "clangd"
-status "Installed clangd"
+status "Done"
 
-# Install python LSP
-status "Installing pyright..."
+status "Installing pyright..."                          # Install python LSP
 sudo npm install -g pyright
-status "Installed pyright"
-
-# Install vim-LSP
-status "Installing vimls..."
+status "Done"
+status "Installing vimls..."                            # Install vim-LSP
 sudo npm install -g vim-language-server
-status "Installed vimls"
+status "Done"
 
-# Install typescript LSP
-status "Installing typescript language server..."
+status "Installing typescript language server..."       # Install typescript LSP
 sudo npm install -g typescript typescript-language-server
-status "Installed typescript language server"
+status "Done"
 
-# Install bash LSP
-status "Installing bash language server..."
+status "Installing bash language server..."             # Install bash LSP
 sudo npm install -g bash-language-server
-status "Installed bash language server"
+status "Done"
 
-status "Neovim install complete"
+# ----------------
+# zsh installation 
+# ----------------
+
+zsh --version >/dev/null 2>&1 || 
+  (status "Installing zsh..." && install "zsh")       # Check if zsh installed
+cp zsh/.zshrc $HOME/.zshrc
+
+status "Installing syntax-highlighting..."
+git clone https://github.com/zsh-users/zsh-syntax-highlighting && cd zsh-syntax-highlighting
+sudo make install && cd ../
+status "Done"
+
+status "Installing auto-completion..."
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+status "Done"
+
+# -----------------
+# tmux installation 
+# -----------------
+
+tmux --version >/dev/null 2>&1 || 
+  (status "Installing tmux..." && install "tmux")       # Check if tmux installed
+cp tmux/tmux.conf $HOME/.tmux.conf
+status "Done"
 
