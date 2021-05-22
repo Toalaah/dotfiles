@@ -85,7 +85,7 @@ cp zsh/.zshrc $HOME/.zshrc
 
 status "Installing syntax-highlighting..."
 git clone https://github.com/zsh-users/zsh-syntax-highlighting && cd zsh-syntax-highlighting
-sudo make install && cd ../
+sudo make install && cd ../ && rm -rf zsh-syntax-highlighting
 status "Done"
 
 status "Installing auto-completion..."
