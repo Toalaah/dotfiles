@@ -37,10 +37,13 @@ status "Copied config files"
 
 # Install node / sudo npm
 status "Installing language server dependencies..."
-status "Installing npm..."
+status "Installing node.js / npm..."
 install "npm" 
-sudo npm i -g npm
-status "Installed npm"
+sudo npm install -g npm
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
+status "Installed node.js / npm"
 
 # Install cargo [ This is needed to install texlab LSP ]
 status "Installing cargo..."
@@ -59,12 +62,12 @@ status "Installed clangd"
 
 # Install python LSP
 status "Installing pyright..."
-sudo npm i -g pyright
+sudo npm install -g pyright
 status "Installed pyright"
 
 # Install vim-LSP
 status "Installing vimls..."
-sudo npm i -g vim-language-server
+sudo npm install -g vim-language-server
 status "Installed vimls"
 
 # Install typescript LSP
@@ -74,7 +77,7 @@ status "Installed typescript language server"
 
 # Install bash LSP
 status "Installing bash language server..."
-sudo npm i -g bash-language-server
+sudo npm install -g bash-language-server
 status "Installed bash language server"
 
 status "Neovim install complete"
