@@ -37,6 +37,8 @@ set shortmess+=c                " Disable annoying error message from autocomple
 set formatoptions-=cro          " Stop newline continution of comments
 colorscheme gruvbox             " set Colorscheme
 set bg=dark                     " Set dark background
+let g:tex_flavor='latex'        " Set default filetype of empty tex file 
+                                " to latex instead of plaintex
 
 " Enable line-wrap when working with tex or markdown files
 au BufRead,BufNewFile *.tex setlocal wrap
