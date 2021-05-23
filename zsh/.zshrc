@@ -37,6 +37,7 @@ precmd_functions+=(update_prompt)
 # =======================================================================
 # ============================= OPTIONS ===============================
 
+export PATH="$PATH:$HOME/.cargo/bin"
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
