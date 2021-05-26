@@ -43,3 +43,6 @@ let g:tex_flavor='latex'        " Set default filetype of empty tex file
 " Enable line-wrap when working with tex or markdown files
 au BufRead,BufNewFile *.tex setlocal wrap
 au BufRead,BufNewFile *.md setlocal wrap
+
+" Auto-compiles tex documents on write and removes auxiliary files
+autocmd BufWritePost *.tex silent! !pdflatex <afile> >/dev/null 2>&1 && latexmk -c > /dev/null 2>&1
