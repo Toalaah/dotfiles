@@ -13,6 +13,10 @@ install()
   [ $# -eq 0 ] || sudo apt-get -y install $1
 }
 
+# TODO: Automate detection of distro and update install() accordingly
+sudo apt-get update && sudo apt-get upgrade
+# sudo pacman -Syu
+
 # --------------------------------------------
 # Neovim Installation and Plugin Configuration 
 # --------------------------------------------
