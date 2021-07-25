@@ -1,0 +1,67 @@
+#  ____  _     ____  ____ ____  _ _____ _____ ___  _
+# /  _ \/ \   /  _ \/   _Y  __\/ Y__ __Y__ __\\  \//
+# | / \|| |   | / \||  / |  \/|| | / \   / \   \  / 
+# | |-||| |_/\| |-|||  \_|    /| | | |   | |   / /  
+# \_/ \|\____/\_/ \|\____|_/\_\\_/ \_/   \_/  /_/   
+# v1, 07.21
+
+# Window & font preferences
+window:
+  dimensions:
+    columns: 82
+    lines: 55
+  position:
+    x: 0
+    y: 0
+  padding:
+    x: 10
+    y: 10
+  decorations: none
+scrolling:
+  history: 10000
+font:
+  normal:
+    family: Ubuntu Mono
+    style: Regular
+  bold:
+    style: Bold
+  italic:
+    style: Italic
+  bold_italic:
+    style: Bold Italic
+  size: 15
+draw_bold_text_with_bright_colors: true
+
+
+# Colorscheme (gruvbox dark)
+colors:
+  primary:
+    background: '0x282828'
+    foreground: '0xebdbb2'
+  normal:
+    black:   '0x282828'
+    red:     '0xcc241d'
+    green:   '0x98971a'
+    yellow:  '0xd79921'
+    blue:    '0x458588'
+    magenta: '0xb16286'
+    cyan:    '0x689d6a'
+    white:   '0xa89984'
+  bright:
+    black:   '0x928374'
+    red:     '0xfb4934'
+    green:   '0xb8bb26'
+    yellow:  '0xfabd2f'
+    blue:    '0x83a598'
+    magenta: '0xd3869b'
+    cyan:    '0x8ec07c'
+    white:   '0xebdbb2'
+
+
+# Cursor preferences
+cursor:
+  style:
+    shape: Block
+    blinking: On
+  blink_interval: 500
+
