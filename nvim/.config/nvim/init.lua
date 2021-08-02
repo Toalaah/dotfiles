@@ -1,0 +1,5 @@
+require("plugin-config/plugins")
+require("plugin-config/language-servers")
+require("plugin-config/lightline-config")
+require("preferences")
+require("keybindings")
