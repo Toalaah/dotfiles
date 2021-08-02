@@ -1,4 +1,3 @@
-bin/build
-iTerm/com.googlecode.iterm2.plist
 .DS_Store
 setup
+nvim/.config/nvim/plugin/*

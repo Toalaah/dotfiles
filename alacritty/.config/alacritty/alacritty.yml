@@ -5,11 +5,12 @@
 # \_/ \|\____/\_/ \|\____|_/\_\\_/ \_/   \_/  /_/   
 # v1, 07.21
 
-# Window & font preferences
+
+# Window preferences
 window:
   dimensions:
     columns: 82
-    lines: 55
+    lines: 54
   position:
     x: 0
     y: 0
@@ -17,8 +18,14 @@ window:
     x: 10
     y: 10
   decorations: none
+
+
+# Set scrollbar history
 scrolling:
   history: 10000
+
+
+# Font preferences
 font:
   normal:
     family: Ubuntu Mono
@@ -65,3 +72,15 @@ cursor:
     blinking: On
   blink_interval: 500
 
+
+
+# Keybindings
+key_bindings:
+  # This is needed for my tmux navigation, as the alt key cannot be set as a meta key
+  - { key: H,             mods: Alt,           chars: "\x1bh" }
+  - { key: J,             mods: Alt,           chars: "\x1bj" }
+  - { key: K,             mods: Alt,           chars: "\x1bk" }
+  - { key: L,             mods: Alt,           chars: "\x1bl" }
+  - { key: Comma,         mods: Alt,           chars: "\x1b," }
+  - { key: Period,        mods: Alt,           chars: "\x1b." }
+  - { key: F,             mods: Command|Shift, action: ToggleFullscreen      }
