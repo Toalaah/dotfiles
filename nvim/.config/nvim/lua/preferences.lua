@@ -1,6 +1,7 @@
-
 vim.cmd('set encoding=utf-8')
+vim.cmd('set hidden') -- allows switching buffers without saving them
 vim.cmd('set relativenumber')
+vim.cmd('set termguicolors')
 vim.cmd('set showmatch')
 vim.cmd('set nohlsearch')
 vim.cmd('set tabstop=2')
