@@ -1,5 +1,6 @@
 vim.cmd('set encoding=utf-8')
 vim.cmd('set hidden') -- allows switching buffers without saving them
+vim.cmd('set shortmess+=c') -- disable 'pattern not found' message from compe
 vim.cmd('set relativenumber')
 vim.cmd('set termguicolors')
 vim.cmd('set showmatch')
@@ -20,8 +21,7 @@ vim.cmd('set nowrap')
 vim.cmd('set showtabline=2')
 vim.cmd('set mouse=a')
 vim.cmd('set autoindent')
--- vim.cmd('set formatoptions-=cro')
 vim.cmd('colorscheme gruvbox')
 vim.cmd('set bg=dark')
-
-vim.cmd('autocmd BufRead,BufNew,BufEnter *.* set formatoptions-=cro')
+-- disables auto-comment continuations for all files
+vim.cmd('autocmd BufRead,BufNew,BufEnter *.* set formatoptions-=cro') 

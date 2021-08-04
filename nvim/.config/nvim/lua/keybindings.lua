@@ -1,10 +1,9 @@
 vim.g.mapleader = " " -- map leader to space
 
--- TODO: hi
-
 -- TODO: add nnoremap to some functions
 -- miscellaneous
 vim.api.nvim_set_keymap("n", "<C-a>", "ggVG<c-$>", {}) -- select all
+vim.api.nvim_set_keymap("n", "<C-w>", ":bd<CR>", { silent = true }) -- close buffer
 
 -- fuzzy finding and file navigation
 vim.api.nvim_set_keymap("n", "<C-p>",   ":Telescope find_files<CR>", {}) 
