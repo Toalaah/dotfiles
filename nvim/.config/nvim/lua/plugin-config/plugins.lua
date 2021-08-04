@@ -1,26 +1,33 @@
 return require('packer').startup(function()
 	use { 'wbthomason/packer.nvim' }
+
+  -- colorschemes
 	use { 'gruvbox-community/gruvbox' }
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-	use { 'neovim/nvim-lspconfig' }
+
+  -- git integration
 	use { 'tpope/vim-fugitive' }
-  use { 'karb94/neoscroll.nvim' }
+  use { 'mhinz/vim-signify' }
+
+  -- lsp / auto-completion
+  use { 'hrsh7th/nvim-compe' }
+	use { 'neovim/nvim-lspconfig' }
 
   -- status/buffer-lines
   use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
   use { 'akinsho/nvim-bufferline.lua', requires = { 'kyazdani42/nvim-web-devicons' } }
 
-
+  -- misc
 	use { 'jiangmiao/auto-pairs' }
 	use { 'b3nj5m1n/kommentary' }
 	use { 'iamcco/markdown-preview.nvim' }
+  use { 'karb94/neoscroll.nvim' }
+  use { 'mhinz/vim-startify' }
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
 	-- telescope
 	use { 'nvim-lua/popup.nvim' }
 	use { 'nvim-lua/plenary.nvim' }              
 	use { 'nvim-telescope/telescope.nvim' }
 
-  -- auto-completion
-  use { 'hrsh7th/nvim-compe' }
 end)
 

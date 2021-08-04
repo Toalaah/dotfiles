@@ -1,4 +1,4 @@
-require("bufferline").setup{
+require('bufferline').setup{
   options = {
     separator_style = "thin",
     enforce_regular_tabs = true,
