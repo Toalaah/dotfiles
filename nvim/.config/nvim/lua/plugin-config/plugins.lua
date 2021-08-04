@@ -23,6 +23,7 @@ return require('packer').startup(function()
   use { 'karb94/neoscroll.nvim' }
   use { 'mhinz/vim-startify' }
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use { 'dbeniamine/cheat.sh-vim' }
 
 	-- telescope
 	use { 'nvim-lua/popup.nvim' }
