@@ -4,17 +4,28 @@
 alias vim=nvim
 alias ..="cd .."
 alias ...="cd ../../"
-alias ls="ls -a --color"
+
+# aliases get set to more aesthetic variants of ls / cat 
+# (only if these variants are already installed on the system)
+# this is only checked once per startup of every shell 
+# instance, so the performance hit should be small
+
+[[ -n "$(exa --help 2>/dev/null)" ]] && \
+  alias ls="exa -ah --group-directories-first --color=always --icons" || \
+  alias ls="ls -a"
+[[ -n "$(bat --help 2>/dev/null)" ]] && alias cat="bat"
+
+alias pw="pass -c"
 
 ZSHRC=$HOME/.zshrc
-VIMRC=$HOME/.config/nvim/init.vim
+VIMRC=$HOME/.config/nvim/init.lua
 
 # =======================================================================
 # =============================== PROMPT ================================
 
 autoload -U colors && colors
-COL1=044
-COL2=084
+COL1=044 # path color
+COL2=084 # arrow prompt color
 function update_prompt() {
   PS1="%F{$COL1}%K{000}%2~%F{015}%K{000} "
   # find out if in git repo or not, and if so what branch
@@ -37,7 +48,8 @@ precmd_functions+=(update_prompt)
 # =======================================================================
 # ============================= OPTIONS ===============================
 
-export PATH="$PATH:$HOME/.cargo/bin"
+export VISUAL=nvim
+export PATH="$PATH:$HOME/.cargo/bin:/usr/local/opt/llvm/bin/"
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
@@ -51,5 +63,10 @@ update_prompt
 # auto-ls on cd
 chpwd() ls;  
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+[[ -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && \
+  source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+[[ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && \
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
