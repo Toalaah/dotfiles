@@ -1,20 +1,40 @@
-vim.g.mapleader = " " -- map leader to space
+vim.g.mapleader = " "                                               
 
--- TODO: add nnoremap to some functions
 -- miscellaneous
-vim.api.nvim_set_keymap("n", "<C-a>", "ggVG<c-$>", {}) -- select all
+vim.api.nvim_set_keymap("n", "<C-a>", "ggVG<c-$>", {})              -- select all
 vim.api.nvim_set_keymap("n", "<C-w>", ":bd<CR>", { silent = true }) -- close buffer
 
--- fuzzy finding and file navigation
-vim.api.nvim_set_keymap("n", "<C-p>",   ":Telescope find_files<CR>", {}) 
-vim.api.nvim_set_keymap("n", "<Leader>g",   ":Telescope live_grep<CR>", {}) 
+-- fuzzy finding and file navigation w/ telescope
+vim.api.nvim_set_keymap('n', '<C-p>', 
+  ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', 
+  {noremap = true, silent = true})
+
+vim.api.nvim_set_keymap('n', '<leader>F', 
+  ':lua require"telescope.builtin".live_grep()<CR>',
+  {noremap = true, silent = true})
+
+vim.api.nvim_set_keymap('n', '<leader>?', 
+  ':lua require"telescope.builtin".help_tags()<CR>',
+  {noremap = true, silent = true})
+
+vim.api.nvim_set_keymap('n', '<leader>gb',
+  ':lua require"telescope.builtin".git_branches()<CR>',
+  {noremap = true, silent = true})
+
+vim.api.nvim_set_keymap('n', '<leader>gc',
+  ':lua require"telescope.builtin".git_commits()<CR>',
+  {noremap = true, silent = true})
+
+vim.api.nvim_set_keymap('n', '<leader>gf',
+  ':lua require"telescope.builtin".git_files()<CR>',
+  {noremap = true, silent = true})
 
 -- buffer navigation
-vim.api.nvim_set_keymap("n", "<Tab>",   ":bnext<CR>", { silent = true } ) 
-vim.api.nvim_set_keymap("n", "<S-Tab>", ":bprev<CR>",{ silent = true }) 
+vim.api.nvim_set_keymap("n", "<Tab>",   ":bnext<CR>", { silent = true }) 
+vim.api.nvim_set_keymap("n", "<S-Tab>", ":bprev<CR>", { silent = true }) 
 
 -- commenting
-vim.api.nvim_set_keymap("n", "<leader>/", "<Plug>kommentary_line_default", {})
+vim.api.nvim_set_keymap("n", "<leader>/", "<Plug>kommentary_line_default",   {})
 vim.api.nvim_set_keymap("v", "<leader>/", "<Plug>kommentary_visual_default", {})
 
 -- virtual line navigation
