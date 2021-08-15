@@ -24,6 +24,8 @@ return require('packer').startup(function()
   use { 'mhinz/vim-startify' }
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use { 'dbeniamine/cheat.sh-vim' }
+  use { 'kyazdani42/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons' } }
+  use { 'romainl/vim-cool' }
 
 	-- telescope
 	use { 'nvim-lua/popup.nvim' }

@@ -2,7 +2,17 @@ vim.g.mapleader = " "
 
 -- miscellaneous
 vim.api.nvim_set_keymap("n", "<C-a>", "ggVG<c-$>", {})              -- select all
-vim.api.nvim_set_keymap("n", "<C-w>", ":bd<CR>", { silent = true }) -- close buffer
+vim.api.nvim_set_keymap("n", "<C-W>", ":bd<CR>", { silent = true }) -- close buffer
+vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>",  { silent = true }) -- close buffer
+vim.api.nvim_set_keymap("i", "<C-s>", "<Esc>:w<CR>a",  { silent = true }) -- close buffer
+
+
+-- move between splits more comfortably
+vim.api.nvim_set_keymap("n", "<C-h>", "<C-w><C-h>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-j>", "<C-w><C-j>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-k>", "<C-w><C-k>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-l>", "<C-w><C-l>", { noremap = true })
+
 
 -- fuzzy finding and file navigation w/ telescope
 vim.api.nvim_set_keymap('n', '<C-p>', 
@@ -50,4 +60,7 @@ vim.api.nvim_set_keymap("v", "^", "v:count == 0 ? 'g^' : '^'", { expr = true, si
 -- indentation in visual mode
 vim.api.nvim_set_keymap("v" , "<", "<gv", { noremap = true })
 vim.api.nvim_set_keymap("v" , ">", ">gv", { noremap = true })
+
+-- file browser
+vim.api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { silent = true })
 
