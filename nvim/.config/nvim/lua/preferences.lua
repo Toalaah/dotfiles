@@ -3,7 +3,7 @@ vim.cmd('set hidden')                 -- allows switching buffers without saving
 vim.cmd('set shortmess+=c')           -- disable 'pattern not found' message from compe
 vim.cmd('set relativenumber')         -- relative line numbering, better for jumps
 vim.cmd('set termguicolors')          -- enable 24-bit rgb
-vim.cmd('set nohlsearch')             -- disables matched words becoming highlighted
+-- vim.cmd('set nohlsearch')             -- disables matched words becoming highlighted
 vim.cmd('set tabstop=2')              -- sets tab-length to 2 instead of the default 8
 vim.cmd('set shiftwidth=2')           -- enables auto-indenting to the same degree of tab-lengths
 vim.cmd('set expandtab')              -- converts all tabs to spaces on save
