@@ -27,3 +27,6 @@ vim.cmd('set bg=dark')                -- set background-color
 -- ftplugins; this ensures that they are set correctly
 vim.cmd('autocmd BufRead,BufNew,BufEnter *.* set formatoptions-=cro') 
 
+-- set filetype to bash for all .sh files
+vim.cmd('autocmd BufRead,BufNew,BufEnter *.sh* set ft=bash') 
+
