@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function check_dependencies() {
-  for PROG in 'mailhog' 'brew' 'git' 'node' 'stow'; do
+  for PROG in 'brew' 'git' 'node' 'stow'; do
     command -v $PROG &> /dev/null || print_dependency_error_and_exit
   done
 
