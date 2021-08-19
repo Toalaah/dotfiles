@@ -28,5 +28,5 @@ vim.cmd('set bg=dark')                -- set background-color
 vim.cmd('autocmd BufRead,BufNew,BufEnter *.* set formatoptions-=cro') 
 
 -- set filetype to bash for all .sh files
-vim.cmd('autocmd BufRead,BufNew,BufEnter *.sh* set ft=bash') 
+vim.cmd('autocmd BufRead,BufNew,BufEnter *.sh* set syntax=bash') 
 
