@@ -22,6 +22,15 @@ function symlink_dotfiles() {
   done
 }
 
+function install_font() {
+  # all fonts: https://www.nerdfonts.com/font-downloads
+  FONT_NAME=$1
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/$FONT_NAME.zip
+  unzip $FONT_NAME.zip -d ~/.local/share/fonts > /dev/null 2>&1
+  fc-cache -fv > /dev/null 2>&1
+  rm $FONT_NAME.zip
+}
+
 # Check dependencies + install if necessary (This includes the font for alacritty!)
 check_dependencies
 # Stow files
