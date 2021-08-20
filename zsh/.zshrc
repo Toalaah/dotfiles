@@ -10,10 +10,11 @@ alias ...="cd ../../"
 # this is only checked once per startup of every shell 
 # instance, so the performance hit should be small
 
-[[ -n "$(exa --help 2>/dev/null)" ]] && \
-  alias ls="exa -ah --group-directories-first --color=always --icons" || \
+command -V exa > /dev/null 2>&1 &&
+  alias ls="exa -ah --group-directories-first --color=always --icons" ||
   alias ls="ls -a"
-[[ -n "$(bat --help 2>/dev/null)" ]] && alias cat="bat"
+
+command -V bat &> /dev/null && alias cat="bat"
 
 alias pw="pass -c"
 
