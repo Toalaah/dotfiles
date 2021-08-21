@@ -1,4 +1,4 @@
-return require('packer').startup(function()
+return require('packer').startup(function(use)
 	use { 'wbthomason/packer.nvim' }
 
   -- colorschemes
@@ -11,13 +11,13 @@ return require('packer').startup(function()
   -- lsp / auto-completion
   use { 'hrsh7th/nvim-compe' }
 	use { 'neovim/nvim-lspconfig' }
+  use { 'kabouzeid/nvim-lspinstall' }
 
   -- status/buffer-lines
   use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
   use { 'akinsho/nvim-bufferline.lua', requires = { 'kyazdani42/nvim-web-devicons' } }
 
   -- misc
-	use { 'jiangmiao/auto-pairs' }
 	use { 'b3nj5m1n/kommentary' }
 	use { 'iamcco/markdown-preview.nvim' }
   use { 'karb94/neoscroll.nvim' }
@@ -29,7 +29,7 @@ return require('packer').startup(function()
 
 	-- telescope
 	use { 'nvim-lua/popup.nvim' }
-	use { 'nvim-lua/plenary.nvim' }              
+	use { 'nvim-lua/plenary.nvim' }
 	use { 'nvim-telescope/telescope.nvim' }
 
 end)

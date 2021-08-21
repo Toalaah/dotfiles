@@ -3,7 +3,6 @@ vim.cmd('set hidden')                 -- allows switching buffers without saving
 vim.cmd('set shortmess+=c')           -- disable 'pattern not found' message from compe
 vim.cmd('set relativenumber')         -- relative line numbering, better for jumps
 vim.cmd('set termguicolors')          -- enable 24-bit rgb
--- vim.cmd('set nohlsearch')             -- disables matched words becoming highlighted
 vim.cmd('set tabstop=2')              -- sets tab-length to 2 instead of the default 8
 vim.cmd('set shiftwidth=2')           -- enables auto-indenting to the same degree of tab-lengths
 vim.cmd('set expandtab')              -- converts all tabs to spaces on save
@@ -20,13 +19,13 @@ vim.cmd('set showtabline=2')          -- always show tab-bar
 vim.cmd('set mouse=a')                -- enable mouse usage
 vim.cmd('set autoindent')             -- auto-indenting
 vim.cmd('colorscheme gruvbox')        -- set colorscheme
-vim.cmd('set bg=dark')                -- set background-color 
+vim.cmd('set bg=dark')                -- set background-color
 
--- disables auto-comment continuations for all files. 
+-- disables auto-comment continuations for all files.
 -- Some files have their format-options overwritten by
 -- ftplugins; this ensures that they are set correctly
-vim.cmd('autocmd BufRead,BufNew,BufEnter *.* set formatoptions-=cro') 
+vim.cmd('autocmd BufRead,BufNew,BufEnter *.* set formatoptions-=cro')
 
 -- set filetype to bash for all .sh files
-vim.cmd('autocmd BufRead,BufNew,BufEnter *.sh* set syntax=bash') 
+vim.cmd('autocmd BufRead,BufNew,BufEnter *.sh* set syntax=bash')
 
