@@ -55,7 +55,7 @@ function ask_for_overwrite {
   printf "[${RED}Warning! The following files will be created / overwritten!${NC}]\n"
   for PROG in ${dotfiles[@]}; do 
     # black magic replacing to get all files which will be overwritten
-    printf "$(find "${DEST}/${PROG}" -type f | sed 's/^[^\/]*\//~\//g')\n"
+    printf "$(find "${DEST}/${PROG}" -type f | sed "s/\/.dotfiles\/${PROG}//g")\n"
   done
   while true; do
       read -p "Do you wish to continue? [y/N] " yn
