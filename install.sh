@@ -1,5 +1,13 @@
 #!/usr/bin/bash
 
+# TODO: choose more appropriate, hidden directory to clone repo to (perhaps $HOME/.local/share)
+# TODO: add installers for tmux, neovim, zsh and alacritty
+# TODO: add installers for zsh-syntax-highlighting, zsh-autosuggestions
+# TODO: clean up script (documentation, consistencies with > /dev/null, etc.)
+# TODO: add ssh key installer for github, etc. (put this at the end of the script, perhaps make optional)
+# TODO: /usr/bin/bash vs /bin/bash (maybe you don't need this if you run 'bash install.sh')
+# TODO: improve neovim installation (add packer installer, run neovim headlessly with packerSync / LspInstall, etc.)
+
 dependencies=()
 dotfiles=("alacritty" "nvim" "tmux" "zsh")
 RED="\033[0;31m"
@@ -68,23 +76,14 @@ function ask_for_overwrite {
 }
 
 function main {
-  # Check dependencies + install if necessary (This includes the font for alacritty!)
-  # Stow files 
-  # Install language servers 
-  # Creating an ssh key just for you... ( + show link )
-
   determine_os_type
   print_status "Checking dependencies..."
   check_dependencies
   print_status "Requirements met"
   print_status "Cloning repo to ${DEST}"
-
-  mkdir -p "${HOME}/$DEST"
   git clone "https://github.com/${REPO}" "$DEST"
-
   ask_for_overwrite
   print_status "Installing dotfiles..."
-  # leave this off for debugging 
   symlink_dotfiles
   print_status "Done"
   print_status "Installing fonts..."
