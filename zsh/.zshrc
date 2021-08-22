@@ -10,7 +10,7 @@ alias ...="cd ../../"
 # this is only checked once per startup of every shell 
 # instance, so the performance hit should be small
 
-command -V exa > /dev/null 2>&1 &&
+command -V exa &> /dev/null &&
   alias ls="exa -ah --group-directories-first --color=always --icons" ||
   alias ls="ls -a"
 
@@ -20,6 +20,23 @@ alias pw="pass -c"
 
 ZSHRC=$HOME/.zshrc
 VIMRC=$HOME/.config/nvim/init.lua
+
+# =======================================================================
+# ============================= FUNCTIONS ===============================
+
+# this function finds all directories from the user's home directory
+# and pipes them into fzf, the output of which is then used as an
+# argument in cd. this required fd and fzf
+
+function c {
+  cd "$HOME/$(fd --type directory | fzf \
+                                  --height=10 \
+                                  --reverse \
+                                  --border=sharp \
+                                  --prompt='➜ ' \
+                                  --cycle \
+                                  --header='Go to:')"
+}
 
 # =======================================================================
 # =============================== PROMPT ================================
