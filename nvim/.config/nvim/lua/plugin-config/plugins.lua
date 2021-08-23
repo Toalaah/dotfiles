@@ -7,6 +7,7 @@ return require('packer').startup(function(use)
   -- git integration
 	use { 'tpope/vim-fugitive' }
   use { 'mhinz/vim-signify' }
+  use { 'apzelos/blamer.nvim' }
 
   -- lsp / auto-completion
   use { 'hrsh7th/nvim-compe' }
