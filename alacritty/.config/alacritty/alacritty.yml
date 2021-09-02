@@ -20,15 +20,17 @@ scrolling:
 # Font preferences
 font:
   normal:
-    family: UbuntuMono Nerd Font Mono
+    family: Inconsolata
     style: Regular
   bold:
     style: Bold
+  light:
+    style: Light
   italic:
     style: Italic
   bold_italic:
     style: Bold Italic
-  size: 15
+  size: 22
 draw_bold_text_with_bright_colors: true
 
 
@@ -63,7 +65,6 @@ cursor:
     shape: Block
     blinking: On
   blink_interval: 500
-
 
 
 # Keybindings
