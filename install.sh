@@ -1,18 +1,12 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-# TODO: choose more appropriate, hidden directory to clone repo to (perhaps $HOME/.local/share)
 # TODO: add installers for tmux, neovim, zsh and alacritty
-# TODO: add installers for zsh-syntax-highlighting, zsh-autosuggestions
 # TODO: clean up script (documentation, consistencies with > /dev/null, etc.)
-# TODO: add ssh key installer for github, etc. (put this at the end of the script, perhaps make optional)
 # TODO: improve neovim installation (add packer installer, run neovim headlessly with packerSync / LspInstall, etc.)
 
-dependencies=()
+dependencies=("stow" "npm" "git" "curl")
 dotfiles=("alacritty" "nvim" "tmux" "zsh")
-RED="\033[0;31m"
-CYAN="\033[0;36m"
-NC="\033[0m"
 REPO="toalaah/config"
 DEST="$HOME/.local/share/.dotfiles"
 
@@ -35,7 +29,7 @@ function determine_os_type {
       RECOMMEND_INSTALL="brew install"
       ;;
     *)
-      printf "[${RED}Unsupported OS $OS detected! Exiting.${NC}]\n"
+      echo "Unsupported OS '$OS' detected! Exiting."
       exit 1
       ;;
   esac
@@ -43,16 +37,16 @@ function determine_os_type {
 
 function check_dependencies {
   for PROG in ${dependencies[@]}; do
-    command -v $PROG &> /dev/null || print_dependency_error_and_exit
+    command -v $PROG &>/dev/null || print_dependency_error_and_exit
   done
 }
 
 function print_dependency_error_and_exit {
-  printf "[${RED}Missing dependencies! Required dependencies:${NC}]\n"
+  echo "Missing dependencies! Required dependencies:"
   for PROG in ${dependencies[@]}; do
-    printf "\t$PROG\n"
+    echo -e "\t$PROG"
   done
-  printf "[${RED}Please make sure these are all installed and in your path before proceeding!${NC}]\n"
+  echo "Please make sure these are all installed and in your path before proceeding!"
   exit 1
 }
 
@@ -64,52 +58,72 @@ function symlink_dotfiles {
   done
 }
 
+function install_programs {
+  for PROG in ${dotfiles[@]}; do
+    echo "Installing $PROG"
+    $RECOMMEND_INSTALL $PROG
+  done
+}
+
 function install_font {
-  # all fonts: https://www.nerdfonts.com/font-downloads
+
+  DST_DIR="$HOME/.local/share/fonts"
+  [[ $(uname -s) == "Darwin"* ]] && DST_DIR="$HOME/Libary/Fonts/"
   FONT_NAME=$1
-  curl -Lo /tmp/font.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/$FONT_NAME.zip -O /tmp/font.zip > /dev/null 2>&1
-  unzip -n /tmp/font.zip -d ~/.local/share/fonts > /dev/null 2>&1
-  fc-cache -fv > /dev/null 2>&1
+  echo "Installing font: $1"
+  curl -Lo /tmp/font.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/$FONT_NAME.zip
+  unzip -n /tmp/font.zip -d $DST_DIR
+  fc-cache -fv
   rm /tmp/font.zip
 }
 
-function print_status {
-  printf "[${CYAN}$@${NC}]\n"
-}
-
-function ask_for_overwrite {
-  printf "[${RED}Warning! The following files will be created / overwritten!${NC}]\n"
+function prompt_dotfile_symlink {
+  echo "Warning! The following files will be created / overwritten!"
   for PROG in ${dotfiles[@]}; do 
     # black magic replacing to get all files which will be overwritten
-    printf "$(find "${DEST}/${PROG}" -type f | sed "s/\/.dotfiles\/${PROG}//g")\n"
+    echo "$(find "${DEST}/${PROG}" -type f | sed "s/\/.dotfiles\/${PROG}//g")"
   done
   while true; do
       read -p "Do you wish to continue? [y/N] " yn
       case $yn in
           [Yy]* ) return;;
-          [Nn]* ) print_status "Exiting." && exit 0;;
+          [Nn]* ) echo "Exiting." && exit 0;;
           * ) echo "Please answer yes or no.";;
       esac
   done
 }
 
+
+function configure_neovim {
+  echo "Configuring neovim..."
+  echo "Installing packer..."
+  git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+  echo "Installed packer"
+  echo "Installing plugins..."
+  # installs all plugins headlessly
+  nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
+  echo "Installed plugins"
+
+}
+
 function main {
   determine_os_type
-  print_status "Checking dependencies..."
+  echo "Checking dependencies..."
   check_dependencies
-  print_status "Requirements met"
-  print_status "Cloning repo to ${DEST}"
+  echo "Requirements met"
+  echo "Cloning repo to ${DEST}"
   git clone "https://github.com/${REPO}" "$DEST"
-  ask_for_overwrite
-  print_status "Installing dotfiles..."
+  prompt_dotfile_symlink
+  echo "Installing dotfiles..."
   symlink_dotfiles
-  print_status "Done"
-  print_status "Installing fonts..."
+  echo "Done"
+  echo "Installing fonts..."
   install_font "UbuntuMono"
+  install_font "Inconsolata"
   install_font "FiraCode"
-  print_status "Done"
+  echo "Done"
 
-  return 0
 }
 
 main
