@@ -1,11 +1,11 @@
-vim.g.mapleader = " "                                               
+vim.g.mapleader = " "
 
 -- miscellaneous
 vim.api.nvim_set_keymap("n", "<C-a>", "ggVG<c-$>", {})              -- select all
 vim.api.nvim_set_keymap("n", "<C-W>", ":bd<CR>", { silent = true }) -- close buffer
 vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>",  { silent = true }) -- close buffer
 vim.api.nvim_set_keymap("i", "<C-s>", "<Esc>:w<CR>a",  { silent = true }) -- close buffer
-
+vim.api.nvim_set_keymap("n", "q:", "<nop>", { silent = true, noremap=true}) -- gets rid of annoying commandline
 
 -- move between splits more comfortably
 vim.api.nvim_set_keymap("n", "<C-h>", "<C-w><C-h>", { noremap = true })
@@ -15,15 +15,15 @@ vim.api.nvim_set_keymap("n", "<C-l>", "<C-w><C-l>", { noremap = true })
 
 
 -- fuzzy finding and file navigation w/ telescope
-vim.api.nvim_set_keymap('n', '<C-p>', 
-  ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', 
+vim.api.nvim_set_keymap('n', '<C-p>',
+  ':lua require"telescope.builtin".find_files({ hidden = true })<CR>',
   {noremap = true, silent = true})
 
-vim.api.nvim_set_keymap('n', '<leader>F', 
+vim.api.nvim_set_keymap('n', '<leader>F',
   ':lua require"telescope.builtin".live_grep()<CR>',
   {noremap = true, silent = true})
 
-vim.api.nvim_set_keymap('n', '<leader>?', 
+vim.api.nvim_set_keymap('n', '<leader>?',
   ':lua require"telescope.builtin".help_tags()<CR>',
   {noremap = true, silent = true})
 
@@ -40,8 +40,8 @@ vim.api.nvim_set_keymap('n', '<leader>gf',
   {noremap = true, silent = true})
 
 -- buffer navigation
-vim.api.nvim_set_keymap("n", "<Tab>",   ":bnext<CR>", { silent = true }) 
-vim.api.nvim_set_keymap("n", "<S-Tab>", ":bprev<CR>", { silent = true }) 
+vim.api.nvim_set_keymap("n", "<Tab>",   ":bnext<CR>", { silent = true })
+vim.api.nvim_set_keymap("n", "<S-Tab>", ":bprev<CR>", { silent = true })
 
 -- commenting
 vim.api.nvim_set_keymap("n", "<leader>/", "<Plug>kommentary_line_default",   {})
