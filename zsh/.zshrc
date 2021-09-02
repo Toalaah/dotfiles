@@ -11,7 +11,7 @@ alias ...="cd ../../"
 # instance, so the performance hit should be small
 
 command -V exa &> /dev/null &&
-  alias ls="exa -ah --group-directories-first --color=always --icons" ||
+  alias ls="exa -lah --group-directories-first --color=always --icons" ||
   alias ls="ls -a"
 
 command -V bat &> /dev/null && alias cat="bat"
@@ -59,7 +59,7 @@ function update_prompt() {
       fi
   
   fi
-  PS1+="%F{$COL2}%K{000}➜%F{015}%K{000} "
+  PS1+="%F{$COL2}%K{000}⟫ %F{015}%K{000} "
 }
 precmd_functions+=(update_prompt)
 
@@ -68,6 +68,7 @@ precmd_functions+=(update_prompt)
 
 export VISUAL=nvim
 export PATH="$PATH:$HOME/.cargo/bin:/usr/local/opt/llvm/bin/"
+export NVM_DIR="$HOME/.nvm"
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
@@ -81,10 +82,9 @@ update_prompt
 # auto-ls on cd
 chpwd() ls;  
 
-
-
 [[ -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && \
   source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 [[ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && \
   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # load nvm
 
