@@ -1,11 +1,11 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
+set -eo pipefail
 
 # TODO: choose more appropriate, hidden directory to clone repo to (perhaps $HOME/.local/share)
 # TODO: add installers for tmux, neovim, zsh and alacritty
 # TODO: add installers for zsh-syntax-highlighting, zsh-autosuggestions
 # TODO: clean up script (documentation, consistencies with > /dev/null, etc.)
 # TODO: add ssh key installer for github, etc. (put this at the end of the script, perhaps make optional)
-# TODO: /usr/bin/bash vs /bin/bash (maybe you don't need this if you run 'bash install.sh')
 # TODO: improve neovim installation (add packer installer, run neovim headlessly with packerSync / LspInstall, etc.)
 
 dependencies=()
@@ -14,13 +14,31 @@ RED="\033[0;31m"
 CYAN="\033[0;36m"
 NC="\033[0m"
 REPO="toalaah/config"
-HOME=$HOME
-DEST="${HOME}/.dotfiles"
+DEST="$HOME/.local/share/.dotfiles"
 
+# this function was taken and modified from the lunarvim installer
 function determine_os_type {
-  [[ $OSTYPE == "linux-gnu"* ]] && dependencies=("wget" "git" "npm" "stow") && return
-  [[ $OSTYPE == "darwin"* ]] && dependencies=("wget" "brew" "git" "npm" "stow") && return
-  printf "[${RED}Unsupported os/distro detected! Exiting.${NC}]\n" && exit 1
+  OS="$(uname -s)"
+  case "$OS" in
+    Linux)
+      if [ -f "/etc/arch-release" ] || [ -f "/etc/artix-release" ]; then
+        RECOMMEND_INSTALL="sudo pacman -S"
+      elif [ -f "/etc/fedora-release" ] || [ -f "/etc/redhat-release" ]; then
+        RECOMMEND_INSTALL="sudo dnf install -y"
+      elif [ -f "/etc/gentoo-release" ]; then
+        RECOMMEND_INSTALL="emerge install -y"
+      else # assume debian based
+        RECOMMEND_INSTALL="sudo apt install -y"
+      fi
+      ;;
+    Darwin)
+      RECOMMEND_INSTALL="brew install"
+      ;;
+    *)
+      printf "[${RED}Unsupported OS $OS detected! Exiting.${NC}]\n"
+      exit 1
+      ;;
+  esac
 }
 
 function check_dependencies {
@@ -49,7 +67,7 @@ function symlink_dotfiles {
 function install_font {
   # all fonts: https://www.nerdfonts.com/font-downloads
   FONT_NAME=$1
-  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/$FONT_NAME.zip -O /tmp/font.zip > /dev/null 2>&1
+  curl -Lo /tmp/font.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/$FONT_NAME.zip -O /tmp/font.zip > /dev/null 2>&1
   unzip -n /tmp/font.zip -d ~/.local/share/fonts > /dev/null 2>&1
   fc-cache -fv > /dev/null 2>&1
   rm /tmp/font.zip
