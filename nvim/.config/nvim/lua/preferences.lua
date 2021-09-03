@@ -28,6 +28,9 @@ vim.cmd('let g:blamer_enabled=1')     -- enable 'gitlens'-feature
 -- ftplugins; this ensures that they are set correctly
 vim.cmd('autocmd BufRead,BufNew,BufEnter *.* set formatoptions-=cro')
 
+-- recompile dwm config on write
+vim.cmd('autocmd BufWritePost ~/.config/dwm/config.h !cd ~/.config/dwm/; sudo make install')
+
 -- set filetype to bash for all .sh files
 vim.cmd('autocmd BufRead,BufNew,BufEnter *.sh* set syntax=bash')
 
