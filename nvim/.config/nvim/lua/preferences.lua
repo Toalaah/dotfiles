@@ -13,6 +13,7 @@ vim.cmd('set incsearch')              -- incremental searching
 vim.cmd('set ignorecase')             -- searching ignores case
 vim.cmd('set cursorline')             -- highlights current line
 vim.cmd('set scrolloff=8')            -- always show 8 lines on the top / bottom of the buffer when scrolling
+vim.cmd('set nowrap')                 -- disable linewrapping
 vim.cmd('set noshowmode')             -- disables messages below the tabline
 vim.cmd('set clipboard+=unnamedplus') -- enables copy / pasting to and from the buffer
 vim.cmd('set showtabline=2')          -- always show tab-bar
