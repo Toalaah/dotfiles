@@ -27,10 +27,17 @@ vim.cmd('let g:blamer_enabled=1')     -- enable 'gitlens'-feature
 -- Some files have their format-options overwritten by
 -- ftplugins; this ensures that they are set correctly
 vim.cmd('autocmd BufRead,BufNew,BufEnter *.* set formatoptions-=cro')
-
+-- run xrdb on changes to xresources
+vim.cmd('autocmd BufWritePost ~/.xresources !xrdb ~/.xresources')
 -- recompile dwm config on write
 vim.cmd('autocmd BufWritePost ~/.config/dwm/config.h !cd ~/.config/dwm/; sudo make install')
-
+-- recompile st config on write
+vim.cmd('autocmd BufWritePost ~/.config/st/config.h !cd ~/.config/st/; sudo make install')
+-- recompile + restart dwmblocks config on write
+-- (yes, this is a very ugly way of doing this)
+vim.cmd('autocmd BufWritePost ~/.config/dwmblocks/config.h !cd ~/.config/dwmblocks/; sudo make install; kill $(pidof -s dwmblocks) >/dev/null; dwmblocks &')
+-- recompile dmenu config on write
+vim.cmd('autocmd BufWritePost ~/.config/dmenu/config.h !cd ~/.config/dmenu/; sudo make install')
 -- set filetype to bash for all .sh files
 vim.cmd('autocmd BufRead,BufNew,BufEnter *.sh* set syntax=bash')
 
