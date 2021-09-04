@@ -1,7 +1,27 @@
-xrandr -s 1920x1080 # set resolution
-~/.fehbg            # set background
+# sourced on 'startx'
+
+# source xresources
+# xrdb ${XDG_CONFIG_HOME:-$HOME/}/.xresources &
+xrdb ${XDG_CONFIG_HOME:-$HOME/}/.xresources
+
+# set resolution
+xrandr -s 1920x1080
+
+# set background
+~/.fehbg  
+
 # start compositor
-xcompmgr -c -C -t-5 -l-5 -r4.2 -o.55 &
-xset r rate 200 30  # controls repeat-delay for keys, first argument is time to wait before repeating, second controls the rate
-unclutter &         # hides cursor when inactive
-exec dwm            # start window manager
+xcompmgr &
+
+# start dwm-blocks (status-bar)
+dwmblocks &
+
+# controls repeat-delay for keys, first argument is time
+# to wait before repeating, second controls the rate
+xset r rate 200 30
+
+# hides cursor when inactive
+unclutter &         
+
+# start window manager
+exec dwm
