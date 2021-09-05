@@ -9,6 +9,7 @@ xrandr -s 1920x1080
 
 # set background
 ~/.fehbg  
+wal -R
 
 # start compositor
 xcompmgr &
