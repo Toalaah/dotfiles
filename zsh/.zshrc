@@ -48,7 +48,7 @@ function update_prompt() {
       fi
   
   fi
-  PS1+="%B${COL2} ${RST}%b "
+  PS1+="%B${COL2} ❯${RST}%b "
 }
 precmd_functions+=(update_prompt)
 
