@@ -23,6 +23,8 @@ vim.cmd('colorscheme gruvbox')        -- set colorscheme
 vim.cmd('set bg=dark')                -- set background-color
 vim.cmd('let g:blamer_enabled=1')     -- enable 'gitlens'-feature
 
+-- Enable alpha
+vim.cmd('autocmd BufRead,BufNew,BufEnter * highlight Normal guibg=none')
 -- disables auto-comment continuations for all files.
 -- Some files have their format-options overwritten by
 -- ftplugins; this ensures that they are set correctly
