@@ -1,8 +1,5 @@
 ! general settings
-*.alpha: 0.9
-*dwm.showbar: 1
-*dwm.borderpx: 4
-*st.borderpx: 4
+*alpha: 0.9
 
 ! Gruvbox dark theme
 *background:   #282828
