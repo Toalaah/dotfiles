@@ -77,5 +77,4 @@ chpwd() ls;
   source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 [[ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && \
   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # load nvm
 
