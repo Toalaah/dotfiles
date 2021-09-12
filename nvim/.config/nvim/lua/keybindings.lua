@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 
 -- miscellaneous
 vim.api.nvim_set_keymap("n", "<C-a>", "ggVG<c-$>", {})              -- select all
-vim.api.nvim_set_keymap("n", "<C-W>", ":bd<CR>", { silent = true }) -- close buffer
+vim.api.nvim_set_keymap("n", "<C-w>", ":bd<CR>", { silent = true, noremap=true }) -- close buffer
 vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>",  { silent = true }) -- close buffer
 vim.api.nvim_set_keymap("i", "<C-s>", "<Esc>:w<CR>a",  { silent = true }) -- close buffer
 vim.api.nvim_set_keymap("n", "q:", "<nop>", { silent = true, noremap=true}) -- gets rid of annoying commandline
