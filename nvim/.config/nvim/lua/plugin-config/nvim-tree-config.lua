@@ -1,5 +1,8 @@
 vim.g.nvim_tree_side = 'left'
-vim.g.nvim_tree_width = 30
+vim.g.nvim_tree_auto_close =1
+vim.g.nvim_tree_auto_open = 1
+vim.g.nvim_tree_follow = 1
+vim.g.nvim_tree_width = 20
 vim.g.nvim_tree_icons = {
      default = '',
      symlink = '',
