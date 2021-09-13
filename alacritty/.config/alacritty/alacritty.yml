@@ -2,7 +2,7 @@
 window:
   dimensions:
     columns: 82
-    lines: 54
+    lines: 52
   position:
     x: 0
     y: 0
@@ -20,7 +20,7 @@ scrolling:
 # Font preferences
 font:
   normal:
-    family: Inconsolata
+    family: JetBrainsMono Nerd Font
     style: Regular
   bold:
     style: Bold
@@ -30,7 +30,7 @@ font:
     style: Italic
   bold_italic:
     style: Bold Italic
-  size: 22
+  size: 16
 draw_bold_text_with_bright_colors: true
 
 
