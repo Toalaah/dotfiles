@@ -10,7 +10,7 @@ alias ...="cd ../../"
 # this is only checked once per startup of every shell 
 # instance, so the performance hit should be small
 command -V exa &> /dev/null &&
-  alias ls="exa -lah --group-directories-first --color=always --icons" ||
+  alias ls="exa -ah --color=auto --icons --group-directories-first" ||
   alias ls="ls -a"
 
 command -V bat &> /dev/null && alias cat="bat"
