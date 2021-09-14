@@ -2,7 +2,16 @@
 
 ### About
 
-A fully automated setup script which I use to quickly setup new systems. This includes customized installations of neovim, dwm, tmux, and zsh. 
+A fully automated setup script which I use to quickly setup my dotfiles on new systems. At the moment, this includes configuration files for
+
+- neovim
+- tmux
+- alacritty
+- zsh
+- xinitrc
+- xresources
+
+This repo also contains most of my wallpapers which I have collected over time. Due to the size of the wallpapers, it is only contained as a submodule, which you can find [here](https://github.com/toalaah/wallpapers).
 
 ### Prerequisites
 
@@ -11,29 +20,49 @@ A fully automated setup script which I use to quickly setup new systems. This in
   - **macOS** 
   - **Arch Linux**
   - **Ubuntu Linux**
+- The following packages / programs:
+  - **stow**
+  - **git**
+  - **curl**
 
-### Installation
+### Installation (automatic)
 
-1. Clone and navigate into the repository:
+To install all dotfiles automatically, run the following script (at your own discretion). You will be prompted whether you want to also download the wallpapers or not. 
 
 ```shell
-git clone https://github.com/toalaah/config
-cd config
+bash <(curl -s https://raw.githubusercontent.com/Toalaah/config/master/install.sh)
+```
+This will create a folder in `~/.local/dotfiles`. **IMPORTANT**: Do not delete the folder after installing as it merely symlinks the dotfiles using stow.
+
+### Installation (manual)
+
+1. Clone and navigate into the repository
+
+```shell
+git clone https://github.com/toalaah/config ~/.local/dotfiles
+cd ~/.local/dotfiles
 ```
 
-2. Run the appropriate setup script according to your operating system / distribution. These include `setup-macos`, `setup-arch-linux`, and `setup-ubuntu-linux`.
-3. ?
+2. **(Optional)** If you wish to download the wallpapers as well run the following commands from **inside** the `dotfiles` folder
 
-4. Profit 👍
+```shell
+git submodule init
+git submodule update
+```
 
-### Notes 
+3. For each dotfile you wish to install run the following command from **inside** the `dotfiles` folder
 
-- There are a number of customizable options available with this script. It is recommended to check out the help menu by invoking the `--help` flag before proceeding with the installation.
-- The optional `--apps` flag installs a number of apps which I generally would install on a new installation of macOS or Linux distro. These include:
-  - **ungoogled-chromium**: basically chrome without many google services. This can also be found over at [eloston/ungoogled-chromium](https://github.com/Eloston/ungoogled-chromium)
-  - **skim**: a (in my opinion) better pdf reader than preview as it allows for live updating of files, which is especially useful for latex workflows (this is only relevant to macOS installs)
-  - **the unarchiver**: a, well, unarchiver (this is only relevant to macOS installs)
-  - **vlc**: for playing back media
-  - **discord**: chatting
-  - **spotify**: for music
-- The optional `--pass` flag is tied to a very specific setup which I followed from [here](https://soemarko.com/blog/complete-guide-for-passwordstore-on-macos). But as long as you use pass with a remote repository and have access to your public and private gpg keys at the time of installation, you should be ok.
+```shell
+stow {CONFIG}
+```
+
+Where `{CONFIG}` is the configuration you wish to install (ex: nvim, zsh, or tmux)
+
+### Uninstalling
+
+To uninstall all dotfiles (i.e remove the created symlinks), run the following script:
+
+```shell
+bash ~/.local/dotfiles/clean.sh
+```
+To uninstall a specific dotfile, navigate into `~/.local/dotfiles` and run `stow -D {CONFIG}`, where `{CONFIG}` is the configuration you wish to remove (ex: nvim, zsh, or tmux)
