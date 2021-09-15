@@ -11,7 +11,7 @@ REPO="toalaah/config"
 DEST="$HOME/.local/dotfiles"
 
 # this function was taken and modified from the lunarvim installer
-function determine_os_type {
+determine_os_type() {
   OS="$(uname -s)"
   case "$OS" in
     Linux)
@@ -35,13 +35,13 @@ function determine_os_type {
   esac
 }
 
-function check_dependencies {
+check_dependencies() {
   for PROG in ${dependencies[@]}; do
     command -v $PROG &>/dev/null || print_dependency_error_and_exit
   done
 }
 
-function print_dependency_error_and_exit {
+print_dependency_error_and_exit() {
   echo "Missing dependencies! Required dependencies:"
   for PROG in ${dependencies[@]}; do
     echo -e "\t$PROG"
@@ -50,7 +50,7 @@ function print_dependency_error_and_exit {
   exit 1
 }
 
-function symlink_dotfiles {
+symlink_dotfiles() {
   cd $DEST
   # we need to delete any existing files to avoid stow conflicts...
   for PROG in ${dotfiles[@]}; do 
@@ -59,14 +59,14 @@ function symlink_dotfiles {
   done
 }
 
-function install_programs {
+install_programs() {
   for PROG in ${dotfiles[@]}; do
     echo "Installing $PROG"
     $RECOMMEND_INSTALL $PROG
   done
 }
 
-function install_font {
+install_font() {
 
   DST_DIR="$HOME/.local/share/fonts"
   [[ $(uname -s) == "Darwin"* ]] && DST_DIR="$HOME/Libary/Fonts/"
@@ -78,7 +78,7 @@ function install_font {
   rm /tmp/font.zip
 }
 
-function prompt_dotfile_symlink {
+prompt_dotfile_symlink() {
   echo "Warning! The following files will be created / overwritten!"
   for PROG in ${dotfiles[@]}; do 
     # black magic replacing to get all files which will be overwritten
@@ -95,7 +95,7 @@ function prompt_dotfile_symlink {
 }
 
 
-function configure_neovim {
+configure_neovim() {
   echo "Configuring neovim..."
   echo "Installing packer..."
   git clone --depth 1 https://github.com/wbthomason/packer.nvim\
@@ -105,10 +105,9 @@ function configure_neovim {
   # installs all plugins headlessly
   nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
   echo "Installed plugins"
-
 }
 
-function main {
+main() {
   determine_os_type
   echo "Checking dependencies..."
   check_dependencies
