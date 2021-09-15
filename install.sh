@@ -1,39 +1,10 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-# TODO: add installers for tmux, neovim, zsh and alacritty
-# TODO: clean up script (documentation, consistencies with > /dev/null, etc.)
-# TODO: improve neovim installation (add packer installer, run neovim headlessly with packerSync / LspInstall, etc.)
-
-dependencies=("stow" "git" "curl")
+dependencies=("stow" "git")
 dotfiles=("nvim" "tmux" "alacritty" "zsh" "x11")
 REPO="toalaah/config"
 DEST="$HOME/.local/dotfiles"
-
-# this function was taken and modified from the lunarvim installer
-determine_os_type() {
-  OS="$(uname -s)"
-  case "$OS" in
-    Linux)
-      if [ -f "/etc/arch-release" ] || [ -f "/etc/artix-release" ]; then
-        INSTALL="sudo pacman -S"
-      elif [ -f "/etc/fedora-release" ] || [ -f "/etc/redhat-release" ]; then
-        INSTALL="sudo dnf install -y"
-      elif [ -f "/etc/gentoo-release" ]; then
-        INSTALL="emerge install -y"
-      else # assume debian based
-        INSTALL="sudo apt install -y"
-      fi
-      ;;
-    Darwin)
-      INSTALL="brew install"
-      ;;
-    *)
-      echo "Unsupported OS '$OS' detected! Exiting."
-      exit 1
-      ;;
-  esac
-}
 
 check_dependencies() {
   for PROG in ${dependencies[@]}; do
@@ -44,7 +15,7 @@ check_dependencies() {
 print_dependency_error_and_exit() {
   echo "Missing dependencies! Required dependencies:"
   for PROG in ${dependencies[@]}; do
-    echo -e "\t$PROG"
+    echo -e "- $PROG"
   done
   echo "Please make sure these are all installed and in your path before proceeding!"
   exit 1
@@ -54,36 +25,36 @@ symlink_dotfiles() {
   cd $DEST
   # we need to delete any existing files to avoid stow conflicts...
   for PROG in ${dotfiles[@]}; do 
-    rm -rf $(find "$DEST/$PROG" -type f | sed "s/\/.dotfiles\/$PROG//g") ||:
-    stow -d "$DEST" -S "$PROG" 
+    rm -rf $(find $PROG -type f | sed -e "s|$PROG|$HOME|")
+    stow $PROG --target=$HOME
   done
 }
 
-install_programs() {
-  for PROG in ${dotfiles[@]}; do
-    echo "Installing $PROG"
-    $RECOMMEND_INSTALL $PROG
+prompt_wallpaper_download() {
+  while true; do
+      read -p "Do you wish to download wallpapers? [y/N] " yn
+      case $yn in
+          [Yy]* ) return 0;;
+          [Nn]* ) echo "Skipping wallpaper download" && return 1;;
+          * ) echo "Please answer yes or no.";;
+      esac
   done
 }
 
-install_font() {
-
-  DST_DIR="$HOME/.local/share/fonts"
-  [[ $(uname -s) == "Darwin"* ]] && DST_DIR="$HOME/Libary/Fonts/"
-  FONT_NAME=$1
-  echo "Installing font: $1"
-  curl -Lo /tmp/font.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/$FONT_NAME.zip
-  unzip -n /tmp/font.zip -d $DST_DIR
-  fc-cache -fv
-  rm /tmp/font.zip
+download_wallpapers() {
+  cd $DEST
+  dotfiles+=("wallpapers")
+  git submodule init
+  git submodule update
 }
 
 prompt_dotfile_symlink() {
-  echo "Warning! The following files will be created / overwritten!"
+  cd $DEST
+  echo -e "Warning! The following files will be created / overwritten!\n"
   for PROG in ${dotfiles[@]}; do 
-    # black magic replacing to get all files which will be overwritten
-    echo "$(find "${DEST}/${PROG}" -type f | sed "s/\/.dotfiles\/${PROG}//g")"
+    find $PROG -type f | sed -e "s|$PROG|$HOME|"
   done
+  echo
   while true; do
       read -p "Do you wish to continue? [y/N] " yn
       case $yn in
@@ -94,36 +65,20 @@ prompt_dotfile_symlink() {
   done
 }
 
-
-configure_neovim() {
-  echo "Configuring neovim..."
-  echo "Installing packer..."
-  git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-  echo "Installed packer"
-  echo "Installing plugins..."
-  # installs all plugins headlessly
-  nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
-  echo "Installed plugins"
-}
-
 main() {
-  determine_os_type
   echo "Checking dependencies..."
   check_dependencies
   echo "Requirements met"
-  echo "Cloning repo to ${DEST}"
-  git clone "https://github.com/${REPO}" "$DEST"
+
+  echo "Cloning repo to $DEST"
+  git clone "https://github.com/$REPO" "$DEST"
+  prompt_wallpaper_download && download_wallpapers
+
   prompt_dotfile_symlink
   echo "Installing dotfiles..."
   symlink_dotfiles
-  echo "Done"
-  echo "Installing fonts..."
-  install_font "UbuntuMono"
-  install_font "Inconsolata"
-  install_font "FiraCode"
-  echo "Done"
 
+  echo "Done"
 }
 
 main
