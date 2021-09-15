@@ -5,10 +5,10 @@ set -eo pipefail
 # TODO: clean up script (documentation, consistencies with > /dev/null, etc.)
 # TODO: improve neovim installation (add packer installer, run neovim headlessly with packerSync / LspInstall, etc.)
 
-dependencies=("stow" "npm" "git" "curl")
-dotfiles=("alacritty" "nvim" "tmux" "zsh")
+dependencies=("stow" "git" "curl")
+dotfiles=("nvim" "tmux" "alacritty" "zsh" "x11")
 REPO="toalaah/config"
-DEST="$HOME/.local/share/.dotfiles"
+DEST="$HOME/.local/dotfiles"
 
 # this function was taken and modified from the lunarvim installer
 function determine_os_type {
@@ -16,17 +16,17 @@ function determine_os_type {
   case "$OS" in
     Linux)
       if [ -f "/etc/arch-release" ] || [ -f "/etc/artix-release" ]; then
-        RECOMMEND_INSTALL="sudo pacman -S"
+        INSTALL="sudo pacman -S"
       elif [ -f "/etc/fedora-release" ] || [ -f "/etc/redhat-release" ]; then
-        RECOMMEND_INSTALL="sudo dnf install -y"
+        INSTALL="sudo dnf install -y"
       elif [ -f "/etc/gentoo-release" ]; then
-        RECOMMEND_INSTALL="emerge install -y"
+        INSTALL="emerge install -y"
       else # assume debian based
-        RECOMMEND_INSTALL="sudo apt install -y"
+        INSTALL="sudo apt install -y"
       fi
       ;;
     Darwin)
-      RECOMMEND_INSTALL="brew install"
+      INSTALL="brew install"
       ;;
     *)
       echo "Unsupported OS '$OS' detected! Exiting."
@@ -51,10 +51,11 @@ function print_dependency_error_and_exit {
 }
 
 function symlink_dotfiles {
+  cd $DEST
   # we need to delete any existing files to avoid stow conflicts...
   for PROG in ${dotfiles[@]}; do 
-    rm -rf $(find "${DEST}/${PROG}" -type f | sed "s/\/.dotfiles\/${PROG}//g") ||:
-    stow -d "${DEST}" -S "${PROG}" 
+    rm -rf $(find "$DEST/$PROG" -type f | sed "s/\/.dotfiles\/$PROG//g") ||:
+    stow -d "$DEST" -S "$PROG" 
   done
 }
 
