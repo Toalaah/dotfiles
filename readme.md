@@ -1,68 +1,88 @@
-## Config ⚙️
+# Config ⚙️
 
-### About
+## Table of Contents
 
-A fully automated setup script which I use to quickly setup my dotfiles on new systems. At the moment, this includes configuration files for
+1. [About](#about)
+2. [Requirements](#requirements)
+3. [Installation](#installation)
+    1. [Automatic](#automatic)
+    2. [Manual](#manual)
+4. [Uninstalling](#uninstallation)
+
+## About
+
+This repository contains all my personal dotfiles as well as a semi-automated setup script which can be used to quickly setup my configuration on new systems. At the moment, this includes configuration files for:
 
 - neovim
 - tmux
 - alacritty
 - zsh
-- xinitrc
-- xresources
+- X.Org (xinitrc, xresources)
 
-This repo also contains most of my wallpapers which I have collected over time. Due to the size of the wallpapers, it is only contained as a submodule, which you can find [here](https://github.com/toalaah/wallpapers).
+This repo also contains most of my wallpapers which I have collected over time. However, due to the size of the wallpapers it is only contained as a sub-module, which you can find [here](https://github.com/toalaah/wallpapers).
 
-### Prerequisites
+## Requirements
+
+If you wish to install using the installer script you will need the following:
 
 - An internet connection to pull dependencies during installation
 - One of the following operating systems / Linux distributions: 
-  - **macOS** 
-  - **Arch Linux**
-  - **Ubuntu Linux**
+  - macOS 
+  - Arch Linux
+  - Ubuntu Linux
 - The following packages / programs:
-  - **stow**
-  - **git**
-  - **curl**
+  - stow
+  - git
+  - curl
 
-### Installation (automatic)
+Furthermore, it is recommended you install a font which supports glyphs, for example one of the nerd-fonts from [here](https://github.com/ryanoasis/nerd-fonts).
 
-To install all dotfiles automatically, run the following script (at your own discretion). You will be prompted whether you want to also download the wallpapers or not. 
+
+## Installation
+
+### Automatic 
+
+**Important**: This script will overwrite all existing configuration files for the aforementioned programs. The script will prompt you whether you want to continue before overwriting. 
+
+To install all configuration files automatically, run the following script (at your own discretion). You will be prompted whether you want to also download the wallpapers or not, as well as whether or not you wish to install additional fonts. 
 
 ```shell
 bash <(curl -s https://raw.githubusercontent.com/Toalaah/config/master/install.sh)
 ```
-This will create a folder in `~/.local/dotfiles`. **IMPORTANT**: Do not delete the folder after installing as it merely symlinks the dotfiles using stow.
+This will create a folder in `~/.local/dotfiles`. 
 
-### Installation (manual)
+**Important**: Do not delete the folder after installation as it merely symlinks the dotfiles using stow, leaving you with dangling symlinks.
 
-1. Clone and navigate into the repository
+### Manual
+
+1. Clone and navigate into the repository.
 
 ```shell
 git clone https://github.com/toalaah/config ~/.local/dotfiles
 cd ~/.local/dotfiles
 ```
 
-2. **(Optional)** If you wish to download the wallpapers as well run the following commands from **inside** the `dotfiles` folder
+2. **Optional**: If you wish to download the wallpapers as well run the following commands from _inside_ the repository folder.
 
 ```shell
 git submodule init
 git submodule update
 ```
 
-3. For each dotfile you wish to install run the following command from **inside** the `dotfiles` folder
+3. For each dotfile you wish to install run the following command from _inside_ the repository folder.
 
 ```shell
 stow {CONFIG}
 ```
 
-Where `{CONFIG}` is the configuration you wish to install (ex: nvim, zsh, or tmux)
+Where `{CONFIG}` is the configuration you wish to install (ex: nvim, zsh, or tmux).
 
-### Uninstalling
+## Uninstalling
 
 To uninstall all dotfiles (i.e remove the created symlinks), run the following script:
 
 ```shell
 bash ~/.local/dotfiles/clean.sh
 ```
-To uninstall a specific dotfile, navigate into `~/.local/dotfiles` and run `stow -D {CONFIG}`, where `{CONFIG}` is the configuration you wish to remove (ex: nvim, zsh, or tmux)
+To uninstall a specific dotfile, navigate into `~/.local/dotfiles` and run `stow -D {CONFIG}`, where `{CONFIG}` is the configuration you wish to remove (ex: nvim, zsh, or tmux).
+
