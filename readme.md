@@ -26,10 +26,6 @@ This repo also contains most of my wallpapers which I have collected over time. 
 If you wish to install using the installer script you will need the following:
 
 - An internet connection to pull dependencies during installation
-- One of the following operating systems / Linux distributions: 
-  - macOS 
-  - Arch Linux
-  - Ubuntu Linux
 - The following packages / programs:
   - stow
   - git
@@ -37,19 +33,18 @@ If you wish to install using the installer script you will need the following:
 
 Furthermore, it is recommended you install a font which supports glyphs, for example one of the nerd-fonts from [here](https://github.com/ryanoasis/nerd-fonts).
 
-
 ## Installation
 
 ### Automatic 
 
-**Important**: This script will overwrite all existing configuration files for the aforementioned programs. The script will prompt you whether you want to continue before overwriting. 
+**Important**: This script will overwrite all existing configuration files for the aforementioned programs. **No backups of any kind will be created for you**. The script will prompt you whether you want to continue before overwriting. 
 
-To install all configuration files automatically, run the following script (at your own discretion). You will be prompted whether you want to also download the wallpapers or not, as well as whether or not you wish to install additional fonts. 
+To install all configuration files automatically, run the following script (at your own discretion). You will be asked whether or not you want to also download the wallpapers.
 
 ```shell
 bash <(curl -s https://raw.githubusercontent.com/Toalaah/config/master/install.sh)
 ```
-This will create a folder in `~/.local/dotfiles`. 
+This will create a folder in `~/.local/dotfiles`.
 
 **Important**: Do not delete the folder after installation as it merely symlinks the dotfiles using stow, leaving you with dangling symlinks.
 
