@@ -67,7 +67,7 @@ git submodule update
 3. For each dotfile you wish to install run the following command from _inside_ the repository folder.
 
 ```shell
-stow {CONFIG}
+stow -t $HOME {CONFIG}
 ```
 
 Where `{CONFIG}` is the configuration you wish to install (ex: nvim, zsh, or tmux).
