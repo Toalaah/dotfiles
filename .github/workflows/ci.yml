@@ -16,3 +16,12 @@ jobs:
         SHELLCHECK_OPTS: -e SC2046
       with:
         ignore: zsh
+  markdown-lint:
+    name: Markdown-Lint
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Markdown-Lint
+      uses: avtodev/markdown-lint@v1
+      with:
+        args: './readme.md'

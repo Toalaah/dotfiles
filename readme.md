@@ -8,10 +8,13 @@
     1. [Automatic](#automatic)
     2. [Manual](#manual)
 4. [Uninstalling](#uninstallation)
+5. [Notes](#notes)
 
 ## About
 
-This repository contains all my personal dotfiles as well as a semi-automated setup script which can be used to quickly setup my configuration on new systems. At the moment, this includes configuration files for:
+This repository contains all my personal dotfiles as well as a semi-automated
+setup script which can be used to quickly setup my configuration on new
+systems. At the moment, this includes configuration files for:
 
 - neovim
 - tmux
@@ -19,7 +22,9 @@ This repository contains all my personal dotfiles as well as a semi-automated se
 - zsh
 - X.Org (xinitrc, xresources)
 
-This repo also contains most of my wallpapers which I have collected over time. However, due to the size of the wallpapers it is only contained as a sub-module, which you can find [here](https://github.com/toalaah/wallpapers).
+This repo also contains most of my wallpapers which I have collected over time.
+However, due to the size of the wallpapers it is only contained as a
+sub-module, which you can find [here](https://github.com/toalaah/wallpapers).
 
 ## Requirements
 
@@ -31,22 +36,31 @@ If you wish to install using the installer script you will need the following:
   - git
   - curl
 
-Furthermore, it is recommended you install a font which supports glyphs, for example one of the nerd-fonts from [here](https://github.com/ryanoasis/nerd-fonts).
+Furthermore, it is recommended you install a font which supports glyphs, for
+example one of the nerd-fonts from
+[here](https://github.com/ryanoasis/nerd-fonts).
 
 ## Installation
 
-### Automatic 
+### Automatic
 
-**Important**: This script will overwrite all existing configuration files for the aforementioned programs. **No backups of any kind will be created for you**. The script will prompt you whether you want to continue before overwriting. 
+**Important**: This script will overwrite all existing configuration files for
+the aforementioned programs. **No backups of any kind will be created for you**.
+ The script will prompt you whether you want to continue before overwriting.
 
-To install all configuration files automatically, run the following script (at your own discretion). You will be asked whether or not you want to also download the wallpapers.
+To install all configuration files automatically, run the following script (at y
+our own discretion). You will be asked whether or not you want to also download
+the wallpapers.
 
 ```shell
-bash <(curl -s https://raw.githubusercontent.com/Toalaah/config/master/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/Toalaah/config/master/install.s
+h)
 ```
+
 This will create a folder in `~/.local/dotfiles`.
 
-**Important**: Do not delete the folder after installation as it merely symlinks the dotfiles using stow, leaving you with dangling symlinks.
+**Important**: Do not delete the folder after installation as it merely symlinks
+ the dotfiles using stow, leaving you with dangling symlinks.
 
 ### Manual
 
@@ -57,27 +71,42 @@ git clone https://github.com/toalaah/config ~/.local/dotfiles
 cd ~/.local/dotfiles
 ```
 
-2. **Optional**: If you wish to download the wallpapers as well run the following commands from _inside_ the repository folder.
+1. **Optional**: If you wish to download the wallpapers as well run the followin
+g commands from _inside_ the repository folder.
 
 ```shell
 git submodule init
 git submodule update
 ```
 
-3. For each dotfile you wish to install run the following command from _inside_ the repository folder.
+1. For each dotfile you wish to install run the following command from _inside_
+the repository folder.
 
 ```shell
 stow -t $HOME {CONFIG}
 ```
 
-Where `{CONFIG}` is the configuration you wish to install (ex: nvim, zsh, or tmux).
+Where `{CONFIG}` is the configuration you wish to install (ex: nvim, zsh,
+or tmux).
 
 ## Uninstalling
 
-To uninstall all dotfiles (i.e remove the created symlinks), run the following script:
+To uninstall all dotfiles (i.e remove the created symlinks), run the following
+script:
 
 ```shell
 bash ~/.local/dotfiles/clean.sh
 ```
-To uninstall a specific dotfile, navigate into `~/.local/dotfiles` and run `stow -D {CONFIG}`, where `{CONFIG}` is the configuration you wish to remove (ex: nvim, zsh, or tmux).
 
+To uninstall a specific dotfile, navigate into `~/.local/dotfiles` and run `stow
+ -D {CONFIG}`, where `{CONFIG}` is the configuration you wish to remove
+ (ex: nvim, zsh, or tmux).
+
+## Notes
+
+Some things which are still in the working:
+
+- Create an uninstaller
+- Improve neovim first-time startup (at the moment still throws errors due to
+missing plugins)
+- Add linters for most dotfiles to ensure consistent standards
