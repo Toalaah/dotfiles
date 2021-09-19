@@ -22,6 +22,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run Markdown-Lint
-      uses: avtodev/markdown-lint@v1
+      uses: docker://avtodev/markdown-lint:v1
       with:
         args: './readme.md'
+      
