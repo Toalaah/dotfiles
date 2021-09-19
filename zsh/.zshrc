@@ -33,6 +33,8 @@ autoload -U colors && colors
 COL1="%{$fg[cyan]%}"    # path color
 COL2="%{$fg[blue]%}"    # arrow prompt color
 RST="%{$reset_color%}"
+ARROW="❯"
+[ "$EUID" -eq 0 ] && ARROW="#"
 function update_prompt() {
   PS1="%B${COL1}%2~${RST}"
   # find out if in git repo or not, and if so what branch
@@ -48,7 +50,7 @@ function update_prompt() {
       fi
   
   fi
-  PS1+="%B${COL2} ❯${RST}%b "
+  PS1+="%B${COL2} ${ARROW}${RST}%b "
 }
 precmd_functions+=(update_prompt)
 
@@ -61,7 +63,7 @@ HISTFILE=~/.zsh_history
 
 setopt globdots # enable tab-completion for hidden dirs / files
 export VISUAL=nvim
-export PATH="$PATH:$HOME/.cargo/bin:/usr/local/opt/llvm/bin/:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.cargo/bin:/usr/local/opt/llvm/bin/:$HOME/.local/bin:$HOME/.bin"
 export NVM_DIR="$HOME/.nvm"
 setopt autocd
 
