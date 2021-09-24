@@ -2,7 +2,7 @@
 set -eo pipefail
 
 dependencies=("stow" "git")
-dotfiles=("nvim" "tmux" "alacritty" "zsh" "x11")
+dotfiles=("nvim" "tmux" "alacritty" "zsh" "x11" "bin")
 REPO="toalaah/config"
 DEST="$HOME/.local/dotfiles"
 

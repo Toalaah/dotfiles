@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# requirements: nordvpn
+# if no arguments are passed, the vpn state is toggled (if toggled on an automatic server is chosen by nordvpn)
+# else, the script accepts a single location argument and sets the server accordingly
+
+# error handling
+command -V nordvpn >/dev/null || exit 1
+[ "$#" -gt 1 ] && exit 1
+
+# get vpn status
+STATUS=$(nordvpn status)
+
+# toggle vpn based on current connection status
+if [ "$#" -eq 0 ]
+then
+  echo "$STATUS" | head -1 | grep -qw "Disconnected" &&
+    nordvpn connect >/dev/null ||
+    nordvpn disconnect >/dev/null 
+    exit 0
+fi
+
+# if argument was passed use it to connect to that country
+nordvpn countries | grep -qw "$1" && nordvpn connect "$1" && exit 0
+echo "Invalid country parameter passed, does not Exist!" && exit 1
+

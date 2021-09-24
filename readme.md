@@ -21,6 +21,7 @@ systems. At the moment, this includes configuration files for:
 - alacritty
 - zsh
 - X.Org (xinitrc, xresources)
+- bin (custom scripts)
 
 This repo also contains most of my wallpapers which I have collected over time.
 However, due to the size of the wallpapers it is only contained as a
