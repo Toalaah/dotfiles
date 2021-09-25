@@ -4,18 +4,18 @@
 alias vim=nvim
 alias ..="cd .."
 alias ...="cd ../../"
+alias pw="pass -c"
 
 # aliases get set to more aesthetic variants of ls / cat 
 # (only if these variants are already installed on the system)
 # this is only checked once per startup of every shell 
 # instance, so the performance hit should be small
-command -V exa &> /dev/null &&
-  alias ls="exa -ah --color=auto --icons --group-directories-first" ||
-  alias ls="ls -a"
+command -V exa &>/dev/null &&
+  { alias ls="exa -ah  --color=auto --icons --group-directories-first" && 
+    alias ll="exa -lah --color=auto --icons --group-directories-first"; } ||
+  { alias ls="ls -Ah --color=auto" && alias ll="ls -lAh --color=auto"; }
 
-command -V bat &> /dev/null && alias cat="bat"
-
-alias pw="pass -c"
+command -V bat &>/dev/null && alias cat="bat"
 
 # aliases for quickly opening various config files. the "-c 'lcd %:p:h'"
 # flag sets the current working direcotry of the buffer to the root dir
@@ -64,7 +64,6 @@ HISTFILE=~/.zsh_history
 setopt globdots # enable tab-completion for hidden dirs / files
 export VISUAL=nvim
 export PATH="$PATH:$HOME/.cargo/bin:/usr/local/opt/llvm/bin/:$HOME/.local/bin:$HOME/.bin"
-export NVM_DIR="$HOME/.nvm"
 setopt autocd
 
 # edit line in vim with ctrl-e:
