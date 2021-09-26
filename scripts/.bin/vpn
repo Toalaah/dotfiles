@@ -15,8 +15,8 @@ STATUS=$(nordvpn status)
 if [ "$#" -eq 0 ]
 then
   echo "$STATUS" | head -1 | grep -qw "Disconnected" &&
-    nordvpn connect >/dev/null ||
-    nordvpn disconnect >/dev/null 
+    { nordvpn connect >/dev/null ||
+    nordvpn disconnect >/dev/null; }
     exit 0
 fi
 
