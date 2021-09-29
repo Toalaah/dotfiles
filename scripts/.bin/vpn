@@ -9,18 +9,20 @@ command -V nordvpn >/dev/null || exit 1
 [ "$#" -gt 1 ] && exit 1
 
 # get vpn status
-STATUS=$(nordvpn status)
+STATUS=$(nordvpn status | grep -w "Disconnected")
 
 # toggle vpn based on current connection status
-if [ "$#" -eq 0 ]
-then
-  echo "$STATUS" | head -1 | grep -qw "Disconnected" &&
-    { nordvpn connect >/dev/null ||
-    nordvpn disconnect >/dev/null; }
-    exit 0
+if [ "$#" -eq 0 ]; then
+  if [ -z "$STATUS" ]; then
+    nordvpn disconnect >/dev/null
+  else
+    nordvpn connect >/dev/null
+  fi
+  exit 0
 fi
 
-# if argument was passed use it to connect to that country
-nordvpn countries | grep -qw "$1" && nordvpn connect "$1" && exit 0
+# if argument was passed use it to connect to
+# that country, regardless of current state
+nordvpn countries | grep -qw "$1" && nordvpn connect "$1" >/dev/null && exit 0
 echo "Invalid country parameter passed, does not Exist!" && exit 1
 
