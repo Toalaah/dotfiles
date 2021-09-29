@@ -3,9 +3,11 @@
 # volume control script for use with pamixer / pulseaudio
 # if no arguments are passed, mute status is toggled
 # otherwise, the script takes a single argument (desired volume level)
-# and sets the volume accordingly
+# and modified the volume level based on the input
 
 [ "$#" -gt 1 ] && exit 1
+[ "$1" = "-i" ] && pamixer -i 5 && exit 0
+[ "$1" = "-d" ] && pamixer -d 5 && exit 0
 [ "$#" -eq 0 ] && pamixer --toggle-mute && exit 0
 pamixer --unmute && pamixer --set-volume "$1" && exit 0
 
