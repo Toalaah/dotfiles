@@ -6,5 +6,5 @@
 LAT="48"
 LONG="11"
 
-redshift -l "$LAT:$LONG"
+redshift -l "$LAT:$LONG" &
 
