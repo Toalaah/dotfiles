@@ -30,7 +30,7 @@ vim.cmd('autocmd BufRead,BufNew,BufEnter * highlight Normal guibg=none')
 -- ftplugins; this ensures that they are set correctly
 vim.cmd('autocmd BufRead,BufNew,BufEnter *.* set formatoptions-=cro')
 -- run xrdb on changes to xresources
-vim.cmd('autocmd BufWritePost ~/.xresources !xrdb ~/.xresources')
+vim.cmd('autocmd BufWritePost ~/.xresources !xrdb -DPYWAL_="<$HOME/.cache/wal/colors.Xresources>" -merge ~/.xresources')
 -- recompile dwm config on write
 vim.cmd('autocmd BufWritePost ~/.config/dwm/config.h !cd ~/.config/dwm/; sudo make install')
 -- recompile st config on write

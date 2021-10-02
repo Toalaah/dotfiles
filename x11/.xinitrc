@@ -1,15 +1,15 @@
 # sourced on 'startx'
 
 # source xresources
-# xrdb ${XDG_CONFIG_HOME:-$HOME/}/.xresources &
-xrdb ${XDG_CONFIG_HOME:-$HOME/}/.xresources
+# xrdb ${XDG_CONFIG_HOME:-$HOME/}.xresources
+xrdb -DPYWAL_="<${XDG_CONFIG_HOME:-$HOME/}.cache/wal/colors.Xresources>" -merge ${XDG_CONFIG_HOME:-$HOME/}.xresources
 
 # set resolution
 xrandr -s 1920x1080
 
 # set background
 ~/.fehbg  
-wal -R
+# wal -R
 
 # start compositor
 xcompmgr &
