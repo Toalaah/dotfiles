@@ -21,6 +21,10 @@ dwmblocks &
 # to wait before repeating, second controls the rate
 xset r rate 200 30
 
+# disable screen saving
+xset -dpms
+xset s off
+
 # hides cursor when inactive
 unclutter &         
 
