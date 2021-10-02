@@ -24,6 +24,7 @@ alias cz="nvim $HOME/.zshrc -c 'lcd %:p:h'"
 alias cv="nvim $HOME/.config/nvim/init.lua -c 'lcd %:p:h'"
 alias cdwm="nvim $HOME/.config/dwm/config.h -c 'lcd %:p:h'"
 alias cst="nvim $HOME/.config/st/config.h -c 'lcd %:p:h'"
+alias cdm="nvim $HOME/.config/dmenu/config.h -c 'lcd %:p:h'"
 alias cblk="nvim $HOME/.config/dwmblocks/config.h -c 'lcd %:p:h'"
 
 # =======================================================================
