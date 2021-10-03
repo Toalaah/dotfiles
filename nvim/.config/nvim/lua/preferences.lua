@@ -40,6 +40,8 @@ vim.cmd('autocmd BufWritePost ~/.config/st/config.h !cd ~/.config/st/; sudo make
 vim.cmd('autocmd BufWritePost ~/.config/dwmblocks/config.h !cd ~/.config/dwmblocks/; sudo make install; kill $(pidof -s dwmblocks) >/dev/null; dwmblocks &')
 -- recompile dmenu config on write
 vim.cmd('autocmd BufWritePost ~/.config/dmenu/config.h !cd ~/.config/dmenu/; sudo make install')
+-- recompile slock config on write
+vim.cmd('autocmd BufWritePost ~/.config/slock/config.h !cd ~/.config/slock/; sudo make install')
 -- set filetype to bash for all .sh files
 vim.cmd('autocmd BufRead,BufNew,BufEnter *.sh* set syntax=bash')
 

@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# requirements: sxiv, feh, wal, find, sed
+
+# Change this variable to the (absolute) path of your
+# wallpapers folder 
+WALLS_DIR="$HOME/wallpapers"
+
+# set this to something non-zero if you want the script to
+# randomly choose one of your selected wallpapers (that is,
+# if you selected more than one). Otherwise, the script
+# defaults to the first wallpaper chosen
+CHOOSE_RANDOM=1
+
+# get wallpaper selection (mark the picture(s) you want with
+# 'm' in sxiv, then quit using 'q')
+SELECTION=$(find "$WALLS_DIR"/**/ -type f | grep 'jpg$\|png$\|jpeg$'\
+            | sxiv -t -i -o)
+
+# if nothing was selected, exit
+[ -z "$SELECTION" ] && exit 0
+
+# get new wallpaper
+if [ "$((CHOOSE_RANDOM))" != 0 ]; then
+  WALL=$(echo "$SELECTION" | shuf -n1)
+else
+  WALL=$(echo "$SELECTION" | sed 1q)
+fi
+
+# set wallpaper and colorscheme
+feh --bg-fill "$WALL" && wal -i "$WALL" >/dev/null && exit 0
+
