@@ -28,5 +28,5 @@ else
 fi
 
 # set wallpaper and colorscheme
-feh --bg-fill "$WALL" && wal -i "$WALL" >/dev/null && exit 0
+feh --bg-fill "$WALL" && wal -q -i "$WALL" && exit 0
 
