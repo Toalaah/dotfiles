@@ -3,7 +3,7 @@
 # requirements: dmenu, awk
 
 # select network device
-NET_DEVICE=$(ls /sys/class/net/ | dmenu -i -l 20 -p "Select drive:")
+NET_DEVICE=$(find /sys/class/net/* | sed 's|^.*/||g' | dmenu -i -l 20 -p "Select drive:")
 
 # check if selection was cancelled
 [ -z "$NET_DEVICE" ] || [ "$NET_DEVICE" = "Quit" ] && exit 0
@@ -20,13 +20,13 @@ ACTION_CHOICE=$(echo "$ACTIONS" | dmenu -i -l 20 -p "Desired action:" | awk '{pr
 
 # special case, state is not a keyword in the command and uses different arguments
 if [ "$ACTION_CHOICE" = "state" ]; then
-  OPERATION=$(echo "up\ndown\nQuit" | dmenu -i -l 20 -p "Desired operation:")
+  OPERATION=$(printf "up\ndown\nQuit" | dmenu -i -l 20 -p "Desired operation:")
   # check if selection was cancelled
   [ -z "$OPERATION" ] || [ "$OPERATION" = "Quit" ] && exit 0
   sudo ip link set "$NET_DEVICE" "$OPERATION" && exit 0
 fi
 
-OPERATION=$(echo "on\noff\nQuit" | dmenu -i -l 20 -p "Desired operation:")
+OPERATION=$(printf "on\noff\nQuit" | dmenu -i -l 20 -p "Desired operation:")
 # check if selection was cancelled
 [ -z "$OPERATION" ] || [ "$OPERATION" = "Quit" ] && exit 0
 
