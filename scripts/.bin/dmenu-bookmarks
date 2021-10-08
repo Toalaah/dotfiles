@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# requirements: jq, dmenu
+
+# change this variable to the (absolute) path of your bookmarks
+# file (the file must follow chromium-like bookmark-file syntax)
+BM_FILE="$HOME/.config/chromium/Default/Bookmarks"
+
+# change this variable to your desired browser (must be chromium based)
+BROWSER="chromium"
+
+# get bookmarks list in desired format
+BOOKMARKS=$(jq '.. | objects | select(.type == "url") | "\(.name) : \(.url)"' --raw-output "$BM_FILE")
+
+# get selection + check if selection was cancelled
+TARGET_URL=$(printf "%s\nQuit" "$BOOKMARKS" | dmenu -i -l 20 -p "Open bookmark:")
+[ -z "$TARGET_URL" ] || [ "$TARGET_URL" = "Quit" ] && exit 0
+
+# open selected bookmark's url
+echo "$TARGET_URL" | awk '{ print $NF }' | xargs "$BROWSER" --new-window
+
