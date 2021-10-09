@@ -3,10 +3,9 @@
 # requirements: dmenu, awk
 
 # add all folders you want to be able to mount partitions to here
-MOUNT_POINTS="$HOME/usb
-$HOME/mnt
-/mnt
+MOUNT_POINTS="$HOME/USB
 /E
+/USB
 Quit"
 
 # get all mountable partitions
