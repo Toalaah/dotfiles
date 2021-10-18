@@ -37,7 +37,9 @@ RST="%{$reset_color%}"
 ARROW="❯"
 [ "$EUID" -eq 0 ] && ARROW="#"
 function update_prompt() {
-  PS1="%B${COL1}%2~${RST}"
+  # get name of python virtual environment (if in one)
+  VENV=$([ -z "$VIRTUAL_ENV" ] || echo "("$(basename "$VIRTUAL_ENV")")")
+  PS1="%B${COL2}${VENV}${RST}${COL1}%2~${RST}"
   # find out if in git repo or not, and if so what branch
   BRANCH=$(git branch --show-current 2>/dev/null)
   if [ -z "$BRANCH" ]; then
