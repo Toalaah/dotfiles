@@ -44,4 +44,6 @@ vim.cmd('autocmd BufWritePost ~/.config/dmenu/config.h !cd ~/.config/dmenu/; sud
 vim.cmd('autocmd BufWritePost ~/.config/slock/config.h !cd ~/.config/slock/; sudo make install')
 -- set filetype to bash for all .sh files
 vim.cmd('autocmd BufRead,BufNew,BufEnter *.sh* set syntax=bash')
+-- disable error highlighting in json files
+vim.cmd('autocmd BufRead,BufNew,BufEnter *.json* hi Error NONE')
 
