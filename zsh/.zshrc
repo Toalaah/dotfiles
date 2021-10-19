@@ -62,6 +62,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
 
+export TERM=xterm-256color
 setopt globdots # enable tab-completion for hidden dirs / files
 export VISUAL=nvim
 export PATH="$PATH:$HOME/.cargo/bin:/usr/local/opt/llvm/bin/:$HOME/.local/bin:$HOME/.bin"
