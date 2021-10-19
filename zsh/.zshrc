@@ -39,7 +39,7 @@ ARROW="❯"
 function update_prompt() {
   # get name of python virtual environment (if in one)
   VENV=$([ -z "$VIRTUAL_ENV" ] || echo "("$(basename "$VIRTUAL_ENV")")")
-  PS1="%B${COL2}${VENV}${RST}${COL1}%2~${RST}"
+  PS1="%B${COL2}${VENV}${RST}%B${COL1}%2~${RST}"
   # find out if in git repo or not, and if so what branch
   BRANCH=$(git branch --show-current 2>/dev/null)
   if [ -z "$BRANCH" ]; then
@@ -64,7 +64,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
 
-export TERM=xterm-256color
 export LANG=en_US.UTF-8
 setopt globdots # enable tab-completion for hidden dirs / files
 export VISUAL=nvim
