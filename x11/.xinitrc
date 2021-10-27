@@ -17,6 +17,11 @@ xcompmgr &
 # start dwm-blocks (status-bar)
 dwmblocks &
 
+# android studio fix
+export _JAVA_AWT_WM_NONREPARENTING=1
+# set flutter chrome executable to chromium
+export CHROME_EXECUTABLE=$(which chromium)
+
 # controls repeat-delay for keys, first argument is time
 # to wait before repeating, second controls the rate
 xset r rate 200 30
@@ -30,3 +35,4 @@ unclutter &
 
 # start window manager
 exec dwm
+
