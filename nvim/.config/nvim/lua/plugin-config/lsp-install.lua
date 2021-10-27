@@ -51,6 +51,7 @@ local function setup_servers()
 end
 
 setup_servers()
+require'lspconfig'.dartls.setup{on_attach = on_attach}
 
 require'lspinstall'.post_install_hook = function ()
   setup_servers()

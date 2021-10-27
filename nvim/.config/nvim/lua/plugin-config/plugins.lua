@@ -23,6 +23,10 @@ return require('packer').startup(function(use)
   use { 'neovim/nvim-lspconfig' }
   use { 'kabouzeid/nvim-lspinstall' }
 
+  -- flutter / dart development
+  use { 'akinsho/flutter-tools.nvim' }
+  use { 'dart-lang/dart-vim-plugin' }
+
   -- status/buffer-lines
   use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
   use { 'akinsho/nvim-bufferline.lua', requires = { 'kyazdani42/nvim-web-devicons' } }
