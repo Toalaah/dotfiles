@@ -64,7 +64,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
 
-export LANG=en_US.UTF-8
 setopt globdots # enable tab-completion for hidden dirs / files
 export VISUAL=nvim
 export LANG=en_US.UTF-8
