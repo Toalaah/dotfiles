@@ -22,13 +22,12 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # set flutter chrome executable to chromium
 export CHROME_EXECUTABLE=$(which chromium)
 
+# disable screen saving and change key-repeat delays
+xset -dpms
+xset s off
 # controls repeat-delay for keys, first argument is time
 # to wait before repeating, second controls the rate
 xset r rate 200 30
-
-# disable screen saving
-xset -dpms
-xset s off
 
 # hides cursor when inactive
 unclutter &         
