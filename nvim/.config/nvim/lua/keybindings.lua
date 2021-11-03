@@ -43,6 +43,10 @@ vim.api.nvim_set_keymap('n', '<leader>gf',
   ':lua require"telescope.builtin".git_files()<CR>',
   {noremap = true, silent = true})
 
+vim.api.nvim_set_keymap('n', '<leader>ft',
+  ':lua require(\'telescope\').extensions.flutter.commands()<CR>',
+  {noremap = true, silent = true})
+
 -- buffer navigation
 vim.api.nvim_set_keymap("n", "<Tab>",   ":bnext<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<S-Tab>", ":bprev<CR>", { silent = true })
