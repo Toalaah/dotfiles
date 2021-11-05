@@ -73,6 +73,7 @@ setopt autocd
 # edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
+bindkey '^L' autosuggest-accept
 
 update_prompt
 # auto-ls on cd
