@@ -2,7 +2,7 @@
 require('plugin-config.plugins')
 
 -- plugin / lsp configurations
-require('plugin-config.lsp-install')
+require('plugin-config.lsp-installer')
 require('plugin-config.lualine-config')
 require('plugin-config.bufferline-config')
 require('plugin-config.cmp-config')
