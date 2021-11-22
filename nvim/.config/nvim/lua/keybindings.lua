@@ -43,7 +43,7 @@ vim.api.nvim_set_keymap('n', '<leader>gf',
   ':lua require"telescope.builtin".git_files()<CR>',
   {noremap = true, silent = true})
 
-vim.api.nvim_set_keymap('n', '<leader>ft',
+vim.api.nvim_set_keymap('n', '<leader>t',
   ':lua require(\'telescope\').extensions.flutter.commands()<CR>',
   {noremap = true, silent = true})
 
