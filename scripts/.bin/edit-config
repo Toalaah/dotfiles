@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# requirements: dmenu
+
+# set this to the terminal you use (st, alacritty, etc.)
+TERMINAL="st"
+
+# add all configuration folders you want to have access to here
+declare -A CONFIG_FILES=(
+[nvim]="$HOME/.config/nvim"
+[alacritty]="$HOME/.config/alacritty/alacritty.yml"
+[dmenu]="$HOME/.config/dmenu"
+[zsh]="$HOME/.zshrc"
+[dwm]="$HOME/.config/dwm/"
+[st]="$HOME/.config/st/"
+[dotfiles]="$HOME/.local/dotfiles/"
+)
+
+# get all keys of array in once variable, separated by newlines
+CONFIG_CHOICES="${!CONFIG_FILES[*]}"
+CONFIG_CHOICES="${CONFIG_CHOICES// /$'\n'}"
+
+# get user's config selection + check if selection was cancelled
+CONFIG=$(printf "%s\nquit\n" "$CONFIG_CHOICES" | dmenu -i -l 20 -p "Select config to edit:")
+[ -z "$CONFIG" ] || [ "$CONFIG" = "quit" ] && exit 0
+
+# open selected config file in $EDITOR. If $EDITOR is not set, use vim
+CMD="${EDITOR:-vim} ${CONFIG_FILES["$CONFIG"]}"
+
+"$TERMINAL" -e "$SHELL" -c "$CMD; $SHELL"
+
