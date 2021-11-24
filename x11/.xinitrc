@@ -32,6 +32,9 @@ xset r rate 200 30
 # hides cursor when inactive
 unclutter &         
 
+# set editor
+export EDITOR=nvim
+
 # start window manager
 exec dwm
 
