@@ -67,7 +67,7 @@ HISTFILE=~/.zsh_history
 setopt globdots # enable tab-completion for hidden dirs / files
 export VISUAL=nvim
 export LANG=en_US.UTF-8
-export PATH="$PATH:$HOME/.cargo/bin:/usr/local/opt/llvm/bin/:$HOME/.local/bin:$HOME/.bin:$HOME/.local/flutter/bin"
+export PATH="$PATH:$HOME/.cargo/bin:/usr/local/opt/llvm/bin/:$HOME/.local/bin:$HOME/.bin:$HOME/.local/flutter/bin:$HOME/.yarn/bin"
 setopt autocd
 
 # edit line in vim with ctrl-e:
