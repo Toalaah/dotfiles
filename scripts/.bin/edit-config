@@ -13,6 +13,9 @@ declare -A CONFIG_FILES=(
 [zsh]="$HOME/.zshrc"
 [dwm]="$HOME/.config/dwm/"
 [st]="$HOME/.config/st/"
+[xinitrc]="$HOME/.xinitrc"
+[xresources]="$HOME/.xresources"
+[dwmblocks]="$HOME/.config/dwmblocks"
 [dotfiles]="$HOME/.local/dotfiles/"
 )
 
