@@ -6,12 +6,15 @@ jobs:
   format-nvim-config:
     name: Stylua
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nvim/.config/nvim
     steps:
       - uses: actions/checkout@v2
       - uses: JohnnyMorganz/stylua-action@1.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          args: --check nvim/.config/nvim
+          args: --check .
   format-readme:
     name: Markdown-Lint
     runs-on: ubuntu-latest
