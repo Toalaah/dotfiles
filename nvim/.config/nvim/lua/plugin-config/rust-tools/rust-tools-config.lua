@@ -25,45 +25,21 @@ local get_capabilities = function ()
   return capabilities
 end
 
-local lsp_installer = require('nvim-lsp-installer')
--- define all the servers we want to be auto-installed
-local servers = {
-  'tailwindcss',
-  'html',
-  'texlab',
-  'bashls',
-  'clangd',
-  'yamlls',
-  'eslint',
-  'sumneko_lua',
-  'vimls',
-  'pyright',
-  'vuels',
-  'tsserver',
-}
 
--- install missing servers
-for _, name in pairs(servers) do
-  local ok, server = lsp_installer.get_server(name)
-  if ok then
-    if not server:is_installed() then
-      print('Installing ' .. name)
-      server:install()
-    end
-  end
-end
-
--- setup servers
-lsp_installer.on_server_ready(function(server)
-  local opts = { on_attach = on_attach, capabilities = get_capabilities() }
-  if server.name == 'sumneko_lua' then
-    opts.settings = {
-      Lua = {
-        diagnostics = {
-          globals = { 'vim' },
-        },
-      },
-    }
-  end
-  server:setup(opts)
-end)
+require('rust-tools').setup({
+  tools = {
+    autoSetHints = false,
+    hover_with_actions = false,
+    executor = require('rust-tools/executors').termopen,
+    runnables = {
+      use_telescope = true,
+    },
+    debuggables = {
+      use_telescope = true,
+    },
+  },
+  server = {
+    on_attach = on_attach,
+    capabilities = get_capabilities()
+  },
+})

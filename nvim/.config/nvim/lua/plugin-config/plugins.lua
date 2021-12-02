@@ -128,6 +128,15 @@ return require('packer').startup(function(use)
     'dart-lang/dart-vim-plugin',
   })
 
+  -- rust development
+  use({
+    'simrat39/rust-tools.nvim',
+    requires = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
+    config = function()
+      require('plugin-config.rust-tools.rust-tools-config')
+    end,
+  })
+
   -- status/buffer line
   use({
     'hoob3rt/lualine.nvim',

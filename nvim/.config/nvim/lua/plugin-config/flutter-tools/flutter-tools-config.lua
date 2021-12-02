@@ -19,13 +19,16 @@ local on_attach = function(bufnr)
   buf_set_keymap('n', '<leader>ca', '<cmd>Telescope lsp_code_actions<CR>', opts)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+local get_capabilities = function()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  return capabilities
+end
 
 require('flutter-tools').setup({
   lsp = {
     on_attach = on_attach,
-    capabilities = capabilities,
+    capabilities = get_capabilities(),
     settings = {
       showTodos = true,
       completeFunctionCalls = true,
