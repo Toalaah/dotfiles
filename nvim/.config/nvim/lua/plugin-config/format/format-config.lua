@@ -16,15 +16,15 @@ require('format').setup({
       end_pattern = '^}}}$',
     },
   },
-  -- lua = {
-  --     {
-  --         cmd = {
-  --             function(file)
-  --                 return string.format("luafmt -l %s -w replace %s", vim.bo.textwidth, file)
-  --             end
-  --         }
-  --     }
-  -- },
+  dart = {
+      {
+          cmd = {
+              function(file)
+                  return string.format("dartfmt -w %s", file)
+              end
+          }
+      }
+  },
   lua = {
     {
       cmd = {
@@ -41,7 +41,31 @@ require('format').setup({
     },
   },
   javascript = {
-    { cmd = { 'prettier -w', './node_modules/.bin/eslint --fix' } },
+      {
+          cmd = {
+              function(file)
+                  return string.format("prettier -w %s", file)
+              end
+          }
+      }
+  },
+  typescript = {
+      {
+          cmd = {
+              function(file)
+                  return string.format("prettier -w %s", file)
+              end
+          }
+      }
+  },
+  json = {
+      {
+          cmd = {
+              function(file)
+                  return string.format("prettier -w %s", file)
+              end
+          }
+      }
   },
   markdown = {
     { cmd = { 'prettier -w' } },
