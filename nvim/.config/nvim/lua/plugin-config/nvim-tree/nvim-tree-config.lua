@@ -1,9 +1,19 @@
 require('nvim-tree').setup({
+  update_cwd = true,
   tree_side = 'left',
-  tree_auto_close = 1,
-  tree_auto_open = 1,
-  tree_follow = 1,
+  tree_auto_close = true,
+  tree_auto_open = true,
+  tree_follow = true,
   tree_width = 20,
+  git = {
+    enable = true,
+    ignore = false,
+    timeout = 500,
+  },
+  filters = {
+    dotfiles = false,
+    custom = {},
+  },
   tree_icons = {
     default = '',
     symlink = '',
