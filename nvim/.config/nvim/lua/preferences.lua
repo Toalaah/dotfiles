@@ -13,7 +13,8 @@ cmd('set incsearch') -- incremental searching
 cmd('set ignorecase') -- searching ignores case
 cmd('set smartcase') -- use case-aware search only if search is capitalized
 cmd('set cursorline') -- highlights current line
-cmd('set scrolloff=8') -- always pad the top / bottom of the buffer by 8 lines when scrolling
+cmd('set scrolloff=4') -- always pad the top / bottom of the buffer by 8 lines when scrolling
+cmd('set signcolumn=yes') -- always show signcolumn
 cmd('set nowrap') -- disable line-wrapping
 cmd('set noshowmode') -- disables messages below the tabline
 cmd('set clipboard+=unnamedplus') -- enables copy / pasting to and from external programs
@@ -21,7 +22,7 @@ cmd('set showtabline=2') -- always show tab-bar
 cmd('set mouse=a') -- enable mouse usage
 cmd('set autoindent') -- auto-indenting
 cmd('set bg=dark') -- set background-color
-cmd('colorscheme gruvbox') -- set colorscheme
+cmd('colorscheme tokyonight') -- set colorscheme
 cmd('set timeoutlen=250') -- make timeout length faster (default: 1000ms)
 cmd('set list') -- enable list characters
 cmd('set showbreak=↪\\ ') -- character to show before the continuation of a wrapped line
@@ -30,7 +31,7 @@ cmd('set completeopt=menuone,noselect')
 cmd('set confirm')
 
 -- enable alpha
-cmd('autocmd BufRead,BufNew,BufEnter * highlight Normal guibg=none')
+-- cmd('autocmd BufRead,BufNew,BufEnter * highlight Normal guibg=none')
 
 -- set filetype to bash for all .sh files
 cmd('autocmd BufRead,BufNew,BufEnter *.sh* set syntax=bash')
