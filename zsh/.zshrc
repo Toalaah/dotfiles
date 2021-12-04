@@ -1,10 +1,13 @@
 # =======================================================================
 # =============================== ALIASES ===============================
 
-alias vim=nvim
+alias vim="nvim"
 alias ..="cd .."
 alias ...="cd ../../"
 alias pw="pass -c"
+alias cp="cp -i"
+alias mv="mv -iv"
+alias pac="sudo pacman"
 
 # aliases get set to more aesthetic variants of ls / cat 
 # (only if these variants are already installed on the system)
@@ -51,7 +54,6 @@ function update_prompt() {
       else
         PS1+=" on %B${COL1}$BRANCH (+$CHANGES)${RST}"
       fi
-  
   fi
   PS1+="%B${COL2} ${ARROW}${RST}%b "
 }
@@ -64,8 +66,10 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.zsh_history
 
+export EDITOR=nvim
 setopt globdots # enable tab-completion for hidden dirs / files
-export VISUAL=nvim
+setopt INC_APPEND_HISTORY # write to hist-file as soon as command is executed
+export MANPAGER='nvim +Man!'
 export LANG=en_US.UTF-8
 export PATH="$PATH:$HOME/.cargo/bin:/usr/local/opt/llvm/bin/:$HOME/.local/bin:$HOME/.bin:$HOME/.local/flutter/bin:$HOME/.yarn/bin"
 setopt autocd
