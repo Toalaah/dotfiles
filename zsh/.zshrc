@@ -94,6 +94,7 @@ export MANPAGER='nvim +Man!'
 export LANG=en_US.UTF-8
 export PATH="$PATH:$HOME/.cargo/bin:/usr/local/opt/llvm/bin/:$HOME/.local/bin:$HOME/.bin:$HOME/.local/flutter/bin:$HOME/.yarn/bin"
 setopt autocd
+command -V zoxide &>/dev/null && eval "$(zoxide init zsh)"
 
 # edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
