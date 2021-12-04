@@ -1,3 +1,5 @@
+-- TODO: this on-attatch funciton and get_capabilities gets used multiple times in
+-- various modules, need to outsource it to some sort of utils module
 local on_attach = function(bufnr)
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)

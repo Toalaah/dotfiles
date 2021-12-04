@@ -19,7 +19,7 @@ return require('packer').startup(function(use)
     'wbthomason/packer.nvim',
   })
 
-  -- telescope / treesitter
+  -- treesitter
   use({
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
@@ -27,6 +27,8 @@ return require('packer').startup(function(use)
       require('plugin-config.treesitter.treesitter-config')
     end,
   })
+
+  -- telescope + telescope extensions / dependencies
   use({
     'nvim-telescope/telescope.nvim',
     requires = {
@@ -36,6 +38,10 @@ return require('packer').startup(function(use)
       require('plugin-config.telescope.telescope-config')
     end,
   })
+  use({ 'nvim-lua/popup.nvim' })
+  use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
+  use({ 'jvgrootveld/telescope-zoxide' })
+  use({ 'camgraff/telescope-tmux.nvim' })
 
   -- colorschemes
   use({
@@ -47,6 +53,8 @@ return require('packer').startup(function(use)
   use({
     'navarasu/onedark.nvim',
   })
+  use({ 'whatsthatsmell/codesmell_dark.vim' })
+  use({ 'folke/tokyonight.nvim' })
 
   -- git integration
   use({
@@ -86,7 +94,7 @@ return require('packer').startup(function(use)
   })
 
   -- auto-completion / snippets
-  use ({'onsails/lspkind-nvim'})
+  use({ 'onsails/lspkind-nvim' })
   use({
     'hrsh7th/nvim-cmp',
     config = function()
@@ -181,6 +189,7 @@ return require('packer').startup(function(use)
   })
 
   -- misc
+  -- TODO: check out comment.nvim
   use({
     'b3nj5m1n/kommentary',
     config = function()

@@ -1,4 +1,15 @@
+-- TODO: make hiddden files searchable in file search
+-- TODO: add extension for file-search (will become deprecated)
+-- TODO: zoxide plugin
 require('telescope').setup({
+  extensions = {
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = 'smart_case',
+    },
+  },
   defaults = {
     vimgrep_arguments = {
       'rg',
@@ -16,7 +27,7 @@ require('telescope').setup({
     initial_mode = 'insert',
     selection_strategy = 'reset',
     sorting_strategy = 'descending',
-    layout_strategy = 'horizontal',
+    layout_strategy = 'vertical',
     layout_config = {
       horizontal = {
         mirror = false,
@@ -43,3 +54,7 @@ require('telescope').setup({
     buffer_previewer_maker = require('telescope.previewers').buffer_previewer_maker,
   },
 })
+
+-- load extensions
+require('telescope').load_extension('fzf')
+require('telescope').load_extension('zoxide')
