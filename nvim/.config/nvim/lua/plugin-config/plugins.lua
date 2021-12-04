@@ -86,6 +86,7 @@ return require('packer').startup(function(use)
   })
 
   -- auto-completion / snippets
+  use ({'onsails/lspkind-nvim'})
   use({
     'hrsh7th/nvim-cmp',
     config = function()
@@ -98,6 +99,9 @@ return require('packer').startup(function(use)
   use({
     'saadparwaiz1/cmp_luasnip',
   })
+  use({ 'hrsh7th/cmp-buffer' })
+  use({ 'hrsh7th/cmp-path' })
+  use({ 'hrsh7th/nvim-lua' })
   use({
     'L3MON4D3/LuaSnip',
     config = function()
