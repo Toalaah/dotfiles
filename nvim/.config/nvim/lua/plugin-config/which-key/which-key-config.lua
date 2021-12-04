@@ -1,7 +1,19 @@
 require('which-key').setup({
   ignore_missing = true,
+  plugins = {
+    registers = true,
+    spelling = {
+      enabled = true,
+      suggestions = 20,
+    },
+  },
   window = {
     border = 'single',
+  },
+  icons = {
+    breadcrumb = "»",
+    separator = "➜ ",
+    group = "+",
   },
 })
 
@@ -49,6 +61,7 @@ wk.register({
     S = { '<Cmd>LspInstallInfo<CR>', 'Installed LSP servers' },
     r = { '<Cmd>lua vim.lsp.buf.references()<CR>', 'Goto references' },
     R = { '<Cmd>lua vim.lsp.buf.rename()<CR>', 'Rename variable' },
+    x = { '<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', 'Show diagnostics' },
   },
 }, opts)
 
@@ -104,6 +117,7 @@ wk.register({
         'Select next hunk',
       },
       s = { '<Cmd>Gitsigns stage_hunk<CR>', 'Stage hunk' },
+      r = { '<Cmd>Gitsigns reset_hunk<CR>', 'Reset hunk' },
     },
   },
 }, opts)
@@ -120,13 +134,20 @@ wk.register({
   ['?'] = { '<Cmd>WhichKey<CR>', 'Show which-key menu' },
   ['<leader>/'] = { '<Plug>kommentary_line_default', 'Comment line' },
   ['<leader>p'] = { '<Cmd>Format<CR>', 'Format current file' },
+  ['<leader>m'] = { '<Cmd>make<CR>', 'Make' },
+  ['<leader>M'] = { '<Cmd>lua require"telescope.builtin".man_pages()<CR>', 'View man-pages' },
+  ['<leader>H'] = { '<Cmd>lua require"telescope.builtin".help_tags()<CR>', 'View help tags' },
 
   -- toggleable settings
   ['<leader>z'] = {
     "<Cmd>lua require('zen-mode').toggle({window = {width = .85}})<CR>",
     'Toggle zen mode',
   },
-  ['<leader>s'] = { '<Cmd>set spell!<CR>', 'Toggle spell-checker' },
+  ['<leader>s'] = {
+    name = '+Spelling',
+    ['t'] = { '<Cmd>set spell!<CR>', 'Toggle spell-checker' },
+    ['s'] = { 'z=', 'Suggest word' },
+  },
   ['<leader>n'] = {
     '<Cmd>set number! relativenumber!<CR>',
     'Toggle line numbers',
