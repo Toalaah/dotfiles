@@ -11,9 +11,9 @@ require('which-key').setup({
     border = 'single',
   },
   icons = {
-    breadcrumb = "»",
-    separator = "➜ ",
-    group = "+",
+    breadcrumb = '»',
+    separator = '➜ ',
+    group = '+',
   },
 })
 
@@ -60,7 +60,7 @@ wk.register({
     I = { '<Cmd>LspInfo<CR>', 'LSP info' },
     S = { '<Cmd>LspInstallInfo<CR>', 'Installed LSP servers' },
     r = { '<Cmd>lua vim.lsp.buf.references()<CR>', 'Goto references' },
-    R = { '<Cmd>lua vim.lsp.buf.rename()<CR>', 'Rename variable' },
+    R = { '<Cmd>lua require"renamer".rename()<CR>', 'Rename variable' },
     x = { '<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', 'Show diagnostics' },
   },
 }, opts)

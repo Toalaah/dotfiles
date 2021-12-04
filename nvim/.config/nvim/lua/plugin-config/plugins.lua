@@ -92,6 +92,12 @@ return require('packer').startup(function(use)
       require('plugin-config.format.format-config')
     end,
   })
+  use({
+    'filipdutescu/renamer.nvim',
+    branch = 'master',
+    requires = { { 'nvim-lua/plenary.nvim' } },
+    config = function() require('plugin-config.renamer.renamer-config') end,
+  })
 
   -- auto-completion / snippets
   use({ 'onsails/lspkind-nvim' })
