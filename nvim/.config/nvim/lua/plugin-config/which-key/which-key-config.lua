@@ -157,7 +157,7 @@ wk.register({
 
   -- file / buffer navigation
   ['<C-p>'] = {
-    '<Cmd>lua require"telescope.builtin".find_files({ hidden = true, previewer = false })<CR>',
+    '<Cmd>lua require"telescope.builtin".find_files({ hidden=true, no_ignore=true, previewer = false })<CR>',
     'Search files',
   },
   ['<C-n>'] = { '<Cmd>NvimTreeToggle<CR>', 'File explorer' },
