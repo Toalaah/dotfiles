@@ -8,7 +8,7 @@ xrdb -DPYWAL_="<${XDG_CONFIG_HOME:-$HOME/}.cache/wal/colors.Xresources>" -merge 
 xrandr -s 1920x1080
 
 # set background
-~/.fehbg  
+~/.fehbg
 # wal -R
 
 # start compositor
@@ -30,7 +30,10 @@ xset s off
 xset r rate 200 30
 
 # hides cursor when inactive
-unclutter &         
+unclutter &
+
+# notifications
+dunst &
 
 # set editor
 export EDITOR=nvim
