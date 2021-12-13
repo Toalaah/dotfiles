@@ -101,9 +101,9 @@ wk.register({
     w = { '<Cmd>Gitsigns toggle_word_diff<CR>', 'Toggle word diff' },
     ['d'] = {
       name = '+Diff',
-      m = { '<Cmd><CR>', 'Merge conflict split' },
-      v = { '<Cmd>Gvdiffsplit<CR>', 'Vertical diff split' },
-      h = { '<Cmd>Ghdiffsplit<CR>', 'Horizontal diff split' },
+      m = { '<Cmd>Gdiffsplit!<CR>', 'Merge conflict split' },
+      h = { '<Cmd>diffget //2<CR>', 'Choose target (left)' },
+      l = { '<Cmd>diffget //3<CR>', 'Choose merge parent (right)' },
     },
     ['h'] = {
       name = '+Hunk',

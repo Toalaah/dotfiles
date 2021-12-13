@@ -29,6 +29,7 @@ cmd('set showbreak=↪\\ ') -- character to show before the continuation of a wr
 cmd('set listchars=tab:→\\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨')
 cmd('set completeopt=menuone,noselect')
 cmd('set confirm')
+cmd('set diffopt+=vertical') -- prefer vertical diff split for merge conflicts
 
 -- enable alpha
 -- cmd('autocmd BufRead,BufNew,BufEnter * highlight Normal guibg=none')
