@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # globals
-dependencies=("stow" "git")
+BASE_DEPENDENCIES=("stow" "git")
+NVIM_DEPENDENCIES=("unzip" "npm" "rg" "fd" "make")
 dotfiles=("nvim" "tmux" "alacritty" "zsh" "x11" "scripts" "wallpapers" "bat")
 REPO="toalaah/config"
 DEST="$HOME/.local/dotfiles"
@@ -123,20 +124,21 @@ function multiselect {
     eval $return_value='("${selected[@]}")'
 }
 
-function check_dependencies {
-  for PROG in "${dependencies[@]}"; do
+function check_dependencies() {
+  DEPS=("$@")
+  for PROG in "${DEPS[@]}"; do
     command -v "$PROG" &>/dev/null || return 1
   done
   return 0
 }
 
-function print_dependency_error_and_exit {
+function print_dependency_error {
+  DEPS=("$@")
   echo "Missing dependencies! Required dependencies:"
-  for PROG in "${dependencies[@]}"; do
-    echo -e "- $PROG"
+  for PROG in "${DEPS[@]}"; do
+    echo -e "  - $PROG"
   done
   echo "Please make sure these are all installed and in your path before proceeding!"
-  exit 1
 }
 
 function delete_config_if_exists {
@@ -149,7 +151,12 @@ function delete_config_if_exists {
 }
 
 function install_nvim {
+  echo "Checking nvim dependencies..."
+  check_dependencies "${NVIM_DEPENDENCIES[@]}"|| { print_dependency_error "${NVIM_DEPENDENCIES[@]}" && echo "Skipping nvim installation" && return; }
+
+  echo -e "${CHECK}" "Requirements met"
   cd "$DEST"
+
   delete_config_if_exists "nvim"
   stow nvim --target="$STOW_TARGET"
   # Sync plugins in headless nvim-instance to avoid errors on startup (if nvim is installed)
@@ -173,8 +180,8 @@ function install_base {
 function main {
   echo "Checking dependencies..."
   echo
-  check_dependencies || print_dependency_error_and_exit
-  echo -e "${CHECK}" "Requirements met"
+  check_dependencies "${BASE_DEPENDENCIES[@]}"|| { print_dependency_error "${BASE_DEPENDENCIES[@]}"&& exit 1; }
+  echo -e "${CHECK}" "Requirements met" 
   echo
 
   echo "${emph}Warning!${normal} This script will completely overwrite the folder" "$DEST"

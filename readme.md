@@ -36,6 +36,12 @@ If you wish to install using the installer script you will need the following:
   - stow
   - git
   - curl
+- Additionally, if you want to install the nvim configuration, you will require:
+  - unzip
+  - npm
+  - rg
+  - fd
+  - make
 
 Furthermore, it is recommended you install a font which supports glyphs, for
 example one of the nerd-fonts from
@@ -54,8 +60,7 @@ our own discretion). You will be asked whether or not you want to also download
 the wallpapers.
 
 ```shell
-bash <(curl -s https://raw.githubusercontent.com/Toalaah/config/master/install.s
-h)
+bash <(curl -s https://raw.githubusercontent.com/Toalaah/config/master/install.sh)
 ```
 
 This will create a folder in `~/.local/dotfiles`.
@@ -92,22 +97,15 @@ or tmux).
 
 ## Uninstalling
 
-To uninstall all dotfiles (i.e remove the created symlinks), run the following
-script:
-
-```shell
-bash ~/.local/dotfiles/clean.sh
-```
-
 To uninstall a specific dotfile, navigate into `~/.local/dotfiles` and run `stow
- -D {CONFIG}`, where `{CONFIG}` is the configuration you wish to remove
+ -D {CONFIG} -t $HOME`, where `{CONFIG}` is the configuration you wish to remove
  (ex: nvim, zsh, or tmux).
 
 ## Notes
 
 Some things which are still in the working:
 
-- Create an uninstaller
+- Create an auto-uninstaller
 - Improve neovim first-time startup (at the moment still throws errors due to
 missing plugins)
 - Add linters for most dotfiles to ensure consistent standards
