@@ -167,8 +167,7 @@ function install_nvim {
 }
 
 function install_wallpapers {
-  cd "$DEST"
-  delete_config_if_exists "wallpapers"
+  cd "$DEST" && delete_config_if_exists "wallpapers"
   git submodule init wallpapers/wallpapers
   git submodule update
   stow wallpapers --target="$STOW_TARGET"
@@ -177,7 +176,8 @@ function install_wallpapers {
 function install_base {
   # Removes the target folder of the first argument passed and stows the first
   # argument passed relative to the user's home folder
-  cd "$DEST" && delete_config_if_exists "$1" && stow "$1" --target="$STOW_TARGET"
+  cd "$DEST" && delete_config_if_exists "$1"
+  stow "$1" --target="$STOW_TARGET"
 }
 
 function main {
