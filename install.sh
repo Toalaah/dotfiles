@@ -1,17 +1,31 @@
 #!/usr/bin/env bash
 
-# global
+# globals
 dependencies=("stow" "git")
 dotfiles=("nvim" "tmux" "alacritty" "zsh" "x11" "scripts" "wallpapers" "bat")
 REPO="toalaah/config"
 DEST="$HOME/.local/dotfiles"
 STOW_TARGET="$HOME"
+CHECK="[\e[38;5;46m✔\e[0m]"
+
+# global helpers
+prompt_continue() {
+  while true; do
+      read -r -p "Do you wish to continue? [y/N] " yn
+      case $yn in
+          [Yy]* ) return 0;;
+          [Nn]* ) echo "Exiting without changes..." && return 1;;
+          * ) echo "Please answer yes or no.";;
+      esac
+  done
+}
+
+normal=$(tput sgr0)
+emph=$(tput bold smul)
 
 # taken and slightly modified from: https://unix.stackexchange.com/questions/146570/arrow-key-enter-menu/673436#673436
 function multiselect {
     # little helpers for terminal print control and key input
-    normal=$(tput sgr0)
-    emph=$(tput bold smul)
     ESC=$( printf "\033")
     cursor_blink_on()   { printf "$ESC[?25h"; }
     cursor_blink_off()  { printf "$ESC[?25l"; }
@@ -19,16 +33,6 @@ function multiselect {
     print_inactive()    { printf "$2   $1 "; }
     print_active()      { printf "$2  $ESC[7m $1 $ESC[27m"; }
     get_cursor_row()    { IFS=';' read -sdR -p $'\E[6n' ROW COL; echo ${ROW#*[}; }
-    prompt_continue() {
-      while true; do
-          read -r -p "Do you wish to continue? [y/N] " yn
-          case $yn in
-              [Yy]* ) return 0;;
-              [Nn]* ) echo "Exiting without changes..." && return 1;;
-              * ) echo "Please answer yes or no.";;
-          esac
-      done
-    }
 
     echo "${emph}Warning!${normal} The configurations you select ${emph}will${normal} overwrite any existing configurations!"
     echo
@@ -83,7 +87,7 @@ function multiselect {
         for option in "${options[@]}"; do
             local prefix="[ ]"
             if [[ ${selected[idx]} == true ]]; then
-              prefix="[\e[38;5;46m✔\e[0m]"
+              prefix="${CHECK}"
             fi
 
             cursor_to $(($startrow + $idx))
@@ -136,25 +140,25 @@ function print_dependency_error_and_exit {
 }
 
 function delete_config_if_exists {
-  # get all files which must be deleted and remove them if they exist
-  find "$1" -type f | sed 's|^'"$1"'|'"$STOW_TARGET"'|'
-  # Deletes the config folder of the passed argument, which is determined based
-  # on the folder structure in the repo and the relative stow target. Ex for
-  # nvim, which relative to this script is in ./nvim/.config/nvim, it would
-  # delete the folder ~/.config/nvim (if it exists) as the stow target is $HOME
+  # Deletes the config files of the passed argument ($1), which is determined
+  # based on the folder structure in the repo and the relative stow target. Ex
+  # for nvim, which relative to this script is in ./nvim/.config/nvim, it would
+  # delete the necessary files in  $HOME/.config/nvim (if they exist) as the
+  # stow target is $HOME
+  find "$1" -type f | sed "s|^$1/|$STOW_TARGET/|" | xargs -I {} bash -c '[ -f {} ] && rm -rf {}'
 }
 
 function install_nvim {
-  delete_config_if_exists "nvim"
   cd "$DEST"
+  delete_config_if_exists "nvim"
   stow nvim --target="$STOW_TARGET"
   # Sync plugins in headless nvim-instance to avoid errors on startup (if nvim is installed)
   command -v nvim && nvim --headless -c "autocmd User PackerComplete execute 'normal q'| qall" -c "PackerSync"
 }
 
 function install_wallpapers {
-  delete_config_if_exists "wallpapers"
   cd "$DEST"
+  delete_config_if_exists "wallpapers"
   git submodule init wallpapers/wallpapers
   git submodule update
   stow wallpapers --target="$STOW_TARGET"
@@ -163,33 +167,38 @@ function install_wallpapers {
 function install_base {
   # Removes the target folder of the first argument passed and stows the first
   # argument passed relative to the user's home folder
-  echo "Setting up configuration for" "$1"
-  # stow "$1" --target="$STOW_TARGET"
+  cd "$DEST" && delete_config_if_exists "$1" && stow "$1" --target="$STOW_TARGET"
 }
-
-
 
 function main {
   echo "Checking dependencies..."
   echo
   check_dependencies || print_dependency_error_and_exit
-  echo "Requirements met"
+  echo -e "${CHECK}" "Requirements met"
   echo
 
-  echo "Cloning repo to $DEST"
+  echo "${emph}Warning!${normal} This script will completely overwrite the folder" "$DEST"
   echo
-  # git clone "https://github.com/$REPO" "$DEST"
+  prompt_continue || exit 0
+  echo
+
+  echo "Cloning repo to" "$DEST"
+
+  [ -d "$DEST" ] && rm -rf "$DEST"
+
+  # prefer cloning with ssh if possible
+  git clone git@github.com:"$REPO" "$DEST" 2>/dev/null || \
+  git clone https://github.com/"$REPO" "$DEST"
 
   # get user selection on what they want to install
   multiselect result dotfiles
 
+  # advanced configs which require more setup than merely symlinking have
+  # their own 'install_{conf}' function. If it does not exist we default to
+  # the 'install_base' function which merely symlinks the configuration
   idx=0
   for option in "${dotfiles[@]}"; do
-      # advanced configs which require more setup than only symlinking have
-      # their own 'install_{conf}' function. If it does not exist we default to
-      # the 'install_base' function which merely symlinks the configuration
       ${result[idx]} == "true" && { install_"$option" 2>/dev/null || install_base "$option"; }
-
       ((idx++))
   done
 
