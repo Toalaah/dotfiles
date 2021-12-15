@@ -160,7 +160,10 @@ function install_nvim {
   delete_config_if_exists "nvim"
   stow nvim --target="$STOW_TARGET"
   # Sync plugins in headless nvim-instance to avoid errors on startup (if nvim is installed)
-  command -v nvim && nvim --headless -c "autocmd User PackerComplete execute 'normal q'| qall" -c "PackerSync"
+  echo "Bootstrapping nvim plugins. This may take a while..."
+  echo
+  command -v nvim && nvim --headless -c "autocmd User PackerComplete execute 'normal q'| qall" -c "PackerSync" &>/dev/null
+  ehco "Nvim installation complete"
 }
 
 function install_wallpapers {
