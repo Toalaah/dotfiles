@@ -49,6 +49,15 @@ require('format').setup({
           }
       }
   },
+  python = {
+      {
+          cmd = {
+              function(file)
+                  return string.format("black %s", file)
+              end
+          }
+      }
+  },
   typescript = {
       {
           cmd = {
