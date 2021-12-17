@@ -124,7 +124,7 @@ function multiselect {
     eval $return_value='("${selected[@]}")'
 }
 
-function check_dependencies() {
+function check_dependencies {
   DEPS=("$@")
   for PROG in "${DEPS[@]}"; do
     command -v "$PROG" &>/dev/null || return 1
@@ -163,10 +163,12 @@ function install_nvim {
   echo "Bootstrapping nvim plugins. This may take a while..."
   echo
   command -v nvim && nvim --headless -c "autocmd User PackerComplete execute 'normal q'| qall" -c "PackerSync" &>/dev/null
-  ehco "Nvim installation complete"
+  echo "Nvim installation complete"
 }
 
 function install_wallpapers {
+  echo "Fetching and downloading wallpapers. This may take a while..."
+  echo
   cd "$DEST" && delete_config_if_exists "wallpapers"
   git submodule init wallpapers/wallpapers
   git submodule update
@@ -176,6 +178,8 @@ function install_wallpapers {
 function install_base {
   # Removes the target folder of the first argument passed and stows the first
   # argument passed relative to the user's home folder
+  echo "Symlinking config for" "$1"
+  echo
   cd "$DEST" && delete_config_if_exists "$1"
   stow "$1" --target="$STOW_TARGET"
 }
