@@ -11,6 +11,7 @@ declare -A CONFIG_FILES=(
 [alacritty]="$HOME/.config/alacritty/alacritty.yml"
 [dmenu]="$HOME/.config/dmenu"
 [zsh]="$HOME/.zshrc"
+[scripts]="$HOME/.bin"
 [dwm]="$HOME/.config/dwm/"
 [st]="$HOME/.config/st/"
 [xinitrc]="$HOME/.xinitrc"
