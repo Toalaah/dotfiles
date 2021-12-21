@@ -132,7 +132,7 @@ wk.register({
   ['<C-a>'] = { 'ggVG', 'Select all' },
   ['<C-s>'] = { '<Cmd>w<CR>', 'Save file' },
   ['?'] = { '<Cmd>WhichKey<CR>', 'Show which-key menu' },
-  ['<leader>/'] = { '<Plug>kommentary_line_default', 'Comment line' },
+  ['<leader>/'] = { '<Cmd> lua require("Comment.api").toggle_current_linewise()<CR>', 'Comment line' },
   ['<leader>p'] = { '<Cmd>Format<CR>', 'Format current file' },
   ['<leader>m'] = { '<Cmd>make<CR>', 'Make' },
   ['<leader>M'] = { '<Cmd>lua require"telescope.builtin".man_pages()<CR>', 'View man-pages' },
@@ -196,7 +196,7 @@ wk.register({
 wk.register({
   ['<'] = { '<gv', 'Increase indent level' },
   ['>'] = { '>gv', 'Decrease indent level' },
-  ['<leader>/'] = { '<Plug>kommentary_visual_default', 'Comment line range' },
+  ['<leader>/'] = { '<Cmd>lua require("Comment.api").call("toggle_linewise_op")<CR>g@', 'Comment line range' },
 
   -- virtual line navigation
   ['j'] = { "v:count == 0 ? 'gj' : 'j'", 'Down', expr = true, silent = true },

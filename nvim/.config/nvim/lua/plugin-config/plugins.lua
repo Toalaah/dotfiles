@@ -96,7 +96,9 @@ return require('packer').startup(function(use)
     'filipdutescu/renamer.nvim',
     branch = 'master',
     requires = { { 'nvim-lua/plenary.nvim' } },
-    config = function() require('plugin-config.renamer.renamer-config') end,
+    config = function()
+      require('plugin-config.renamer.renamer-config')
+    end,
   })
 
   -- auto-completion / snippets
@@ -115,7 +117,7 @@ return require('packer').startup(function(use)
   })
   use({ 'hrsh7th/cmp-buffer' })
   use({ 'hrsh7th/cmp-path' })
-  use({ 'hrsh7th/nvim-lua' })
+  use({ 'hrsh7th/cmp-nvim-lua' })
   use({
     'L3MON4D3/LuaSnip',
     config = function()
@@ -154,6 +156,9 @@ return require('packer').startup(function(use)
       require('plugin-config.rust-tools.rust-tools-config')
     end,
   })
+
+  -- web dev plugins
+  use({ 'leafOfTree/vim-matchtag' })
 
   -- status/buffer line
   use({
@@ -195,11 +200,10 @@ return require('packer').startup(function(use)
   })
 
   -- misc
-  -- TODO: check out comment.nvim
   use({
-    'b3nj5m1n/kommentary',
+    'numToStr/Comment.nvim',
     config = function()
-      require('plugin-config.kommentary.kommentary-config')
+      require('plugin-config.comment.comment-config')
     end,
   })
   use({
