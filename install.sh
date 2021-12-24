@@ -28,12 +28,12 @@ emph=$(tput bold smul)
 function multiselect {
     # little helpers for terminal print control and key input
     ESC=$( printf "\033")
-    cursor_blink_on()   { printf "$ESC[?25h"; }
-    cursor_blink_off()  { printf "$ESC[?25l"; }
-    cursor_to()         { printf "$ESC[$1;${2:-1}H"; }
+    cursor_blink_on()   { printf "${ESC}[?25h"; }
+    cursor_blink_off()  { printf "${ESC}[?25l"; }
+    cursor_to()         { printf "${ESC}[$1;${2:-1}H"; }
     print_inactive()    { printf "$2   $1 "; }
-    print_active()      { printf "$2  $ESC[7m $1 $ESC[27m"; }
-    get_cursor_row()    { IFS=';' read -sdR -p $'\E[6n' ROW COL; echo ${ROW#*[}; }
+    print_active()      { printf "$2  ${ESC}[7m $1 ${ESC}[27m"; }
+    get_cursor_row()    { IFS=';' read -sdR -p $'\E[6n' ROW _; echo ${ROW#*[}; }
 
     echo "${emph}Warning!${normal} The configurations you select ${emph}will${normal} overwrite any existing configurations!"
     echo
@@ -52,7 +52,8 @@ function multiselect {
     done
 
     # determine current screen position for overwriting the options
-    local lastrow=`get_cursor_row`
+    local lastrow
+    lastrow=$(get_cursor_row)
     local startrow=$(($lastrow - ${#options[@]}))
 
     # ensure cursor and input echoing back on upon a ctrl+c during read -s
@@ -92,7 +93,7 @@ function multiselect {
             fi
 
             cursor_to $(($startrow + $idx))
-            if [ $idx -eq $1 ]; then
+            if [ "$idx" -eq "$1" ]; then
                 print_active "$option" "$prefix"
             else
                 print_inactive "$option" "$prefix"
@@ -106,7 +107,7 @@ function multiselect {
         print_options $active
 
         # user key control
-        case `key_input` in
+        case $(key_input) in
             space)  toggle_option $active;;
             enter)  print_options -1; break;;
             up)     ((active--));
@@ -155,7 +156,7 @@ function install_nvim {
   check_dependencies "${NVIM_DEPENDENCIES[@]}"|| { print_dependency_error "${NVIM_DEPENDENCIES[@]}" && echo "Skipping nvim installation" && return; }
 
   echo -e "${CHECK}" "Requirements met"
-  cd "$DEST"
+  cd "$DEST" || exit 1
 
   delete_config_if_exists "nvim"
   stow nvim --target="$STOW_TARGET"
@@ -205,6 +206,7 @@ function main {
   git clone https://github.com/"$REPO" "$DEST"
 
   # get user selection on what they want to install
+  declare result
   multiselect result dotfiles
 
   # advanced configs which require more setup than merely symlinking have
@@ -212,7 +214,7 @@ function main {
   # the 'install_base' function which merely symlinks the configuration
   idx=0
   for option in "${dotfiles[@]}"; do
-      ${result[idx]} == "true" && { install_"$option" 2>/dev/null || install_base "$option"; }
+      [ "${result[idx]}" = "true" ] && { install_"$option" 2>/dev/null || install_base "$option"; }
       ((idx++))
   done
 
