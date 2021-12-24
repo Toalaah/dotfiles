@@ -55,6 +55,7 @@ return require('packer').startup(function(use)
   })
   use({ 'whatsthatsmell/codesmell_dark.vim' })
   use({ 'folke/tokyonight.nvim' })
+  use({ 'rebelot/kanagawa.nvim' })
 
   -- git integration
   use({
@@ -156,9 +157,6 @@ return require('packer').startup(function(use)
       require('plugin-config.rust-tools.rust-tools-config')
     end,
   })
-
-  -- web dev plugins
-  use({ 'leafOfTree/vim-matchtag' })
 
   -- status/buffer line
   use({
