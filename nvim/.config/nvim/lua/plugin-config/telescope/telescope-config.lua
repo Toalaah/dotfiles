@@ -8,6 +8,12 @@ require('telescope').setup({
       case_mode = 'smart_case',
     },
   },
+  pickers = {
+    find_files = {
+      theme = 'ivy',
+      prompt_prefix = '🔍: ',
+    },
+  },
   defaults = {
     vimgrep_arguments = {
       'rg',
