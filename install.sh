@@ -2,7 +2,7 @@
 
 # globals
 BASE_DEPENDENCIES=("stow" "git")
-NVIM_DEPENDENCIES=("unzip" "npm" "rg" "fd" "make")
+NVIM_DEPENDENCIES=("nvim" "unzip" "npm" "rg" "fd" "make")
 dotfiles=("nvim" "tmux" "alacritty" "zsh" "x11" "scripts" "wallpapers" "bat")
 REPO="toalaah/config"
 DEST="$HOME/.local/dotfiles"
@@ -12,7 +12,7 @@ CHECK="[\e[38;5;46m✔\e[0m]"
 # global helpers
 prompt_continue() {
   while true; do
-      read -r -p "Do you wish to continue? [y/N] " yn
+      read -r -p "Do you wish to continue? [y/N] " 2>/dev/tty yn
       case $yn in
           [Yy]* ) return 0;;
           [Nn]* ) echo "Exiting without changes..." && return 1;;
@@ -21,6 +21,23 @@ prompt_continue() {
   done
 }
 
+# taken from https://stackoverflow.com/questions/2875424/correct-way-to-check-for-a-command-line-flag-in-bash
+# returns 'true' if flag is present, and '' otherwise
+function has_param() {
+    local terms="$1"
+    shift
+
+    for term in $terms; do
+        for arg; do
+            if [[ $arg == "$term" ]]; then
+                echo "true"
+            fi
+        done
+    done
+}
+
+# if this flag is passed, script does not prompt user for overwrites, clones, etc.
+NO_CONFIRM=$(has_param "-y --yes" "$@")
 normal=$(tput sgr0)
 emph=$(tput bold smul)
 
@@ -39,7 +56,7 @@ function multiselect {
     echo
     echo "Please make sure any configurations you wish to keep are backed up ${emph}before${normal} running this script!"
     echo
-    prompt_continue || exit 0
+    [[ "$NO_CONFIRM" != "true" ]] && { prompt_continue || exit 0; }
     echo "Please select the configurations you wish to install:"
 
     local return_value=$1
@@ -152,18 +169,28 @@ function delete_config_if_exists {
 }
 
 function install_nvim {
-  echo "Checking nvim dependencies..."
-  check_dependencies "${NVIM_DEPENDENCIES[@]}"|| { print_dependency_error "${NVIM_DEPENDENCIES[@]}" && echo "Skipping nvim installation" && return; }
 
-  echo -e "${CHECK}" "Requirements met"
+  echo "Symlinking config for nvim"
+  echo
   cd "$DEST" || exit 1
-
   delete_config_if_exists "nvim"
   stow nvim --target="$STOW_TARGET"
-  # Sync plugins in headless nvim-instance to avoid errors on startup (if nvim is installed)
+
+  echo "Checking nvim dependencies for boostrap-process..."
+  check_dependencies "${NVIM_DEPENDENCIES[@]}" || { print_dependency_error "${NVIM_DEPENDENCIES[@]}" && echo "Skipping nvim boostrap process" && return; }
+
+  echo -e "${CHECK}" "Requirements met"
+  echo
+
+  echo "Your system appears to be able to bootstrap its neovim configuration"
+  echo "This will install all plugins, colorschemes, etc. automatically for you"
+  echo
+  [[ "$NO_CONFIRM" != "true" ]] && { prompt_continue || return 0; }
+
+  # Sync plugins in headless nvim-instance to avoid errors on startup (if nvim is installed / requirements are met)
   echo "Bootstrapping nvim plugins. This may take a while..."
   echo
-  command -v nvim && nvim --headless -c 'autocmd User PackerComplete quitall'
+  nvim --headless -c 'autocmd User PackerComplete quitall'
   echo "Nvim installation complete"
 }
 
@@ -171,9 +198,11 @@ function install_wallpapers {
   echo "Fetching and downloading wallpapers. This may take a while..."
   echo
   cd "$DEST" && delete_config_if_exists "wallpapers"
-  git submodule init wallpapers/wallpapers
+  git submodule init wallpapers/wallpapers &>/dev/null
   git submodule update
   stow wallpapers --target="$STOW_TARGET"
+  echo "Sucessessfully installed and symlinked wallpapers"
+  echo
 }
 
 function install_base {
@@ -194,25 +223,32 @@ function main {
 
   echo "${emph}Warning!${normal} This script will completely overwrite the folder" "$DEST"
   echo
-  prompt_continue || exit 0
+  [[ "$NO_CONFIRM" != "true" ]] && { prompt_continue || exit 0; }
   echo
 
   echo "Cloning repo to" "$DEST"
 
   [ -d "$DEST" ] && rm -rf "$DEST"
 
-  # prefer cloning with ssh if possible
-  git clone git@github.com:"$REPO" "$DEST" 2>/dev/null || \
+  # clone repository to destination folder
   git clone https://github.com/"$REPO" "$DEST"
 
   # get user selection on what they want to install
+  # (or select all if NO_CONFIRM flag is passed)
   declare result
-  multiselect result dotfiles
+  if [[ "$NO_CONFIRM" != "true" ]]; then
+    multiselect result dotfiles
+  else
+    for ((i=0; i<${#dotfiles[@]}; i++)); do
+      result+=("true")
+    done
+  fi
+
+  mkdir -p "$HOME"/.config # ensure .config folder exists
 
   # advanced configs which require more setup than merely symlinking have
   # their own 'install_{conf}' function. If it does not exist we default to
   # the 'install_base' function which merely symlinks the configuration
-  mkdir -p "$HOME"/.config # ensure .config folder exists
   idx=0
   for option in "${dotfiles[@]}"; do
       [ "${result[idx]}" = "true" ] && { install_"$option" 2>/dev/null || install_base "$option"; }

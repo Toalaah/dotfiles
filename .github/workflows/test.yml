@@ -1,0 +1,22 @@
+name: Install Script Test
+
+on:
+  push:
+    paths:
+    - 'install.sh'
+jobs:
+  test-installer:
+    name: Test installer script
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get upgrade
+          sudo add-apt-repository ppa:neovim-ppa/unstable
+          sudo apt-get install zsh git stow unzip curl wget npm ripgrep build-essential neovim
+          curl -s https://sh.rustup.rs > init-rust.sh
+          sh ./init-rust.sh -y
+          $(which cargo) install fd-find
+      - name: Install
+        run: bash <(curl -s https://raw.githubusercontent.com/Toalaah/config/master/install.sh) --yes

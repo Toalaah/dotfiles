@@ -15,12 +15,3 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: --check .
-  format-readme:
-    name: Markdown-Lint
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Run Markdown-Lint
-      uses: docker://avtodev/markdown-lint:v1
-      with:
-        args: './readme.md'

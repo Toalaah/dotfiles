@@ -14,3 +14,12 @@ jobs:
         SHELLCHECK_OPTS: --severity warning
       with:
         ignore_paths: zsh
+  lint-readme:
+    name: Markdown-Lint
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Markdown-Lint
+      uses: docker://avtodev/markdown-lint:v1
+      with:
+        args: './readme.md'
