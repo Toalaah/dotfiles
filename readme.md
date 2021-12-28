@@ -40,7 +40,7 @@ If you wish to install using the installer script you will need the following:
   - stow
   - git
   - curl
-- Additionally, if you wish to ***bootstrap** the nvim configuration, you will
+- Additionally, if you wish to **bootstrap** the nvim configuration, you will
   require (only recommended for / tested on a clean system with no existing
   nvim-config):
   - unzip
@@ -67,15 +67,16 @@ your own discretion). You will be asked whether or not you want to also
 download the wallpapers.
 
 ```bash
-# hand-pick the config-files you want to install.
+# hand-pick the config-files you want to install
 bash <(curl -s https://raw.githubusercontent.com/Toalaah/config/master/install.sh)
 
-# install all config-files without asking for confirmation.
+# install all config-files without asking for confirmation
 bash \
 <(curl -s https://raw.githubusercontent.com/Toalaah/config/master/install.sh) --yes
 ```
 
-This will create a folder in `~/.local/dotfiles`.
+This will create a folder in `~/.local/dotfiles` in which the configuration
+files are stored and later symlinked from.
 
 **Important**: Do not delete the folder after installation as it merely
 symlinks the dotfiles using stow, leaving you with dangling symlinks should the
