@@ -163,7 +163,7 @@ function install_nvim {
   # Sync plugins in headless nvim-instance to avoid errors on startup (if nvim is installed)
   echo "Bootstrapping nvim plugins. This may take a while..."
   echo
-  command -v nvim && nvim --headless -c "autocmd User PackerComplete execute 'normal q'| qall" -c "PackerSync" &>/dev/null
+  command -v nvim && nvim --headless -c 'autocmd User PackerComplete quitall'
   echo "Nvim installation complete"
 }
 
@@ -212,6 +212,7 @@ function main {
   # advanced configs which require more setup than merely symlinking have
   # their own 'install_{conf}' function. If it does not exist we default to
   # the 'install_base' function which merely symlinks the configuration
+  mkdir -p "$HOME"/.config # ensure .config folder exists
   idx=0
   for option in "${dotfiles[@]}"; do
       [ "${result[idx]}" = "true" ] && { install_"$option" 2>/dev/null || install_base "$option"; }

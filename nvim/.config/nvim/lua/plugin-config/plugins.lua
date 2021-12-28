@@ -1,8 +1,8 @@
 -- bootstrap packer installation
-local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.system({
+local fn = vim.fn
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+  Packer_bootstrap = fn.system({
     'git',
     'clone',
     '--depth',
@@ -223,7 +223,7 @@ return require('packer').startup(function(use)
     'romainl/vim-cool',
   })
 
-  if not packer_exists then
-    vim.api.nvim_command('PackerSync')
+  if Packer_bootstrap then
+    require('packer').sync()
   end
 end)
