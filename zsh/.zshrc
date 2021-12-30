@@ -34,8 +34,8 @@ alias cblk="nvim $HOME/.config/dwmblocks/config.h -c 'lcd %:p:h'"
 # =============================== PROMPT ================================
 
 autoload -U colors && colors
-COL1="%{$fg[cyan]%}"    # path color
-COL2="%{$fg[blue]%}"    # arrow prompt color
+COL1="%{$fg[yellow]%}"    # path color
+COL2="%{$fg[red]%}"    # arrow prompt color
 RST="%{$reset_color%}"
 ARROW="❯"
 [ "$EUID" -eq 0 ] && ARROW="#"
