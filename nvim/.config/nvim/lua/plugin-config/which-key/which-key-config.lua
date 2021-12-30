@@ -97,6 +97,7 @@ wk.register({
     C = { '<Cmd>Git commit<CR>', 'Commit changes' },
     P = { '<Cmd>Git push<CR>', 'Push changes' },
     s = { '<Cmd>Gitsigns toggle_signs<CR>', 'Toggle signs' },
+    t = { '<Cmd>lua require"util".toggleSignColumn()<CR>', 'Toggle signcolumn' },
     l = { '<Cmd>Gitsigns toggle_linehl<CR>', 'Toggle changes highlighting' },
     w = { '<Cmd>Gitsigns toggle_word_diff<CR>', 'Toggle word diff' },
     ['d'] = {

@@ -1,10 +1,13 @@
 require('nvim-tree').setup({
   update_cwd = true,
   tree_side = 'left',
-  tree_auto_close = true,
-  tree_auto_open = true,
+  auto_close = true,
   tree_follow = true,
   tree_width = 20,
+  update_to_buf_dir = {
+    enable = true,
+    auto_open = true,
+  },
   git = {
     enable = true,
     ignore = false,
@@ -12,7 +15,7 @@ require('nvim-tree').setup({
   },
   filters = {
     dotfiles = false,
-    custom = {},
+    custom = { '.DS_STORE' },
   },
   tree_icons = {
     default = '',

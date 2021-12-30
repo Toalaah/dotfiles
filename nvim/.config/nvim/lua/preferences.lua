@@ -22,7 +22,7 @@ cmd('set showtabline=2') -- always show tab-bar
 cmd('set mouse=a') -- enable mouse usage
 cmd('set autoindent') -- auto-indenting
 cmd('set bg=dark') -- set background-color
-cmd('silent! colorscheme kanagawa') -- set colorscheme (ignore not found errors)
+cmd('colorscheme gruvbox') -- set colorscheme (ignore not found errors)
 cmd('set timeoutlen=250') -- make timeout length faster (default: 1000ms)
 cmd('set list') -- enable list characters
 cmd('set showbreak=↪\\ ') -- character to show before the continuation of a wrapped line
