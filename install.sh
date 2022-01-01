@@ -10,7 +10,7 @@ STOW_TARGET="$HOME"
 CHECK="[\e[38;5;46m✔\e[0m]"
 
 # global helpers
-prompt_continue() {
+function prompt_continue() {
   while true; do
       read -r -p "Do you wish to continue? [y/N] " 2>/dev/tty yn
       case $yn in
