@@ -190,7 +190,7 @@ function install_nvim {
   # Sync plugins in headless nvim-instance to avoid errors on startup (if nvim is installed / requirements are met)
   echo "Bootstrapping nvim plugins. This may take a while..."
   echo
-  nvim --headless -c 'autocmd User PackerComplete quitall'
+  nvim --headless -c 'exe ":!<command>" | redraw' -c 'autocmd User PackerComplete quitall'
   echo "Nvim installation complete"
 }
 
