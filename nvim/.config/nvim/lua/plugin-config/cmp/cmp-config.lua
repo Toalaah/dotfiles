@@ -13,8 +13,8 @@ cmp.setup({
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm({
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<C-l>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     }),
@@ -36,9 +36,9 @@ cmp.setup({
   },
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'nvim_lua' },
-    { name = 'luasnip' },
+    { name = 'buffer', keyword_length = 5, max_item_count = 5 },
     { name = 'path' },
-    { name = 'buffer', keyword_length = 5 },
+    { name = 'luasnip', max_item_count = 5 },
+    { name = 'nvim_lua' },
   },
 })

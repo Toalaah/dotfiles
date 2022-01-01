@@ -21,7 +21,7 @@ local on_attach = function(bufnr)
   buf_set_keymap('n', '<leader>ca', '<cmd>Telescope lsp_code_actions<CR>', opts)
 end
 
-local get_capabilities = function ()
+local get_capabilities = function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
   return capabilities
@@ -30,7 +30,6 @@ end
 local lsp_installer = require('nvim-lsp-installer')
 -- define all the servers we want to be auto-installed
 local servers = {
-  'tailwindcss',
   'html',
   'texlab',
   'bashls',
@@ -38,7 +37,6 @@ local servers = {
   'yamlls',
   'eslint',
   'sumneko_lua',
-  'vimls',
   'pyright',
   'vuels',
   'tsserver',

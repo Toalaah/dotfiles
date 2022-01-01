@@ -1,5 +1,6 @@
 require('zen-mode').setup({
   window = {
+    width = 1,
     options = {
       signcolumn = 'no',
       number = false,
@@ -11,7 +12,7 @@ require('zen-mode').setup({
     },
   },
   plugins = {
-    gitsigns = { enabled = false },
-    tmux = { enabled = false },
+    gitsigns = { enabled = true },
+    tmux = { enabled = true },
   },
 })

@@ -17,13 +17,13 @@ require('format').setup({
     },
   },
   dart = {
-      {
-          cmd = {
-              function(file)
-                  return string.format("dartfmt -w %s", file)
-              end
-          }
-      }
+    {
+      cmd = {
+        function(file)
+          return string.format('dartfmt -w %s', file)
+        end,
+      },
+    },
   },
   lua = {
     {
@@ -41,49 +41,49 @@ require('format').setup({
     },
   },
   javascript = {
-      {
-          cmd = {
-              function(file)
-                  return string.format("prettier -w %s", file)
-              end
-          }
-      }
+    {
+      cmd = {
+        function(file)
+          return string.format('prettier -w %s', file)
+        end,
+      },
+    },
   },
   vue = {
-      {
-          cmd = {
-              function(file)
-                  return string.format("prettier -w %s", file)
-              end
-          }
-      }
+    {
+      cmd = {
+        function(file)
+          return string.format('prettier -w %s', file)
+        end,
+      },
+    },
   },
   python = {
-      {
-          cmd = {
-              function(file)
-                  return string.format("black %s", file)
-              end
-          }
-      }
+    {
+      cmd = {
+        function(file)
+          return string.format('black %s', file)
+        end,
+      },
+    },
   },
   typescript = {
-      {
-          cmd = {
-              function(file)
-                  return string.format("prettier -w %s", file)
-              end
-          }
-      }
+    {
+      cmd = {
+        function(file)
+          return string.format('prettier -w %s', file)
+        end,
+      },
+    },
   },
   json = {
-      {
-          cmd = {
-              function(file)
-                  return string.format("prettier -w %s", file)
-              end
-          }
-      }
+    {
+      cmd = {
+        function(file)
+          return string.format('prettier -w %s', file)
+        end,
+      },
+    },
   },
   markdown = {
     { cmd = { 'prettier -w' } },

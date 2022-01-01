@@ -141,7 +141,7 @@ wk.register({
 
   -- toggleable settings
   ['<leader>z'] = {
-    "<Cmd>lua require('zen-mode').toggle({window = {width = .85}})<CR>",
+    "<Cmd>lua require('zen-mode').toggle()<CR>",
     'Toggle zen mode',
   },
   ['<leader>s'] = {

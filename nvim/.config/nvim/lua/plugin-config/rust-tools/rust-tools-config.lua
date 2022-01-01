@@ -19,12 +19,11 @@ local on_attach = function(bufnr)
   buf_set_keymap('n', '<leader>ca', '<cmd>Telescope lsp_code_actions<CR>', opts)
 end
 
-local get_capabilities = function ()
+local get_capabilities = function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
   return capabilities
 end
-
 
 require('rust-tools').setup({
   tools = {
@@ -40,6 +39,6 @@ require('rust-tools').setup({
   },
   server = {
     on_attach = on_attach,
-    capabilities = get_capabilities()
+    capabilities = get_capabilities(),
   },
 })

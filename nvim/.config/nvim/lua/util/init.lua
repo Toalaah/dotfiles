@@ -1,6 +1,6 @@
 local M = {}
 
-M.toggleSignColumn = function ()
+M.toggleSignColumn = function()
   if vim.o.signcolumn == 'yes' then
     vim.o.signcolumn = 'no'
     return

@@ -3,7 +3,12 @@ require('nvim-tree').setup({
   tree_side = 'left',
   auto_close = true,
   tree_follow = true,
-  tree_width = 20,
+  view = {
+    width = 15,
+    side = 'left',
+    auto_resize = true,
+    signcolumn = 'no',
+  },
   update_to_buf_dir = {
     enable = true,
     auto_open = true,
