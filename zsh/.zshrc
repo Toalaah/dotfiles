@@ -9,12 +9,12 @@ alias cp="cp -i"
 alias mv="mv -iv"
 alias pac="sudo pacman"
 
-# aliases get set to more aesthetic variants of ls / cat 
+# aliases get set to more aesthetic variants of ls / cat
 # (only if these variants are already installed on the system)
-# this is only checked once per startup of every shell 
+# this is only checked once per startup of every shell
 # instance, so the performance hit should be small
 command -V exa &>/dev/null &&
-  { alias ls="exa -ah  --color=auto --icons --group-directories-first" && 
+  { alias ls="exa -ah  --color=auto --icons --group-directories-first" &&
     alias ll="exa -lah --color=auto --icons --group-directories-first"; } ||
   { alias ls="ls -Ah --color=auto" && alias ll="ls -lAh --color=auto"; }
 
@@ -90,9 +90,10 @@ HISTFILE=~/.zsh_history
 export EDITOR=nvim
 setopt globdots # enable tab-completion for hidden dirs / files
 setopt INC_APPEND_HISTORY # write to hist-file as soon as command is executed
-export MANPAGER='nvim +Man!'
+# set manpager to nvim (if nvim is installed)
+command -V nvim &>/dev/null && export MANPAGER='nvim +Man!'
 export LANG=en_US.UTF-8
-export PATH="$PATH:$HOME/.cargo/bin:/usr/local/opt/llvm/bin/:$HOME/.local/bin:$HOME/.bin:$HOME/.local/flutter/bin:$HOME/.yarn/bin"
+export PATH="$PATH:$HOME/.cargo/bin:/usr/local/opt/llvm/bin/:$HOME/.local/bin:$HOME/.bin:$HOME/.local/flutter/bin:$HOME/.yarn/bin:$HOME/go/bin"
 setopt autocd
 command -V zoxide &>/dev/null && eval "$(zoxide init zsh)"
 
@@ -103,7 +104,7 @@ bindkey '^L' autosuggest-accept
 
 update_prompt
 # auto-ls on cd
-chpwd() ls;  
+chpwd() ls;
 
 [[ -f /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && \
   source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
