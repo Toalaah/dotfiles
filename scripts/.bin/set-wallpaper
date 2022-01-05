@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # requirements: sxiv, feh, wal, find, sed
+# optional: colors, schemer2
 
 # Change this variable to the (absolute) path of your
 # wallpapers folder 
@@ -27,6 +28,11 @@ else
   WALL=$(echo "$SELECTION" | sed 1q)
 fi
 
-# set wallpaper and colorscheme
-feh --bg-fill "$WALL" && wal -q -i "$WALL" && exit 0
+# set wallpaper and colorscheme backends are checked in order or preference, if
+# none are found then use the default wal backend
+command -V colorz feh --bg-fill "$WALL" && wal -s -i "$WALL" --backend colorz  && exit 0
+command -V schemer2 feh --bg-fill "$WALL" && wal -s -i "$WALL" --backend schemer2  && exit 0
+
+# fallback
+feh --bg-fill "$WALL" && wal -s -i "$WALL" && exit 0
 
