@@ -127,6 +127,7 @@ wk.register({
 wk.register({
 
   -- miscellaneous
+  ['<leader>k'] = { '<Cmd>lua require"telescope".extensions.flutter.commands()<CR>', 'Flutter tools' },
   ['Q'] = { '<Cmd>q<CR>', 'Exit' },
   ['Y'] = { 'y$', 'Yank to end of line' },
   ['<C-c>'] = { '<Cmd>bd<CR>', 'Close buffer' },
