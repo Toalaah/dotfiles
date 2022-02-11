@@ -61,7 +61,7 @@ wk.register({
     S = { '<Cmd>LspInstallInfo<CR>', 'Installed LSP servers' },
     r = { '<Cmd>lua vim.lsp.buf.references()<CR>', 'Goto references' },
     R = { '<Cmd>lua require"renamer".rename()<CR>', 'Rename variable' },
-    x = { '<Cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', 'Show diagnostics' },
+    x = { '<Cmd>lua vim.diagnostic.open_float()<CR>', 'Show diagnostics' },
   },
 }, opts)
 
