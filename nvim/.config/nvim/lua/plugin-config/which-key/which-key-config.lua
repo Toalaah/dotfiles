@@ -65,6 +65,12 @@ wk.register({
   },
 }, opts)
 
+wk.register({
+  ['<leader>l'] = {
+    a = { '<Cmd>Telescope lsp_range_code_actions<CR>', 'Code action' },
+  },
+}, { mode = 'v', noremap = true })
+
 -- terminal mappings
 wk.register({
 
