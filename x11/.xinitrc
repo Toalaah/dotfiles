@@ -29,6 +29,9 @@ xset s off
 # to wait before repeating, second controls the rate
 xset r rate 200 30
 
+# allow to type german umlauts with (right-alt + Shift + ') followed by a, u, o
+setxkbmap us altgr-intl
+
 # hides cursor when inactive
 unclutter &
 
