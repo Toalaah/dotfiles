@@ -49,6 +49,15 @@ require('format').setup({
       },
     },
   },
+  html = {
+    {
+      cmd = {
+        function(file)
+          return string.format('prettier -w %s', file)
+        end,
+      },
+    },
+  },
   vue = {
     {
       cmd = {
