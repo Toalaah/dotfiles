@@ -56,6 +56,13 @@ end
 -- setup servers
 lsp_installer.on_server_ready(function(server)
   local opts = { on_attach = on_attach, capabilities = get_capabilities() }
+  if server.name == 'yamlls' then
+    opts.settings = {
+      yaml = {
+        schemas = { kubernetes = '/*.k8s.y*ml' },
+      },
+    }
+  end
   if server.name == 'sumneko_lua' then
     opts.settings = {
       Lua = {
