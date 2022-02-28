@@ -121,3 +121,4 @@ To uninstall a specific dotfile, navigate into `~/.local/dotfiles` and run `stow
 - Neomutt config
 - Dunst config
 - Zathura config
+- FZF config
