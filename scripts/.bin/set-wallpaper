@@ -30,8 +30,8 @@ fi
 
 # set wallpaper and colorscheme backends are checked in order or preference, if
 # none are found then use the default wal backend
-command -V colorz feh --bg-fill "$WALL" && wal -s -i "$WALL" --backend colorz  && exit 0
-command -V schemer2 feh --bg-fill "$WALL" && wal -s -i "$WALL" --backend schemer2  && exit 0
+command -V colorz && feh --bg-fill "$WALL" && wal -s -i "$WALL" --backend colorz  && exit 0
+command -V schemer2 && feh --bg-fill "$WALL" && wal -s -i "$WALL" --backend schemer2  && exit 0
 
 # fallback
 feh --bg-fill "$WALL" && wal -s -i "$WALL" && exit 0
