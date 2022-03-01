@@ -25,6 +25,15 @@ require('format').setup({
       },
     },
   },
+  cpp = {
+    {
+      cmd = {
+        function(file)
+          return string.format('clang-format -i %s', file)
+        end,
+      },
+    },
+  },
   lua = {
     {
       cmd = {
