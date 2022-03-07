@@ -38,7 +38,7 @@ local servers = {
   'eslint',
   'sumneko_lua',
   'pyright',
-  'vuels',
+  'volar',
   'tsserver',
 }
 
