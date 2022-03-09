@@ -23,7 +23,7 @@ command -V bat &>/dev/null && alias cat="bat"
 # aliases for quickly opening various config files. the "-c 'lcd %:p:h'"
 # flag sets the current working direcotry of the buffer to the root dir
 # of the config file, which I personally find quite convenient
-alias cz="nvim $HOME/.zshrc -c 'lcd %:p:h'"
+alias cz="nvim ${ZDOTDIR:-$HOME}/.zshrc -c 'lcd %:p:h'"
 alias cv="nvim $HOME/.config/nvim/init.lua -c 'lcd %:p:h'"
 alias cdwm="nvim $HOME/.config/dwm/config.h -c 'lcd %:p:h'"
 alias cst="nvim $HOME/.config/st/config.h -c 'lcd %:p:h'"
@@ -35,11 +35,17 @@ alias cblk="nvim $HOME/.config/dwmblocks/config.h -c 'lcd %:p:h'"
 
 autoload -U colors && colors
 COL1="%{$fg[yellow]%}"    # path color
-COL2="%{$fg[blue]%}"    # arrow prompt color
+COL2="%{$fg[blue]%}"      # arrow prompt color
 RST="%{$reset_color%}"
-ARROW="❯"
+ARROW="::"
 [ "$EUID" -eq 0 ] && ARROW="#"
 function update_prompt() {
+  # print error to right-prompt on non-0 exit codes
+  EXIT_CODE="$?"
+  RPROMPT=""
+  if [ "$EXIT_CODE" -ne 0 ]; then
+      RPROMPT="%B[${COL2}${EXIT_CODE}${RST}%B]${RST}"
+  fi
   # get name of python virtual environment (if in one)
   VENV=$([ -z "$VIRTUAL_ENV" ] || echo "("$(basename "$VIRTUAL_ENV")")")
   PS1="%B${COL2}${VENV}${RST}%B${COL1}%2~${RST}"
@@ -55,7 +61,7 @@ function update_prompt() {
         PS1+=" on %B${COL1}$BRANCH (+$CHANGES)${RST}"
       fi
   fi
-  PS1+="%B${COL2} ${ARROW}${RST}%b "
+  PS1+="${COL2} ${ARROW}${RST}%b "
 }
 precmd_functions+=(update_prompt)
 
@@ -85,7 +91,7 @@ preexec() { echo -ne '\e[1 q' ;}
 
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE=~/.zsh_history
+HISTFILE=${ZDOTDIR:-$HOME}.zsh_history
 
 export EDITOR=nvim
 setopt globdots # enable tab-completion for hidden dirs / files
