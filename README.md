@@ -12,7 +12,7 @@
     1. [Automatic](#automatic)
     2. [Manual](#manual)
 4. [Uninstalling](#uninstallation)
-5. [Notes](#notes)
+5. [Notes](#todos)
 
 ## About
 
