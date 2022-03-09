@@ -206,6 +206,7 @@ return require('packer').startup(function(use)
   })
   use({
     'iamcco/markdown-preview.nvim',
+    run = 'cd app && yarn install'
   })
   use({
     'mhinz/vim-startify',
