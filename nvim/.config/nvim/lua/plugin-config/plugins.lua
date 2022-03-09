@@ -87,9 +87,10 @@ return require('packer').startup(function(use)
     end,
   })
   use({
-    'lukas-reineke/format.nvim',
+    'lukas-reineke/lsp-format.nvim',
+    tag = 'v1',
     config = function()
-      require('plugin-config.format.format-config')
+      require('plugin-config.lsp-format.lsp-format-config')
     end,
   })
   use({

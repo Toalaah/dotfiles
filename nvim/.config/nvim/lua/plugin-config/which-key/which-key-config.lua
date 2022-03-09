@@ -141,7 +141,7 @@ wk.register({
   ['<C-s>'] = { '<Cmd>w<CR>', 'Save file' },
   ['?'] = { '<Cmd>WhichKey<CR>', 'Show which-key menu' },
   ['<leader>/'] = { '<Cmd> lua require("Comment.api").toggle_current_linewise()<CR>', 'Comment line' },
-  ['<leader>p'] = { '<Cmd>Format<CR>', 'Format current file' },
+  ['<leader>p'] = { '<Cmd>FormatWrite<CR>', 'Format and save current file' },
   ['<leader>m'] = { '<Cmd>make<CR>', 'Make' },
   ['<leader>M'] = { '<Cmd>lua require"telescope.builtin".man_pages()<CR>', 'View man-pages' },
   ['<leader>H'] = { '<Cmd>lua require"telescope.builtin".help_tags()<CR>', 'View help tags' },
