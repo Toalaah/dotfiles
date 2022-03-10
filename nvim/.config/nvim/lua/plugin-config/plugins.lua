@@ -101,6 +101,13 @@ return require('packer').startup(function(use)
       require('plugin-config.renamer.renamer-config')
     end,
   })
+  use({
+    'folke/trouble.nvim',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function()
+      require('plugin-config.trouble.trouble-config')
+    end,
+  })
 
   -- auto-completion / snippets
   use({ 'onsails/lspkind-nvim' })
@@ -206,7 +213,7 @@ return require('packer').startup(function(use)
   })
   use({
     'iamcco/markdown-preview.nvim',
-    run = 'cd app && yarn install'
+    run = 'cd app && yarn install',
   })
   use({
     'mhinz/vim-startify',

@@ -53,15 +53,17 @@ wk.register({
   ['<leader>l'] = {
     name = '+LSP',
     a = { '<Cmd>Telescope lsp_code_actions<CR>', 'Code action' },
-    d = { '<Cmd>lua vim.lsp.buf.definition()<CR>', 'Goto definition' },
+    d = { '<Cmd>TroubleToggle vim_definition<CR>', 'Goto definition' },
     D = { '<Cmd>lua vim.lsp.buf.declaration()<CR>', 'Goto declaration' },
     k = { '<Cmd>lua vim.lsp.buf.hover()<CR>', 'Hover' },
-    i = { '<Cmd>lua vim.lsp.buf.implementation()<CR>', 'Goto implementation' },
+    i = { '<Cmd>TroubleToggle lsp_implementation<CR>', 'Goto implementation' },
     I = { '<Cmd>LspInfo<CR>', 'LSP info' },
     S = { '<Cmd>LspInstallInfo<CR>', 'Installed LSP servers' },
-    r = { '<Cmd>lua vim.lsp.buf.references()<CR>', 'Goto references' },
+    r = { '<Cmd>TroubleToggle lsp_references<CR>', 'Goto references' },
+    t = { '<Cmd>TroubleToggle lsp_type_definitions<CR>', 'Goto type definition' },
     R = { '<Cmd>lua require"renamer".rename()<CR>', 'Rename variable' },
     x = { '<Cmd>lua vim.diagnostic.open_float()<CR>', 'Show diagnostics' },
+    X = { '<Cmd>TroubleToggle document_diagnostics<CR>', 'Show diagnostics' },
   },
 }, opts)
 
