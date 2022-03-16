@@ -204,6 +204,7 @@ wk.register({
 
 -- groupless matchings (visual mode)
 wk.register({
+  ['*'] = { "y/\\V<C-R>=escape(@\",'/\\')<CR><CR>", 'Search for selected text' },
   ['<'] = { '<gv', 'Increase indent level' },
   ['>'] = { '>gv', 'Decrease indent level' },
   ['<leader>/'] = { '<Cmd>lua require("Comment.api").call("toggle_linewise_op")<CR>g@', 'Comment line range' },
