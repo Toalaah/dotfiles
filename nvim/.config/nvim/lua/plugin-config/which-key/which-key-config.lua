@@ -139,7 +139,7 @@ wk.register({
   ['Q'] = { '<Cmd>q<CR>', 'Exit' },
   ['Y'] = { 'y$', 'Yank to end of line' },
   ['<C-c>'] = { '<Cmd>bd<CR>', 'Close buffer' },
-  ['<C-a>'] = { 'ggVG', 'Select all' },
+  ['<leader>A'] = { 'ggVG', 'Select all' },
   ['<C-s>'] = { '<Cmd>w<CR>', 'Save file' },
   ['?'] = { '<Cmd>WhichKey<CR>', 'Show which-key menu' },
   ['<leader>/'] = { '<Cmd> lua require("Comment.api").toggle_current_linewise()<CR>', 'Comment line' },
