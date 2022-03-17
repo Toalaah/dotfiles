@@ -53,10 +53,10 @@ wk.register({
   ['<leader>l'] = {
     name = '+LSP',
     a = { '<Cmd>Telescope lsp_code_actions<CR>', 'Code action' },
-    d = { '<Cmd>TroubleToggle vim_definition<CR>', 'Goto definition' },
+    d = { '<Cmd>TroubleToggle lsp_definitions<CR>', 'Goto definition' },
     D = { '<Cmd>lua vim.lsp.buf.declaration()<CR>', 'Goto declaration' },
     k = { '<Cmd>lua vim.lsp.buf.hover()<CR>', 'Hover' },
-    i = { '<Cmd>TroubleToggle lsp_implementation<CR>', 'Goto implementation' },
+    i = { '<Cmd>TroubleToggle lsp_implementations<CR>', 'Goto implementation' },
     I = { '<Cmd>LspInfo<CR>', 'LSP info' },
     S = { '<Cmd>LspInstallInfo<CR>', 'Installed LSP servers' },
     r = { '<Cmd>TroubleToggle lsp_references<CR>', 'Goto references' },
