@@ -43,7 +43,7 @@ wk.register({
       'Search open buffers',
     },
     v = { '<Cmd>vsplit<CR>', 'Create vertical split' },
-    s = { '<Cmd>vsplit<CR>', 'Create horizontal split' },
+    h = { '<Cmd>split<CR>', 'Create horizontal split' },
   },
 }, opts)
 
