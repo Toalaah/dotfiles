@@ -55,7 +55,6 @@ wk.register({
     a = { '<Cmd>Telescope lsp_code_actions<CR>', 'Code action' },
     d = { '<Cmd>TroubleToggle lsp_definitions<CR>', 'Goto definition' },
     D = { '<Cmd>lua vim.lsp.buf.declaration()<CR>', 'Goto declaration' },
-    k = { '<Cmd>lua vim.lsp.buf.hover()<CR>', 'Hover' },
     i = { '<Cmd>TroubleToggle lsp_implementations<CR>', 'Goto implementation' },
     I = { '<Cmd>LspInfo<CR>', 'LSP info' },
     S = { '<Cmd>LspInstallInfo<CR>', 'Installed LSP servers' },
@@ -135,6 +134,7 @@ wk.register({
 wk.register({
 
   -- miscellaneous
+  ['K'] = { '<Cmd>lua vim.lsp.buf.hover()<CR>', 'Hover' },
   ['<leader>k'] = { '<Cmd>lua require"telescope".extensions.flutter.commands()<CR>', 'Flutter tools' },
   ['Q'] = { '<Cmd>q<CR>', 'Exit' },
   ['Y'] = { 'y$', 'Yank to end of line' },
