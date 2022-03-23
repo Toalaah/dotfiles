@@ -26,7 +26,7 @@ cmp.setup({
     format = lspkind.cmp_format({
       with_text = true,
       menu = {
-        nvim_lsp = '[Lsp]',
+        nvim_lsp = '[LSP]',
         nvim_lua = '[Vim]',
         luasnip = '[Snip]',
         path = '[Path]',
