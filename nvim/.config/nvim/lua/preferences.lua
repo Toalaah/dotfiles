@@ -30,6 +30,8 @@ cmd('set listchars=tab:→\\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨')
 cmd('set completeopt=menuone,noselect')
 cmd('set confirm')
 cmd('set diffopt+=vertical') -- prefer vertical diff split for merge conflicts
+cmd('set laststatus=3')
+cmd('highlight WinSeperator guibg=None')
 
 -- enable alpha
 -- cmd('autocmd BufRead,BufNew,BufEnter * highlight Normal guibg=none')

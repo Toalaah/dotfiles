@@ -134,6 +134,7 @@ wk.register({
 wk.register({
 
   -- miscellaneous
+  ['<leader><leader>'] = { '<C-^>', 'Switch to previous buffer' },
   ['K'] = { '<Cmd>lua vim.lsp.buf.hover()<CR>', 'Hover' },
   ['<leader>k'] = { '<Cmd>lua require"telescope".extensions.flutter.commands()<CR>', 'Flutter tools' },
   ['Q'] = { '<Cmd>q<CR>', 'Exit' },
