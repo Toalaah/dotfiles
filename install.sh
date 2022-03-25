@@ -3,7 +3,7 @@
 # globals
 BASE_DEPENDENCIES=("stow" "git")
 NVIM_DEPENDENCIES=("nvim" "unzip" "npm" "rg" "fd" "make")
-dotfiles=("nvim" "tmux" "alacritty" "zsh" "x11" "scripts" "wallpapers" "bat" "chromium")
+dotfiles=("nvim" "tmux" "alacritty" "zsh" "x11" "scripts" "zathura" "bat" "chromium" "wallpapers")
 REPO="toalaah/config"
 DEST="$HOME/.local/dotfiles"
 STOW_TARGET="$HOME"
