@@ -25,7 +25,7 @@ export LESSHISTFILE=-
 # overwrite prompt arrow by setting ARROW here
 # ARROW="$"
 # ARROW="%%"
-# ARROW=$'\n'" ﬌"
+# export ARROW=$'\n'"﬌"
 
 export PAGER=$(
   is_installed "bat" && { echo "bat --style=plain"; true } || echo "less"

@@ -21,3 +21,6 @@ bindkey -s '^f' 'zi^M'
 # probably my most used keybinding...
 bindkey "^l" autosuggest-accept
 
+# bind for file browser (if installed)
+is_installed "lf" && bindkey -s "^o" 'lf^M'
+
