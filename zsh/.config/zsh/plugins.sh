@@ -8,6 +8,7 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
 if is_installed "fzf"; then
   export FZF_DEFAULT_OPTS="--height 40%  \
+    --color=bg+:1,gutter:-1 \
     --cycle \
     --layout=reverse \
     --inline-info \
