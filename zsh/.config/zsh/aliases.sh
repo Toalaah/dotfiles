@@ -34,7 +34,11 @@ alias gr="git restore"
 alias grS="git restore --staged"
 alias gs="git status"
 alias gb="git branch"
-function gco() { git checkout $1 2>/dev/null || git checkout -b $1 }
+is_installed "fzf" && function gco() {
+  TARGET=${1:-$(git branch -a | cut -c3- | sed -e '/->/d' | fzf --print-query | tail -n1 | sed -e 's|^remotes/origin/||')}
+  [[ -z "$TARGET" ]] && return 130
+  git checkout "$TARGET" 2>/dev/null || git checkout -b "$TARGET"
+}
 alias gc="git commit"
 alias gca="git commit --amend"
 alias gp="git fetch --prune && git pull"
