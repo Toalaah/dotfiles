@@ -1,7 +1,6 @@
 require('nvim-tree').setup({
   update_cwd = true,
   tree_side = 'left',
-  auto_close = true,
   tree_follow = true,
   view = {
     width = 15,
