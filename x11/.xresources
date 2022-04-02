@@ -1,9 +1,10 @@
-! general settings
-
 # include PYWAL_
-*alpha: 0.90
-*font:Jet Brains Mono Nerd Font:pixelsize=14:antialias=true:autohint=true
+
+! st settings
+st.alpha: 0.95
+st.borderpx: 5
 st.font:Jet Brains Mono Nerd Font:pixelsize=18:antialias=true:autohint=true
 
-
-
+! dwm settings
+*dwm.borderpx: 1
+*dwm.font:Jet Brains Mono Nerd Font:pixelsize=14:antialias=true:autohint=true

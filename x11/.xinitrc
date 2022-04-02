@@ -1,46 +1,21 @@
-# sourced on 'startx'
+# file is sourced on 'startx'
 
-# source xresources
-# xrdb ${XDG_CONFIG_HOME:-$HOME/}.xresources
-xrdb -DPYWAL_="<${XDG_CONFIG_HOME:-$HOME/}.cache/wal/colors.Xresources>" -merge ${XDG_CONFIG_HOME:-$HOME/}.xresources
-
-# set resolution
-xrandr -s 1920x1080
-
-# set background
-~/.fehbg
-# wal -R
-
-# start compositor
-xcompmgr &
-
-# start dwm-blocks (status-bar)
-dwmblocks &
-
-# android studio fix
+# flutter exports / android studio fixes
 export _JAVA_AWT_WM_NONREPARENTING=1
-# set flutter chrome executable to chromium
 export CHROME_EXECUTABLE=$(which chromium)
 
-# disable screen saving and change key-repeat delays
-xset -dpms
-xset s off
-# controls repeat-delay for keys, first argument is time
-# to wait before repeating, second controls the rate
-xset r rate 200 30
+# set background, resolution,xresources
+~/.fehbg
+xrandr -s 1920x1080
+xrdb -DPYWAL_="<${XDG_CONFIG_HOME:-$HOME/}.cache/wal/colors.Xresources>" -merge ${XDG_CONFIG_HOME:-$HOME/}.xresources
 
-# allow to type german umlauts with (right-alt + Shift + ') followed by a, u, o
-setxkbmap us altgr-intl
-
-# hides cursor when inactive
-unclutter &
-
-# notifications
-dunst &
-
-# set editor
-export EDITOR=nvim
-
-# start window manager
-exec dwm
+picom --experimental-backends -b # start compositor
+dwmblocks &                      # start dwm-blocks (status-bar)
+xset -dpms                       # disable screen saving
+xset s off                       # disable and change key-repeat delays
+xset r rate 200 30               # (repeat delay for keys, 200ms to wait before repeat, 30ms rate when holding down key)
+setxkbmap us altgr-intl          # easier typing of umlauts
+unclutter -idle 2 &              # hide cursor when inactive for 2 seconds
+dunst &                          # notification daemon
+exec dwm                         # start window manager
 
