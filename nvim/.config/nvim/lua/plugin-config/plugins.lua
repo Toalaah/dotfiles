@@ -69,12 +69,6 @@ return require('packer').startup(function(use)
       require('plugin-config.gitsigns.gitsigns-config')
     end,
   })
-  use({
-    'apzelos/blamer.nvim',
-    config = function()
-      require('plugin-config.blamer.blamer-config')
-    end,
-  })
 
   -- lsp / auto-formatting
   use({
