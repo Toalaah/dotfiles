@@ -4,12 +4,13 @@ function is_installed () {
 
 export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/go/bin"
+export PATH="$PATH:$HOME/.local/go/bin"
 export PATH="$PATH:$HOME/.local/flutter/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.yarn/bin"
 export PATH="$PATH:/usr/local/opt/llvm/bin/"
 
+export GOPATH="$HOME/.local/go"
 export HISTFILE=$ZDOTDIR/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=10000
