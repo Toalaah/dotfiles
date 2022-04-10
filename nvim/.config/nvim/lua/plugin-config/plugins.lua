@@ -55,6 +55,12 @@ return require('packer').startup(function(use)
   use({ 'whatsthatsmell/codesmell_dark.vim' })
   use({ 'folke/tokyonight.nvim' })
   use({ 'rebelot/kanagawa.nvim' })
+  use({
+    'projekt0n/github-nvim-theme',
+    config = function()
+      require('plugin-config.github-nvim-theme.github-nvim-theme-config')
+    end,
+  })
 
   -- git integration
   use({

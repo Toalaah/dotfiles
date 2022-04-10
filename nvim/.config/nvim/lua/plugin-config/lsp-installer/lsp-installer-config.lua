@@ -1,22 +1,22 @@
 local get_capabilities = function()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   return capabilities
 end
 
 local lsp_installer = require('nvim-lsp-installer')
 -- define all the servers we want to be auto-installed
 local servers = {
-  'html',
-  'texlab',
   'bashls',
   'clangd',
-  'yamlls',
   'eslint',
-  'sumneko_lua',
+  'gopls',
+  'html',
   'pyright',
-  'volar',
+  'sumneko_lua',
+  'texlab',
   'tsserver',
+  'volar',
+  'yamlls',
 }
 
 -- install missing servers
