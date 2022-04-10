@@ -6,10 +6,12 @@ export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.local/go/bin"
 export PATH="$PATH:$HOME/.local/flutter/bin"
-export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.local/cargo/bin"
 export PATH="$PATH:$HOME/.yarn/bin"
 export PATH="$PATH:/usr/local/opt/llvm/bin/"
 
+export RUSTUP_HOME="$HOME/.local/rustup"
+export CARGO_HOME="$HOME/.local/cargo"
 export GOPATH="$HOME/.local/go"
 export HISTFILE=$ZDOTDIR/.zsh_history
 export HISTSIZE=10000
