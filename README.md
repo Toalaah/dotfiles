@@ -27,6 +27,8 @@ systems. At the moment, this includes configuration files for:
 - X.Org (xinitrc, xresources)
 - bin (custom scripts)
 
+... and more!
+
 This repo also contains most of my wallpapers which I have collected over time.
 However, due to the size of the wallpapers it is only contained as a
 sub-module, which you can find [here](https://github.com/toalaah/wallpapers).
@@ -59,8 +61,12 @@ example one of the nerd-fonts from
 
 **Important**: This script will overwrite all existing configuration files for
 the aforementioned programs. **No backups of any kind will be created for
-you**. The script will prompt you whether you want to continue before
-overwriting (unless you specify the `-y` or `--yes` flag).
+you**. The script will prompt you on whether or not  you wish to continue
+before overwriting.
+
+If you specify the `-y` or `--yes` flag, the script will auto-install **all**
+config-files **without** asking for confirmation. This flag will also bootstrap
+nvim if the required dependencies are installed on the host machine.
 
 To install all configuration files automatically, run the following script (at
 your own discretion). You will be asked whether or not you want to also
@@ -103,22 +109,19 @@ git submodule update
 the repository folder.
 
 ```bash
-stow -t $HOME {CONFIG}
+stow -t $HOME <CONFIG>
 ```
 
-Where `{CONFIG}` is the configuration you wish to install (ex: nvim, zsh,
+Where `<CONFIG>` is the configuration you wish to install (ex: nvim, zsh,
 or tmux).
 
 ## Uninstalling
 
 To uninstall a specific dotfile, navigate into `~/.local/dotfiles` and run `stow
- -D {CONFIG} -t $HOME`, where `{CONFIG}` is the configuration you wish to remove
+ -D <CONFIG> -t $HOME`, where `<CONFIG>` is the configuration you wish to remove
  (ex: nvim, zsh, or tmux).
 
 ## TODOS
 
 - Uninstaller
-- Neomutt config
 - Dunst config
-- Zathura config
-- FZF config
