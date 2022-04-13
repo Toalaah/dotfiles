@@ -28,14 +28,16 @@ else
   WALL=$(echo "$SELECTION" | sed 1q)
 fi
 
+# keyboard shortcut to update WM-colorscheme to match wallpaper
+update_wm_scheme () {
+  hash xdotool 2>/dev/null && xdotool key super+F5
+}
+
 # set wallpaper and colorscheme backends are checked in order or preference, if
 # none are found then use the default wal backend
-command -V colorz && feh --bg-fill "$WALL" && wal -s -i "$WALL" --backend colorz
-command -V schemer2 && feh --bg-fill "$WALL" && wal -s -i "$WALL" --backend schemer2
+command -V colorz && feh --bg-fill "$WALL" && wal -s -i "$WALL" --backend colorz && update_wm_scheme && exit 0
+command -V schemer2 && feh --bg-fill "$WALL" && wal -s -i "$WALL" --backend schemer2 && update_wm_scheme && exit 0
 
 # fallback
-feh --bg-fill "$WALL" && wal -s -i "$WALL"
-
-# keyboard shortcut to update WM-colorscheme to match wallpaper
-hash xdotool 2>/dev/null && xdotool key super+F5
+feh --bg-fill "$WALL" && wal -s -i "$WALL" && update_wm_scheme && exit 0
 
