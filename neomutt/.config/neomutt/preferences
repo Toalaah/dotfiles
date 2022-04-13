@@ -1,0 +1,24 @@
+# vim: ft=neomuttrc
+
+set date_format="%y/%m/%d %I:%M%p"
+set sort = 'reverse-date'
+set sleep_time = 0
+set markers = no
+set mark_old = no
+set mime_forward = yes
+set fast_reply
+set forward_format = "Fwd: %s"
+set forward_quote
+set include
+set mail_check=60
+auto_view text/html
+auto_view application/pgp-encrypted
+set display_filter = "tac | sed '/\\\[-- Autoview/,+1d' | tac"
+alternative_order text/plain text/enriched text/html
+
+set sidebar_visible = yes
+set sidebar_width = 20
+set sidebar_short_path = yes
+set sidebar_next_new_wrap = yes
+set mail_check_stats
+set sidebar_format = '%D%?F? [%F]?%* %?N?%N/? %?S?%S?'

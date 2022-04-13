@@ -1,0 +1,13 @@
+# largely sourced and slightly modified from: https://bit.ly/3jA3bh9
+
+# auth + basic mailbox settings
+source ~/.config/neomutt/setup
+
+# general preferences
+source ~/.config/neomutt/preferences
+
+# keybindings
+source ~/.config/neomutt/keybindings
+
+# colors
+source ~/.config/neomutt/colors
