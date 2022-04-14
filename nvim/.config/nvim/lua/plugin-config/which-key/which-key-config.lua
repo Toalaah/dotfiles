@@ -142,6 +142,7 @@ wk.register({
   ['<C-c>'] = { '<Cmd>bd<CR>', 'Close buffer' },
   ['<leader>A'] = { 'ggVG', 'Select all' },
   ['<C-s>'] = { '<Cmd>w<CR>', 'Save file' },
+  ['<C-q>'] = { '<Cmd>copen<CR>', 'Open quick-fix list' },
   ['?'] = { '<Cmd>WhichKey<CR>', 'Show which-key menu' },
   ['<leader>/'] = { '<Cmd> lua require("Comment.api").toggle_current_linewise()<CR>', 'Comment line' },
   ['<leader>p'] = { '<Cmd>FormatWrite<CR>', 'Format and save current file' },

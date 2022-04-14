@@ -15,9 +15,7 @@ end
 
 return require('packer').startup(function(use)
   -- packer manager
-  use({
-    'wbthomason/packer.nvim',
-  })
+  use 'wbthomason/packer.nvim'
 
   -- treesitter
   use({
@@ -30,17 +28,15 @@ return require('packer').startup(function(use)
   -- telescope + telescope extensions / dependencies
   use({
     'nvim-telescope/telescope.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-    },
+    requires = { 'nvim-lua/plenary.nvim', },
     config = function()
       require('plugin-config.telescope.telescope-config')
     end,
   })
-  use({ 'nvim-lua/popup.nvim' })
+  use 'nvim-lua/popup.nvim'
+  use 'jvgrootveld/telescope-zoxide'
+  use 'camgraff/telescope-tmux.nvim'
   use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
-  use({ 'jvgrootveld/telescope-zoxide' })
-  use({ 'camgraff/telescope-tmux.nvim' })
 
   -- colorschemes
   use({
@@ -49,12 +45,7 @@ return require('packer').startup(function(use)
       'rktjmp/lush.nvim',
     },
   })
-  use({
-    'navarasu/onedark.nvim',
-  })
-  use({ 'whatsthatsmell/codesmell_dark.vim' })
   use({ 'folke/tokyonight.nvim' })
-  use({ 'rebelot/kanagawa.nvim' })
   use({
     'projekt0n/github-nvim-theme',
     config = function()
@@ -63,9 +54,7 @@ return require('packer').startup(function(use)
   })
 
   -- git integration
-  use({
-    'tpope/vim-fugitive',
-  })
+  use 'tpope/vim-fugitive'
   use({
     'lewis6991/gitsigns.nvim',
     requires = {
@@ -77,9 +66,7 @@ return require('packer').startup(function(use)
   })
 
   -- lsp / auto-formatting
-  use({
-    'neovim/nvim-lspconfig',
-  })
+  use 'neovim/nvim-lspconfig'
   use({
     'williamboman/nvim-lsp-installer',
     config = function()
@@ -110,30 +97,24 @@ return require('packer').startup(function(use)
   })
 
   -- auto-completion / snippets
-  use({ 'onsails/lspkind-nvim' })
   use({
     'hrsh7th/nvim-cmp',
     config = function()
       require('plugin-config.cmp.cmp-config')
     end,
   })
-  use({
-    'hrsh7th/cmp-nvim-lsp',
-  })
-  use({
-    'saadparwaiz1/cmp_luasnip',
-  })
-  use({ 'hrsh7th/cmp-buffer' })
-  use({ 'hrsh7th/cmp-path' })
-  use({ 'hrsh7th/cmp-nvim-lua' })
+  use 'onsails/lspkind-nvim'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'saadparwaiz1/cmp_luasnip'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-nvim-lua'
+  use 'rafamadriz/friendly-snippets'
   use({
     'L3MON4D3/LuaSnip',
     config = function()
       require('plugin-config.luasnip.luasnip-config')
     end,
-  })
-  use({
-    'rafamadriz/friendly-snippets',
   })
 
   -- terminal integration
@@ -227,9 +208,7 @@ return require('packer').startup(function(use)
       require('plugin-config.zen-mode.zen-mode-config')
     end,
   })
-  use({
-    'romainl/vim-cool',
-  })
+  use 'romainl/vim-cool'
 
   if Packer_bootstrap then
     require('packer').sync()
