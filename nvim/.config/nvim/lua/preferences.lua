@@ -1,9 +1,5 @@
 local cmd = vim.api.nvim_command
-
--- call f(...) without omitting errors
-local function callSilent(f, ...)
-  pcall(f, ...)
-end
+local silent = require('util').call_silent
 
 cmd('set encoding=utf8')                     -- set default encoding standard
 cmd('set hidden')                            -- allow switching buffers without saving them
@@ -27,7 +23,7 @@ cmd('set clipboard+=unnamedplus')            -- enables copy / pasting to and fr
 cmd('set showtabline=2')                     -- always show tab bar
 cmd('set mouse=a')                           -- enable mouse usage
 cmd('set bg=dark')                           -- set background color
-callSilent(cmd, 'colorscheme github_dimmed') -- set colorscheme
+silent(cmd, 'colorscheme github_dimmed')     -- set colorscheme
 cmd('set timeoutlen=250')                    -- make timeout length faster (default: 1000ms)
 cmd('set showbreak=↪\\ ')                    -- character to show before the continuation of a wrapped line
 cmd('set diffopt+=vertical')                 -- prefer vertical diff split for merge conflicts
