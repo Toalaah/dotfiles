@@ -42,7 +42,7 @@ export TERMINAL=$(
 
 export MANPAGER=$(
   if is_installed "nvim"; then
-   echo "nvim +Man!"
+   echo "nvim -M +Man!"
   elif is_installed "bat"; then
     echo "bat --style=plain --language=man"
   else
