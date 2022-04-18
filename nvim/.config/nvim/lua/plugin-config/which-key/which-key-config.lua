@@ -59,7 +59,8 @@ wk.register({
     I = { '<Cmd>LspInfo<CR>', 'LSP info' },
     S = { '<Cmd>LspInstallInfo<CR>', 'Installed LSP servers' },
     r = { '<Cmd>TroubleToggle lsp_references<CR>', 'Goto references' },
-    t = { '<Cmd>TroubleToggle lsp_type_definitions<CR>', 'Goto type definition' },
+    t = { '<Cmd>TodoQuickFix<CR>', 'View all TODOs' },
+    T = { '<Cmd>TroubleToggle lsp_type_definitions<CR>', 'Goto type definition' },
     R = { '<Cmd>lua require"renamer".rename()<CR>', 'Rename variable' },
     x = { '<Cmd>lua vim.diagnostic.open_float()<CR>', 'Show diagnostics' },
     X = { '<Cmd>TroubleToggle document_diagnostics<CR>', 'Show diagnostics' },
@@ -130,9 +131,20 @@ wk.register({
   },
 }, opts)
 
+-- quickfix mappings (normal mode)
+
+wk.register({
+  ['<C-q>'] = {
+    name = '+Quickfix',
+    ['q'] = { '<Cmd>lua require"util".toggle_qf_list()<CR>', 'Toggle quick-fix list' },
+    ['c'] = { '<Cmd>lua require"util".clear_qf_list()<CR>', 'Clear quick-fix list' },
+    ['e'] = { '<Cmd>lua require"util".exec_qf_list()<CR>', 'Exec command for all qf entries' },
+    ['j'] = { '<Cmd>cnext<CR>', 'Go to next entry in quickfix list' },
+    ['k'] = { '<Cmd>cprev<CR>', 'Go to prev entry in quickfix list' },
+  },
+})
 -- groupless mappings (normal mode)
 wk.register({
-
   -- miscellaneous
   ['<leader><leader>'] = { '<C-^>', 'Switch to previous buffer' },
   ['K'] = { '<Cmd>lua vim.lsp.buf.hover()<CR>', 'Hover' },
@@ -142,9 +154,6 @@ wk.register({
   ['<C-c>'] = { '<Cmd>bd<CR>', 'Close buffer' },
   ['<leader>A'] = { 'ggVG', 'Select all' },
   ['<C-s>'] = { '<Cmd>w<CR>', 'Save file' },
-  ['<C-q>'] = { '<Cmd>lua require"util".toggle_qf_list()<CR>', 'Toggle quick-fix list' },
-  ['<C-J>'] = { '<Cmd>cnext<CR>', 'Go to next entry in quickfix list' },
-  ['<C-K>'] = { '<Cmd>cprev<CR>', 'Go to prev entry in quickfix list' },
   ['?'] = { '<Cmd>WhichKey<CR>', 'Show which-key menu' },
   ['<leader>/'] = { '<Cmd> lua require("Comment.api").toggle_current_linewise()<CR>', 'Comment line' },
   ['<leader>p'] = { '<Cmd>FormatWrite<CR>', 'Format and save current file' },
