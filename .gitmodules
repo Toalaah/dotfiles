@@ -1,3 +1,4 @@
 [submodule "wallpapers/wallpapers"]
 	path = wallpapers/wallpapers
 	url = https://github.com/Toalaah/wallpapers.git
+	ignore = dirty
