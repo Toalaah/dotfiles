@@ -18,7 +18,7 @@ export HISTSIZE=10000
 export SAVEHIST=10000
 
 export ZSH_PLUGIN_ENABLE=1
-export ZSH_PLUGIN_DIR=/usr/local/share/zsh/plugins
+export ZSH_PLUGIN_DIR="$HOME/.local/zsh/plugins"
 
 export EDITOR=nvim
 export VISUAL=nvim
