@@ -35,7 +35,7 @@ export PAGER=$(
 )
 
 TERM_MAC=alacritty
-TERM_LINUX=st
+TERM_LINUX=alacritty
 export TERMINAL=$(
   [[ $(uname -s) = "Darwin" ]] && { echo $TERM_MAC; true } || echo $TERM_LINUX
 )

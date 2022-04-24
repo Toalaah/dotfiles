@@ -10,6 +10,7 @@ window:
     x: 10
     y: 10
   decorations: none
+  opacity: 0.90
 
 
 # Set scrollbar history
@@ -30,7 +31,7 @@ font:
     style: Italic
   bold_italic:
     style: Bold Italic
-  size: 16
+  size: 14
 draw_bold_text_with_bright_colors: true
 
 # Cursor preferences
