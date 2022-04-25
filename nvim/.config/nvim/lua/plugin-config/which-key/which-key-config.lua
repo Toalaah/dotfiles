@@ -187,6 +187,10 @@ wk.register({
   ['<Tab>'] = { '<Cmd>bnext<CR>', 'Next buffer' },
   ['<S-Tab>'] = { '<Cmd>bprev<CR>', 'Previous buffer' },
 
+  -- move blocks of text up / down
+  ['<A-j>'] = { '<Esc>:m .+1<CR>==', 'Move text-block down' },
+  ['<A-k>'] = { '<Esc>:m .-2<CR>==', 'Move text-block up' },
+
   -- split navigaton
   ['<C-h>'] = { '<C-w><C-h>', 'Select left split' },
   ['<C-j>'] = { '<C-w><C-j>', 'Select lower split' },
@@ -213,6 +217,9 @@ wk.register({
 -- groupless matchings (insert mode)
 wk.register({
   ['<C-s>'] = { '<Esc><Cmd>w<CR>a', 'Save file' },
+  -- move blocks of text up / down
+  ['<A-j>'] = { '<Esc>:m .+1<CR>==gi', 'Move text-block down' },
+  ['<A-k>'] = { '<Esc>:m .-2<CR>==gi', 'Move text-block up' },
 }, { mode = 'i', noremap = true })
 
 -- groupless matchings (visual mode)
@@ -221,7 +228,9 @@ wk.register({
   ['<'] = { '<gv', 'Increase indent level' },
   ['>'] = { '>gv', 'Decrease indent level' },
   ['<leader>/'] = { '<Cmd>lua require("Comment.api").call("toggle_linewise_op")<CR>g@', 'Comment line range' },
-
+  -- move blocks of text up / down
+  ['<A-j>'] = { ":m '>+1<CR>gv=gv", 'Move text-block down' },
+  ['<A-k>'] = { ":m '<-2<CR>gv=gv", 'Move text-block up' },
   -- virtual line navigation
   ['j'] = { "v:count == 0 ? 'gj' : 'j'", 'Down', expr = true, silent = true },
   ['k'] = { "v:count == 0 ? 'gk' : 'k'", 'Up', expr = true, silent = true },
