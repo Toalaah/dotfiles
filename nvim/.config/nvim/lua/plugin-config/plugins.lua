@@ -204,12 +204,6 @@ return require('packer').startup(function(use)
     run = 'cd app && yarn install',
   })
   use({
-    'mhinz/vim-startify',
-    config = function()
-      require('plugin-config.startify.startify-config')
-    end,
-  })
-  use({
     'folke/zen-mode.nvim',
     config = function()
       require('plugin-config.zen-mode.zen-mode-config')
