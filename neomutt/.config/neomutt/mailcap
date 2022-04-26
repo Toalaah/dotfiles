@@ -1,0 +1,4 @@
+# define how to view html-emails
+text/html; elinks -dump; copiousoutput;
+# same thing but with color support
+# text/html; elinks -dump -dump-color-mode 1; copiousoutput;

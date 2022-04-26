@@ -12,6 +12,7 @@ set forward_quote
 set include
 set mail_check=60
 set timeout=60
+set mailcap_path="~/.config/neomutt/mailcap"
 auto_view text/html
 auto_view application/pgp-encrypted
 set display_filter = "tac | sed '/\\\[-- Autoview/,+1d' | tac"
