@@ -1,14 +1,11 @@
 require('nvim-tree').setup({
   update_cwd = true,
-  tree_side = 'left',
-  tree_follow = true,
   view = {
     width = 15,
     side = 'left',
-    auto_resize = true,
     signcolumn = 'no',
   },
-  update_to_buf_dir = {
+  hijack_directories = {
     enable = true,
     auto_open = true,
   },
@@ -20,34 +17,5 @@ require('nvim-tree').setup({
   filters = {
     dotfiles = false,
     custom = { '.DS_STORE' },
-  },
-  tree_icons = {
-    default = '',
-    symlink = '',
-    git = {
-      unstaged = '✗',
-      staged = '✓',
-      unmerged = '',
-      renamed = '➜',
-      untracked = '★',
-      deleted = '',
-      ignored = '◌',
-    },
-    folder = {
-      arrow_open = '',
-      arrow_closed = '',
-      default = '',
-      open = '',
-      empty = '',
-      empty_open = '',
-      symlink = '',
-      symlink_open = '',
-    },
-    lsp = {
-      hint = '',
-      info = '',
-      warning = '',
-      error = '',
-    },
   },
 })
