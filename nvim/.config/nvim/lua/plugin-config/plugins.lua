@@ -33,6 +33,7 @@ return require('packer').startup(function(use)
       require('plugin-config.telescope.telescope-config')
     end,
   })
+  use ('nvim-telescope/telescope-ui-select.nvim')
   use('nvim-lua/popup.nvim')
   use('jvgrootveld/telescope-zoxide')
   use('camgraff/telescope-tmux.nvim')

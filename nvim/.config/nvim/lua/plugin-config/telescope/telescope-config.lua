@@ -7,6 +7,9 @@ require('telescope').setup({
       override_file_sorter = true,
       case_mode = 'smart_case',
     },
+    ['ui-select'] = {
+      require('telescope.themes').get_dropdown({}),
+    },
   },
   pickers = {
     find_files = {
@@ -61,3 +64,4 @@ require('telescope').setup({
 -- load extensions
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('zoxide')
+require('telescope').load_extension('ui-select')
