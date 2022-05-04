@@ -33,4 +33,5 @@ require('format').setup({
       tempfile_postfix = '.tmp',
     },
   },
+  ['*'] = { prettier_default_config },
 })
