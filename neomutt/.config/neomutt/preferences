@@ -7,6 +7,7 @@ set markers = no
 set mark_old = no
 set mime_forward = yes
 set fast_reply
+set pipe_decode = yes
 set forward_format = "Fwd: %s"
 set forward_quote
 set include
