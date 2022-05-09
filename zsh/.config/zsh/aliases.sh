@@ -26,6 +26,7 @@ alias cst="$EDITOR $HOME/.config/st/config.h -c 'lcd %:p:h'"
 alias cdm="$EDITOR $HOME/.config/dmenu/config.h -c 'lcd %:p:h'"
 alias cblk="$EDITOR $HOME/.config/dwmblocks/config.h -c 'lcd %:p:h'"
 
+alias gprune='git branch --merged| egrep -v "(^\*|master|main)" | xargs git branch -d'
 alias g="git"
 alias ga="git add"
 alias gau="git add -u"
