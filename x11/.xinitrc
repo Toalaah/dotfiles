@@ -1,5 +1,11 @@
 # file is sourced on 'startx'
 
+# xdg exports
+export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+export XDG_STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
+
 # flutter exports / android studio fixes
 export _JAVA_AWT_WM_NONREPARENTING=1
 export CHROME_EXECUTABLE=$(which chromium)
@@ -7,7 +13,7 @@ export CHROME_EXECUTABLE=$(which chromium)
 # set background, resolution,xresources
 ~/.fehbg
 xrandr -s 1920x1080
-xrdb -DPYWAL_="<${XDG_CONFIG_HOME:-$HOME/}.cache/wal/colors.Xresources>" -merge ${XDG_CONFIG_HOME:-$HOME/}.xresources
+xrdb -DPYWAL_="<${XDG_CACHE_HOME:-$HOME/.cache}/wal/colors.Xresources>" -merge "$HOME"/.xresources
 
 picom --experimental-backends -b # start compositor
 dwmblocks &                      # start dwm-blocks (status-bar)

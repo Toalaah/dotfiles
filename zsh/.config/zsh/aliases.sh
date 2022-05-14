@@ -6,7 +6,7 @@ alias pw="pass -c"
 alias cp="cp -iv"
 alias mv="mv -iv"
 alias grep="grep --color=auto"
-
+alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 
 if is_installed "exa"; then
   alias ls="exa -ah  --color=auto --icons --group-directories-first"
