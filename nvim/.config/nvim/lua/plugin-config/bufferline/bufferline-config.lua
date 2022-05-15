@@ -4,7 +4,7 @@ require('bufferline').setup({
     enforce_regular_tabs = true,
     max_name_length = 18,
     tab_size = 18,
-    always_show_bufferline = true,
+    always_show_bufferline = false,
     offsets = {
       { filetype = 'NvimTree', text = 'File Explorer', text_align = 'left' },
     },
