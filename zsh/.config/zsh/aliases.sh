@@ -26,7 +26,23 @@ alias cst="$EDITOR $HOME/.config/st/config.h -c 'lcd %:p:h'"
 alias cdm="$EDITOR $HOME/.config/dmenu/config.h -c 'lcd %:p:h'"
 alias cblk="$EDITOR $HOME/.config/dwmblocks/config.h -c 'lcd %:p:h'"
 
-alias gprune='git branch --merged| egrep -v "(^\*|master|main)" | xargs git branch -d'
+function gprune() {
+  git rev-parse -is-inside-work-tree > /dev/null 2>&1 || ( echo 'Not in git worktree, aborting prune'; false ) || return 1
+
+  local merged_branches_origin
+  local merged_branches_local
+
+  merged_branches_origin=$(git branch --merged | grep -E -v '(^\*|master|main)')
+  merged_branches_local=$(git branch -vv | grep ': gone]' | cut -d' ' -f3)
+
+  [[ "" != "$merged_branches_origin$merged_branches_origin" ]] && echo "Nothing to clean" && return 0
+
+  [[ ! -z "$merged_branches_origin" ]] && echo "$merged_branches_origin" | xargs git branch -d
+  [[ ! -z "$merged_branches_local" ]] && echo "$merged_branches_local" | xargs git branch -D
+
+  return 0
+}
+
 alias g="git"
 alias ga="git add"
 alias gau="git add -u"
@@ -34,7 +50,7 @@ alias gaa="git add -A"
 alias gr="git restore"
 alias grS="git restore --staged"
 alias gs="git s"
-alias gb="git branch"
+alias gb="git branch -vv"
 is_installed "fzf" && function gco() {
   TARGET=${1:-$(git branch -a | cut -c3- | sed -e '/->/d' | fzf --print-query | tail -n1 | sed -e 's|^remotes/origin/||')}
   [[ -z "$TARGET" ]] && return 130
