@@ -15,7 +15,7 @@ export CHROME_EXECUTABLE=$(which chromium)
 xrandr -s 1920x1080
 xrdb -DPYWAL_="<${XDG_CACHE_HOME:-$HOME/.cache}/wal/colors.Xresources>" -merge "$HOME"/.xresources
 
-picom --experimental-backends -b # start compositor
+picom --experimental-backends -b & # start compositor
 dwmblocks &                      # start dwm-blocks (status-bar)
 xset -dpms                       # disable screen saving
 xset s off                       # disable and change key-repeat delays
