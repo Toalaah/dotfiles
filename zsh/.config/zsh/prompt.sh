@@ -25,10 +25,10 @@ function update_prompt() {
     BRANCH=${${VCS_STATUS_LOCAL_BRANCH}//\%/%%}                                   # get branch name, escape %
     CHANGES=$(( VCS_STATUS_NUM_UNSTAGED+VCS_STATUS_NUM_UNTRACKED ))               # get no. changes
 
-    (( CHANGES )) && GIT_INFO=" on %B${COL1}${BRANCH} (+${CHANGES})"  || GIT_INFO=" on %B${COL1}${BRANCH}"
+    (( CHANGES )) && GIT_INFO=" on %B${COL1}${BRANCH} (+${CHANGES})${RST}"  || GIT_INFO=" on %B${COL1}${BRANCH}${RST}"
   fi
 
-  PROMPT="%B${COL2}${VENV}${COL1}%2~${RST}${GIT_INFO} ${COL2}${ARROW}%b "
+  PROMPT="%B${COL2}${VENV}${COL1}%2~${RST}${GIT_INFO} ${COL2}${ARROW}${RST} "
 }
 
 precmd_functions+=(update_prompt)
