@@ -9,7 +9,7 @@ RST="%{$reset_color%}"    # reset colors + styles
 gitstatus_stop 'MY' 2>/dev/null && gitstatus_start -s -1 -u -1 -c -1 -d -1 'MY' 2>/dev/null || DISABLE_VCS_INFO=1
 
 # set default arrow
-ARROW="${ARROW:-}"
+ARROW="${ARROW:-}"
 [[ "$EUID" -eq 0 ]] && ARROW="#"
 
 function update_prompt() {

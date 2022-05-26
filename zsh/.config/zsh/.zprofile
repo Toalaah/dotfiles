@@ -38,8 +38,8 @@ export PAGER=$(
   is_installed "bat" && { echo "bat --style=plain"; true } || echo "less"
 )
 
-TERM_MAC=alacritty
-TERM_LINUX=alacritty
+TERM_MAC=kitty
+TERM_LINUX=kitty
 export TERMINAL=$(
   [[ $(uname -s) = "Darwin" ]] && { echo $TERM_MAC; true } || echo $TERM_LINUX
 )

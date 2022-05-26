@@ -16,6 +16,8 @@ else
   alias ll="ls -lAh --color=auto"
 fi
 
+[[ "$TERM" = "xterm-kitty" ]] && alias ssh="kitty +kitten ssh"
+
 is_installed "bat" && alias cat="bat"
 
 alias ca="$EDITOR $HOME/.config/alacritty/alacritty.yml -c 'lcd %:p:h'"
