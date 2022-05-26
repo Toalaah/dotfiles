@@ -33,7 +33,7 @@ return require('packer').startup(function(use)
       require('plugin-config.telescope.telescope-config')
     end,
   })
-  use ('nvim-telescope/telescope-ui-select.nvim')
+  use('nvim-telescope/telescope-ui-select.nvim')
   use('nvim-lua/popup.nvim')
   use('jvgrootveld/telescope-zoxide')
   use('camgraff/telescope-tmux.nvim')
@@ -63,6 +63,17 @@ return require('packer').startup(function(use)
     },
     config = function()
       require('plugin-config.gitsigns.gitsigns-config')
+    end,
+  })
+
+  -- copilot
+  use({
+    'github/copilot.vim',
+    config = function()
+      local cmd = vim.api.nvim_command
+      cmd('imap <silent><script><expr> <C-l> copilot#Accept("\\<CR>")')
+      cmd('let g:copilot_no_tab_map = v:true')
+      cmd('let g:copilot_assume_mapped = v:true')
     end,
   })
 
