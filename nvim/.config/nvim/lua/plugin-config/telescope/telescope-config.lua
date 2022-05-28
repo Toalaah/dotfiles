@@ -22,6 +22,7 @@ require('telescope').setup({
         '--files',
         '--column',
         '--no-heading',
+        '--follow',
         '--type-add=env:.env*',
         -- '--type=all',
       },
