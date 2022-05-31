@@ -28,6 +28,16 @@ alias cst="$EDITOR $HOME/.config/st/config.h -c 'lcd %:p:h'"
 alias cdm="$EDITOR $HOME/.config/dmenu/config.h -c 'lcd %:p:h'"
 alias cblk="$EDITOR $HOME/.config/dwmblocks/config.h -c 'lcd %:p:h'"
 
+# sync to folders, usually I use this for syncing my media to an external
+# drive
+function sync() {
+  if [ $# -ne 2 ]; then
+    echo "Usage: sync <source> <destination>"
+    return 1
+  fi
+  rsync -a --no-o --no-g --ignore-existing "$1" "$2"
+}
+
 function gprune() {
   git rev-parse -is-inside-work-tree > /dev/null 2>&1 || ( echo 'Not in git worktree, aborting prune'; false ) || return 1
 
