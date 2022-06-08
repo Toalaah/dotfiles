@@ -3,8 +3,9 @@
 # requirements: redshift
 # set vars accordingly based on your location
 # lat-long calculator: https://www.latlong.net/
-LAT="48"
-LONG="11"
+LAT="52"
+LONG="13"
 
+killall -q redshift
 redshift -l "$LAT:$LONG" &
 
