@@ -1,5 +1,6 @@
 .DS_Store
 nvim/.config/nvim/plugin/*
+nvim/.config/nvim/spell
 zsh/.config/zsh/.zsh_history
 zsh/.config/zsh/.zcompdump
 zsh/.config/zsh/.zsh_sessions/
