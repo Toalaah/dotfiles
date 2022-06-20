@@ -12,7 +12,6 @@ export PATH="$PATH:/usr/local/opt/llvm/bin/"
 
 export DOCKER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}"/docker
 export ELINKS_CONFDIR="${XDG_CONFIG_HOME:-$HOME/.config/}"/elinks
-export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 export ANSIBLE_HOME="$HOME"/.config/ansible
 export RUSTUP_HOME="$HOME"/.local/rustup
 export CARGO_HOME="$HOME"/.local/cargo
