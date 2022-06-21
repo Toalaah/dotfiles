@@ -1,6 +1,6 @@
 local cmd = vim.api.nvim_command
 local silent = require('util').call_silent
-local colorscheme = 'github_dimmed'
+local colorscheme = 'tokyonight'
 
 cmd('set encoding=utf8')                     -- set default encoding standard
 cmd('set hidden')                            -- allow switching buffers without saving them
