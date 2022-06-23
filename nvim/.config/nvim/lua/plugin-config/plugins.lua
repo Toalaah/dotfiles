@@ -17,6 +17,21 @@ return require('packer').startup(function(use)
   -- packer manager
   use('wbthomason/packer.nvim')
 
+  use({
+    'ghillb/cybu.nvim',
+    branch = 'v1.x', -- won't receive breaking changes
+    -- branch = "main", -- timely updates
+    requires = { 'kyazdani42/nvim-web-devicons' }, --optional
+    config = function()
+      local ok, cybu = pcall(require, 'cybu')
+      if not ok then
+        return
+      end
+      cybu.setup()
+      vim.keymap.set('n', 'H', '<Plug>(CybuPrev)')
+      vim.keymap.set('n', 'L', '<Plug>(CybuNext)')
+    end,
+  })
   -- treesitter
   use({
     'nvim-treesitter/nvim-treesitter',
