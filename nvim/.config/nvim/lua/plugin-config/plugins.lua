@@ -81,17 +81,6 @@ return require('packer').startup(function(use)
     end,
   })
 
-  -- copilot
-  use({
-    'github/copilot.vim',
-    config = function()
-      local cmd = vim.api.nvim_command
-      cmd('imap <silent><script><expr> <C-l> copilot#Accept("\\<CR>")')
-      cmd('let g:copilot_no_tab_map = v:true')
-      cmd('let g:copilot_assume_mapped = v:true')
-    end,
-  })
-
   -- lsp / auto-formatting
   use('neovim/nvim-lspconfig')
   use({
