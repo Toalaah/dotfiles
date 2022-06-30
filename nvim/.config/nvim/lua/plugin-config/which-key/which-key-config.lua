@@ -160,6 +160,8 @@ wk.register({
   ['<leader>m'] = { '<Cmd>make<CR>', 'Make' },
   ['<leader>M'] = { '<Cmd>lua require"telescope.builtin".man_pages()<CR>', 'View man-pages' },
   ['<leader>H'] = { '<Cmd>lua require"telescope.builtin".help_tags()<CR>', 'View help tags' },
+  ['n'] = { 'nzz', 'Next match' },
+  ['N'] = { 'Nzz', 'previous match match' },
 
   -- toggleable settings
   ['<leader>z'] = {
