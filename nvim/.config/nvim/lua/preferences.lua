@@ -21,6 +21,7 @@ cmd('set nobackup')                          -- disable backup files
 cmd('set noshowmode')                        -- disables messages below the tabline
 cmd('set noswapfile')                        -- disable swap files
 cmd('set nowrap')                            -- disable line wrapping
+cmd("let g:tex_flavor='latex'")              -- override tex flavor
 cmd('set number')                            -- show numbers on side
 cmd('set relativenumber')                    -- set relative line numbering
 cmd('set scrolloff=4')                       -- always pad the top / bottom of the buffer by 8 lines when scrolling
