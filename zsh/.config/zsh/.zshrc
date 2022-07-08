@@ -10,3 +10,5 @@ source $ZDOTDIR/keybindings.sh
 source $ZDOTDIR/plugins.sh
 source $ZDOTDIR/prompt.sh
 
+unset -f is_installed
+
