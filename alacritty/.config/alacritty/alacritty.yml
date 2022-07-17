@@ -7,10 +7,10 @@ window:
     x: 0
     y: 0
   padding:
-    x: 10
-    y: 10
+    x: 0
+    y: 0
   decorations: none
-  opacity: 0.90
+  opacity: 0.95
 
 
 # Set scrollbar history
@@ -21,17 +21,21 @@ scrolling:
 # Font preferences
 font:
   normal:
-    family: JetBrainsMono Nerd Font
+    family: JetBrains Mono
     style: Regular
   bold:
+    family: JetBrains Mono
     style: Bold
   light:
+    family: JetBrains Mono
     style: Light
   italic:
+    family: JetBrains Mono
     style: Italic
   bold_italic:
+    family: JetBrains Mono
     style: Bold Italic
-  size: 14
+  size: 15.0
 draw_bold_text_with_bright_colors: true
 
 # Cursor preferences
