@@ -5,7 +5,11 @@ alias ...="cd ../../"
 alias pw="pass -c"
 alias cp="cp -iv"
 alias mv="mv -iv"
-alias grep="grep --color=auto"
+if is_installed "rg"; then
+  alias grep="rg"
+else
+  alias grep="grep --color=auto"
+fi
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 
 if is_installed "exa"; then
