@@ -11,6 +11,7 @@ else
   alias grep="grep --color=auto"
 fi
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
+alias tmp='$EDITOR $(mktemp /tmp/scratch.XXX)'
 
 if is_installed "exa"; then
   alias ls="exa -ah  --color=auto --icons --group-directories-first"
