@@ -36,7 +36,7 @@ return require('packer').startup(function(use)
   use({
     'nvim-treesitter/nvim-treesitter',
     config = function()
-      require('plugin-config.treesitter.treesitter-config')
+      require('plugins.treesitter.treesitter-config')
     end,
   })
 
@@ -45,7 +45,7 @@ return require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
     config = function()
-      require('plugin-config.telescope.telescope-config')
+      require('plugins.telescope.telescope-config')
     end,
   })
   use('nvim-telescope/telescope-ui-select.nvim')
@@ -65,7 +65,7 @@ return require('packer').startup(function(use)
   use({
     'projekt0n/github-nvim-theme',
     config = function()
-      require('plugin-config.github-nvim-theme.github-nvim-theme-config')
+      require('plugins.github-nvim-theme.github-nvim-theme-config')
     end,
   })
 
@@ -77,7 +77,7 @@ return require('packer').startup(function(use)
       'nvim-lua/plenary.nvim',
     },
     config = function()
-      require('plugin-config.gitsigns.gitsigns-config')
+      require('plugins.gitsigns.gitsigns-config')
     end,
   })
 
@@ -86,14 +86,14 @@ return require('packer').startup(function(use)
   use({
     'williamboman/nvim-lsp-installer',
     config = function()
-      require('plugin-config.lsp-installer.lsp-installer-config')
+      require('plugins.lsp-installer.lsp-installer-config')
     end,
   })
   use({
     'lukas-reineke/lsp-format.nvim',
     tag = 'v1',
     config = function()
-      require('plugin-config.lsp-format.lsp-format-config')
+      require('plugins.lsp-format.lsp-format-config')
     end,
   })
   use({
@@ -108,14 +108,14 @@ return require('packer').startup(function(use)
     branch = 'master',
     requires = { { 'nvim-lua/plenary.nvim' } },
     config = function()
-      require('plugin-config.renamer.renamer-config')
+      require('plugins.renamer.renamer-config')
     end,
   })
   use({
     'folke/trouble.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
-      require('plugin-config.trouble.trouble-config')
+      require('plugins.trouble.trouble-config')
     end,
   })
 
@@ -123,7 +123,7 @@ return require('packer').startup(function(use)
   use({
     'hrsh7th/nvim-cmp',
     config = function()
-      require('plugin-config.cmp.cmp-config')
+      require('plugins.cmp.cmp-config')
     end,
   })
   use('onsails/lspkind-nvim')
@@ -136,7 +136,7 @@ return require('packer').startup(function(use)
   use({
     'L3MON4D3/LuaSnip',
     config = function()
-      require('plugin-config.luasnip.luasnip-config')
+      require('plugins.luasnip.luasnip-config')
     end,
   })
 
@@ -144,7 +144,7 @@ return require('packer').startup(function(use)
   use({
     'voldikss/vim-floaterm',
     config = function()
-      require('plugin-config.floaterm.floaterm-config')
+      require('plugins.floaterm.floaterm-config')
     end,
   })
 
@@ -153,7 +153,7 @@ return require('packer').startup(function(use)
     'akinsho/flutter-tools.nvim',
     requires = 'nvim-lua/plenary.nvim',
     config = function()
-      require('plugin-config.flutter-tools.flutter-tools-config')
+      require('plugins.flutter-tools.flutter-tools-config')
     end,
   })
   use({
@@ -165,7 +165,7 @@ return require('packer').startup(function(use)
     'simrat39/rust-tools.nvim',
     requires = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
     config = function()
-      require('plugin-config.rust-tools.rust-tools-config')
+      require('plugins.rust-tools.rust-tools-config')
     end,
   })
 
@@ -176,7 +176,7 @@ return require('packer').startup(function(use)
       'kyazdani42/nvim-web-devicons',
     },
     config = function()
-      require('plugin-config.lualine.lualine-config')
+      require('plugins.lualine.lualine-config')
     end,
   })
   use({
@@ -185,7 +185,7 @@ return require('packer').startup(function(use)
       'kyazdani42/nvim-web-devicons',
     },
     config = function()
-      require('plugin-config.bufferline.bufferline-config')
+      require('plugins.bufferline.bufferline-config')
     end,
   })
 
@@ -196,7 +196,7 @@ return require('packer').startup(function(use)
       'kyazdani42/nvim-web-devicons',
     },
     config = function()
-      require('plugin-config.nvim-tree.nvim-tree-config')
+      require('plugins.nvim-tree.nvim-tree-config')
     end,
   })
 
@@ -204,7 +204,7 @@ return require('packer').startup(function(use)
   use({
     'folke/which-key.nvim',
     config = function()
-      require('plugin-config.which-key.which-key-config')
+      require('plugins.which-key.which-key-config')
     end,
   })
 
@@ -212,7 +212,7 @@ return require('packer').startup(function(use)
   use({
     'numToStr/Comment.nvim',
     config = function()
-      require('plugin-config.comment.comment-config')
+      require('plugins.comment.comment-config')
     end,
   })
   use({
@@ -222,7 +222,7 @@ return require('packer').startup(function(use)
   use({
     'folke/zen-mode.nvim',
     config = function()
-      require('plugin-config.zen-mode.zen-mode-config')
+      require('plugins.zen-mode.zen-mode-config')
     end,
   })
   use('romainl/vim-cool')
