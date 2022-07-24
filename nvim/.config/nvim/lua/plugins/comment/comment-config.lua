@@ -1,20 +1,28 @@
 require('Comment').setup({
-  -- add a space b/w comment and the line
-  padding = true,
+  toggler = {
+    -- Line-wise comment toggle keymap
+    line = 'gcc',
+    -- Block-wise comment toggle keymap
+    block = 'gbc',
+  },
 
-  -- whether the cursor should stay at its position
-  sticky = true,
+  opleader = {
+    -- Line-comment keymap
+    line = 'gc',
+    -- Block-comment keymap
+    block = 'gb',
+  },
 
-  -- lines to be ignored while comment/uncomment.
-  ignore = nil,
+  extra = {
+    above = 'gcO',
+    below = 'gco',
+    eol = 'gcA',
+  },
 
-  -- i want to manually set keybindings using which-key + the comment nvim api,
-  -- so to make sure nothing conflicts i set all the keymappings to nil
-  toggler = nil,
-  opleader = nil,
-  extra = nil,
-  mappings = nil,
-
-  pre_hook = nil,
-  post_hook = nil,
+  mappings = {
+    -- Includes `gcc`, `gbc`, `gc[count]{motion}` and `gb[count]{motion}`
+    basic = true,
+    -- Extra mappings (`gco`, `gcO`, `gcA`)
+    extra = true,
+  },
 })

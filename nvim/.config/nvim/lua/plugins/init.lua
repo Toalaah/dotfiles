@@ -1,22 +1,21 @@
--- bootstrap packer installation
-local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  Packer_bootstrap = fn.system({
-    'git',
-    'clone',
-    '--depth',
-    '1',
-    'https://github.com/wbthomason/packer.nvim',
-    install_path,
-  })
-  vim.cmd('packadd packer.nvim')
-end
+local u = require('plugins.util')
+local plugin = u.plugin
+
+-- bootstrap packer installation if required
+local did_bootstrap = u.bootstrap_packer()
+
+---@diagnostic disable-next-line: unused-local
+local plugin_list = {
+  lsp = {},
+  git = {},
+  colorscheme = {},
+}
 
 return require('packer').startup(function(use)
   -- packer manager
   use('wbthomason/packer.nvim')
 
+  use(plugin('numToStr/Comment.nvim'))
   use({
     'ghillb/cybu.nvim',
     branch = 'v1.x', -- won't receive breaking changes
@@ -33,12 +32,7 @@ return require('packer').startup(function(use)
     end,
   })
   -- treesitter
-  use({
-    'nvim-treesitter/nvim-treesitter',
-    config = function()
-      require('plugins.treesitter.treesitter-config')
-    end,
-  })
+  use(plugin('nvim-treesitter/nvim-treesitter'))
 
   -- telescope + telescope extensions / dependencies
   use({
@@ -48,26 +42,11 @@ return require('packer').startup(function(use)
       require('plugins.telescope.telescope-config')
     end,
   })
-  use('nvim-telescope/telescope-ui-select.nvim')
-  use('nvim-lua/popup.nvim')
-  use('jvgrootveld/telescope-zoxide')
-  use('camgraff/telescope-tmux.nvim')
   use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
 
   -- colorschemes
-  use({
-    'ellisonleao/gruvbox.nvim',
-    requires = {
-      'rktjmp/lush.nvim',
-    },
-  })
-  use({ 'folke/tokyonight.nvim' })
-  use({
-    'projekt0n/github-nvim-theme',
-    config = function()
-      require('plugins.github-nvim-theme.github-nvim-theme-config')
-    end,
-  })
+  use(plugin('folke/tokyonight.nvim'))
+  use(plugin('projekt0n/github-nvim-theme'))
 
   -- git integration
   use('tpope/vim-fugitive')
@@ -120,33 +99,18 @@ return require('packer').startup(function(use)
   })
 
   -- auto-completion / snippets
-  use({
-    'hrsh7th/nvim-cmp',
-    config = function()
-      require('plugins.cmp.cmp-config')
-    end,
-  })
-  use('onsails/lspkind-nvim')
-  use('hrsh7th/cmp-nvim-lsp')
-  use('saadparwaiz1/cmp_luasnip')
-  use('hrsh7th/cmp-buffer')
-  use('hrsh7th/cmp-path')
-  use('hrsh7th/cmp-nvim-lua')
-  use('rafamadriz/friendly-snippets')
-  use({
-    'L3MON4D3/LuaSnip',
-    config = function()
-      require('plugins.luasnip.luasnip-config')
-    end,
-  })
+  use(plugin('hrsh7th/nvim-cmp'))
+  use(plugin('onsails/lspkind-nvim'))
+  use(plugin('hrsh7th/cmp-nvim-lsp'))
+  use(plugin('saadparwaiz1/cmp_luasnip'))
+  use(plugin('hrsh7th/cmp-buffer'))
+  use(plugin('hrsh7th/cmp-path'))
+  use(plugin('hrsh7th/cmp-nvim-lua'))
+  use(plugin('rafamadriz/friendly-snippets'))
+  use(plugin('L3MON4D3/LuaSnip'))
 
   -- terminal integration
-  use({
-    'voldikss/vim-floaterm',
-    config = function()
-      require('plugins.floaterm.floaterm-config')
-    end,
-  })
+  use(plugin('voldikss/vim-floaterm'))
 
   -- flutter / dart development
   use({
@@ -156,9 +120,7 @@ return require('packer').startup(function(use)
       require('plugins.flutter-tools.flutter-tools-config')
     end,
   })
-  use({
-    'dart-lang/dart-vim-plugin',
-  })
+  use(plugin('dart-lang/dart-vim-plugin'))
 
   -- rust development
   use({
@@ -201,33 +163,23 @@ return require('packer').startup(function(use)
   })
 
   -- keymappings
-  use({
-    'folke/which-key.nvim',
-    config = function()
-      require('plugins.which-key.which-key-config')
-    end,
-  })
+  -- use({
+  --   'folke/which-key.nvim',
+  --   config = function()
+  --     require('plugins.which-key.which-key-config')
+  --   end,
+  -- })
+  use(plugin('folke/which-key.nvim'))
 
-  -- misc
-  use({
-    'numToStr/Comment.nvim',
-    config = function()
-      require('plugins.comment.comment-config')
-    end,
-  })
   use({
     'iamcco/markdown-preview.nvim',
     run = 'cd app && yarn install',
   })
-  use({
-    'folke/zen-mode.nvim',
-    config = function()
-      require('plugins.zen-mode.zen-mode-config')
-    end,
-  })
-  use('romainl/vim-cool')
+  use(plugin('folke/zen-mode.nvim'))
+  -- automatically set 'noh' after searching
+  use(plugin('romainl/vim-cool'))
 
-  if Packer_bootstrap then
+  if did_bootstrap then
     require('packer').sync()
   end
 end)
