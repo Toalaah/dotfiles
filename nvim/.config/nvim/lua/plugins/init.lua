@@ -15,6 +15,11 @@ return require('packer').startup(function(use)
   -- packer manager
   use('wbthomason/packer.nvim')
 
+  -- 'Core' plugins. Frequently used as dependencies for other plugins
+  use(plugin('nvim-lua/plenary.nvim'))
+  use(plugin('nvim-treesitter/nvim-treesitter'))
+  use(plugin('nvim-telescope/telescope.nvim'))
+
   use(plugin('numToStr/Comment.nvim'))
   use({
     'ghillb/cybu.nvim',
@@ -31,17 +36,6 @@ return require('packer').startup(function(use)
       vim.keymap.set('n', 'L', '<Plug>(CybuNext)')
     end,
   })
-  -- treesitter
-  use(plugin('nvim-treesitter/nvim-treesitter'))
-
-  -- telescope + telescope extensions / dependencies
-  use({
-    'nvim-telescope/telescope.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      require('plugins.telescope.telescope-config')
-    end,
-  })
   use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
 
   -- colorschemes
@@ -52,9 +46,6 @@ return require('packer').startup(function(use)
   use('tpope/vim-fugitive')
   use({
     'lewis6991/gitsigns.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-    },
     config = function()
       require('plugins.gitsigns.gitsigns-config')
     end,
@@ -77,7 +68,6 @@ return require('packer').startup(function(use)
   })
   use({
     'folke/todo-comments.nvim',
-    requires = 'nvim-lua/plenary.nvim',
     config = function()
       require('todo-comments').setup({})
     end,
@@ -85,7 +75,6 @@ return require('packer').startup(function(use)
   use({
     'filipdutescu/renamer.nvim',
     branch = 'master',
-    requires = { { 'nvim-lua/plenary.nvim' } },
     config = function()
       require('plugins.renamer.renamer-config')
     end,
@@ -115,7 +104,6 @@ return require('packer').startup(function(use)
   -- flutter / dart development
   use({
     'akinsho/flutter-tools.nvim',
-    requires = 'nvim-lua/plenary.nvim',
     config = function()
       require('plugins.flutter-tools.flutter-tools-config')
     end,
