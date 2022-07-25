@@ -52,13 +52,9 @@ return require('packer').startup(function(use)
   })
 
   -- lsp / auto-formatting
-  use('neovim/nvim-lspconfig')
-  use({
-    'williamboman/nvim-lsp-installer',
-    config = function()
-      require('plugins.lsp-installer.lsp-installer-config')
-    end,
-  })
+  use(plugin('williamboman/mason.nvim'))
+  use(plugin('williamboman/mason-lspconfig.nvim'))
+  use(plugin('neovim/nvim-lspconfig'))
   use({
     'lukas-reineke/lsp-format.nvim',
     tag = 'v1',
@@ -150,13 +146,6 @@ return require('packer').startup(function(use)
     end,
   })
 
-  -- keymappings
-  -- use({
-  --   'folke/which-key.nvim',
-  --   config = function()
-  --     require('plugins.which-key.which-key-config')
-  --   end,
-  -- })
   use(plugin('folke/which-key.nvim'))
 
   use({
@@ -164,6 +153,7 @@ return require('packer').startup(function(use)
     run = 'cd app && yarn install',
   })
   use(plugin('folke/zen-mode.nvim'))
+
   -- automatically set 'noh' after searching
   use(plugin('romainl/vim-cool'))
 
