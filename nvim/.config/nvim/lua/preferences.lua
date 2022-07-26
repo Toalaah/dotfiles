@@ -1,6 +1,6 @@
 local cmd = vim.api.nvim_command
 local silent = require('util').call_silent
-local colorscheme = 'tokyonight'
+local colorscheme = 'minimal'
 
 cmd('highlight WinSeperator guibg=None')     -- sleeker separator between splits
 cmd('set bg=dark')                           -- set background color
