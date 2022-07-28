@@ -1,5 +1,7 @@
+---@class plugin_util
 local M = {}
 
+---Checks whether a given directory exists.
 ---@param path string
 ---@return boolean
 M.exists = function(path)
@@ -19,26 +21,38 @@ M.normalize = function(plugin_name)
   return string.lower(string.match(plugin_name, '/([^%.]+)'))
 end
 
+---Returns the require path for a plugin based on the normalized plugin name.
 ---@param plugin_name string
 ---@return string
 M.config_require_path = function(plugin_name)
   local c = M.normalize(plugin_name)
-  return 'plugins.' .. c .. '.' .. c .. '-config'
+  return string.format('plugins.%s.%s-config', c, c)
 end
 
+---Checks whether a plugin is installed (assumes that packer is being used).
+---@param plugin_name string
 ---@return boolean
 M.is_installed = function(plugin_name)
-  -- strips everything up to first occurrence of '/' (including '/')
+  -- strip everything up to first occurrence of '/' (including '/')
+  ---Example:
+  ---  someUser/plugin.nvim -> plugin.nvim
   local config_name = string.match(plugin_name, '/(.+)')
-  local path = vim.fn.stdpath('data') .. '/site/pack/packer/start/' .. config_name
+  local path = string.format('%s/site/pack/packer/start/%s', vim.fn.stdpath('data'), config_name)
   return M.exists(path)
 end
 
+---Checks whether a plugin is installed (assumes that packer is being used).
+---@param plugin_name string
+---@return boolean
 M.config_exists = function(plugin_name)
-  local path = vim.fn.stdpath('config') .. '/lua/plugins/' .. M.normalize(plugin_name)
+  local path = string.format('%s/lua/plugins/%s', vim.fn.stdpath('config'), M.normalize(plugin_name))
   return M.exists(path)
 end
 
+---Retruns a default plugin specification which can be consumed by Packer's
+---use() function. The configuration file for the specified plugin is loaded if
+---and only if said config file is is found and the plugin is already
+---installed.
 ---@param plugin_name string
 ---@return table
 M.plugin = function(plugin_name)
