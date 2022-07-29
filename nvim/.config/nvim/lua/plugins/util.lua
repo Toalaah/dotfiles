@@ -49,10 +49,10 @@ M.config_exists = function(plugin_name)
   return M.exists(path)
 end
 
----Retruns a default plugin specification which can be consumed by Packer's
----use() function. The configuration file for the specified plugin is loaded if
----and only if said config file is is found and the plugin is already
----installed.
+---Returns a default plugin specification which can be consumed by
+---Packer's `use()` function. The configuration file for the specified
+---plugin is loaded if and only if said config file is is found and the
+---plugin is already installed.
 ---@param plugin_name string
 ---@return table
 M.plugin = function(plugin_name)
