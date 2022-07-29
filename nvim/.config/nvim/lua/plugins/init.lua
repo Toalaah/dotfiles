@@ -4,161 +4,135 @@ local plugin = u.plugin
 -- bootstrap packer installation if required
 local did_bootstrap = u.bootstrap_packer()
 
----@diagnostic disable-next-line: unused-local
 local plugin_list = {
-  lsp = {},
-  git = {},
-  colorscheme = {},
+  -- 'Core' plugins. Frequently used as dependencies for other plugins
+  'nvim-lua/plenary.nvim',
+  'nvim-treesitter/nvim-treesitter',
+  'nvim-telescope/telescope.nvim',
+  'kyazdani42/nvim-web-devicons',
+
+  -- Aesthetics & Colorschemes
+  'Yazeed1s/minimal.nvim',
+  'folke/tokyonight.nvim',
+  'projekt0n/github-nvim-theme',
+  'folke/zen-mode.nvim', -- minimal, distraction-free editing mode
+  'hoob3rt/lualine.nvim', -- statusline
+  'akinsho/nvim-bufferline.lua', -- bufferline
+
+  -- LSP
+  'williamboman/mason.nvim',
+  'williamboman/mason-lspconfig.nvim',
+  'neovim/nvim-lspconfig',
+
+  -- Completion engine & snippets
+  'hrsh7th/nvim-cmp',
+  'onsails/lspkind-nvim',
+  'hrsh7th/cmp-nvim-lsp',
+  'saadparwaiz1/cmp_luasnip',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-nvim-lua',
+  'rafamadriz/friendly-snippets',
+  'L3MON4D3/LuaSnip',
+
+  -- Utility
+  'numToStr/Comment.nvim', -- improved commenting motions
+  'romainl/vim-cool', -- automatically set 'noh' after searching
+
+  -- Git
+  'tpope/vim-fugitive',
+  'lewis6991/gitsigns.nvim',
 }
 
-return require('packer').startup(function(use)
-  -- packer manager
-  use('wbthomason/packer.nvim')
+return require('packer').startup({
+  function(use)
+    -- packer manager
+    use('wbthomason/packer.nvim')
 
-  -- 'Core' plugins. Frequently used as dependencies for other plugins
-  use(plugin('nvim-lua/plenary.nvim'))
-  use(plugin('nvim-treesitter/nvim-treesitter'))
-  use(plugin('nvim-telescope/telescope.nvim'))
+    for _, p in ipairs(plugin_list) do
+      use(plugin(p))
+    end
 
-  use(plugin('numToStr/Comment.nvim'))
-  use({
-    'ghillb/cybu.nvim',
-    branch = 'v1.x', -- won't receive breaking changes
-    -- branch = "main", -- timely updates
-    requires = { 'kyazdani42/nvim-web-devicons' }, --optional
-    config = function()
-      local ok, cybu = pcall(require, 'cybu')
-      if not ok then
-        return
-      end
-      cybu.setup()
-      vim.keymap.set('n', 'H', '<Plug>(CybuPrev)')
-      vim.keymap.set('n', 'L', '<Plug>(CybuNext)')
-    end,
-  })
-  use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
+    use({
+      'ghillb/cybu.nvim',
+      branch = 'v1.x', -- won't receive breaking changes
+      -- branch = "main", -- timely updates
+      config = function()
+        local ok, cybu = pcall(require, 'cybu')
+        if not ok then
+          return
+        end
+        cybu.setup()
+        vim.keymap.set('n', 'H', '<Plug>(CybuPrev)')
+        vim.keymap.set('n', 'L', '<Plug>(CybuNext)')
+      end,
+    })
+    use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
 
-  -- colorschemes
-  use(plugin('Yazeed1s/minimal.nvim'))
-  use(plugin('folke/tokyonight.nvim'))
-  use(plugin('projekt0n/github-nvim-theme'))
+    -- git integration
+    use({
+      'lukas-reineke/lsp-format.nvim',
+      tag = 'v1',
+      config = function()
+        require('plugins.lsp-format.lsp-format-config')
+      end,
+    })
+    use({
+      'folke/todo-comments.nvim',
+      config = function()
+        require('todo-comments').setup({})
+      end,
+    })
+    use({
+      'filipdutescu/renamer.nvim',
+      branch = 'master',
+      config = function()
+        require('plugins.renamer.renamer-config')
+      end,
+    })
+    use({
+      'folke/trouble.nvim',
+      requires = 'kyazdani42/nvim-web-devicons',
+      config = function()
+        require('plugins.trouble.trouble-config')
+      end,
+    })
 
-  -- git integration
-  use('tpope/vim-fugitive')
-  use({
-    'lewis6991/gitsigns.nvim',
-    config = function()
-      require('plugins.gitsigns.gitsigns-config')
-    end,
-  })
+    -- terminal integration
+    use(plugin('voldikss/vim-floaterm'))
 
-  -- lsp / auto-formatting
-  use(plugin('williamboman/mason.nvim'))
-  use(plugin('williamboman/mason-lspconfig.nvim'))
-  use(plugin('neovim/nvim-lspconfig'))
-  use({
-    'lukas-reineke/lsp-format.nvim',
-    tag = 'v1',
-    config = function()
-      require('plugins.lsp-format.lsp-format-config')
-    end,
-  })
-  use({
-    'folke/todo-comments.nvim',
-    config = function()
-      require('todo-comments').setup({})
-    end,
-  })
-  use({
-    'filipdutescu/renamer.nvim',
-    branch = 'master',
-    config = function()
-      require('plugins.renamer.renamer-config')
-    end,
-  })
-  use({
-    'folke/trouble.nvim',
-    requires = 'kyazdani42/nvim-web-devicons',
-    config = function()
-      require('plugins.trouble.trouble-config')
-    end,
-  })
+    -- flutter / dart development
+    use({
+      'akinsho/flutter-tools.nvim',
+      config = function()
+        require('plugins.flutter-tools.flutter-tools-config')
+      end,
+    })
+    use(plugin('dart-lang/dart-vim-plugin'))
 
-  -- auto-completion / snippets
-  use(plugin('hrsh7th/nvim-cmp'))
-  use(plugin('onsails/lspkind-nvim'))
-  use(plugin('hrsh7th/cmp-nvim-lsp'))
-  use(plugin('saadparwaiz1/cmp_luasnip'))
-  use(plugin('hrsh7th/cmp-buffer'))
-  use(plugin('hrsh7th/cmp-path'))
-  use(plugin('hrsh7th/cmp-nvim-lua'))
-  use(plugin('rafamadriz/friendly-snippets'))
-  use(plugin('L3MON4D3/LuaSnip'))
+    -- file / buffer navigation
+    use({
+      'kyazdani42/nvim-tree.lua',
+      config = function()
+        require('plugins.nvim-tree.nvim-tree-config')
+      end,
+    })
 
-  -- terminal integration
-  use(plugin('voldikss/vim-floaterm'))
+    use(plugin('folke/which-key.nvim'))
 
-  -- flutter / dart development
-  use({
-    'akinsho/flutter-tools.nvim',
-    config = function()
-      require('plugins.flutter-tools.flutter-tools-config')
-    end,
-  })
-  use(plugin('dart-lang/dart-vim-plugin'))
+    use({
+      'iamcco/markdown-preview.nvim',
+      run = 'cd app && yarn install',
+    })
 
-  -- rust development
-  use({
-    'simrat39/rust-tools.nvim',
-    requires = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' },
-    config = function()
-      require('plugins.rust-tools.rust-tools-config')
-    end,
-  })
+    if did_bootstrap then
+      require('packer').sync()
+    end
+  end,
 
-  -- status/buffer line
-  use({
-    'hoob3rt/lualine.nvim',
-    requires = {
-      'kyazdani42/nvim-web-devicons',
+  config = {
+    display = {
+      open_fn = require('packer.util').float,
     },
-    config = function()
-      require('plugins.lualine.lualine-config')
-    end,
-  })
-  use({
-    'akinsho/nvim-bufferline.lua',
-    requires = {
-      'kyazdani42/nvim-web-devicons',
-    },
-    config = function()
-      require('plugins.bufferline.bufferline-config')
-    end,
-  })
-
-  -- file / buffer navigation
-  use({
-    'kyazdani42/nvim-tree.lua',
-    requires = {
-      'kyazdani42/nvim-web-devicons',
-    },
-    config = function()
-      require('plugins.nvim-tree.nvim-tree-config')
-    end,
-  })
-
-  use(plugin('folke/which-key.nvim'))
-
-  use({
-    'iamcco/markdown-preview.nvim',
-    run = 'cd app && yarn install',
-  })
-  use(plugin('folke/zen-mode.nvim'))
-
-  -- automatically set 'noh' after searching
-  use(plugin('romainl/vim-cool'))
-
-  if did_bootstrap then
-    require('packer').sync()
-  end
-end)
+  },
+})
