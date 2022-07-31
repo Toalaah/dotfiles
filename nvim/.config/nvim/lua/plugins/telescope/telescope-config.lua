@@ -1,4 +1,3 @@
--- TODO: add extension for file-search (will become deprecated)
 require('telescope').setup({
   extensions = {
     fzf = {
@@ -7,14 +6,9 @@ require('telescope').setup({
       override_file_sorter = true,
       case_mode = 'smart_case',
     },
-    ['ui-select'] = {
-      require('telescope.themes').get_dropdown({}),
-    },
   },
   pickers = {
     find_files = {
-      theme = 'dropdown',
-      prompt_prefix = '🔍: ',
       find_command = {
         'rg',
         '--color=never',
@@ -27,20 +21,25 @@ require('telescope').setup({
     },
   },
   defaults = {
-    prompt_prefix = '> ',
+    prompt_prefix = '🔍: ',
     selection_caret = '> ',
     entry_prefix = '  ',
     initial_mode = 'insert',
     selection_strategy = 'reset',
-    sorting_strategy = 'descending',
-    layout_strategy = 'vertical',
+    sorting_strategy = 'ascending',
+    layout_strategy = 'horizontal',
     layout_config = {
       horizontal = {
-        mirror = false,
+        prompt_position = 'top',
+        preview_width = 0.55,
+        results_width = 0.8,
       },
       vertical = {
         mirror = false,
       },
+      width = 0.87,
+      height = 0.80,
+      preview_cutoff = 120,
     },
     file_sorter = require('telescope.sorters').get_fuzzy_file,
     generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
