@@ -1,6 +1,4 @@
 local cmd = vim.api.nvim_command
-local silent = require('util').call_silent
-local colorscheme = 'minimal'
 
 cmd('highlight WinSeperator guibg=None')     -- sleeker separator between splits
 cmd('set bg=dark')                           -- set background color
@@ -33,7 +31,6 @@ cmd('set smartcase')                         -- use case aware search only if se
 cmd('set tabstop=2')                         -- sets tab length to 2 instead of the default 8
 cmd('set termguicolors')                     -- enable 24 bit rgb
 cmd('set timeoutlen=250')                    -- make timeout length faster (default: 1000ms)
-silent(cmd, 'colorscheme ' .. colorscheme)   -- set colorscheme
 vim.opt.list = true                          -- enable list characters
 vim.opt.listchars = {
   -- eol = '⤶',
