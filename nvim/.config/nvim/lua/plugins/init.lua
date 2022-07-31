@@ -18,6 +18,7 @@ local plugin_list = {
   'folke/zen-mode.nvim', -- minimal, distraction-free editing mode
   'hoob3rt/lualine.nvim', -- statusline
   'akinsho/nvim-bufferline.lua', -- bufferline
+  'brenoprata10/nvim-highlight-colors', -- preview colors in buffer via virtual text
 
   -- LSP
   'williamboman/mason.nvim',
