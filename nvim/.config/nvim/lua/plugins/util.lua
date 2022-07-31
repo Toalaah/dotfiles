@@ -29,30 +29,9 @@ M.config_require_path = function(plugin_name)
   return string.format('plugins.%s.%s-config', c, c)
 end
 
----Checks whether a plugin is installed (assumes that packer is being used).
----@param plugin_name string
----@return boolean
-M.is_installed = function(plugin_name)
-  -- strip everything up to first occurrence of '/' (including '/')
-  ---Example:
-  ---  someUser/plugin.nvim -> plugin.nvim
-  local config_name = string.match(plugin_name, '/(.+)')
-  local path = string.format('%s/site/pack/packer/start/%s', vim.fn.stdpath('data'), config_name)
-  return M.exists(path)
-end
-
----Checks whether a plugin is installed (assumes that packer is being used).
----@param plugin_name string
----@return boolean
-M.config_exists = function(plugin_name)
-  local path = string.format('%s/lua/plugins/%s', vim.fn.stdpath('config'), M.normalize(plugin_name))
-  return M.exists(path)
-end
-
----Returns a default plugin specification which can be consumed by
----Packer's `use()` function. The configuration file for the specified
----plugin is loaded if and only if said config file is is found and the
----plugin is already installed.
+---Returns a default plugin specification which can be consumed by Packer's
+---`use()` function. The configuration file for the specified plugin is
+---loaded using `pcall()` in order to catch errors stemming from missing config files.
 ---@param plugin string|table Either plugin name as GitHub repo slug or table containing plugin name as first entry followed by arbitrary packer-compatible directives.
 ---@return table
 M.plugin = function(plugin)
@@ -63,12 +42,8 @@ M.plugin = function(plugin)
     plug_opts = { plugin }
   end
   plugin_name = plug_opts[1]
-  -- attempt to require plugin if config file exists and plugin is installed
-  if M.config_exists(plugin_name) and M.is_installed(plugin_name) then
-    local req_path = M.config_require_path(plugin_name)
-    require(req_path)
-  end
-
+  -- attempt to require plugin config
+  pcall(require, M.config_require_path(plugin_name))
   return plug_opts
 end
 
