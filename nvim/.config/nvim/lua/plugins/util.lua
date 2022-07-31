@@ -53,11 +53,16 @@ end
 ---Packer's `use()` function. The configuration file for the specified
 ---plugin is loaded if and only if said config file is is found and the
 ---plugin is already installed.
----@param plugin_name string
+---@param plugin string|table Either plugin name as GitHub repo slug or table containing plugin name as first entry followed by arbitrary packer-compatible directives.
 ---@return table
-M.plugin = function(plugin_name)
-  local plug_opts = { plugin_name }
-
+M.plugin = function(plugin)
+  local plug_opts, plugin_name
+  if type(plugin) == 'table' then
+    plug_opts = plugin
+  else
+    plug_opts = { plugin }
+  end
+  plugin_name = plug_opts[1]
   -- attempt to require plugin if config file exists and plugin is installed
   if M.config_exists(plugin_name) and M.is_installed(plugin_name) then
     local req_path = M.config_require_path(plugin_name)
