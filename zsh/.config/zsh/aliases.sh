@@ -2,6 +2,7 @@ alias v=${EDITOR:-nvim}
 alias vim=${EDITOR:-nvim}
 alias ..="cd .."
 alias ...="cd ../../"
+alias ....="cd ../../../"
 alias pw="pass -c"
 alias cp="cp -iv"
 alias mv="mv -iv"
@@ -11,7 +12,7 @@ else
   alias grep="grep --color=auto"
 fi
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
-alias tmp='$EDITOR $(mktemp /tmp/scratch.XXX)'
+alias tmp='$EDITOR $(mktemp /tmp/scratch.XXX.txt)'
 
 if is_installed "exa"; then
   alias ls="exa -ah  --color=auto --icons --group-directories-first"
@@ -29,6 +30,7 @@ alias ca="$EDITOR $HOME/.config/alacritty/alacritty.yml -c 'lcd %:p:h'"
 alias cz="$EDITOR $ZDOTDIR/.zshrc -c 'lcd %:p:h'"
 alias cv="$EDITOR $HOME/.config/nvim/init.lua -c 'lcd %:p:h'"
 alias cdwm="$EDITOR $HOME/.config/dwm/config.h -c 'lcd %:p:h'"
+alias ck="$EDITOR $HOME/.config/kitty/kitty.conf -c 'lcd %:p:h'"
 alias cst="$EDITOR $HOME/.config/st/config.h -c 'lcd %:p:h'"
 alias cdm="$EDITOR $HOME/.config/dmenu/config.h -c 'lcd %:p:h'"
 alias cblk="$EDITOR $HOME/.config/dwmblocks/config.h -c 'lcd %:p:h'"
