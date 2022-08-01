@@ -25,7 +25,7 @@ cmd('set relativenumber')                    -- set relative line numbering
 cmd('set scrolloff=4')                       -- always pad the top / bottom of the buffer by 8 lines when scrolling
 cmd('set shiftwidth=2')                      -- enables auto indenting to the same degree of tab lengths
 cmd('set showbreak=↪\\ ')                    -- character to show before the continuation of a wrapped line
-cmd('set showtabline=2')                     -- always show tab bar
+cmd('set showtabline=0')                     -- never show tab bar
 cmd('set signcolumn=yes')                    -- always show signcolumn
 cmd('set smartcase')                         -- use case aware search only if search is capitalized
 cmd('set tabstop=2')                         -- sets tab length to 2 instead of the default 8
