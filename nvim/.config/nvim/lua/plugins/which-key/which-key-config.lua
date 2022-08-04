@@ -146,6 +146,7 @@ wk.register({
 -- groupless mappings (normal mode)
 wk.register({
   -- miscellaneous
+  ['<leader>R'] = { '<Cmd>lua require"util".reload_module()<CR>', 'Reload lua module' },
   ['<leader><leader>'] = { '<C-^>', 'Switch to previous buffer' },
   ['K'] = { '<Cmd>lua vim.lsp.buf.hover()<CR>', 'Hover' },
   ['<leader>k'] = { '<Cmd>lua require"telescope".extensions.flutter.commands()<CR>', 'Flutter tools' },

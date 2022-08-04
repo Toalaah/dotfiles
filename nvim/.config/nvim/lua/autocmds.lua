@@ -19,7 +19,7 @@ end)
 -- Auto-sync / compile packer on changes to plugin file
 au_cmd('BufWritePost', '*/plugins/init.lua', '__packer', function(_)
   require('lua.util').reload_module()
-  require('packer').sync()
+  vim.cmd([[PackerCompile]])
 end)
 
 -- Update xresources on write
