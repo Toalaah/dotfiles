@@ -29,7 +29,7 @@ M.config_require_path = function(plugin_name)
   return string.format('plugins.%s.%s-config', c, c)
 end
 
----Returns a default plugin specification which can be consumed by Packer's
+---Returns a default plugin specification which can be consumed by Packers
 ---`use()` function. The configuration file for the specified plugin is
 ---loaded using `pcall()` in order to catch errors stemming from missing config files.
 ---@param plugin string|table Either plugin name as GitHub repo slug or table containing plugin name as first entry followed by arbitrary packer-compatible directives.
@@ -49,9 +49,8 @@ end
 
 M.bootstrap_packer = function()
   local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-  local did_bootstrap = nil
   if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    did_bootstrap = vim.fn.system({
+    M.did_bootstrap = vim.fn.system({
       'git',
       'clone',
       '--depth',
@@ -59,9 +58,8 @@ M.bootstrap_packer = function()
       'https://github.com/wbthomason/packer.nvim',
       install_path,
     })
-    vim.cmd('packadd packer.nvim')
+    vim.cmd([[packadd packer.nvim]])
   end
-  return did_bootstrap
 end
 
 return M

@@ -2,10 +2,11 @@ local u = require('plugins.util')
 local plugin = u.plugin
 
 -- bootstrap packer installation if required
-local did_bootstrap = u.bootstrap_packer()
+u.bootstrap_packer()
 
 local plugin_list = {
   -- 'Core' plugins. Frequently used as dependencies for other plugins
+  'wbthomason/packer.nvim',
   'nvim-lua/plenary.nvim',
   'nvim-treesitter/nvim-treesitter',
   'nvim-telescope/telescope.nvim',
@@ -63,14 +64,11 @@ local plugin_list = {
 
 return require('packer').startup({
   function(use)
-    -- packer manager
-    use('wbthomason/packer.nvim')
-
     for _, p in ipairs(plugin_list) do
       use(plugin(p))
     end
 
-    if did_bootstrap then
+    if u.did_bootstrap then
       require('packer').sync()
     end
   end,
