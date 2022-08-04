@@ -10,6 +10,7 @@ local plugin_list = {
   'nvim-treesitter/nvim-treesitter',
   'nvim-telescope/telescope.nvim',
   'kyazdani42/nvim-web-devicons',
+  'lewis6991/impatient.nvim',
 
   -- Aesthetics & Colorschemes
   'folke/tokyonight.nvim', -- colorscheme of choice
@@ -73,10 +74,4 @@ return require('packer').startup({
       require('packer').sync()
     end
   end,
-
-  config = {
-    display = {
-      open_fn = require('packer.util').float,
-    },
-  },
 })
