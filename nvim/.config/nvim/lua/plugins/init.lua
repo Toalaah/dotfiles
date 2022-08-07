@@ -14,21 +14,20 @@ local plugin_list = {
   'lewis6991/impatient.nvim',
 
   -- Aesthetics & Colorschemes
-  'folke/tokyonight.nvim', -- colorscheme of choice
-  'folke/zen-mode.nvim', -- minimal, distraction-free editing mode
-  'hoob3rt/lualine.nvim', -- statusline
-  'lewis6991/spellsitter.nvim', -- smart spellchecker
-  'brenoprata10/nvim-highlight-colors', -- preview colors in buffer via virtual text
-  'kyazdani42/nvim-tree.lua', -- file tree
-  'rcarriga/nvim-notify', -- pretty wrapper for vim.notify()
+  'folke/tokyonight.nvim',
+  'folke/zen-mode.nvim',
+  'hoob3rt/lualine.nvim',
+  'lewis6991/spellsitter.nvim',
+  'norcalli/nvim-colorizer.lua',
+  'rcarriga/nvim-notify',
+  'j-hui/fidget.nvim',
 
   -- LSP
   'williamboman/mason.nvim',
   'williamboman/mason-lspconfig.nvim',
   'neovim/nvim-lspconfig',
   'folke/trouble.nvim',
-  { 'lukas-reineke/lsp-format.nvim', tag = 'v1' },
-  'filipdutescu/renamer.nvim',
+  'glepnir/lspsaga.nvim',
   'jose-elias-alvarez/null-ls.nvim',
 
   -- Additional language plugins
@@ -48,14 +47,17 @@ local plugin_list = {
   'L3MON4D3/LuaSnip',
 
   -- Utility
-  'numToStr/Comment.nvim', -- improved commenting motions
-  'romainl/vim-cool', -- automatically set 'noh' after searching
-  { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }, -- Telescope extension
+  'numToStr/Comment.nvim',
+  'kyazdani42/nvim-tree.lua',
+  'romainl/vim-cool',
+  { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
   { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install' },
-  'folke/which-key.nvim', -- keymenu
-  'folke/todo-comments.nvim', -- manage todo comments
-  'ghillb/cybu.nvim', -- buffer navigation
-  'voldikss/vim-floaterm', -- terminal integration
+  'folke/which-key.nvim',
+  'folke/todo-comments.nvim',
+  'voldikss/vim-floaterm',
+
+  -- File & buffer navigation
+  'ghillb/cybu.nvim',
 
   -- Git
   'tpope/vim-fugitive',
