@@ -43,6 +43,7 @@ local options = {
 local variables = {
   -- override default latex flavor (default: 'tex')
   tex_flavor = 'latex',
+  mapleader = ' ',
 }
 
 for option, value in pairs(options) do

@@ -17,7 +17,6 @@ require('which-key').setup({
   },
 })
 
-vim.g.mapleader = ' '
 local wk = require('which-key')
 local opts = { mode = 'n', noremap = true, silent = true }
 
