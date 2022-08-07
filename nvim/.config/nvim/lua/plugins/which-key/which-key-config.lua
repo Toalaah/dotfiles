@@ -51,18 +51,21 @@ wk.register({
 
   ['<leader>l'] = {
     name = '+LSP',
-    a = { '<Cmd>lua vim.lsp.buf.code_action()<CR>', 'Code action' },
+    a = { '<Cmd>Lspsaga code_action<CR>', 'Code action' },
     d = { '<Cmd>lua vim.lsp.buf.definition()<CR>', 'Goto definition' },
     D = { '<Cmd>lua vim.lsp.buf.declaration()<CR>', 'Goto declaration' },
     i = { '<Cmd>TroubleToggle lsp_implementations<CR>', 'Goto implementation' },
     I = { '<Cmd>LspInfo<CR>', 'LSP info' },
-    S = { '<Cmd>LspInstallInfo<CR>', 'Installed LSP servers' },
     r = { '<Cmd>TroubleToggle lsp_references<CR>', 'Goto references' },
     t = { '<Cmd>TodoQuickFix<CR>', 'View all TODOs' },
     T = { '<Cmd>TroubleToggle lsp_type_definitions<CR>', 'Goto type definition' },
-    R = { '<Cmd>lua require"renamer".rename()<CR>', 'Rename variable' },
-    x = { '<Cmd>lua vim.diagnostic.open_float()<CR>', 'Show diagnostics' },
-    X = { '<Cmd>TroubleToggle document_diagnostics<CR>', 'Show diagnostics' },
+    R = { '<Cmd>Lspsaga rename<CR>', 'Rename variable' },
+    ['x'] = {
+      name = '+Diagnostics',
+      x = { '<Cmd>lua require("lspsaga.diagnostic").show_line_diagnostics()<CR>', 'Show diagnostics' },
+      j = { '<Cmd>lua require("lspsaga.diagnostic").goto_next()<CR>', 'View next diagnostic' },
+      k = { '<Cmd>lua require("lspsaga.diagnostic").goto_prev()<CR>', 'View prev diagnostic' },
+    },
   },
 }, opts)
 
@@ -147,7 +150,7 @@ wk.register({
   -- miscellaneous
   ['<leader>R'] = { '<Cmd>lua require"util".reload_module()<CR>', 'Reload lua module' },
   ['<leader><leader>'] = { '<C-^>', 'Switch to previous buffer' },
-  ['K'] = { '<Cmd>lua vim.lsp.buf.hover()<CR>', 'Hover' },
+  ['K'] = { '<Cmd>Lspsaga hover_doc<CR>', 'Hover' },
   ['<leader>k'] = { '<Cmd>lua require"telescope".extensions.flutter.commands()<CR>', 'Flutter tools' },
   ['Q'] = { '<Cmd>q<CR>', 'Exit' },
   ['Y'] = { 'y$', 'Yank to end of line' },
