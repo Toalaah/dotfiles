@@ -33,9 +33,13 @@ export LESSHISTFILE=-
 # ARROW="%%"
 # export ARROW=$'\n'"﬌"
 
-export PAGER=$(
-  is_installed "bat" && { echo "bat --style=plain"; true } || echo "less"
-)
+if [[ is_installed("bat") ]]; then
+  export PAGER="bat"
+  export BAT_THEME="Visual Studio Dark+"
+  export BAT_STYLE="numbers,header,grid"
+else
+  export PAGER="less"
+fi
 
 TERM_MAC=kitty
 TERM_LINUX=kitty
