@@ -30,6 +30,7 @@ PLUGINS=(
 "https://github.com/zsh-users/zsh-autosuggestions"
 "https://github.com/zsh-users/zsh-syntax-highlighting"
 "https://github.com/romkatv/gitstatus"
+"https://github.com/Aloxaf/fzf-tab"
 )
 
 
