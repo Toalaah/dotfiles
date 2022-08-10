@@ -26,9 +26,7 @@ local plugin_list = {
   'williamboman/mason.nvim',
   'williamboman/mason-lspconfig.nvim',
   'neovim/nvim-lspconfig',
-  'folke/trouble.nvim',
   'glepnir/lspsaga.nvim',
-  'jose-elias-alvarez/null-ls.nvim',
 
   -- Additional language plugins
   -- (Dart / Flutter)
@@ -53,7 +51,6 @@ local plugin_list = {
   { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
   { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install' },
   'folke/which-key.nvim',
-  'folke/todo-comments.nvim',
   'voldikss/vim-floaterm',
 
   -- File & buffer navigation
