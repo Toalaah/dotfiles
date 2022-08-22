@@ -4,5 +4,5 @@
 # Change this variable to the (absolute) path of your password-store
 PASS_DIR="$HOME/.password-store/"
 
-cd "$PASS_DIR" && find . -name "*.gpg" | sed -e 's|\./||' -e 's|\.gpg$||' | dmenu -i -l 20 | xargs pass -c
+cd "$PASS_DIR" && find . -name "*.gpg" | sed -e 's|\./||' -e 's|\.gpg$||' | dmenu -i -c -l 20 | xargs pass -c
 

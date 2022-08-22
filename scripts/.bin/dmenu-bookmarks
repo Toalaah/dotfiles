@@ -13,7 +13,7 @@ BROWSER="chromium"
 BOOKMARKS=$(jq '.. | objects | select(.type == "url") | "\(.name) : \(.url)"' --raw-output "$BM_FILE")
 
 # get selection + check if selection was cancelled
-TARGET_URL=$(printf "%s\nQuit" "$BOOKMARKS" | dmenu -i -l 20 -p "Open bookmark:")
+TARGET_URL=$(printf "%s\nQuit" "$BOOKMARKS" | dmenu -i -c -l 20 -p "Open bookmark:")
 [ -z "$TARGET_URL" ] || [ "$TARGET_URL" = "Quit" ] && exit 0
 
 # open selected bookmark's url
