@@ -150,6 +150,8 @@ wk.register({
   -- miscellaneous
   ['<leader>R'] = { '<Cmd>lua require"util".reload_module()<CR>', 'Reload lua module' },
   ['<leader><leader>'] = { '<C-^>', 'Switch to previous buffer' },
+  ['<C-d>'] = { '<C-d>zz', 'Jump down' },
+  ['<C-u>'] = { '<C-u>zz', 'Jump up' },
   ['K'] = { '<Cmd>Lspsaga hover_doc<CR>', 'Hover' },
   ['<leader>k'] = { '<Cmd>lua require"telescope".extensions.flutter.commands()<CR>', 'Flutter tools' },
   ['Q'] = { '<Cmd>q<CR>', 'Exit' },
