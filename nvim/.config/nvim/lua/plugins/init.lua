@@ -47,6 +47,7 @@ local plugin_list = {
 
   -- Utility
   'numToStr/Comment.nvim',
+  'JoosepAlviste/nvim-ts-context-commentstring',
   'kyazdani42/nvim-tree.lua',
   'romainl/vim-cool',
   { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
