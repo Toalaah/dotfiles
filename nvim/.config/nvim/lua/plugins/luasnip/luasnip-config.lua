@@ -49,7 +49,7 @@ end
 require('luasnip/loaders/from_vscode').lazy_load()
 
 -- load custom snippets not already included in 'friendly-snippets' plugin
-local custom_snippets_path = vim.fn.stdpath('config') .. '/lua/plugin-config/luasnip/snippets'
+local custom_snippets_path = vim.fn.stdpath('config') .. '/lua/plugins/luasnip/snippets'
 require('luasnip/loaders/from_vscode').lazy_load({
   paths = custom_snippets_path,
 })
