@@ -1,7 +1,15 @@
-vim.g.tokyonight_style = 'night'
-vim.g.tokyonight_italic_functions = true
-vim.g.tokyonight_sidebars = { 'qf', 'vista_kind', 'terminal', 'packer' }
-local colorscheme = 'tokyonight'
+require('nvim-tundra').setup({
+  transparent_background = false,
+  syntax = {
+    comments = { bold = false, italic = true },
+  },
+})
+
+vim.opt.background = 'dark'
+local colorscheme = 'tundra'
+
+-- fix dark blametext on dark background
+vim.defer_fn(function() vim.cmd [[ highlight GitSignsCurrentLineBlame guifg='#374151' ]] end, 0)
 
 local ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
 if not ok then

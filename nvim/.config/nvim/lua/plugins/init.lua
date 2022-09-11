@@ -15,6 +15,7 @@ local plugin_list = {
 
   -- Aesthetics & Colorschemes
   'folke/tokyonight.nvim',
+  'sam4llis/nvim-tundra',
   'folke/zen-mode.nvim',
   'hoob3rt/lualine.nvim',
   'akinsho/bufferline.nvim',
