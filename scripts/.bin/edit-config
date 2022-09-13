@@ -3,7 +3,7 @@
 # requirements: dmenu
 
 # set this to the terminal you use (st, alacritty, etc.)
-TERMINAL="st"
+TERMINAL="${TERMINAL:-st}"
 
 # add all configuration folders you want to have access to here
 declare -A CONFIG_FILES=(
