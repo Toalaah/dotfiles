@@ -25,9 +25,11 @@ end)
 -- Update xresources on write
 au_cmd(
   'BufWritePost',
-  '~/.xresources',
+  '.xresources',
   '__xresources',
-  '!xrdb -DPYWAL_="<$HOME/.cache/wal/colors.Xresources>" -merge ~/.xresources'
+  function(_)
+    vim.cmd('!xrdb -DPYWAL_="<$HOME/.cache/wal/colors.Xresources>" -merge ~/.xresources')
+  end
 )
 
 -- Automatically compile suckless programs on write
@@ -35,26 +37,28 @@ au_cmd(
 local group = '__suckless'
 vim.api.nvim_create_augroup(group, { clear = true })
 for _, v in ipairs({
-  '~/.config/dwm/config.h',
-  '~/.config/st/config.h',
-  '~/.config/dmenu/config.h',
-  '~/.config/slock/config.h',
+  '*/dwm/config.h',
+  '*/st/config.h',
+  '*/dmenu/config.h',
+  '*/slock/config.h',
 }) do
   vim.api.nvim_create_autocmd('BufWritePost', {
     pattern = v,
     group = vim.api.nvim_create_augroup(group, {
       clear = false,
     }),
-    callback = string.format('!cd %s; sudo make install', v),
+    callback = function() vim.cmd(string.format('!sudo make clean install', v)) end,
   })
 end
 
 -- Dwmblocks requires additional process termination on top of simply running 'make'
 au_cmd(
   'BufWritePost',
-  '~/.config/dwmblocks/config.h',
+  '*/dwmblocks/config.h',
   '__dwmblocks',
-  '!cd ~/.config/dwmblocks/; sudo make install; kill $(pidof -s dwmblocks) >/dev/null; dwmblocks &'
+  function(_)
+    vim.cmd('!cd ~/.config/dwmblocks/; sudo make install; kill $(pidof -s dwmblocks) >/dev/null; dwmblocks &')
+  end
 )
 
 -- disables auto-comment continuations for .py files (some filetypes have their format-options overwritten by ftplugins)
