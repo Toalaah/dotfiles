@@ -37,10 +37,10 @@ au_cmd(
 local group = '__suckless'
 vim.api.nvim_create_augroup(group, { clear = true })
 for _, v in ipairs({
-  '*/dwm/config.h',
-  '*/st/config.h',
-  '*/dmenu/config.h',
-  '*/slock/config.h',
+  '*/dwm/**/config.h',
+  '*/st/**/config.h',
+  '*/dmenu/**/config.h',
+  '*/slock/**/config.h',
 }) do
   vim.api.nvim_create_autocmd('BufWritePost', {
     pattern = v,
