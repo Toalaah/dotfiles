@@ -51,4 +51,8 @@ i3lock -n -c 00000000 -t -e --pass-media-keys --pass-power-keys --pass-volume-ke
   --pointer=default
 }
 
-lock_screen & sleep 5 && xset dpms force off
+trap revert HUP INT TERM
+xset dpms 10 10 10
+lock_screen
+# reset dpms
+xset dpms 600 600 600
