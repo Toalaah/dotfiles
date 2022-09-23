@@ -1,5 +1,6 @@
-alias v=${EDITOR:-nvim}
-alias vim=${EDITOR:-nvim}
+# shellcheck disable=2139
+alias v="${EDITOR:-nvim}"
+alias vim="${EDITOR:-nvim}"
 alias ..="cd .."
 alias ...="cd ../../"
 alias ....="cd ../../../"
@@ -7,11 +8,11 @@ alias pw="pass -c"
 alias cp="cp -iv"
 alias mv="mv -iv"
 if is_installed "rg"; then
-  alias grep="rg"
+  alias grep="rg -i --color=auto"
 else
-  alias grep="grep --color=auto"
+  alias grep="grep -i --color=auto"
 fi
-alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
+alias wget='wget --hsts-file=$XDG_DATA_HOME/wget-hsts'
 alias tmp='$EDITOR $(mktemp /tmp/scratch.XXX.txt)'
 
 if is_installed "exa"; then
@@ -26,14 +27,14 @@ fi
 
 is_installed "bat" && alias cat="bat"
 
-alias ca="$EDITOR $HOME/.config/alacritty/alacritty.yml -c 'lcd %:p:h'"
-alias cz="$EDITOR $ZDOTDIR/.zshrc -c 'lcd %:p:h'"
-alias cv="$EDITOR $HOME/.config/nvim/init.lua -c 'lcd %:p:h'"
-alias cdwm="$EDITOR $HOME/.config/dwm/config.h -c 'lcd %:p:h'"
-alias ck="$EDITOR $HOME/.config/kitty/kitty.conf -c 'lcd %:p:h'"
-alias cst="$EDITOR $HOME/.config/st/config.h -c 'lcd %:p:h'"
-alias cdm="$EDITOR $HOME/.config/dmenu/config.h -c 'lcd %:p:h'"
-alias cblk="$EDITOR $HOME/.config/dwmblocks/config.h -c 'lcd %:p:h'"
+alias ca='$EDITOR $HOME/.config/alacritty/alacritty.yml -c "lcd %:p:h"'
+alias cz='$EDITOR $ZDOTDIR/.zshrc -c "lcd %:p:h"'
+alias cv='$EDITOR $HOME/.config/nvim/init.lua -c "lcd %:p:h"'
+alias cdwm='$EDITOR $HOME/.config/dwm/config.h -c "lcd %:p:h"'
+alias ck='$EDITOR $HOME/.config/kitty/kitty.conf -c "lcd %:p:h"'
+alias cst='$EDITOR $HOME/.config/st/config.h -c "lcd %:p:h"'
+alias cdm='$EDITOR $HOME/.config/dmenu/config.h -c "lcd %:p:h"'
+alias cblk='$EDITOR $HOME/.config/dwmblocks/config.h -c "lcd %:p:h"'
 
 # sync to folders, usually I use this for syncing my media to an external
 # drive
@@ -56,8 +57,8 @@ function gprune() {
 
   [[ "" != "$merged_branches_origin$merged_branches_origin" ]] && echo "Nothing to clean" && return 0
 
-  [[ ! -z "$merged_branches_origin" ]] && echo "$merged_branches_origin" | xargs git branch -d
-  [[ ! -z "$merged_branches_local" ]] && echo "$merged_branches_local" | xargs git branch -D
+  [[ -n "$merged_branches_origin" ]] && echo "$merged_branches_origin" | xargs git branch -d
+  [[ -n "$merged_branches_local" ]] && echo "$merged_branches_local" | xargs git branch -D
 
   return 0
 }
