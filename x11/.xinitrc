@@ -15,7 +15,8 @@ export CHROME_EXECUTABLE=$(which chromium)
 xrdb -DPYWAL_="<${XDG_CACHE_HOME:-$HOME/.cache}/wal/colors.Xresources>" -merge "$HOME"/.xresources
 
 picom --experimental-backends -b & # start compositor
-xset s off                         # disable and change key-repeat delays
+xset +dpms dpms 600 600 600
+xss-lock lock &
 xset r rate 200 30                 # (repeat delay for keys, 200ms to wait before repeat, 30ms rate when holding down key)
 setxkbmap us altgr-intl            # easier typing of umlauts
 [[ -f $HOME/.Xmodmap ]] && xmodmap $HOME/.Xmodmap
