@@ -23,14 +23,9 @@ au_cmd('BufWritePost', '*/plugins/init.lua', '__packer', function(_)
 end)
 
 -- Update xresources on write
-au_cmd(
-  'BufWritePost',
-  '.xresources',
-  '__xresources',
-  function(_)
-    vim.cmd('!xrdb -DPYWAL_="<$HOME/.cache/wal/colors.Xresources>" -merge ~/.xresources')
-  end
-)
+au_cmd('BufWritePost', '.xresources', '__xresources', function(_)
+  vim.cmd('!xrdb -DPYWAL_="<$HOME/.cache/wal/colors.Xresources>" -merge ~/.xresources')
+end)
 
 -- Automatically compile suckless programs on write
 -- Need to clear the autogroup first to avoid stacking commands
@@ -47,19 +42,16 @@ for _, v in ipairs({
     group = vim.api.nvim_create_augroup(group, {
       clear = false,
     }),
-    callback = function() vim.cmd(string.format('!sudo make clean install', v)) end,
+    callback = function()
+      vim.cmd(string.format('!sudo make clean install', v))
+    end,
   })
 end
 
 -- Dwmblocks requires additional process termination on top of simply running 'make'
-au_cmd(
-  'BufWritePost',
-  '*/dwmblocks/config.h',
-  '__dwmblocks',
-  function(_)
-    vim.cmd('!cd ~/.config/dwmblocks/; sudo make install; kill $(pidof -s dwmblocks) >/dev/null; dwmblocks &')
-  end
-)
+au_cmd('BufWritePost', '*/dwmblocks/config.h', '__dwmblocks', function(_)
+  vim.cmd('!cd ~/.config/dwmblocks/; sudo make install; kill $(pidof -s dwmblocks) >/dev/null; dwmblocks &')
+end)
 
 -- disables auto-comment continuations for .py files (some filetypes have their format-options overwritten by ftplugins)
 vim.cmd([[autocmd BufRead,BufNew,BufEnter *.py* set formatoptions-=cro shiftwidth=4 tabstop=4 expandtab]])

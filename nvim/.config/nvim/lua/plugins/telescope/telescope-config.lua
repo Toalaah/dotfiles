@@ -9,7 +9,7 @@ require('telescope').setup({
   },
   pickers = {
     colorscheme = {
-      enable_preview = true
+      enable_preview = true,
     },
     find_files = {
       find_command = {
