@@ -1,8 +1,11 @@
 local opts = {
   rename_in_select = true,
   code_action_lightbulb = {
-    enable = true,
+    enable = false,
     virtual_text = false,
+  },
+  symbol_in_winbar = {
+    enable = false,
   },
 }
 
