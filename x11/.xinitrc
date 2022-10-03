@@ -10,17 +10,22 @@ export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 export _JAVA_AWT_WM_NONREPARENTING=1
 export CHROME_EXECUTABLE=$(which chromium)
 
-# set background, resolution,xresources
+# set background, resolution, xresources
 ~/.fehbg
 xrdb -DPYWAL_="<${XDG_CACHE_HOME:-$HOME/.cache}/wal/colors.Xresources>" -merge "$HOME"/.xresources
+if [[ -d "$HOME/.xrdb.d" ]]; then
+  for file in "$HOME"/.xrdb.d/*; do
+    xrdb -merge "$file"
+  done
+fi
 
 picom --experimental-backends -b & # start compositor
 xset +dpms dpms 600 600 600
 xss-lock lock &
 xset r rate 200 30                 # (repeat delay for keys, 200ms to wait before repeat, 30ms rate when holding down key)
 setxkbmap us altgr-intl            # easier typing of umlauts
-[[ -f $HOME/.Xmodmap ]] && xmodmap $HOME/.Xmodmap
+[[ -f "$HOME/.Xmodmap" ]] && xmodmap "$HOME/.Xmodmap"
 unclutter -idle 2 &                # hide cursor when inactive for 2 seconds
 dunst &                            # notification daemon
 exec dwm                           # start window manager
-
+# vim:ft=sh
