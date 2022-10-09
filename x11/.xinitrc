@@ -21,6 +21,7 @@ fi
 
 picom --experimental-backends -b & # start compositor
 xset +dpms dpms 600 600 600
+lxpolkit &                         # authentication agent
 xss-lock lock &
 xset r rate 200 30                 # (repeat delay for keys, 200ms to wait before repeat, 30ms rate when holding down key)
 setxkbmap us altgr-intl            # easier typing of umlauts
