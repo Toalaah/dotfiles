@@ -20,9 +20,12 @@ if [[ -d "$HOME/.xrdb.d" ]]; then
 fi
 
 picom --experimental-backends -b & # start compositor
-xset +dpms dpms 600 600 600
 lxpolkit &                         # authentication agent
-xss-lock lock &
+# setup lockscreen if $LOCK_SCREEN_DISABLE is *not* set
+if [[ -z "$LOCK_SCREEN_DISABLE" ]]; then
+  xss-lock lock &
+  xset +dpms dpms 600 600 600
+fi
 xset r rate 200 30                 # (repeat delay for keys, 200ms to wait before repeat, 30ms rate when holding down key)
 setxkbmap us altgr-intl            # easier typing of umlauts
 [[ -f "$HOME/.Xmodmap" ]] && xmodmap "$HOME/.Xmodmap"
