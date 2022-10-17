@@ -9,6 +9,7 @@ export PATH="$PATH:$HOME/.local/flutter/bin"
 export PATH="$PATH:$HOME/.local/cargo/bin"
 export PATH="$PATH:$HOME/.yarn/bin"
 export PATH="$PATH:/usr/local/opt/llvm/bin/"
+export PATH="$PATH:$HOME"/.local/share/pnpm
 
 export DOCKER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}"/docker
 export ELINKS_CONFDIR="${XDG_CONFIG_HOME:-$HOME/.config/}"/elinks
@@ -17,6 +18,7 @@ export RUSTUP_HOME="$HOME"/.local/rustup
 export CARGO_HOME="$HOME"/.local/cargo
 export GOPATH="$HOME"/.local/go
 export HISTFILE="$ZDOTDIR"/.zsh_history
+export PNPM_HOME="$HOME"/.local/share/pnpm
 export HISTSIZE=10000
 export SAVEHIST=10000
 
