@@ -7,7 +7,7 @@
 BM_FILE="$HOME/.config/chromium/Default/Bookmarks"
 
 # change this variable to your desired browser (must be chromium based)
-BROWSER="chromium"
+BROWSER="${BROWSER:-chromium}"
 
 # get bookmarks list in desired format
 BOOKMARKS=$(jq '.. | objects | select(.type == "url") | "\(.name) : \(.url)"' --raw-output "$BM_FILE")

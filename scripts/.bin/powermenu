@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Options for powermenu
+lock=""
+logout=""
+shutdown=""
+reboot=""
+sleep=""
+
+selected_option=$(
+  printf "%s\n%s\n%s\n%s\n%s" "$lock" "$logout" "$sleep" "$reboot" "$shutdown" \
+    | rofi -dmenu -i -p "Power" -theme "$HOME/.config/rofi/themes/powermenu.rasi"
+)
+
+# Do something based on selected option
+if [ "$selected_option" == "$lock" ]; then
+  lock
+elif [ "$selected_option" == "$logout" ]; then
+  loginctl terminate-user "$(whoami)"
+elif [ "$selected_option" == "$shutdown" ]; then
+  sudo systemctl poweroff
+elif [ "$selected_option" == "$reboot" ]; then
+  sudo systemctl reboot
+elif [ "$selected_option" == "$sleep" ]; then
+  pamixer --mute
+  sudo systemctl suspend
+else
+  echo "No match"
+fi
