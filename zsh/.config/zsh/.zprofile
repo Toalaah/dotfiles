@@ -27,7 +27,7 @@ export ZSH_PLUGIN_DIR="$HOME"/.local/zsh/plugins
 
 export EDITOR=nvim
 export VISUAL=nvim
-export BROWSER=chromium
+export BROWSER=firefox
 export LESSHISTFILE=-
 
 # overwrite prompt arrow by setting ARROW here
