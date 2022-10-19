@@ -25,9 +25,9 @@ export SAVEHIST=10000
 export ZSH_PLUGIN_ENABLE=1
 export ZSH_PLUGIN_DIR="$HOME"/.local/zsh/plugins
 
-export EDITOR=nvim
-export VISUAL=nvim
-export BROWSER=firefox
+export EDITOR=${EDITOR:-nvim}
+export VISUAL=${VISUAL:-nvim}
+export BROWSER=${BROWSER:-firefox}
 export LESSHISTFILE=-
 
 # overwrite prompt arrow by setting ARROW here
@@ -36,20 +36,20 @@ export LESSHISTFILE=-
 # export ARROW=$'\n'"﬌"
 
 if [[ is_installed("bat") ]]; then
-  export PAGER="bat"
+  export PAGER=${PAGER:-bat}
   export BAT_THEME="Visual Studio Dark+"
   export BAT_STYLE="numbers,header,grid"
 else
-  export PAGER="less"
+  export PAGER=${PAGER:-less}
 fi
 
 TERM_MAC=kitty
 TERM_LINUX=kitty
-export TERMINAL=$(
+export TERMINAL=${TERMINAL:-$(
   [[ $(uname -s) = "Darwin" ]] && { echo $TERM_MAC; true } || echo $TERM_LINUX
-)
+)}
 
-export MANPAGER=$(
+export MANPAGER=${MANPAGER:-$(
   if is_installed "nvim"; then
    echo "nvim -M +Man!"
   elif is_installed "bat"; then
@@ -57,5 +57,5 @@ export MANPAGER=$(
   else
     echo "less"
   fi
-)
+)}
 
