@@ -22,6 +22,7 @@ fi
 picom --experimental-backends -b & # start compositor
 lxpolkit &                         # authentication agent
 # setup lockscreen if $LOCK_SCREEN_DISABLE is *not* set
+xset s off -dpms
 if [[ -z "$LOCK_SCREEN_DISABLE" ]]; then
   xss-lock lock &
   xset +dpms dpms 600 600 600
