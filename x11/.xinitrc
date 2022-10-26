@@ -21,6 +21,7 @@ fi
 
 picom --experimental-backends -b & # start compositor
 lxpolkit &                         # authentication agent
+parcellite -n &                    # clipboard manager
 # setup lockscreen if $LOCK_SCREEN_DISABLE is *not* set
 xset s off -dpms
 if [[ -z "$LOCK_SCREEN_DISABLE" ]]; then
