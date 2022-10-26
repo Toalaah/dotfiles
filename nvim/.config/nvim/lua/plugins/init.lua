@@ -19,10 +19,8 @@ local plugin_list = {
   'folke/zen-mode.nvim',
   'hoob3rt/lualine.nvim',
   'akinsho/bufferline.nvim',
-  'lewis6991/spellsitter.nvim',
   'norcalli/nvim-colorizer.lua',
   'rcarriga/nvim-notify',
-  'j-hui/fidget.nvim',
 
   -- LSP
   'williamboman/mason.nvim',

@@ -1,10 +1,13 @@
 require('mason-lspconfig').setup({
   ensure_installed = {
+    'ansiblels',
     'bashls',
     'clangd',
     'eslint',
     'gopls',
     'pyright',
+    'ruby_ls',
+    'solargraph',
     'sumneko_lua',
     'texlab',
     'tsserver',
