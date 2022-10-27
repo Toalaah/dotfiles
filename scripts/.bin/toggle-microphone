@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# toggle all microphones found by pamixer
+pamixer --list-sources \
+  | grep -i microphone \
+  | cut -d' ' -f 1 \
+  | xargs -I {} pamixer --source {} --toggle-mute &&  \
+  notify-send -u critical "Microphone mute toggled"
