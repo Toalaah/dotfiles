@@ -53,6 +53,7 @@ local plugin_list = {
   { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install' },
   'folke/which-key.nvim',
   'voldikss/vim-floaterm',
+  'akinsho/git-conflict.nvim',
 
   -- File & buffer navigation
   'ghillb/cybu.nvim',
