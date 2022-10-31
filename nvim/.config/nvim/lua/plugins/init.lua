@@ -21,6 +21,7 @@ local plugin_list = {
   'akinsho/bufferline.nvim',
   'norcalli/nvim-colorizer.lua',
   'rcarriga/nvim-notify',
+  'elkowar/yuck.vim',
 
   -- LSP
   'williamboman/mason.nvim',
