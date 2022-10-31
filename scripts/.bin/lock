@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
 # lock command taken from: https://github.com/janleigh/dotfiles/blob/master/bin/lck
-#
 lock_screen() {
-i3lock -n -c 00000000 -t -e --pass-media-keys --pass-power-keys --pass-volume-keys --indicator --force-clock \
+i3lock -n -c 000000FF -t -e --pass-media-keys --pass-power-keys --pass-volume-keys --indicator --force-clock \
   --ignore-empty --radius 52 --modif-size=9 --modif-pos="w/2:h/2-15" \
   \
   --time-str="%H:%M" \
