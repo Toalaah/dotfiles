@@ -54,6 +54,7 @@ local plugin_list = {
   'folke/which-key.nvim',
   'voldikss/vim-floaterm',
   'akinsho/git-conflict.nvim',
+  'ekickx/clipboard-image.nvim',
 
   -- File & buffer navigation
   'ghillb/cybu.nvim',
