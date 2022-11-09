@@ -28,6 +28,7 @@ local plugin_list = {
   'williamboman/mason-lspconfig.nvim',
   'neovim/nvim-lspconfig',
   'glepnir/lspsaga.nvim',
+  'gpanders/editorconfig.nvim',
 
   -- Additional language plugins
   -- (Dart / Flutter)
