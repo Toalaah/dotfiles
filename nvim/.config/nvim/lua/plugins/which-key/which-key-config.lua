@@ -149,6 +149,7 @@ wk.register({
 wk.register({
   -- miscellaneous
   ['<leader>R'] = { '<Cmd>lua require"util".reload_module()<CR>', 'Reload lua module' },
+  ['<leader>d'] = { '<Cmd>lua require"notify".dismiss()<CR>', 'Dismiss current notifications' },
   ['<leader><leader>'] = { '<C-^>', 'Switch to previous buffer' },
   ['<C-d>'] = { '<C-d>zz', 'Jump down' },
   ['<C-u>'] = { '<C-u>zz', 'Jump up' },
@@ -161,7 +162,7 @@ wk.register({
   ['<C-s>'] = { '<Cmd>w<CR>', 'Save file' },
   ['?'] = { '<Cmd>WhichKey<CR>', 'Show which-key menu' },
   ['<leader>/'] = { '<Cmd> lua require("Comment.api").toggle_current_linewise()<CR>', 'Comment line' },
-  ['<leader>p'] = { "<Cmd>lua vim.lsp.buf.format(); vim.cmd('write')<CR>", 'Format and save current file' },
+  ['<leader>p'] = { "<Cmd>FormatWrite<CR>", 'Format and save current file' },
   ['<leader>m'] = { '<Cmd>make<CR>', 'Make' },
   ['<leader>M'] = { '<Cmd>lua require"telescope.builtin".man_pages()<CR>', 'View man-pages' },
   ['<leader>H'] = { '<Cmd>lua require"telescope.builtin".help_tags()<CR>', 'View help tags' },
