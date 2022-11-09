@@ -55,3 +55,7 @@ end)
 
 -- disables auto-comment continuations for .py files (some filetypes have their format-options overwritten by ftplugins)
 vim.cmd([[autocmd BufRead,BufNew,BufEnter *.py* set formatoptions-=cro shiftwidth=4 tabstop=4 expandtab]])
+
+au_cmd('TextYankPost', '*', '__highlight_yanked_text', function()
+  vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 500 })
+end)
