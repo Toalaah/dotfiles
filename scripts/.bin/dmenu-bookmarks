@@ -1,21 +1,46 @@
-#!/bin/sh
+#!/bin/bash
 
-# requirements: jq, dmenu
+# requirements: jq, dmenu, sqlite3
 
-# change this variable to the (absolute) path of your bookmarks
-# file (the file must follow chromium-like bookmark-file syntax)
-BM_FILE="$HOME/.config/chromium/Default/Bookmarks"
+notify() { echo "$@"; }
+command -V notify-send 1>/dev/null 2>&1 && notify() { notify-send "$@"; }
 
-# change this variable to your desired browser (must be chromium based)
-BROWSER="${BROWSER:-chromium}"
+[ -z "$BROWSER" ] && {
+  notify "Please set BROWSER variable"
+  exit 1
+}
 
-# get bookmarks list in desired format
-BOOKMARKS=$(jq '.. | objects | select(.type == "url") | "\(.name) : \(.url)"' --raw-output "$BM_FILE")
+get_bookmarks_chromium() {
+  BM_FILE="$HOME/.config/chromium/Default/Bookmarks"
+  jq '.. | objects | select(.type == "url") | "\(.name),,,\(.url)"' \
+    --raw-output "$BM_FILE"
+}
+
+get_bookmarks_firefox() {
+  BM_FILE="$HOME/.mozilla/firefox/88fot2o2.default-release/places.sqlite"
+  sqlite3 --separator ",,," \
+    "file:$BM_FILE?immutable=1" \
+    "SELECT mb.title,mp.url from moz_bookmarks mb JOIN moz_places mp on mb.fk=mp.id;"
+}
+
+case "$BROWSER" in
+"chromium") get_bookmarks() { get_bookmarks_chromium; } ;;
+"firefox") get_bookmarks() { get_bookmarks_firefox; } ;;
+*)
+  notify "Unsupported browser"
+  exit 1
+  ;;
+esac
+
+declare -A bmdict
+while IFS=',' read -r key value; do
+  [ -n "$key" ] && bmdict["$key"]="$value"
+done < <(get_bookmarks)
 
 # get selection + check if selection was cancelled
-TARGET_URL=$(printf "%s\nQuit" "$BOOKMARKS" | dmenu -i -c -l 20 -p "Open bookmark:")
-[ -z "$TARGET_URL" ] || [ "$TARGET_URL" = "Quit" ] && exit 0
+KEY=$(printf "%s\n" "${!bmdict[@]}" | dmenu -i -c -l 20 -p "Open bookmark:")
+[ -z "$KEY" ] && exit 0
 
-# open selected bookmark's url
-echo "$TARGET_URL" | awk '{ print $NF }' | xargs "$BROWSER" --new-window
-
+# open selected bookmark
+"$BROWSER" --new-window "${bmdict[$KEY]//,,/}" &
+disown
