@@ -44,7 +44,7 @@ else
 fi
 
 TERM_MAC=kitty
-TERM_LINUX=kitty
+TERM_LINUX=st
 export TERMINAL=${TERMINAL:-$(
   [[ $(uname -s) = "Darwin" ]] && { echo $TERM_MAC; true } || echo $TERM_LINUX
 )}
