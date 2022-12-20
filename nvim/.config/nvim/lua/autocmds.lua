@@ -16,12 +16,6 @@ au_cmd('BufEnter', '*.env*', '__env', function(args)
   vim.bo.filetype = 'sh'
 end)
 
--- Auto-sync / compile packer on changes to plugin file
-au_cmd('BufWritePost', '*/plugins/init.lua', '__packer', function(_)
-  require('lua.util').reload_module()
-  vim.cmd([[PackerCompile]])
-end)
-
 -- Update xresources on write
 au_cmd('BufWritePost', '.xresources', '__xresources', function(_)
   vim.cmd('!xrdb -DPYWAL_="<$HOME/.cache/wal/colors.Xresources>" -merge ~/.xresources')
