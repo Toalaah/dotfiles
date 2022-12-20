@@ -22,6 +22,7 @@ local plugin_list = {
   'norcalli/nvim-colorizer.lua',
   'rcarriga/nvim-notify',
   'elkowar/yuck.vim',
+  'tikhomirov/vim-glsl',
 
   -- LSP
   'williamboman/mason.nvim',
