@@ -11,6 +11,8 @@ gitstatus_stop 'MY' 2>/dev/null && gitstatus_start -s -1 -u -1 -c -1 -d -1 'MY' 
 # set default arrow
 ARROW="${ARROW:-}"
 [[ "$EUID" -eq 0 ]] && ARROW="#"
+# change arrow if in ssh session
+[[ -n "$SSH_TTY" ]] && ARROW="\$"
 
 function update_prompt() {
   EXIT_CODE="$?"
