@@ -6,6 +6,7 @@ alias ...="cd ../../"
 alias ....="cd ../../../"
 alias pw="pass -c"
 alias cp="cp -iv"
+alias df="df --block-size=1K --human-readable"
 alias mv="mv -iv"
 if is_installed "rg"; then
   alias grep="rg -i --color=auto"
