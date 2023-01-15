@@ -6,3 +6,5 @@ zsh/.config/zsh/.zcompdump
 zsh/.config/zsh/.zsh_sessions/
 zsh/.config/zsh/.zlogin
 tmux/.config/tmux/plugins
+gnupg/.gnupg/*
+!gnupg/.gnupg/gpg.conf
