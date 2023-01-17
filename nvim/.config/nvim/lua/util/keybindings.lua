@@ -1,7 +1,7 @@
 -- adapted from https://github.com/ThePrimeagen/.dotfiles/blob/master/nvim/.config/nvim/lua/theprimeagen/keymap.lua
 ---@param mode 'n' | 'i' | 'v'
 ---@param bind_opts table | nil
----@return fun(lhs:string, rhs:string, desc:string, user_opts?:table)
+---@return fun(lhs:string, rhs:string|function, desc:string, user_opts?:table)
 local bind = function(mode, bind_opts)
   bind_opts = bind_opts or { noremap = true }
   return function(lhs, rhs, desc, user_opts)

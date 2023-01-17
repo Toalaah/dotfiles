@@ -2,6 +2,7 @@ local kb_util = require 'util.keybindings'
 local nnomap = kb_util.nnoremap
 local inomap = kb_util.inoremap
 local vnomap = kb_util.vnoremap
+local qf_util = require 'util.qf'
 
 -- various toggles and quick-actions
 nnomap('<leader>m', '<Cmd>make<CR>', 'Make')
@@ -9,6 +10,12 @@ nnomap('<leader>sc', '<Cmd>set cursorline!<CR>', 'Toggle cursorline')
 nnomap('<leader>sw', '<Cmd>set wrap!<CR>', 'Toggle line-wrapping')
 nnomap('<leader>ss', '<Cmd>set spell!<CR>', 'Toggle spell-checker')
 nnomap('<leader>sn', '<Cmd>set number! relativenumber!<CR>', 'Toggle line numbers')
+-- quickfix list
+nnomap('<C-q>q', qf_util.toggle_qf_list, 'Toggle quick-fix list')
+nnomap('<C-q>c', qf_util.clear_qf_list, 'Clear quick-fix list')
+nnomap('<C-q>e', qf_util.exec_qf_list, 'Exec command for all qf entries')
+nnomap('<C-q>j', '<Cmd>cnext<CR>', 'Go to next entry in quickfix list')
+nnomap('<C-q>k', '<Cmd>cprev<CR>', 'Go to prev entry in quickfix list')
 -- center cursor between jumps
 nnomap('<C-d>', '<C-d>zz', 'Jump down')
 nnomap('<C-u>', '<C-u>zz', 'Jump up')
