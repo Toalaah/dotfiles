@@ -12,7 +12,16 @@ return {
     },
     config = function() require('git-conflict').setup() end,
   },
-  { 'tpope/vim-fugitive', cmd = { 'Git' } },
+  {
+    'tpope/vim-fugitive',
+    cmd = { 'Git' },
+    init = function()
+      local nnoremap = require('util.keybindings').nnoremap
+      nnoremap('<leader>gP', '<Cmd>Git push<CR>', 'Push changes')
+      nnoremap('<leader>gS', '<Cmd>Git<CR>', 'Stage changes')
+      nnoremap('<leader>gC', '<Cmd>Git commit<CR>', 'Push changes')
+    end,
+  },
   {
     'lewis6991/gitsigns.nvim',
     event = 'VeryLazy',
