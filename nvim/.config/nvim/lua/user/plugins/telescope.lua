@@ -1,7 +1,14 @@
 local M = {
   'nvim-telescope/telescope.nvim',
   cmd = { 'Telescope' },
-  dependencies = { { 'nvim-lua/plenary.nvim' }, { 'nvim-telescope/telescope-file-browser.nvim' } },
+  dependencies = {
+    { 'nvim-lua/plenary.nvim' },
+    { 'nvim-telescope/telescope-file-browser.nvim' },
+    {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+    },
+  },
 }
 
 local keybindings = {
@@ -27,14 +34,8 @@ end
 
 M.config = function()
   local telescope = require 'telescope'
-  telescope.setup {
-    extensions = {
-      file_browser = {
-        theme = 'ivy',
-        hijack_netrw = true,
-      },
-    },
-  }
+  telescope.setup {}
+  telescope.load_extension 'fzf'
   telescope.load_extension 'file_browser'
 end
 

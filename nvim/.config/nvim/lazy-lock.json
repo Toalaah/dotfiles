@@ -36,6 +36,7 @@
   "rose-pine": { "branch": "main", "commit": "e3895d8e76c63d10975b56249445bdc58197f6c3" },
   "rust-tools.nvim": { "branch": "master", "commit": "df584e84393ef255f5b8cbd709677d6a3a5bf42f" },
   "telescope-file-browser.nvim": { "branch": "master", "commit": "304508fb7bea78e3c0eeddd88c4837501e403ae8" },
+  "telescope-fzf-native.nvim": { "branch": "main", "commit": "fab3e2212e206f4f8b3bbaa656e129443c9b802e" },
   "telescope.nvim": { "branch": "master", "commit": "2f32775405f6706348b71d0bb8a15a22852a61e4" },
   "todo-comments.nvim": { "branch": "main", "commit": "077c59586d9d0726b0696dc5680eb863f4e04bc5" },
   "toggleterm.nvim": { "branch": "main", "commit": "a54e6c471ce1cd8ef8357e34598a28a955297131" },
