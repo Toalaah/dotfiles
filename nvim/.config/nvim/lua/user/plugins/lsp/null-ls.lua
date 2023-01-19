@@ -1,7 +1,7 @@
 local M = {
   'jose-elias-alvarez/null-ls.nvim',
-  dependencies = { {'nvim-lua/plenary.nvim'}, {"hrsh7th/cmp-nvim-lsp"} },
-  event = 'VeryLazy'
+  dependencies = { { 'nvim-lua/plenary.nvim' }, { 'hrsh7th/cmp-nvim-lsp' } },
+  event = 'VeryLazy',
 }
 
 M.config = function()

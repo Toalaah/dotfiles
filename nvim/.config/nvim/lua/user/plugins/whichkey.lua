@@ -1,7 +1,7 @@
 return {
   'folke/which-key.nvim',
   cmd = 'WhichKey',
-  keys = { '<leader>', 'z'},
+  keys = { '<leader>', 'z' },
   init = function()
     local nnoremap = require('util.keybindings').nnoremap
     nnoremap('?', '<Cmd>WhichKey<CR>', 'Keybindings help')
