@@ -39,5 +39,7 @@ command -V colorz && feh --bg-fill "$WALL" && wal -s -i "$WALL" --backend colorz
 command -V schemer2 && feh --bg-fill "$WALL" && wal -s -i "$WALL" --backend schemer2 && update_wm_scheme && exit 0
 
 # fallback
-feh --bg-fill "$WALL" && wal -s -i "$WALL" && update_wm_scheme && exit 0
+feh --bg-fill "$WALL" && wal -s -i "$WALL" && update_wm_scheme
+command -V betterlockscreen && betterlockscreen -u "$WALL"
+exit 0
 
