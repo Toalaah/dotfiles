@@ -19,7 +19,7 @@ return {
       local nnoremap = require('util.keybindings').nnoremap
       nnoremap('<leader>gP', '<Cmd>Git push<CR>', 'Push changes')
       nnoremap('<leader>gS', '<Cmd>Git<CR>', 'Stage changes')
-      nnoremap('<leader>gC', '<Cmd>Git commit<CR>', 'Push changes')
+      nnoremap('<leader>gC', '<Cmd>Git commit<CR>', 'Commit changes')
     end,
   },
   {
