@@ -10,6 +10,10 @@ nnomap('<leader>sc', '<Cmd>set cursorline!<CR>', 'Toggle cursorline')
 nnomap('<leader>sw', '<Cmd>set wrap!<CR>', 'Toggle line-wrapping')
 nnomap('<leader>ss', '<Cmd>set spell!<CR>', 'Toggle spell-checker')
 nnomap('<leader>sn', '<Cmd>set number! relativenumber!<CR>', 'Toggle line numbers')
+-- navigate buffers
+nnomap('<leader>x', '<Cmd>Bdelete<CR>', 'Close buffer')
+nnomap('<leader>[', '<Cmd>bnext<CR>', 'Next buffer')
+nnomap('<leader>]', '<Cmd>bprev<CR>', 'Previous buffer')
 -- quickfix list
 nnomap('<C-q>q', qf_util.toggle_qf_list, 'Toggle quick-fix list')
 nnomap('<C-q>c', qf_util.clear_qf_list, 'Clear quick-fix list')

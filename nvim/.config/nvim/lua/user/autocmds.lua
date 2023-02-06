@@ -37,13 +37,3 @@ create_autocmd {
   callback = function() vim.cmd.checktime() end,
   desc = 'Reload file if it changed after regaining focus',
 }
-
-create_autocmd {
-  event = 'BufNew',
-  pattern = '*',
-  callback = function()
-    vim.wo.foldmethod = 'expr'
-    vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
-  end,
-  desc = 'Enable treesitter-aware folding',
-}

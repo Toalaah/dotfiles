@@ -1,5 +1,8 @@
 -- sleeker separator between splits
-pcall(vim.cmd.colorscheme, 'tokyonight')
+require('nordic').setup {
+  telescope = { style = 'classic' },
+}
+vim.cmd [[ colorscheme nordic ]]
 vim.api.nvim_set_hl(0, 'WinSeperator', { bg = 'None' })
 
 -- apply border to builtin lsp hover

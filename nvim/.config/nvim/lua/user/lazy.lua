@@ -12,21 +12,16 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require('lazy').setup('user.plugins', {
-  dev = {
-    path = '~/dev',
-  },
-  install = {
-    colorscheme = { 'tokyonight' },
-  },
-  ui = {
-    border = 'rounded',
-  },
+  defaults = { lazy = true },
+  checker = { enabled = false },
   performance = {
+    cache = { enabled = true },
     rtp = {
       disabled_plugins = {
         'gzip',
         'matchit',
         'matchparen',
+        'rplugin',
         'tarPlugin',
         'tohtml',
         'tutor',
@@ -34,4 +29,7 @@ require('lazy').setup('user.plugins', {
       },
     },
   },
+  dev = { path = '~/dev' },
+  ui = { border = 'rounded' },
+  debug = false,
 })

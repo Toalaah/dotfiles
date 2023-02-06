@@ -1,41 +1,35 @@
 return {
-  'nvim-treesitter/nvim-treesitter',
-  event = 'BufReadPost',
-  config = function()
-    require('nvim-treesitter.configs').setup {
-      ensure_installed = {
-        'bash',
-        'go',
-        'help',
-        'javascript',
-        'lua',
-        'org',
-        'rust',
-        'typescript',
-        'vim',
-      },
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = { 'org' },
-      },
-      context_commentstring = {
-        enable = true,
-        enable_autocmd = false,
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = '<CR>',
-          node_incremental = '<CR>',
-          scope_incremental = '<S-CR>',
-          node_decremental = '<BS>',
+  {
+    'nvim-treesitter/nvim-treesitter',
+    event = 'BufReadPost',
+    dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
+    build = function() require('nvim-treesitter.install').update { with_sync = true }() end,
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        ensure_installed = {
+          'bash',
+          'go',
+          'help',
+          'javascript',
+          'lua',
+          'rust',
+          'typescript',
+          'vim',
         },
-      },
-    }
-  end,
-  build = function() require('nvim-treesitter.install').update { with_sync = true }() end,
-  dependencies = {
-    { 'p00f/nvim-ts-rainbow', enabled = false },
-    'JoosepAlviste/nvim-ts-context-commentstring',
+        highlight = { enable = true },
+        context_commentstring = {
+          enable = true,
+          enable_autocmd = false,
+        },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = '<CR>',
+            node_incremental = '<CR>',
+            node_decremental = '<BS>',
+          },
+        },
+      }
+    end,
   },
 }

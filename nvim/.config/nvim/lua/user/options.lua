@@ -6,8 +6,10 @@ vim.cmd [[set spelllang=en_us,de_de ]]
 vim.opt.confirm = true
 vim.opt.cursorline = true
 vim.opt.diffopt = 'vertical'
-vim.opt.foldlevelstart = 99
-vim.opt.foldmethod = 'expr'
+vim.o.foldcolumn = '1'
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.expandtab = true
@@ -54,10 +56,6 @@ for _, plugin in ipairs {
   'logiPat',
   'matchit',
   'matchparen',
-  'netrw',
-  'netrwFileHandlers',
-  'netrwPlugin',
-  'netrwSettings',
   'rrhelper',
   'tar',
   'tarPlugin',
