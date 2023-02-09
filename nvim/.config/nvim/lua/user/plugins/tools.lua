@@ -84,6 +84,21 @@ return {
           always_show = { '.gitignored' },
           never_show = { '.DS_Store' },
         },
+        renderers = {
+          directory = {
+            {
+              'container',
+              content = {
+                { 'name', zindex = 10 },
+                {
+                  'symlink_target',
+                  zindex = 10,
+                  highlight = 'NeoTreeSymbolicLinkTarget',
+                },
+              },
+            },
+          },
+        },
       },
     },
   },
