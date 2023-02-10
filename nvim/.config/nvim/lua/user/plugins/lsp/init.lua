@@ -105,6 +105,7 @@ return {
           { name = 'nvim_lsp' },
           { name = 'buffer' },
           { name = 'copilot' },
+          { name = 'path' },
           { name = 'luasnip' },
           { name = 'nvim_lua' },
         },
