@@ -16,7 +16,9 @@ require('lazy').setup('user.plugins', {
   checker = { enabled = false },
   performance = {
     cache = { enabled = true },
+    reset_packpath = false,
     rtp = {
+      reset = false,
       disabled_plugins = {
         'gzip',
         'matchit',

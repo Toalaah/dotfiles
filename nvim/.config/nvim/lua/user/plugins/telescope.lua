@@ -22,7 +22,21 @@ return {
   },
   opts = {
     pickers = {
-      find_files = { theme = 'dropdown' },
+      colorscheme = {
+        enable_preview = true,
+      },
+      find_files = {
+        theme = 'ivy',
+        find_command = {
+          'rg',
+          '--color=never',
+          '--column',
+          '--files',
+          '--follow',
+          '--hidden',
+          '--no-heading',
+        },
+      },
       buffers = { theme = 'ivy' },
     },
     extensions = {
