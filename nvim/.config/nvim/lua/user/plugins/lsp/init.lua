@@ -16,7 +16,7 @@ return {
     opts = function()
       local lsp_configs = require 'user.plugins.lsp.config'
       return {
-        ensure_installed = { 'sumneko_lua' },
+        ensure_installed = { 'lua_ls' },
         servers = lsp_configs,
       }
     end,
