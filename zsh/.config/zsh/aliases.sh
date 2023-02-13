@@ -9,6 +9,7 @@ alias :wq="exit"
 alias cp="cp -iv"
 alias df="df --block-size=1K --human-readable"
 alias mv="mv -iv"
+alias rm="rm --interactive"
 if is_installed "rg"; then
   alias grep="rg -i --color=auto"
 else
