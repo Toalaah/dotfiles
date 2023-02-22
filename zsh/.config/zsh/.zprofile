@@ -51,11 +51,11 @@ export TERMINAL=${TERMINAL:-$(
 
 export MANPAGER=${MANPAGER:-$(
   if is_installed "nvim"; then
-   echo "nvim -M +Man!"
+   echo 'nvim +Man!'
   elif is_installed "bat"; then
-    echo "bat --style=plain --language=man"
+    echo 'bat --style=plain --language=man'
   else
-    echo "less"
+    echo 'less'
   fi
 )}
 
