@@ -3,6 +3,7 @@ return {
   { 'tikhomirov/vim-glsl', ft = 'glsl' },
   { 'romainl/vim-cool', event = 'VeryLazy' },
   { 'gpanders/editorconfig.nvim', event = 'BufReadPost' },
+  { 'NoahTheDuke/vim-just', ft = 'just' },
   {
     'iamcco/markdown-preview.nvim',
     ft = 'markdown',

@@ -73,6 +73,7 @@ return {
         snippet = {
           expand = function(args) luasnip.lsp_expand(args.body) end,
         },
+        experimental = { ghost_text = true },
         formatting = {
           format = lspkind.cmp_format {
             symbol_map = { Copilot = '' },
