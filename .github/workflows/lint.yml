@@ -1,25 +1,11 @@
-name: Lint
-
-on: [push, pull_request]
-
+name: "Lint"
+on:
+  push:
 jobs:
-  shellcheck:
-    name: Shellcheck
+  check-format:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Run ShellCheck
-      uses: ludeeus/action-shellcheck@master
-      env:
-        SHELLCHECK_OPTS: --severity warning
-      with:
-        ignore_paths: zsh
-  lint-readme:
-    name: Markdown-Lint
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Run Markdown-Lint
-      uses: docker://avtodev/markdown-lint:v1
-      with:
-        args: './readme.md'
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v19
+      - run: nix profile install nixpkgs#git-crypt
+      - run: nix fmt -- --check (git-crypt status | grep 'not encrypted' | cut -d ':' -f2)
