@@ -11,11 +11,13 @@ with lib; {
     };
     primaryUser.fullName = mkOption {
       description = "Primary user's full name";
-      type = types.str;
+      default = null;
+      type = types.nullOr types.str;
     };
     primaryUser.email = mkOption {
       description = "Primary user's email";
-      type = types.str;
+      default = null;
+      type = types.nullOr types.str;
     };
     primaryUser.gpgKey = mkOption {
       description = "Primary user's GPG key";
@@ -37,13 +39,18 @@ with lib; {
       default = pkgs.zsh;
       type = types.package;
     };
-    primaryUser.currentTerminal = mkOption {
-      description = "Primary user's current terminal emulator";
+    primaryUser.editor = mkOption {
+      description = "User's editor";
       default = null;
       type = types.nullOr types.package;
     };
-    primaryUser.currentBrowser = mkOption {
-      description = "Primary user's current browser";
+    primaryUser.terminal = mkOption {
+      description = "Primary user's terminal emulator";
+      default = null;
+      type = types.nullOr types.package;
+    };
+    primaryUser.browser = mkOption {
+      description = "Primary user's browser";
       default = null;
       type = types.nullOr types.package;
     };

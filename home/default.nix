@@ -1,6 +1,6 @@
 {
   personal = {
-    homeConfig = ./personal;
-    attributes = ./personal/secrets;
+    homeConfig = ./users/personal;
+    attributes = ./users/personal/secrets;
   };
 }

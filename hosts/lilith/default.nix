@@ -10,7 +10,7 @@
 
   boot = {
     kernelPackages = pkgs.linuxPackages_6_2;
-    kernelParams = [ "i915.enable_psr=0" ];
+    kernelParams = ["i915.enable_psr=0"];
     loader = {
       systemd-boot = {
         enable = true;
