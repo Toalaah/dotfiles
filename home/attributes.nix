@@ -35,14 +35,14 @@ with lib; {
       type = types.listOf types.str;
     };
     primaryUser.shell = mkOption {
-      description = "User's default shell";
+      description = "Primary user's default shell";
       default = pkgs.zsh;
       type = types.package;
     };
     primaryUser.editor = mkOption {
       description = "User's editor";
       default = null;
-      type = types.nullOr types.package;
+      type = types.oneOf [types.package types.str];
     };
     primaryUser.terminal = mkOption {
       description = "Primary user's terminal emulator";

@@ -83,7 +83,12 @@ in {
             email = user.email;
             name = user.fullName;
           };
-          core.editor = builtins.toString (config.home.shellAliases.EDITOR or user.editor or pkgs.vim);
+          core.editor = builtins.toString (lib.findFirst (x: x != null)
+            pkgs.neovim # default editor fallback
+            [
+              (config.home.shellAliases.EDITOR or null)
+              user.editor
+            ]);
           init.defaultBranch = "master";
           pull.rebase = true;
           push.autoSetupRemote = true;
