@@ -9,6 +9,11 @@ in {
     stateVersion = "22.11";
   };
 
+  editors.neovim = {
+    enable = true;
+    useNightly = true;
+    setManpager = true;
+  };
   dev = {
     git = {
       enable = true;
@@ -17,6 +22,13 @@ in {
       lazygit.enable = true;
       gh.enable = true;
       gitleaks.enable = true;
+    };
+    k8s = {
+      kind.enable = true;
+      k9s = {
+        enable = true;
+        theme = "rose-pine";
+      };
     };
   };
 }

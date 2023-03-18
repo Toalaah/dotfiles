@@ -42,7 +42,7 @@ with lib; {
     primaryUser.editor = mkOption {
       description = "User's editor";
       default = null;
-      type = types.oneOf [types.package types.str];
+      type = types.nullOr (types.oneOf [types.package types.str]);
     };
     primaryUser.terminal = mkOption {
       description = "Primary user's terminal emulator";

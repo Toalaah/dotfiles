@@ -85,6 +85,7 @@ in {
           };
           core.editor = builtins.toString (lib.findFirst (x: x != null)
             pkgs.neovim # default editor fallback
+            
             [
               (config.home.shellAliases.EDITOR or null)
               user.editor
