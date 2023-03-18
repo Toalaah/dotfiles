@@ -9,7 +9,11 @@ in {
   imports = [../home/attributes.nix];
   # prevent hostname from being accidentally overwritten in other modules
   networking.hostName = lib.mkForce hostname;
-  # users.mutableUsers = false;
+  users.mutableUsers = true;
+  i18n = {
+    defaultLocale = user.locale;
+    supportedLocales = ["all"];
+  };
   users.users."${user.name}" = {
     isNormalUser = true;
     uid = 1000;

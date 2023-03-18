@@ -1,12 +1,16 @@
-{pkgs, ...}: {
-  imports = [./hardware-configuration.nix];
+{
+  pkgs,
+  nixos-hardware,
+  ...
+}: {
+  imports = [
+    ./hardware-configuration.nix
+    nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
+  ];
 
   boot = {
     kernelPackages = pkgs.linuxPackages_6_2;
-    kernelParams = [
-      "i915.force_probe=46a6"
-      "i915.enable_psr=0"
-    ];
+    kernelParams = [ "i915.enable_psr=0" ];
     loader = {
       systemd-boot = {
         enable = true;

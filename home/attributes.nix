@@ -34,7 +34,7 @@ with lib; {
     };
     primaryUser.shell = mkOption {
       description = "User's default shell";
-      default = pkgs.bash;
+      default = pkgs.zsh;
       type = types.package;
     };
     primaryUser.currentTerminal = mkOption {
