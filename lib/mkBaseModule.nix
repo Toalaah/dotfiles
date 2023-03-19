@@ -6,7 +6,7 @@
   user = config.attributes.primaryUser;
 in {
   # always need at least one user who is defined via attributes option-set
-  imports = [../home/attributes.nix];
+  imports = [../home/users/attributes.nix];
   # prevent hostname from being accidentally overwritten in other modules
   networking.hostName = lib.mkForce hostname;
   users.mutableUsers = true;

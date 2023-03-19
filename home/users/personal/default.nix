@@ -1,7 +1,7 @@
 {config, ...}: let
   user = config.attributes.primaryUser;
 in {
-  imports = [../../modules ../../attributes.nix ./secrets];
+  imports = [../../modules ../attributes.nix ./secrets];
   xresources.properties."Xft.dpi" = 144;
   home = {
     username = user.name;

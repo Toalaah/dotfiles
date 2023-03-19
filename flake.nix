@@ -3,12 +3,12 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixos-hardware.url = "github:nixos/nixos-hardware/master";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
     flake-utils.url = "github:numtide/flake-utils";
     nur.url = "github:nix-community/nur";
 
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -47,17 +47,12 @@
     nur,
     ...
   } @ inputs: let
-    users = import ./home;
+    users = import ./home/users;
     self.lib = import ./lib {inherit nixpkgs;};
     overlays = [
       (import ./overlays inputs)
       nur.overlay
     ];
-    mkPkgs = system:
-      import nixpkgs {
-        inherit system overlays;
-        config = {};
-      };
   in
     {
       nixosConfigurations = with self.lib; {
@@ -68,26 +63,25 @@
           inherit overlays;
         };
       };
-      homeConfigurations = let
-        # TODO: allow many systems via flake-utils. currently placing in
-        # eachDefaultSystem causes errors during hm builds
-        pkgs = mkPkgs "x86_64-linux";
-        # TODO: map over each user to auto-create home-configs
-        userAttrs = import users.personal.attributes {inherit pkgs;};
-        name = userAttrs.attributes.primaryUser.name;
-      in {
-        ${name} = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = inputs;
-          modules = [users.personal.homeConfig];
-        };
-      };
     }
     // flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = mkPkgs system;
+      pkgs = import nixpkgs {
+        inherit system overlays;
+        config = {};
+      };
     in {
       formatter = pkgs.alejandra;
       devShells.default = import ./shell.nix {inherit pkgs;};
+      legacyPackages.homeConfigurations = self.lib.makeHomeConfigurations {
+        inherit home-manager;
+        users = {
+          personal = {
+            inherit overlays system;
+            user = users.personal;
+            specialArgs = inputs;
+          };
+        };
+      };
       packages.default = pkgs.hello;
     });
 }

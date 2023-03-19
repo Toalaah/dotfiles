@@ -25,7 +25,9 @@
 
   nix = {
     # set nixpkgs in NIX_PATH to currently pinned flake input
-    nixPath = [("nixpkgs=" + builtins.toString pkgs.path)];
+    nixPath = [
+      "nixpkgs=${builtins.toString pkgs.path}"
+    ];
     package = pkgs.nixFlakes;
     extraOptions = ''
       keep-outputs = true
