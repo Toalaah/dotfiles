@@ -2,11 +2,20 @@
   user = config.attributes.primaryUser;
 in {
   imports = [../../modules ../attributes.nix ./secrets];
+
   xresources.properties."Xft.dpi" = 144;
+
   home = {
     username = user.name;
     homeDirectory = "/home/${user.name}";
     stateVersion = "22.11";
+  };
+
+  shells.zsh.enable = true;
+
+  tools = {
+    fzf.enable = true;
+    zoxide.enable = true;
   };
 
   editors.neovim = {
@@ -14,6 +23,7 @@ in {
     useNightly = true;
     setManpager = true;
   };
+
   dev = {
     git = {
       enable = true;
