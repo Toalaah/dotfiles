@@ -7,6 +7,7 @@
     ./productivity/zathura
     ./shells/aliases
     ./shells/zsh
+    ./terminals/alacritty
     ./tools/fzf
     ./tools/zoxide
   ];

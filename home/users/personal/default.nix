@@ -15,6 +15,11 @@ in {
 
   shells.zsh.enable = true;
 
+  terminals.alacritty = {
+    enable = true;
+    theme = "rose-pine";
+  };
+
   tools = {
     fzf.enable = true;
     zoxide.enable = true;
