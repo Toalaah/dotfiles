@@ -47,12 +47,12 @@ with lib; {
     primaryUser.terminal = mkOption {
       description = "Primary user's terminal emulator";
       default = null;
-      type = types.nullOr types.package;
+      type = types.nullOr (types.oneOf [types.package types.str]);
     };
     primaryUser.browser = mkOption {
       description = "Primary user's browser";
       default = null;
-      type = types.nullOr types.package;
+      type = types.nullOr (types.oneOf [types.package types.str]);
     };
     primaryUser.locale = mkOption {
       description = "User's default locale";
