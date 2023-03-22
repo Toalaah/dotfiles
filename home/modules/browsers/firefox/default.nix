@@ -6,7 +6,6 @@
 }:
 with lib; let
   cfg = config.browsers.firefox;
-  user = config.attributes.primaryUser;
 in {
   options = {
     browsers.firefox = {

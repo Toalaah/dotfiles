@@ -44,4 +44,6 @@ in {
       };
     };
   };
+
+  productivity.zathura.enable = true;
 }
