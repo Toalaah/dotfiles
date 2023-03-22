@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./browsers/firefox
     ./dev/git
     ./dev/k8s
     ./editors/neovim

@@ -22,13 +22,12 @@ in {
   };
   config = mkMerge [
     (mkIf cfg.enable
-      {
+      rec {
         home.packages = with pkgs; [
           fd
           sumneko-lua-language-server
         ];
         programs.neovim = {
-          defaultEditor = true;
           viAlias = cfg.configureAliases;
           vimAlias = cfg.configureAliases;
           enable = true;
@@ -43,8 +42,8 @@ in {
           source = ./config;
           recursive = true;
         };
-        attributes.primaryUser.editor = "nvim";
-        home.sessionVariables.EDITOR = "nvim";
+        attributes.primaryUser.editor = "${programs.neovim.package}/bin/nvim";
+        home.sessionVariables.EDITOR = "${programs.neovim.package}/bin/nvim";
       })
 
     (mkIf cfg.setManpager {

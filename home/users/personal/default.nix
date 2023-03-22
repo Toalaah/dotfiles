@@ -11,6 +11,8 @@ in {
     stateVersion = "22.11";
   };
 
+  browsers.firefox.enable = true;
+
   shells.zsh.enable = true;
 
   tools = {
@@ -25,6 +27,7 @@ in {
   };
 
   dev = {
+    # TODO: add tmux module
     git = {
       enable = true;
       signing.enable = true;
