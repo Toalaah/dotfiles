@@ -8,6 +8,7 @@
     ./shells/aliases
     ./shells/zsh
     ./terminals/alacritty
+    ./terminals/st
     ./tools/fzf
     ./tools/zoxide
   ];

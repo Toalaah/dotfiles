@@ -32,7 +32,12 @@ in {
 
   config = mkMerge [
     (mkIf cfg.enable {
-      assertions = [];
+      assertions = [
+        {
+          assertion = cfg.enable -> !config.terminals.st.enable;
+          message = "Only one terminal emulator should be enabled at a time";
+        }
+      ];
       attributes.primaryUser.terminal = "${config.programs.alacritty.package}/bin/alacritty";
       programs.alacritty = {
         enable = true;
