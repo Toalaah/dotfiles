@@ -9,6 +9,7 @@
     ./shells/zsh
     ./terminals/alacritty
     ./terminals/st
+    ./tools/dmenu
     ./tools/fzf
     ./tools/ripgrep
     ./tools/zoxide

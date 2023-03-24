@@ -21,9 +21,10 @@ in {
   };
 
   tools = {
+    dmenu.enable = true;
     fzf.enable = true;
-    zoxide.enable = true;
     ripgrep.enable = true;
+    zoxide.enable = true;
   };
 
   editors.neovim = {
