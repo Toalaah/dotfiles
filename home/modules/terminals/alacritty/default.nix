@@ -78,17 +78,13 @@ in {
               style = "Regular";
             };
           };
-          key_bindings = [
-            (
-              if pkgs.stdenv.isDarwin
-              then {
-                action = "ToggleFullscreen";
-                key = "F";
-                mods = "Command|Shift";
-              }
-              else null
-            )
-          ];
+          key_bindings =
+            []
+            ++ lib.optional pkgs.stdenv.isDarwin {
+              action = "ToggleFullscreen";
+              key = "F";
+              mods = "Command|Shift";
+            };
           scrolling.history = 10000;
           colors = colorScheme;
           window = {

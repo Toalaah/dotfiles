@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   user = config.attributes.primaryUser;
 in {
   imports = [../../modules ../attributes.nix ./secrets];
@@ -10,6 +14,11 @@ in {
     homeDirectory = "/home/${user.name}";
     stateVersion = "22.11";
   };
+
+  home.packages = with pkgs; [
+    (nerdfonts.override {fonts = ["JetBrainsMono"];})
+    jetbrains-mono
+  ];
 
   browsers.firefox.enable = true;
 

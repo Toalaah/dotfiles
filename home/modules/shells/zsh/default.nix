@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -41,7 +40,6 @@ in {
       enableSyntaxHighlighting = cfg.enableSyntaxHighlighting;
       enableAutosuggestions = cfg.enableAutosuggestions;
       autocd = true;
-      defaultKeymap = "vicmd";
       initExtra = ''
         zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
         autoload edit-command-line
