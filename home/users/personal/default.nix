@@ -15,6 +15,13 @@ in {
 
   shells.zsh.enable = true;
 
+  misc.services = {
+    redshift = {
+      enable = true;
+      autoDetermineLocation = true;
+    };
+  };
+
   terminals.alacritty = {
     enable = true;
     theme = "rose-pine";
