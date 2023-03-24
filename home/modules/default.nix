@@ -10,6 +10,7 @@
     ./terminals/alacritty
     ./terminals/st
     ./tools/fzf
+    ./tools/ripgrep
     ./tools/zoxide
   ];
 }

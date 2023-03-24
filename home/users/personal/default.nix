@@ -23,6 +23,7 @@ in {
   tools = {
     fzf.enable = true;
     zoxide.enable = true;
+    ripgrep.enable = true;
   };
 
   editors.neovim = {
