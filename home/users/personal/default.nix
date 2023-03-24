@@ -34,7 +34,7 @@ in {
   };
 
   dev = {
-    # TODO: add tmux module
+    tmux.enable = true;
     git = {
       enable = true;
       signing.enable = true;

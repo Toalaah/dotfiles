@@ -3,6 +3,7 @@
     ./browsers/firefox
     ./dev/git
     ./dev/k8s
+    ./dev/tmux
     ./editors/neovim
     ./productivity/zathura
     ./shells/aliases
