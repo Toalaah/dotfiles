@@ -37,7 +37,10 @@ in {
   };
 
   tools = {
-    dmenu.enable = true;
+    dmenu = {
+      enable = true;
+      sxhkdIntegration.enable = true;
+    };
     fzf.enable = true;
     ripgrep.enable = true;
     zoxide.enable = true;
@@ -67,6 +70,13 @@ in {
       };
     };
   };
+
+  # TODO: xresources module
+  # wm.bspwm = {
+  #   enable = true;
+  #   numDesktops = 6;
+  # };
+  wm.sxhkd.enable = true;
 
   productivity.zathura.enable = true;
 }

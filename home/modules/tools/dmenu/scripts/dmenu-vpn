@@ -1,0 +1,55 @@
+#!/bin/sh
+
+# requirements: nordvpn, dmenu, awk
+
+# get desired action
+ACTIONS="Connect
+Disconnect
+Set configuration options
+Quit"
+
+CONFIG_OPTIONS="Autoconnect
+Cybersec
+Firewall
+Killswitch
+Notify
+ipv6"
+
+# get user selection
+ACTION_CHOICE=$(printf "%s" "$ACTIONS" | dmenu -i -l 20 -p "Desired operation:" | awk '{ print tolower($1) }')
+
+# if action choice is disconnect or quit, immediately disconnect / exit
+[ -z "$ACTION_CHOICE" ] || [ "$ACTION_CHOICE" = "quit" ] && exit 0
+[ "$ACTION_CHOICE" = "disconnect" ]  && nordvpn disconnect && exit 0
+
+if [ "$ACTION_CHOICE" = "set" ]; then
+  # get desired configuration option
+  SETTING=$(printf "%s\nQuit" "$CONFIG_OPTIONS" | dmenu -i -l 20 -p "Select configuration option:" | awk '{ print tolower($1) }')
+  [ -z "$SETTING" ] || [ "$SETTING" = "quit" ] && exit 0
+
+  # get desired operation
+  OPERATION=$(printf "On\nOff\nQuit" | dmenu -i -l 20 -p "Select operation:" | awk '{ print tolower($1) }')
+  [ -z "$OPERATION" ] || [ "$OPERATION" = "quit" ] && exit 0
+  
+  # update configuration and exit
+  nordvpn set "$SETTING" "$OPERATION" && exit 0
+fi
+
+if [ "$ACTION_CHOICE" = "connect" ]; then
+  # get country selection
+  COUNTRIES=$(nordvpn countries | sed -e 's/\t */\n/g' | sed '/^$/d' | sed 's/\(-*\ *\)//g')
+  TARGET_COUNTRY=$(printf "%s\nQuit" "$COUNTRIES" | dmenu -i -l 20 -p "Select country:")
+  [ -z "$TARGET_COUNTRY" ] || [ "$TARGET_COUNTRY" = "Quit" ] && exit 0
+
+  # get city selection
+  CITIES=$(nordvpn cities "$TARGET_COUNTRY" | sed -e 's/\t */\n/g' | sed '/^$/d' | sed 's/\(-*\ *\)//g')
+  TARGET_CITY=$(printf "Default\n%s\nQuit" "$CITIES" | dmenu -i -l 20 -p "Select country:")
+  [ -z "$TARGET_CITY" ] || [ "$TARGET_CITY" = "Quit" ] && exit 0
+
+  # if no city preference is given, connect to target country
+  [ "$TARGET_CITY" = "Default" ]  && nordvpn connect "$TARGET_COUNTRY" && exit 0
+
+  # connect to target city
+  nordvpn connect "$TARGET_CITY" && exit 0
+fi
+

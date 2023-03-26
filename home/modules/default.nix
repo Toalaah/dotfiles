@@ -15,5 +15,6 @@
     ./tools/fzf
     ./tools/ripgrep
     ./tools/zoxide
+    ./wm/sxhkd
   ];
 }
