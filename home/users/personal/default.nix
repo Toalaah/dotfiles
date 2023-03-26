@@ -29,6 +29,7 @@ in {
       enable = true;
       autoDetermineLocation = true;
     };
+    dunst.enable = true;
   };
 
   terminals.alacritty = {
@@ -72,11 +73,13 @@ in {
   };
 
   # TODO: xresources module
-  # wm.bspwm = {
-  #   enable = true;
-  #   numDesktops = 6;
-  # };
-  wm.sxhkd.enable = true;
+  wm = {
+    # bspwm = {
+    #   enable = true;
+    #   numDesktops = 6;
+    # };
+    sxhkd.enable = true;
+  };
 
   productivity.zathura.enable = true;
 }

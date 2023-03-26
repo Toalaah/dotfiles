@@ -5,6 +5,7 @@
     ./dev/k8s
     ./dev/tmux
     ./editors/neovim
+    ./misc/services/dunst
     ./misc/services/redshift
     ./productivity/zathura
     ./shells/aliases
