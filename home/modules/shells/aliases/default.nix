@@ -18,10 +18,10 @@ in {
   config = mkMerge [
     (mkIf cfg.enable {
       home.shellAliases = {
-        v = builtins.toString (
+        v = (
           if user.editor != null
           then user.editor
-          else pkgs.neovim
+          else "${pkgs.neovim}/bin/nvim"
         );
         ":wq" = "exit";
         ".." = "cd ../";

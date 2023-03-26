@@ -42,17 +42,17 @@ with lib; {
     primaryUser.editor = mkOption {
       description = "User's editor";
       default = null;
-      type = types.nullOr (types.oneOf [types.package types.str]);
+      type = types.nullOr types.str;
     };
     primaryUser.terminal = mkOption {
       description = "Primary user's terminal emulator";
       default = null;
-      type = types.nullOr (types.oneOf [types.package types.str]);
+      type = types.nullOr types.str;
     };
     primaryUser.browser = mkOption {
       description = "Primary user's browser";
       default = null;
-      type = types.nullOr (types.oneOf [types.package types.str]);
+      type = types.nullOr types.str;
     };
     primaryUser.locale = mkOption {
       description = "User's default locale";
