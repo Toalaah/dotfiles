@@ -1,0 +1,18 @@
+#! /usr/bin/env cached-nix-shell
+#! nix-shell -i bash -p networkmanager libnotify
+# shellcheck shell=bash
+# vim: ft=sh
+
+info=$(nmcli d | awk -d'\t' '$2 ~ /^wifi$/' | head -n1)
+connected=$(echo "$info"  | awk -d'\t' '{ print $3 }')
+device=$(echo "$info"  | awk -d'\t' '{ print $1 }')
+
+[ "$connected" = "connected" ] && \
+  nmcli device down "$device" && \
+  notify-send "Wireless toggled off" && \
+  exit 0
+
+nmcli device up "$device" && \
+  notify-send "Wireless toggled on" && \
+  exit 0
+

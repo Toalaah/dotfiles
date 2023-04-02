@@ -1,0 +1,15 @@
+(deflisten workspaces "scripts/getWorkspaces")
+(defwidget workspaces [] (literal :content workspaces))
+
+(deflisten layout "scripts/getLayout")
+
+(defwidget layout []
+  (box :class "square" :style "margin-right: 0.4em;" :valign "start"
+    (eventbox :class "event-listener" :onclick "bspc desktop -l next"
+      (label
+        :halign "center"
+        :class "square-content" :text layout)
+    )
+  )
+)
+

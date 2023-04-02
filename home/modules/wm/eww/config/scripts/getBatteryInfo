@@ -1,0 +1,31 @@
+#! /usr/bin/env cached-nix-shell
+#! nix-shell -i bash -p jq eww
+# shellcheck shell=bash
+# vim: ft=sh
+
+info="$(eww get EWW_BATTERY | jq -jr '.BAT0|.status, " ", .capacity, "\n"')"
+batt_status=$(cut -d ' ' -f 1 <<< "$info")
+batt_capacity=$(cut -d ' ' -f 2 <<< "$info")
+
+output_battery_level() {
+  if   (( 0<=batt_capacity && batt_capacity<=10)) ; then echo ""; exit 0
+  elif ((11<=batt_capacity && batt_capacity<=20)) ; then echo ""; exit 0
+  elif ((21<=batt_capacity && batt_capacity<=30)) ; then echo ""; exit 0
+  elif ((31<=batt_capacity && batt_capacity<=40)) ; then echo ""; exit 0
+  elif ((41<=batt_capacity && batt_capacity<=50)) ; then echo ""; exit 0
+  elif ((51<=batt_capacity && batt_capacity<=60)) ; then echo ""; exit 0
+  elif ((61<=batt_capacity && batt_capacity<=70)) ; then echo ""; exit 0
+  elif ((71<=batt_capacity && batt_capacity<=80)) ; then echo ""; exit 0
+  elif ((81<=batt_capacity && batt_capacity<=90)) ; then echo ""; exit 0
+  elif ((81<=batt_capacity && batt_capacity<=100)); then echo ""; exit 0
+  else echo "?"; exit 0
+  fi
+}
+
+
+case "$batt_status" in
+  "Discharging") output_battery_level ;;
+  "Charging")    echo "" ;;
+  "Full")        echo "Full" ;;
+  *)             exit 1 ;;
+esac

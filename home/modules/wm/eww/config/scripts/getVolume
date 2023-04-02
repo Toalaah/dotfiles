@@ -1,0 +1,33 @@
+#!/bin/sh
+
+volume() {
+  case "$1" in
+  "MUTE") echo "婢 $1" ;;
+  *[0-9]*) echo "墳 $1" ;;
+  *) echo "?" ;;
+  esac
+}
+
+# retries a command up to 10 times
+try_until_succeed() {
+  count=0
+  while ! "$@" 2>/dev/null; do
+    sleep 1
+    count=$((count + 1))
+    [ "$count" -ge 10 ] && break
+  done
+}
+
+volume
+# pamixer takes some time to register the default sink, so we retry querying
+# the current volume level at regular intervals until the command succeeds
+# TODO: write script in nix and set pamixer to store path (for all occurrences)
+try_until_succeed pamixer --get-volume >>/tmp/volume
+
+# also check if we are currently muted
+[ "$(pamixer --get-mute)" = "true" ] && echo "MUTE" >> /tmp/volume
+
+# continuously monitor volume status log and regenerate output on changes
+tail -F /tmp/volume | while read -r k; do
+  volume "$k"
+done

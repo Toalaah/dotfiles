@@ -1,0 +1,31 @@
+#! /usr/bin/env cached-nix-shell
+#! nix-shell -i bash -p brightnessctl libnotify
+# shellcheck shell=bash
+# vim: ft=sh
+
+set -xe
+
+TIMEOUT=750
+
+[[ "$#" -ne 1 ]] && echo "Please supply a flag [i/d]" && exit 1
+
+curr_brightness=$(brightnessctl -m | cut -d',' -f4)
+curr_brightness=${curr_brightness//\%/}
+delta=5
+
+if [[ "$1" = "-i" ]]; then
+  brightnessctl s "$delta"%+
+  notify-send -t $TIMEOUT "Brightness increased ($((curr_brightness+delta))%)"
+  exit 0
+fi
+
+# decreasing brightness requires some more thought as decreasing "below" 0%
+# forces the system to go into sleep mode, preventing further keyboard inputs
+# until the lid is closed and opened again
+if [[ "$1" = "-d" ]]; then
+  [[ $((curr_brightness-delta)) -gt 0 ]] && brightnessctl s "$delta"%-
+  notify-send -t $TIMEOUT "Brightness decreased ($((curr_brightness-delta))%)"
+  exit 0
+fi
+
+notify-send -u low "Warning: already at min brightness!" && exit 1

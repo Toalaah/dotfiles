@@ -1,0 +1,52 @@
+(include "./pollers.yuck")
+(include "./modules/battery.yuck")
+(include "./modules/control_panel.yuck")
+(include "./modules/date.yuck")
+(include "./modules/bspwm.yuck")
+(include "./modules/volume.yuck")
+
+(defwidget bar_section [alignment]
+  (box :orientation "h"
+       :space-evenly "false"
+       :halign alignment
+       (children)))
+
+(defwidget bar []
+  (box :class "bar"
+       :orientation "h"
+    ; left widgets
+    (bar_section :alignment "start"
+      (workspaces))
+    ; center widgets
+    (bar_section :alignment "center"
+      (date))
+    ; right widgets
+    (bar_section :alignment "end"
+       (control_panel (layout))
+       (battery)
+       (volume)
+       )
+  )
+)
+
+(defwindow cal
+   :wm-ignore true
+   :geometry (geometry :x "0px"
+                       :y "-3%"
+                       :width "16%"
+                       :height "14%"
+                       :anchor "bottom center")
+      (calendar :class "calendar" :show-heading false)
+)
+
+(defwindow bar
+   :geometry (geometry :x "0px"
+                       :y "0px"
+                       :width "100%"
+                       :height "2.6%"
+                       :anchor "bottom center")
+   :reserve (struts :distance "2.6%" :side "bottom")
+   :windowtype "dock"
+   :monitor 0
+   :wm-ignore false
+   (bar))

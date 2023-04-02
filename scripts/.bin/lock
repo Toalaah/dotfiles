@@ -1,3 +1,0 @@
-#!/bin/sh
-
-betterlockscreen --lock --off 10 --lock blur -- --ignore-empty

@@ -1,7 +1,0 @@
-set statusbar-h-padding 0
-set statusbar-v-padding 0
-set page-padding 10
-map f toggle_fullscreen
-map [fullscreen] f toggle_fullscreen
-map R rotate
-map i recolor

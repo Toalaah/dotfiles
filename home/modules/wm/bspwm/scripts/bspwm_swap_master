@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# this script swaps the current node with the largest local (i.e "master")
+# node. If the current node is the "master" node, the current node is instead
+# swapped with the last node.
+
+biggest_local="$(bspc query -N -n biggest.local)"
+focused="$(bspc query -N -n focused)"
+
+if [ "$biggest_local" == "$focused" ]; then
+  bspc node --swap last.local --follow
+else
+  bspc node --swap "$biggest_local" --follow
+fi
+
+exit 0

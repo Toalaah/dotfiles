@@ -1,0 +1,15 @@
+(defvar control_panel_visible false)
+(defwidget control_panel []
+  (box :space-evenly false
+    (revealer :reveal control_panel_visible
+              :transition "slideleft"
+              :duration "300ms"
+              :style "margin-right 0.4em;"
+      (box (children)))
+
+      (box :style "margin-right: 0.4em;"
+        (eventbox :onclick "eww update control_panel_visible=${ !control_panel_visible }"
+                  :class "texttdim" "")
+      )
+  )
+)

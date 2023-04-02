@@ -1,0 +1,41 @@
+#!/bin/sh
+
+gap_delta=${GAP_DELTA:-10}
+gap_default=${GAP_DEFAULT:-8}
+
+usage() {
+  cat <<EOF
+usage: $(basename "$0") <increase|decrease|reset>
+  increase : increase gap size (+$gap_delta)
+  decrease : decrease gap size (-$gap_delta)
+  reset    : reset gap size to original value ($gap_default)
+EOF
+}
+
+[ "$#" -ne 1 ] && usage && exit 1
+
+increase_gaps() {
+  bspc config -d focused window_gap \
+    $(($(bspc config -d focused window_gap) + gap_default)) &&
+    exit 0
+}
+
+decrease_gaps() {
+  gap=$(($(bspc config -d focused window_gap) - gap_default))
+  bspc config -d focused window_gap $((gap < 0 ? 0 : gap)) && exit 0
+}
+
+case "$1" in
+  "reset")
+    bspc config -d focused window_gap "$gap_default" && exit 0
+    ;;
+  "increase")
+    increase_gaps && exit 0
+    ;;
+  "decrease")
+    decrease_gaps && exit 0
+    ;;
+  *)
+    usage && exit 1
+    ;;
+esac
