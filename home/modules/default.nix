@@ -15,6 +15,7 @@
     ./shells/zsh
     ./terminals/alacritty
     ./terminals/st
+    ./tools/binscripts
     ./tools/dmenu
     ./tools/fzf
     ./tools/ripgrep
