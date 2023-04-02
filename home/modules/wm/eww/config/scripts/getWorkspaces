@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#
+
 print_workspaces() {
 
 local yuckCode; yuckCode=""
@@ -13,14 +13,16 @@ j=1; eval $(for i in $(bspc query -D --names); do
 
 # check if Occupied
 j=1; eval $(for i in $(bspc query -D --names); do
-  echo "o$j"=$(bspc query -D -d .occupied --names | grep "$ws$j")
+  var=ws$j
+  echo "o$j"=$(bspc query -D -d .occupied --names | grep -q "${!var}" && echo $j)
   j=$((j+1))
   done
 )
 
 # check if Focused
 j=1; eval $(for i in $(bspc query -D --names); do
-  echo "f$j"=$(bspc query -D -d focused --names | grep "$ws$j")
+  var=ws$j
+  echo "f$j"=$(bspc query -D -d focused --names | grep -q "${!var}" && echo $j)
   j=$((j+1))
   done
 )
@@ -30,7 +32,7 @@ yuckCode='(box :class "workspaces" :spacing 10 :orientation "h" :valign "center"
 j=1; for i in $(bspc query -D --names); do
   isfocussedVar=f$j
   isoccupiedVar=o$j
-  yuckCode=$(appendNewLineString "(eventbox :class \"event-listener isfocussed${!isfocussedVar} isoccupied${!isoccupiedVar}\" :onclick \"bspc desktop -f $ws$j\" (label :class \"square-content\" :text \"$i\"))")
+  yuckCode=$(appendNewLineString "(eventbox :class \"event-listener isfocussed${!isfocussedVar} isoccupied${!isoccupiedVar}\" :onclick \"bspc desktop -f ^$j\" (label :class \"square-content\" :text \"$i\"))")
   j=$((j+1))
 done
 
