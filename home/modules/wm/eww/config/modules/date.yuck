@@ -1,0 +1,11 @@
+(defpoll date_short :interval "30s" :initial "" `date '+%H:%M'`)
+(defpoll date_long  :interval "30s" :initial "" `date '+%H:%M %a %b %d'`)
+(defvar date_expanded false)
+(defvar calendar_visible false)
+(defwidget date []
+  (eventbox
+    :class   "textt"
+    :onrightclick "eww update date_expanded=${!date_expanded}"
+    :onclick "eww open --toggle cal; eww update calendar_visible=${!calendar_visible}"
+    {date_expanded ? date_long : date_short})
+)

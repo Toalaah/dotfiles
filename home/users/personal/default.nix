@@ -72,12 +72,17 @@ in {
     };
   };
 
-  # TODO: xresources module
   wm = {
-    # bspwm = {
-    #   enable = true;
-    #   numDesktops = 6;
-    # };
+    general = {
+      displayManager = "xinit";
+      # TODO: xresources module
+      # xresources.enable = true;
+    };
+    bspwm = {
+      enable = true;
+      numDesktops = 6;
+      statusBar = "eww";
+    };
     sxhkd.enable = true;
   };
 

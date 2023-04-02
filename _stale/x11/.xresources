@@ -1,5 +1,3 @@
-# include PYWAL_
-
 ! st settings
 st.alpha: 0.95
 st.borderpx: 5

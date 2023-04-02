@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+step=20
+
+resize() {
+  bspc node -z "$dir" "$x" "$y" || bspc node -z "$dir_invert" "$x" "$y"
+}
+
+case "$2" in
+  up)
+    dir=top
+    dir_invert=bottom
+    x=0
+    y="-$step"
+    ;;
+  down)
+    dir=bottom
+    dir_invert=top
+    x=0
+    y="$step"
+    ;;
+  left)
+    dir=left
+    dir_invert=right
+    x="-$step"
+    y=0
+    ;;
+  right)
+    dir=right
+    dir_invert=left
+    x="$step"
+    y=0
+    ;;
+  *)
+    echo "Invalid direction passed"
+    exit 1
+    ;;
+esac
+
+if bspc query -N -n focused.floating >/dev/null; then
+  if [[ "$1" == "contract" ]]; then
+    bspc node -z "$dir_invert" "$x" "$y"
+  else
+    resize
+  fi
+else
+  resize
+fi

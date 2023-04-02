@@ -1,0 +1,89 @@
+@import "styles";
+
+.bar {
+  background-color: $bg;
+  font-family: SF Mono;
+  font-size: 1em;
+  font-weight: bold;
+  color: $fg;
+}
+
+.textt {
+  color: $fg;
+  transition: color 0.2s
+}
+
+.textt:hover {
+  color: $fgDim;
+}
+
+.texttdim {
+  color: $bgSecondary;
+  transition: color 0.2s
+}
+
+.texttdim:hover {
+  color: $fg;
+}
+
+
+.square {
+  background-color: $contrastbg;
+  margin-top: 0.4em;
+  .event-listener {
+    color: $black;
+    background-color: $bgSecondary;
+    border-radius: 0.2em;
+    transition: background-color 0.2s;
+    .square-content {
+      padding-left: 0.4em;
+      padding-right: 0.4em;
+    }
+  }
+  .event-listener:hover {
+    color: $fgDim;
+  }
+}
+
+.workspaces {
+  @extend .square;
+  margin-left: 0.4em;
+
+  .isoccupied1, .isoccupied2, .isoccupied3, .isoccupied4, .isoccupied5, .isoccupied6 {
+    color: $fg;
+  }
+  .isfocussed1, .isfocussed2, .isfocussed3, .isfocussed4, .isfocussed5, .isfocussed6 {
+    color: $blue;
+  }
+}
+
+.calendar {
+  background-color: $contrastbg;
+  color: $fg;
+  font-family: SF Mono;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+calendar:selected {
+  color: $cyan;
+}
+
+calendar.header {
+  color: $blue;
+  font-weight: bold;
+}
+
+calendar.button {
+  color: $blue;
+}
+
+calendar.highlight {
+  color: $blue;
+  font-weight: bold;
+}
+
+calendar:indeterminate {
+  color: rgba(205, 219, 249, 0.3);
+}
+

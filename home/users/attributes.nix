@@ -54,6 +54,11 @@ with lib; {
       default = null;
       type = types.nullOr types.str;
     };
+    primaryUser.windowManager = mkOption {
+      description = "Primary user's window manager / desktop environment";
+      default = null;
+      type = types.nullOr types.str;
+    };
     primaryUser.locale = mkOption {
       description = "User's default locale";
       default = "en_US.UTF-8";

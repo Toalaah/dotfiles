@@ -1,0 +1,19 @@
+#!/bin/sh
+
+get_layout() {
+  layout=$(bspc query -T -d focused | jq -r .layout)
+
+  case "$layout" in
+  "tiled") echo "﩯" ;;
+  "monocle")
+    num_nodes=$(bspc query -N -d focused -n .leaf | wc -l)
+    echo "[$num_nodes]"
+    ;;
+  *) echo "?" ;;
+  esac
+}
+
+get_layout
+bspc subscribe desktop node | while read -r _; do
+  get_layout
+done

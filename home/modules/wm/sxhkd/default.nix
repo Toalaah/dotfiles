@@ -17,6 +17,7 @@ in {
     (mkIf cfg.enable {
       services.sxhkd = {
         enable = true;
+        # base keybindings, non-specific to any window manager
         keybindings = {
           "super + Escape" = "pkill -USR1 -x sxhkd; ${pkgs.libnotify}/bin/notify-send 'Keybindings reloaded'";
           "super + Return" = "${terminal}";

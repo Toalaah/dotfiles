@@ -1,0 +1,9 @@
+(defwidget battery []
+  (box :visible { EWW_BATTERY ?: false } :class "square" :style "margin-right: 0.4em;" :valign "start"
+    (eventbox :class "event-listener"
+      (label :style "padding-right: 0.4em; padding-left: 0.4em;"
+             :text "${battery_icon} ${EWW_BATTERY.BAT0.capacity}%")
+    )
+  )
+)
+
