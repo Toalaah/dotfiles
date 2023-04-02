@@ -10,6 +10,7 @@
     ./misc/services/picom
     ./misc/services/redshift
     ./productivity/zathura
+    ./security/gpg
     ./shells/aliases
     ./shells/zsh
     ./terminals/alacritty

@@ -31,6 +31,11 @@ in {
     colorScheme = "flamingo";
   };
 
+  security.gpg = {
+    enable = true;
+    sshSupport = true;
+  };
+
   misc.services = {
     redshift = {
       enable = true;
