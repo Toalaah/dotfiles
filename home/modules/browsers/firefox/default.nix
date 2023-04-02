@@ -19,6 +19,12 @@ in {
   # TODO: integrate with bookmarks stored in user attributes
   config = mkMerge [
     (mkIf cfg.enable {
+      assertions = [
+        {
+          assertion = ! config.browsers.chromium.enable;
+          message = "firefox: only one browser should be enabled";
+        }
+      ];
       attributes.primaryUser.browser = "${config.programs.firefox.package}/bin/firefox";
       home.sessionVariables.BROWSER = "${config.programs.firefox.package}/bin/firefox";
       programs.firefox = {

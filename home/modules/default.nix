@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./browsers/chromium
     ./browsers/firefox
     ./dev/git
     ./dev/k8s
