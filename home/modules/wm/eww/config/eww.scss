@@ -45,15 +45,20 @@
   }
 }
 
+/*
+Change to the number of workspaces you wish to support
+*/
+$numWS: 9;
 .workspaces {
   @extend .square;
   margin-left: 0.4em;
 
-  .isoccupied1, .isoccupied2, .isoccupied3, .isoccupied4, .isoccupied5, .isoccupied6 {
-    color: $fg;
-  }
-  .isfocussed1, .isfocussed2, .isfocussed3, .isfocussed4, .isfocussed5, .isfocussed6 {
-    color: $blue;
+  @for $i from 1 through $numWS {
+      /*
+      Class names should match those specified in ./scripts/getWorkspaces
+      */
+      .isoccupied#{$i} { color: $fg; }
+      .isfocussed#{$i} { color: $blue; }
   }
 }
 
