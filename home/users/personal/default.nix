@@ -24,6 +24,13 @@ in {
 
   shells.zsh.enable = true;
 
+  misc.applications.spotify = {
+    enable = true;
+    windowManagerSupport = true;
+    theme = "catppuccin-mocha";
+    colorScheme = "flamingo";
+  };
+
   misc.services = {
     redshift = {
       enable = true;

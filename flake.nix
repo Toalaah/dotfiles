@@ -60,6 +60,7 @@
           hostname = "lilith";
           primaryUser = users.personal;
           specialArgs = inputs;
+          config = {allowUnfree = true;};
           inherit overlays;
         };
       };
@@ -78,6 +79,7 @@
           personal = {
             inherit overlays system;
             user = users.personal;
+            config = {allowUnfree = true;};
             specialArgs = inputs;
           };
         };

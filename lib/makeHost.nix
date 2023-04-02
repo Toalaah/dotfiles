@@ -5,10 +5,10 @@
   overlays ? [],
   specialArgs ? {},
   useHomeManager ? true,
+  config ? {},
 }: let
   pkgs = import nixpkgs {
-    inherit system overlays;
-    config = {};
+    inherit system overlays config;
   };
   baseModule = import ./mkBaseModule.nix {inherit hostname;};
   userModule = primaryUser.attributes;

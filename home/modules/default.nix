@@ -5,6 +5,7 @@
     ./dev/k8s
     ./dev/tmux
     ./editors/neovim
+    ./misc/applications/spotify
     ./misc/services/dunst
     ./misc/services/picom
     ./misc/services/redshift
