@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  zsh-nix-shell,
   ...
 }:
 with lib; let
@@ -36,6 +37,7 @@ in {
   config = let
     defaultZshSettings = {
       enable = lib.mkForce true;
+      enableCompletion = true;
       dotDir = ".config/zsh";
       enableSyntaxHighlighting = cfg.enableSyntaxHighlighting;
       enableAutosuggestions = cfg.enableAutosuggestions;
@@ -58,6 +60,13 @@ in {
         ignoreSpace = true;
         size = 50000;
       };
+      plugins = [
+        {
+          name = "zsh-nix-shell";
+          file = "nix-shell.plugin.zsh";
+          src = zsh-nix-shell;
+        }
+      ];
     };
   in
     mkMerge [

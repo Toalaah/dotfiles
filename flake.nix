@@ -32,6 +32,11 @@
       flake = false;
     };
 
+    zsh-nix-shell = {
+      url = "github:chisui/zsh-nix-shell";
+      flake = false;
+    };
+
     # Temporary fix for unreproducable build. See nix-community/neovim-nightly-overlay #164
     nixpkgs-neovim-nightly.url = "github:nixos/nixpkgs?rev=fad51abd42ca17a60fc1d4cb9382e2d79ae31836";
     neovim-nightly = {
