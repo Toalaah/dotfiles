@@ -57,9 +57,6 @@
 
   programs.zsh.enable = true;
   environment.pathsToLink = ["/share/zsh"];
-  # TODO: really no reason to never not use cached-nix-shell. in this sense it
-  # may be wise to expose this as a toggleable option in top-level makeHost fn
-  environment.systemPackages = with pkgs; [cached-nix-shell];
 
   i18n.defaultLocale = "en_US.UTF-8";
   console = {

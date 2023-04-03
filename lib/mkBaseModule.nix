@@ -20,4 +20,5 @@ in {
     shell = user.shell;
     extraGroups = ["wheel" "video" "audio"] ++ user.additionalGroups;
   };
+  environment.systemPackages = [pkgs.cached-nix-shell];
 }

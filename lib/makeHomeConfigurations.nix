@@ -15,7 +15,10 @@
         inherit (user) system overlays;
         config = user.config or {};
       };
-      modules = [user.user.homeConfig];
+      modules = [
+        user.user.homeConfig
+        ({pkgs, ...}: {home.packages = [pkgs.cached-nix-shell];})
+      ];
       extraSpecialArgs = user.specialArgs;
     };
 in
