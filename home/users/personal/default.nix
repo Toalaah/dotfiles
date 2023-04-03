@@ -20,6 +20,8 @@ in {
     jetbrains-mono
   ];
 
+  fonts.fontconfig.enable = true;
+
   browsers.firefox.enable = true;
 
   shells.zsh.enable = true;
