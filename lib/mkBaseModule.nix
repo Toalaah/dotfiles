@@ -1,6 +1,7 @@
 {hostname}: {
   config,
   lib,
+  pkgs,
   ...
 }: let
   user = config.attributes.primaryUser;
