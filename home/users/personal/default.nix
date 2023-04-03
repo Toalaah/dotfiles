@@ -84,6 +84,11 @@ in {
     };
   };
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   wm = {
     general = {
       displayManager = "xinit";

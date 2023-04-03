@@ -29,12 +29,12 @@
       "nixpkgs=${builtins.toString pkgs.path}"
     ];
     package = pkgs.nixFlakes;
-    extraOptions = ''
-      keep-outputs = true
-      keep-derivations = true
-      experimental-features = nix-command flakes
-    '';
-    settings.auto-optimise-store = true;
+    settings = {
+      keep-outputs = true;
+      keep-derivations = true;
+      experimental-features = "nix-command flakes";
+      auto-optimise-store = true;
+    };
     gc.automatic = false;
   };
 
@@ -55,6 +55,7 @@
     pulse.enable = true;
   };
 
+  programs.zsh.enable = true;
   environment.pathsToLink = ["/share/zsh"];
   # TODO: really no reason to never not use cached-nix-shell. in this sense it
   # may be wise to expose this as a toggleable option in top-level makeHost fn
