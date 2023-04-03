@@ -23,7 +23,7 @@ get_bookmarks_firefox() {
     "SELECT mb.title,mp.url from moz_bookmarks mb JOIN moz_places mp on mb.fk=mp.id;"
 }
 
-case "$BROWSER" in
+case "$(basename "$BROWSER")" in
 "chromium") get_bookmarks() { get_bookmarks_chromium; } ;;
 "firefox") get_bookmarks() { get_bookmarks_firefox; } ;;
 *) notify "Unsupported browser"; exit 1 ;;
