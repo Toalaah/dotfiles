@@ -13,6 +13,7 @@ in {
   config = mkMerge [
     (mkIf cfg.enable {
       programs.tmux = {
+        enable = true;
         terminal = "screen-256color";
         historyLimit = 50000;
         keyMode = "vi";
