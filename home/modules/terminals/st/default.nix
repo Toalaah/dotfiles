@@ -20,6 +20,7 @@ in {
       ];
       # TODO: expose more options in upstream flake, ex: changing font-size, cursor, ...
       attributes.primaryUser.terminal = "${st.defaultPackage.${system}}/bin/st";
+      home.sessionVariables.TERMINAL = "${st.defaultPackage.${system}}/bin/st";
       home.packages = [st.defaultPackage.${system}];
     })
   ];
