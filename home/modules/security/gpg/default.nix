@@ -28,7 +28,7 @@ in {
       programs.gpg = {
         enable = true;
         settings = {
-          homeDir = "${config.xdg.dataHome}/gnupg";
+          homedir = "${config.xdg.dataHome}/gnupg";
           keyid-format = "long";
           with-fingerprint = true;
           keyserver = "hkps://keys.openpgp.org";
