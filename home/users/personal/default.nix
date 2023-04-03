@@ -39,6 +39,7 @@ in {
   };
 
   misc.services = {
+    picom.enable = true;
     redshift = {
       enable = true;
       autoDetermineLocation = true;
