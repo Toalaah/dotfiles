@@ -18,7 +18,7 @@ in {
       enable = mkEnableOption "screen locking";
       command = mkOption {
         type = types.str;
-        default = "${pkgs.xss-lock}/bin/xss-lock ${../sxhkd/scripts/lock-screen} &";
+        default = "${pkgs.xss-lock}/bin/xss-lock ${../tools/binscripts/scripts/lock-screen} &";
         description = "command to lock the screen";
       };
       timeout = mkOption {

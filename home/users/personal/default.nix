@@ -92,6 +92,7 @@ in {
   wm = {
     general = {
       displayManager = "xinit";
+      screenLock.enable = true;
       # TODO: xresources module
       # xresources.enable = true;
     };
