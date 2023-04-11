@@ -7,7 +7,7 @@
 in {
   imports = [../../modules ../attributes.nix ./secrets];
 
-  xresources.properties."Xft.dpi" = 144;
+  # xresources.properties."Xft.dpi" = 144;
 
   home = {
     username = user.name;
@@ -18,6 +18,8 @@ in {
   home.packages = with pkgs; [
     (nerdfonts.override {fonts = ["JetBrainsMono"];})
     jetbrains-mono
+    sf-mono
+    xclip # fix clipboard not interoping w/ vim
   ];
 
   fonts.fontconfig.enable = true;
