@@ -1,8 +1,10 @@
-#!/bin/sh
+#! /usr/bin/env cached-nix-shell
+#! nix-shell -i bash -p pass
+# shellcheck shell=bash
+# vim: ft=sh
 
-# requirements: pass, dmenu, find
 # Change this variable to the (absolute) path of your password-store
-PASS_DIR="$HOME/.password-store/"
+PASS_DIR="${PASSWORD_STORE_DIR:-$HOME/.password-store/}"
 
 cd "$PASS_DIR" && find . -name "*.gpg" | sed -e 's|\./||' -e 's|\.gpg$||' | dmenu -i -c -l 20 | xargs pass -c
 
