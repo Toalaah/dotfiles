@@ -2,7 +2,7 @@
   description = "Localhost configurations";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware";
     flake-utils.url = "github:numtide/flake-utils";
     nur.url = "github:nix-community/nur";
@@ -37,11 +37,9 @@
       flake = false;
     };
 
-    # Temporary fix for unreproducable build. See nix-community/neovim-nightly-overlay #164
-    nixpkgs-neovim-nightly.url = "github:nixos/nixpkgs?rev=fad51abd42ca17a60fc1d4cb9382e2d79ae31836";
     neovim-nightly = {
       url = "github:neovim/neovim/nightly/?dir=contrib";
-      inputs.nixpkgs.follows = "nixpkgs-neovim-nightly";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -63,6 +61,13 @@
       nixosConfigurations = with self.lib; {
         lilith = makeHost {
           hostname = "lilith";
+          primaryUser = users.personal;
+          specialArgs = inputs;
+          config = {allowUnfree = true;};
+          inherit overlays;
+        };
+        gaige = makeHost {
+          hostname = "gaige";
           primaryUser = users.personal;
           specialArgs = inputs;
           config = {allowUnfree = true;};
