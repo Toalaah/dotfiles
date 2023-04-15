@@ -1,46 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-print_workspaces() {
-
-local yuckCode; yuckCode=""
-appendNewLineString() { printf "$yuckCode $1"; }
-
-j=1; eval $(for i in $(bspc query -D --names); do
-  echo "ws$j"="$i"
-  j=$((j+1))
-  done
-)
-
-# check if Occupied
-j=1; eval $(for i in $(bspc query -D --names); do
-  var=ws$j
-  echo "o$j"=$(bspc query -D -d .occupied --names | grep -q "${!var}" && echo $j)
-  j=$((j+1))
-  done
-)
-
-# check if Focused
-j=1; eval $(for i in $(bspc query -D --names); do
-  var=ws$j
-  echo "f$j"=$(bspc query -D -d focused --names | grep -q "${!var}" && echo $j)
-  j=$((j+1))
-  done
-)
-
-# numDesktops=
-yuckCode='(box :class "workspaces" :spacing 10 :orientation "h" :valign "center" :halign "center" :space-evenly "false"'
-j=1; for i in $(bspc query -D --names); do
-  isfocussedVar=f$j
-  isoccupiedVar=o$j
-  yuckCode=$(appendNewLineString "(eventbox :class \"event-listener isfocussed${!isfocussedVar} isoccupied${!isoccupiedVar}\" :onclick \"bspc desktop -f ^$j\" (label :class \"square-content\" :text \"$i\"))")
-  j=$((j+1))
-done
-
-yuckCode=$(appendNewLineString ")")
-echo "$yuckCode"
+workspaces() {
+  bspc query -T -m | jq -c -M '.focusedDesktopId as $focusedDesktop | .desktops | map(. + {focused: (.id == $focusedDesktop), occupied: (.focusedNodeId != 0)})'
 }
 
-print_workspaces
-bspc subscribe all | while read -r _ ; do
-print_workspaces
+workspaces
+bspc subscribe desktop node | while read -r _ ; do
+  workspaces
 done

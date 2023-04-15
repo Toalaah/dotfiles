@@ -19,7 +19,7 @@
     fsType = "ext4";
   };
 
-  # TODO: this needs to be /nix/store
+  # TODO: this might need to be /nix/store
   fileSystems."/nix" = {
     device = "/dev/disk/by-uuid/b1405977-f015-4872-9e39-dc1decf49505";
     fsType = "ext4";
@@ -40,6 +40,6 @@
   networking.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

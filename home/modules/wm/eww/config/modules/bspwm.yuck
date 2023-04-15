@@ -1,8 +1,11 @@
-(deflisten workspaces "scripts/getWorkspaces")
-(defwidget workspaces [] (literal :content workspaces))
+(deflisten workspaces :initial "[]" "scripts/getWorkspaces")
+(defwidget workspaces []
+  (box :class "workspaces" :spacing 10 :orientation "h" :valign "center" :halign "center" :space-evenly "false"
+    (for workspace in workspaces
+      (eventbox :class "event-listener ${workspace.focused ? "workspace-focused" : ""} ${workspace.occupied ? "workspace-occupied" : ""}"
+                :onclick "bspc desktop -f ${workspace.name}" (label :class "square-content" :text "${workspace.name}")))))
 
 (deflisten layout "scripts/getLayout")
-
 (defwidget layout []
   (box :class "square" :style "margin-right: 0.4em;" :valign "start"
     (eventbox :class "event-listener" :onclick "bspc desktop -l next"
