@@ -70,6 +70,7 @@ in {
             "browser.discovery.enabled" = false;
             "browser.compactmode.show" = true;
             "browser.startup.homepage" = "about:blank";
+            "browser.sessionstore.resume_from_crash" = false;
           };
         };
       };
