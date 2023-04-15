@@ -29,17 +29,21 @@ in {
     };
   };
 
-  config = mkMerge [
-    (mkIf (cfg.displayManager == "xinit") {
-      assertions = [
+  config = let
+    xsession = "${config.home.homeDirectory}/.xsession";
+  in
+    mkMerge [
+      (mkIf (cfg.displayManager == "xinit")
         {
-          assertion = currentWindowManager != null;
-          message = "a window manager / desktop environment must be specified";
-        }
-      ];
-      home.file.".xinitrc".text = ''
-        exec ${currentWindowManager}
-      '';
-    })
-  ];
+          assertions = [
+            {
+              assertion = currentWindowManager != null;
+              message = "a window manager / desktop environment must be specified";
+            }
+          ];
+          # allows using xinitrc / sxrc
+          home.file.".xinitrc".source = config.lib.file.mkOutOfStoreSymlink xsession;
+          xdg.configFile."sx/sxrc".source = config.lib.file.mkOutOfStoreSymlink xsession;
+        })
+    ];
 }

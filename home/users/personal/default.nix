@@ -110,5 +110,12 @@ in {
     sxhkd.enable = true;
   };
 
+  xsession = {
+    enable = true;
+    initExtra = ''
+      ${pkgs.autorandr}/bin/autorandr --change
+    '';
+  };
+
   productivity.zathura.enable = true;
 }

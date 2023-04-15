@@ -76,12 +76,21 @@
     videoDrivers = ["nvidia"];
     layout = "us";
     displayManager.startx.enable = true;
-    # xrandrHeads = [
-    #   {
-    #     output = "DP-4";
-    #     primary = true;
-    #   }
-    # ];
+    xrandrHeads = [
+      {
+        output = "DP-4";
+        primary = true;
+        monitorConfig = ''
+          Option "DPMS" "false"
+        '';
+      }
+    ];
+    resolutions = [
+      {
+        x = 2880;
+        y = 1800;
+      }
+    ];
   };
 
   services.autorandr = {
