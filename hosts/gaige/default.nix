@@ -43,7 +43,6 @@
   };
 
   sound.enable = true;
-
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -55,8 +54,7 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
-    # TODO: console font is still tiny on hidpi display
-    font = "${pkgs.terminus_font}/share/consolefonts/ter-132n.psf.gz";
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-114n.psf.gz";
     packages = [pkgs.terminus_font];
     useXkbConfig = true;
     earlySetup = true;
@@ -71,24 +69,32 @@
     opengl.enable = true;
   };
   services.xserver = {
+    # TODO: checkout xautolock
     enable = true;
-    # dpi = 150;
     videoDrivers = ["nvidia"];
     layout = "us";
-    displayManager.startx.enable = true;
+    # config is managed by home-maanger
+    windowManager.bspwm.enable = true;
+    displayManager.defaultSession = "none+bspwm";
+    displayManager.gdm.enable = true;
+    libinput.enable = true;
+    serverFlagsSection = ''
+      Option "BlankTime" "0"
+      Option "StandbyTime" "0"
+      Option "SuspendTime" "0"
+      Option "OffTime" "0"
+      Option "DPMS" "off"
+    '';
     xrandrHeads = [
       {
         output = "DP-4";
         primary = true;
-        monitorConfig = ''
-          Option "DPMS" "false"
-        '';
       }
     ];
     resolutions = [
       {
-        x = 2880;
-        y = 1800;
+        x = 3440;
+        y = 1440;
       }
     ];
   };
