@@ -49,10 +49,7 @@ in {
     dunst.enable = true;
   };
 
-  terminals.alacritty = {
-    enable = true;
-    theme = "rose-pine";
-  };
+  terminals.st.enable = true;
 
   tools = {
     dmenu = {
