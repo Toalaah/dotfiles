@@ -1,4 +1,7 @@
-{prev, gtk-layer-shell}:
+{
+  prev,
+  gtk-layer-shell,
+}:
 prev.eww.overrideAttrs (old: rec {
   buildInputs = old.buildInputs ++ [gtk-layer-shell];
   version = "e76206817de1cb86ec431dcff7d4b04c8b7d36fc";
