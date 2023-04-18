@@ -23,6 +23,14 @@
   background-color: #0B0F10 !important;
 }
 
+/* Remove close button*/
+.titlebar-buttonbox-container {
+  display:none
+}
+.titlebar-spacer[type="post-tabs"] {
+  display:none
+}
+
 window,
 #main-window,
 #toolbar-menubar,
@@ -103,10 +111,6 @@ window,
 
 .tab-secondary-label {
   display: none !important;
-}
-
-.tabbrowser-tab .tab-label-container {
-  margin-inline-end: 7px !important;
 }
 
 .tab-label-container {
