@@ -50,7 +50,9 @@
   };
 
   programs.zsh.enable = true;
+  programs.steam.enable = true;
   environment.pathsToLink = ["/share/zsh"];
+  environment.systemPackages = with pkgs; [discord steam-run];
 
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
