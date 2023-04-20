@@ -45,6 +45,7 @@ vim.opt.wrap = false
 
 vim.g.tex_flavor = 'latex'
 vim.g.mapleader = ' '
+vim.g.editorconfig = true
 
 -- prevent loading builtin plugins
 for _, plugin in ipairs {
