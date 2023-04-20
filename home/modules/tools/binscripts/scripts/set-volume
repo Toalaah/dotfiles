@@ -3,35 +3,17 @@
 # shellcheck shell=bash
 # vim: ft=sh
 
-# Volume control script for use with pamixer / pulseaudio. Script takes a
-# single flag (desired volume operation) and modifies the volume level based on
-# the input. Also outputs volume information to temporary file for other
-# processes such as statusbars to listen to.
+[ "$#" -lt 1 ] && exit 1
 
-FILE=/tmp/volume
+vol_arg="${2:-5}"
 
-toggle_mute() {
-  pamixer --toggle-mute
-  if [ "$(pamixer --get-mute)" = "true" ]; then
-    echo "MUTE" >>"$FILE"
-  else
-    pamixer --get-volume >>"$FILE"
-  fi
-}
-
-if [ "$#" -ne 1 ]; then
-  exit 1
-fi
-
-if [ "$1" = "-m" ]; then
-  toggle_mute
-  exit $?
-elif [ "$1" = "-i" ]; then
-  pamixer -i 5
-elif [ "$1" = "-d" ]; then
-  pamixer -d 5
-fi
-
-pamixer --unmute && pamixer --set-volume "$1"
-
-pamixer --get-volume >>"$FILE"
+case "$1" in
+  "-m"|"--mute"|"mute")
+    pamixer --toggle-mute; exit $? ;;
+  "-i"|"up")
+    pamixer -i $vol_arg; exit $? ;;
+  "-d"|"down")
+    pamixer -d $vol_arg; exit $? ;;
+  *)
+    pamixer --unmute && pamixer --set-volume "$1" ;;
+esac
