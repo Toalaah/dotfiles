@@ -58,7 +58,7 @@ in {
           alwaysResetDesktops = true;
           settings = {
             border_width = 2;
-            focused_border_colour = "#FFFFFF";
+            focused_border_color = "#FFFFFF";
             window_gap = 4;
             split_ratio = 0.50;
             focus_follows_pointer = true;
