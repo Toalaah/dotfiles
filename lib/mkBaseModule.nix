@@ -19,7 +19,9 @@ in {
     isNormalUser = true;
     uid = 1000;
     shell = user.shell;
+    description = user.fullName;
     extraGroups = ["wheel" "video" "audio"] ++ user.additionalGroups;
+    openssh.authorizedKeys.keys = user.sshKeys;
   };
   environment.systemPackages = [pkgs.cached-nix-shell];
 }
