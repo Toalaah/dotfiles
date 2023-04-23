@@ -1,6 +1,7 @@
 {pkgs, ...}: let
   bspc = "${pkgs.bspwm}/bin/bspc";
   eww = "${pkgs.eww}/bin/eww";
+  flameshot = "${pkgs.flameshot}/bin/flameshot";
 in {
   "super + shift + {q,r}" = "${bspc} {quit,wm -r}";
   "super + q" = "${bspc} node -c";
@@ -17,8 +18,8 @@ in {
   "super + ctrl + {h,j,k,l}" = "${./scripts/bspwm_resize} resize {left,down,up,right}";
   "super + ctrl + shift + {h,j,k,l}" = "${./scripts/bspwm_resize} contract {left, down, up, right}";
   "super + alt + {h,j,k,l}" = "${bspc} node -v {-15 0,0 15,0 -15,15 0}";
-  "super + shift + space" = "${pkgs.flameshot} gui -c";
+  "super + shift + space" = "${flameshot} gui -c";
   "super + comma" = ''
-    if [ $(${eww} get control_panel_visible) = "true" ]; then a=false; else a=true; fi; ${eww} update control_panel_visible=$a;
+    if [ $(${eww} get control-panel-visible) = "true" ]; then a=false; else a=true; fi; ${eww} update control-panel-visible=$a;
   '';
 }
