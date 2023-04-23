@@ -1,8 +1,9 @@
-#!/bin/bash
+#! /usr/bin/env cached-nix-shell
+#! nix-shell -i bash -p xdo
+# shellcheck shell=bash
+# vim: ft=sh
 
-is_visible() {
-  eww windows | grep bar | grep '\*'
-}
+is_visible() { eww windows | grep bar | grep '\*'; }
 
 root_id=$(xdo id -n root)
 
