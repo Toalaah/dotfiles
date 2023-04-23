@@ -62,8 +62,8 @@ in {
       };
       plugins = [
         {
-          name = "zsh-nix-shell";
-          file = "nix-shell.plugin.zsh";
+          name = "simple-zsh-nix-shell";
+          file = "simple-zsh-nix-shell.zsh";
           src = zsh-nix-shell;
         }
       ];

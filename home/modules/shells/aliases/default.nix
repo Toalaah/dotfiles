@@ -23,6 +23,7 @@ in {
           then user.editor
           else "${pkgs.neovim}/bin/nvim"
         );
+        "ns" = "nix-shell -p";
         ":wq" = "exit";
         ".." = "cd ../";
         "..." = "cd ../../";

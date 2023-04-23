@@ -33,7 +33,7 @@
     };
 
     zsh-nix-shell = {
-      url = "github:chisui/zsh-nix-shell";
+      url = "github:goolord/simple-zsh-nix-shell";
       flake = false;
     };
 
