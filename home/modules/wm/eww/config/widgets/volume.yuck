@@ -1,4 +1,4 @@
-(deflisten volume :initial "[]" "scripts/getVolume")
+(deflisten volume "scripts/getVolume")
 
 (defwidget volume []
   (box :class "square" :halign "center" :valign "center"
