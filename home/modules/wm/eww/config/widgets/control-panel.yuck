@@ -1,0 +1,15 @@
+(defvar control-panel-visible false)
+
+(defwidget _revealer-impl [open-from]
+  (box :style "margin-${open-from}: 0.4em;" :valign "center" :halign "center"
+    (eventbox :onclick "eww update control-panel-visible=${ !control-panel-visible }" :class "texttdim" "${open-from == "left" ? "" : ""}")))
+
+(defwidget control-panel [open-from]
+  (box :space-evenly false :valign "center" :halign "center"
+    (box :visible {open-from == "left"} (_revealer-impl :open-from "left"))
+    (revealer :reveal control-panel-visible
+              :transition "slide${open-from}"
+              :duration "300ms"
+              :style "margin-${open-from}: 0.4em;"
+              (box (children)))
+    (box :visible {open-from == "right"} (_revealer-impl :open-from "right"))))

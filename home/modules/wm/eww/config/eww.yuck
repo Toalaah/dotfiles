@@ -1,52 +1,18 @@
-(include "./pollers.yuck")
-(include "./modules/battery.yuck")
-(include "./modules/control_panel.yuck")
-(include "./modules/date.yuck")
-(include "./modules/bspwm.yuck")
-(include "./modules/volume.yuck")
-
-(defwidget bar_section [alignment]
-  (box :orientation "h"
-       :space-evenly "false"
-       :halign alignment
-       (children)))
-
-(defwidget bar []
-  (box :class "bar"
-       :orientation "h"
-    ; left widgets
-    (bar_section :alignment "start"
-      (workspaces))
-    ; center widgets
-    (bar_section :alignment "center"
-      (date))
-    ; right widgets
-    (bar_section :alignment "end"
-       (control_panel (layout))
-       (battery)
-       (volume)
-       )
-  )
-)
+(include "./widgets/battery.yuck")
+(include "./widgets/control-panel.yuck")
+(include "./widgets/date.yuck")
+(include "./widgets/bspwm.yuck")
+(include "./widgets/volume.yuck")
+(include "./widgets/status-bar.yuck")
 
 (defwindow cal
-   :wm-ignore true
-   :geometry (geometry :x "0px"
-                       :y "-3%"
-                       :width "16%"
-                       :height "14%"
-                       :anchor "bottom center")
-      (calendar :class "calendar" :show-heading false)
-)
+  :wm-ignore true
+  :geometry (geometry :x "0px" :y "3%" :width "10%" :height "10%" :anchor "top center")
+  (calendar :class "calendar" :show-heading true :show-week-numbers true))
 
 (defwindow bar
-   :geometry (geometry :x "0px"
-                       :y "0px"
-                       :width "100%"
-                       :height "2.6%"
-                       :anchor "bottom center")
-   :reserve (struts :distance "2.6%" :side "bottom")
-   :windowtype "dock"
-   :monitor 0
-   :wm-ignore false
-   (bar))
+  :geometry (geometry :x "0px" :y "0px" :width "100%" :height "2.2%" :anchor "top center")
+  :reserve (struts :distance "2.2%" :side "top")
+  :windowtype "dock"
+  :wm-ignore false
+  (bar :side-padding "0.8em"))

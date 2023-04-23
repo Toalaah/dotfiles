@@ -5,6 +5,6 @@ workspaces() {
 }
 
 workspaces
-bspc subscribe desktop node | while read -r _ ; do
+bspc subscribe desktop node | while read -r _; do
   workspaces
 done

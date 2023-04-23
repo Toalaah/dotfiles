@@ -6,7 +6,3 @@
                   :initial ""
                   :run-while calendar_visible
                   `cal`)
-
-(defpoll battery_icon :interval "5s"
-                      :initial ""
-                      `scripts/getBatteryInfo`)

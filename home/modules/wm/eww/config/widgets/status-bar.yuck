@@ -1,0 +1,24 @@
+(defwidget bar-section [alignment ?style]
+  (box :orientation "h"
+       :spacing 10
+       :space-evenly "false"
+       :halign alignment
+       :style style
+       (children)))
+
+(defwidget bar [ side-padding ]
+  (centerbox :class "bar" :orientation "h"
+    ; left widgets
+    (bar-section :alignment "start" :style "margin-left: ${side-padding}"
+      (workspaces)
+      (windows))
+    ; center widgets
+    (bar-section :alignment "center"
+      (date))
+    ; right widgets
+    (bar-section :alignment "end" :style "margin-right: ${side-padding}"
+      (control-panel :open-from "right" (layout))
+      (battery)
+      (volume))))
+
+

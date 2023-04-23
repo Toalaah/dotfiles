@@ -1,0 +1,8 @@
+(deflisten volume :initial "[]" "scripts/getVolume")
+
+(defwidget volume []
+  (box :class "square" :halign "center" :valign "center"
+    (eventbox :class "event-listener" :onclick "set-volume -m" :onscroll "set-volume {}"
+      (label :style "padding-left: 0.4em; padding-right: 0.4em;"
+             :halign "center"
+             :text "${volume.muted ? "MUTE" : volume.volume}"))))

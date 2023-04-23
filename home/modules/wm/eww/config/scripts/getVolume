@@ -1,36 +1,14 @@
 #! /usr/bin/env cached-nix-shell
-#! nix-shell -i bash -p pamixer
+#! nix-shell -i bash -p pulseaudio pamixer
 # shellcheck shell=bash
 # vim: ft=sh
 
 volume() {
-  case "$1" in
-  "MUTE") echo "婢 $1" ;;
-  *[0-9]*) echo "墳 $1" ;;
-  *) echo "?" ;;
-  esac
+  printf '{ "volume": "%s", "muted": %s }\n' $(pamixer --get-volume) $(pamixer --get-mute)
 }
 
-# retries a command up to 10 times
-try_until_succeed() {
-  count=0
-  while ! "$@" 2>/dev/null; do
-    sleep 1
-    count=$((count + 1))
-    [ "$count" -ge 10 ] && break
-  done
-}
-
+default_sink=$(pamixer --get-default-sink | sed -n 2p | cut -d' ' -f1)
 volume
-# pamixer takes some time to register the default sink, so we retry querying
-# the current volume level at regular intervals until the command succeeds
-# TODO: write script in nix and set pamixer to store path (for all occurrences)
-try_until_succeed pamixer --get-volume >>/tmp/volume
-
-# also check if we are currently muted
-[ "$(pamixer --get-mute)" = "true" ] && echo "MUTE" >> /tmp/volume
-
-# continuously monitor volume status log and regenerate output on changes
-tail -F /tmp/volume | while read -r k; do
-  volume "$k"
+pactl subscribe | grep --line-buffered "sink #$default_sink" | while read -r _; do
+  volume
 done

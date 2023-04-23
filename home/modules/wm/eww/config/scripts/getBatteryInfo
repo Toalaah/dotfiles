@@ -27,5 +27,5 @@ case "$batt_status" in
   "Discharging") output_battery_level ;;
   "Charging")    echo "" ;;
   "Full")        echo "Full" ;;
-  *)             exit 1 ;;
+  *)             exit 0 ;;
 esac
