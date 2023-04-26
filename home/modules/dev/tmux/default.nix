@@ -25,6 +25,7 @@ in {
         escapeTime = 0;
         extraConfig = builtins.readFile ./tmux.conf;
         plugins = with pkgs; [
+          # TODO: check out vim-tmux-navigator + corresponding nvim plugin. also tmux-yank
           {
             plugin = tmuxPlugins.resurrect;
             extraConfig = "set -g @resurrect-capture-pane-contents 'on'";
