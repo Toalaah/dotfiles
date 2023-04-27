@@ -36,7 +36,7 @@ in {
       };
 
       extensions = mkOption {
-        default = [];
+        default = with spicetify-nix.packages.${pkgs.system}.default.extensions; [lastfm genre];
         description = ''
           Spicetify extensions to enable
           See https://github.com/the-argus/spicetify-nix/blob/master/EXTENSIONS.md
