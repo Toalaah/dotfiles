@@ -1,7 +1,8 @@
-{pkgs, ...}: let
+{cfg, pkgs, ...}: let
   bspc = "${pkgs.bspwm}/bin/bspc";
   eww = "${pkgs.eww}/bin/eww";
   flameshot = "${pkgs.flameshot}/bin/flameshot";
+  bsp-layout = "${pkgs.bsp-layout}/bin/bsp-layout";
 in {
   "super + shift + {q,r}" = "${bspc} {quit,wm -r}";
   "super + q" = "${bspc} node -c";
@@ -22,4 +23,5 @@ in {
   "super + comma" = ''
     if [ $(${eww} get control-panel-visible) = "true" ]; then a=false; else a=true; fi; ${eww} update control-panel-visible=$a;
   '';
+  "super + period" = "${bsp-layout} next --layouts ${builtins.concatStringsSep "," cfg.enabledLayouts}";
 }

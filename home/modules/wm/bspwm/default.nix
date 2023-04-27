@@ -6,9 +6,30 @@
 }:
 with lib; let
   cfg = config.wm.bspwm;
+  bspLayouts = [
+    "tiled"
+    "monocle"
+    "even"
+    "grid"
+    "rgrid"
+    "rtall"
+    "rwide"
+    "tall"
+    "wide"
+  ];
 in {
   options.wm.bspwm = {
     enable = mkEnableOption "bspwm";
+    enabledLayouts = mkOption {
+      type = types.listOf (types.enum bspLayouts);
+      default = ["tiled" "monocle" "even" "tall"];
+      description = "layouts to enable. all layouts will able to be cycled through";
+    };
+    defaultLayout = mkOption {
+      type = types.str;
+      default = "tiled";
+      description = "default layout to apply to all desktops on startup";
+    };
     numDesktops = mkOption {
       type = types.numbers.between 1 9;
       default = 6;
@@ -43,17 +64,21 @@ in {
         in
           optionals (invalidDesktopNames != []) (builtins.map printWarning invalidDesktopNames);
         # append bspwm-specific keybindings to sxhkd config
-        services.sxhkd.keybindings = import ./keybindings.nix {inherit pkgs;};
+        services.sxhkd.keybindings = import ./keybindings.nix {inherit cfg pkgs;};
         attributes.primaryUser.windowManager = bspwm;
         # enable services required for bspwm to function
         wm.eww.enable = mkDefault (cfg.statusBar == "eww");
         wm.sxhkd.enable = mkDefault true;
+        home.packages = with pkgs; [bsp-layout bc];
         # bspwm config
         xsession.windowManager.bspwm = {
           enable = true;
           extraConfigEarly = import ./startupScript.nix {inherit config cfg pkgs lib;};
           extraConfig = ''
             xsetroot -cursor_name left_ptr
+            for desktop in $(${pkgs.bspwm}/bin/bspc query -D --names); do
+              ${pkgs.bsp-layout}/bin/bsp-layout set ${cfg.defaultLayout} $desktop &
+            done
           '';
           alwaysResetDesktops = true;
           settings = {

@@ -8,9 +8,9 @@
   ${lib.optionalString (cfg.statusBar == "eww") "pkill eww"}
   pkill sxhkd
 
-  xset r rate 200 30
-  xrdb -merge ${config.xdg.cacheHome}/wal/colors.Xresources
-  xrdb -merge ${config.xresources.path}
+  xset r rate 200 30 &
+  xrdb -merge ${config.xdg.cacheHome}/wal/colors.Xresources &
+  xrdb -merge ${config.xresources.path} &
 
   [ -f ${config.home.homeDirectory}/.fehbg ] && nix-shell -p feh --command ${config.home.homeDirectory}/.fehbg &
 
@@ -23,7 +23,7 @@
   ${pkgs.unclutter}/bin/unclutter -idle 2 &
 
   ${lib.optionalString (cfg.statusBar == "eww") ''
-    ${pkgs.eww}/bin/eww daemon
-    ${pkgs.eww}/bin/eww open bar
+    ${pkgs.eww}/bin/eww daemon &
+    ${pkgs.eww}/bin/eww open bar &
   ''}
 ''
