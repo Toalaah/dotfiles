@@ -1,10 +1,15 @@
-#!/bin/sh
+#! /usr/bin/env nix-shell
+#! nix-shell -i bash -p bspwm bsp-layout bc
+# shellcheck shell=bash
+# vim: ft=sh
 
 get_layout() {
-  layout=$(bspc query -T -d focused | jq -r .layout)
+  layout=$(bsp-layout get)
 
   case "$layout" in
-  "tiled") echo "﩯" ;;
+  "tiled")
+    echo "﩯"
+    ;;
   "monocle")
     num_nodes=$(bspc query -N -d focused -n .leaf | wc -l)
     echo "[$num_nodes]"

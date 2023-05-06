@@ -1,4 +1,8 @@
-{cfg, pkgs, ...}: let
+{
+  cfg,
+  pkgs,
+  ...
+}: let
   bspc = "${pkgs.bspwm}/bin/bspc";
   eww = "${pkgs.eww}/bin/eww";
   flameshot = "${pkgs.flameshot}/bin/flameshot";
