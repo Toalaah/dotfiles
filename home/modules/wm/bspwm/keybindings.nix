@@ -7,6 +7,7 @@
   eww = "${pkgs.eww}/bin/eww";
   flameshot = "${pkgs.flameshot}/bin/flameshot";
   bsp-layout = "${pkgs.bsp-layout}/bin/bsp-layout";
+  notify-send = "${pkgs.libnotify}/bin/notify-send";
 in {
   "super + shift + {q,r}" = "${bspc} {quit,wm -r}";
   "super + q" = "${bspc} node -c";
@@ -27,5 +28,7 @@ in {
   "super + comma" = ''
     if [ $(${eww} get control-panel-visible) = "true" ]; then a=false; else a=true; fi; ${eww} update control-panel-visible=$a;
   '';
-  "super + period" = "${bsp-layout} next --layouts ${builtins.concatStringsSep "," cfg.enabledLayouts}";
+  "super + period" = ''
+    ${bsp-layout} next --layouts ${builtins.concatStringsSep "," cfg.enabledLayouts}; ${notify-send} "BSPWM" "Set layout to: $(${bsp-layout} get)" -t 800
+  '';
 }
