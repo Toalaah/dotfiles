@@ -31,3 +31,6 @@ nix run nixpkgs'#'home-manager -- \
 - Optimize power / performance
 - YubiKey disk encryption
 - MPV configuration
+- Profiles
+- `./home/modules` should only contain `~/.config`-related setup, services and
+  etc should be handled by NixOS-specific modules
