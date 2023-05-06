@@ -6,7 +6,6 @@ help:
   just --list
 
 # common handler for build and switch recipes
-[private]
 _handler ACTION TYPE="system" TARGET="":
   #! /usr/bin/env nix-shell
   #! nix-shell -i bash -p home-manager nixos-rebuild
