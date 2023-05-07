@@ -67,6 +67,7 @@ in {
     gcc
     gnutar
     jq
+    ncdu
     netcat-openbsd
     nix-shell-override
     pass

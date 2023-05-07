@@ -23,21 +23,6 @@
     };
   };
 
-  nix = {
-    # set nixpkgs in NIX_PATH to currently pinned flake input
-    nixPath = [
-      "nixpkgs=${builtins.toString pkgs.path}"
-    ];
-    package = pkgs.nixFlakes;
-    settings = {
-      keep-outputs = true;
-      keep-derivations = true;
-      experimental-features = "nix-command flakes";
-      auto-optimise-store = true;
-    };
-    gc.automatic = false;
-  };
-
   networking.networkmanager.enable = true;
 
   time = {

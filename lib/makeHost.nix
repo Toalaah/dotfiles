@@ -31,6 +31,7 @@ in
           user = config.attributes.primaryUser;
         in {
           imports = [specialArgs.home-manager.nixosModule];
+          nix.registry.home-manager.flake = home-manager;
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
