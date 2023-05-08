@@ -6,6 +6,7 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
     flake-utils.url = "github:numtide/flake-utils";
     nur.url = "github:nix-community/nur";
+    firefox-nightly.url = "github:colemickens/flake-firefox-nightly";
 
     home-manager = {
       url = "github:nix-community/home-manager";

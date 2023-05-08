@@ -1,15 +1,18 @@
 {
   config,
-  pkgs,
+  firefox-nightly,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
   cfg = config.browsers.firefox;
+  firefoxNightlyPkg = firefox-nightly.packages.${pkgs.system}.firefox-nightly-bin;
 in {
   options = {
     browsers.firefox = {
       enable = mkEnableOption "firefox";
+      useNightly = mkEnableOption "use nightly firefox build";
       additionalExtensions = mkOption {
         default = [];
         description = "additional extensions to install";
@@ -29,6 +32,10 @@ in {
       home.sessionVariables.BROWSER = "${config.programs.firefox.package}/bin/firefox";
       programs.firefox = {
         enable = true;
+        package =
+          if cfg.useNightly
+          then firefoxNightlyPkg
+          else pkgs.firefox;
         profiles."default" = {
           id = 0;
           isDefault = true;

@@ -25,6 +25,7 @@ in {
   fonts.fontconfig.enable = true;
 
   browsers.firefox.enable = true;
+  browsers.firefox.useNightly = true;
 
   shells.zsh.enable = true;
 
