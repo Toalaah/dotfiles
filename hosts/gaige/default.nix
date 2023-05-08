@@ -7,28 +7,29 @@
 
   services.locate.enable = true;
   services.nordvpn.enable = true;
-  boot = {
-    kernelPackages = pkgs.linuxPackages_6_2;
-    loader = {
-      timeout = 0;
-      systemd-boot = {
-        enable = true;
-        configurationLimit = 10;
-        # disable kernel command-line
-        editor = false;
-        consoleMode = "1";
-      };
-      efi.canTouchEfiVariables = true;
-    };
-    tmp.cleanOnBoot = true;
-  };
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.kernelPackages = pkgs.linuxPackages_6_2;
+  boot.tmp.cleanOnBoot = true;
 
   virtualisation.docker.enable = true;
   users.extraGroups.docker.members = [config.attributes.primaryUser.name];
 
-  time = {
-    timeZone = "Europe/Berlin";
-    hardwareClockInLocalTime = true;
+  time.timeZone = "Europe/Berlin";
+  time.hardwareClockInLocalTime = true;
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "de_DE.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
   };
 
   sound.enable = true;
@@ -40,7 +41,8 @@
 
   programs.zsh.enable = true;
   environment.pathsToLink = ["/"];
-  environment.systemPackages = with pkgs; [nodejs];
+  environment.systemPackages = with pkgs; [nodejs man-pages man-pages-posix];
+  documentation.dev.enable = true;
 
   hardware = {
     nvidia = {
