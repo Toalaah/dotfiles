@@ -41,17 +41,19 @@
 
   programs.zsh.enable = true;
   environment.pathsToLink = ["/"];
-  environment.systemPackages = with pkgs; [nodejs man-pages man-pages-posix];
+
+  virtualisation.spiceUSBRedirection.enable = true;
+  virtualisation.libvirtd.enable = true;
+  users.extraGroups.libvirtd.members = [config.attributes.primaryUser.name];
+
+  environment.systemPackages = with pkgs; [nodejs man-pages man-pages-posix virt-manager];
   documentation.dev.enable = true;
 
-  hardware = {
-    nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-      modesetting.enable = true;
-      forceFullCompositionPipeline = true;
-    };
-    opengl.enable = true;
+  hardware.nvidia = {
+    modesetting.enable = true;
+    forceFullCompositionPipeline = true;
   };
+  hardware.opengl.enable = true;
   services.xserver = {
     # TODO: checkout xautolock
     enable = true;
@@ -83,6 +85,29 @@
         y = 1440;
       }
     ];
+  };
+
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = config.attributes.primaryUser.sshKeys != [];
+    pinentryFlavor = "gnome3";
+    # maxCacheTtl = 120;
+    # defaultCacheTtl = 60;
   };
 
   services.autorandr.enable = true;
