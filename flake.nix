@@ -83,7 +83,16 @@
       };
     in {
       formatter = pkgs.alejandra;
-      devShells.default = import ./shell.nix {inherit pkgs;};
+      devShells.default = with pkgs;
+        mkShell {
+          buildInputs = [
+            alejandra
+            deadnix
+            git-crypt
+            just
+          ];
+        };
+
       legacyPackages.homeConfigurations = self.lib.makeHomeConfigurations {
         inherit home-manager;
         users = {

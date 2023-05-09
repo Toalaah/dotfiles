@@ -75,6 +75,7 @@ in {
     tcpdump
     tree
     unzip
+    wget
     zip
   ];
 
