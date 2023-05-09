@@ -39,7 +39,7 @@ in {
           shadow-green = 0.0;
           shadow-blue = 0.0;
           shadow-ignore-shaped = false;
-          frame-opacity = 0.3;
+          frame-opacity = 0.55;
           inactive-opacity-override = false;
           wm-ignore = false;
         };
