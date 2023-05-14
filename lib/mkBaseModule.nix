@@ -35,8 +35,25 @@ in {
   };
 
   users.mutableUsers = true;
-  i18n.defaultLocale = user.locale;
-  i18n.supportedLocales = ["all"];
+
+  i18n = let
+    locale = user.locale;
+  in {
+    defaultLocale = user.locale;
+    supportedLocales = ["all"];
+    extraLocaleSettings = {
+      LC_ADDRESS = locale;
+      LC_IDENTIFICATION = locale;
+      LC_MEASUREMENT = "de_DE.UTF-8"; # metric
+      LC_MONETARY = locale;
+      LC_NAME = locale;
+      LC_NUMERIC = locale;
+      LC_PAPER = locale;
+      LC_TELEPHONE = locale;
+      LC_TIME = locale;
+    };
+  };
+
   users.users."${user.name}" = {
     isNormalUser = true;
     uid = 1000;
