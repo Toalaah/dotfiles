@@ -25,7 +25,7 @@ in {
           "super + Return" = "${terminal}";
           "super + w" = "${browser}";
           "super + F1" = "${scriptsPath}/set-wallpaper";
-          "super + shift + Escape" = "${scriptsPath}/lock-screen";
+          "super + shift + Escape" = "${pkgs.elogind}/bin/loginctl lock-session";
           "super + {0,minus,equal}" = "${scriptsPath}/set-volume {-m,-d,-i}";
           "{XF86AudioMute,XF86AudioLowerVolume,XF86AudioRaiseVolume}" = "${scriptsPath}/set-volume {-m,-d,-i}";
           "{XF86MonBrightnessUp,XF86MonBrightnessDown}" = "${scriptsPath}/set-brightness {-i,-d}";

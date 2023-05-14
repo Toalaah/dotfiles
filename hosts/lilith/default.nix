@@ -52,12 +52,47 @@
     earlySetup = true;
   };
 
+  systemd = {
+    services.xsecurelock-wake-on-suspend-1 = {
+      description = "automatically show lockscreen prompt on wakeup";
+      after = [
+        "suspend.target"
+        "hibernate.target"
+        "hybrid-sleep.target"
+        "suspend-then-hibernate.target"
+      ];
+      script = ''
+        [[ "$1" = "post" ]] && pkill -x -USR2 xsecurelock
+        exit 0
+      '';
+    };
+  };
+
+  programs.xss-lock = {
+    enable = true;
+    extraOptions = [
+      "--notifier=${pkgs.xsecurelock}/libexec/xsecurelock/dimmer"
+      "--transfer-sleep-lock"
+    ];
+    lockerCommand = let
+      lockScript = pkgs.writeShellScriptBin "lock-cmd" ''
+        export XSECURELOCK_SHOW_DATETIME=1
+        export XSECURELOCK_PASSWORD_PROMPT=time
+        export XSECURELOCK_SINGLE_AUTH_WINDOW=1
+        exec ${pkgs.xsecurelock}/bin/xsecurelock $@
+      '';
+    in "${lockScript}/bin/lock-cmd";
+  };
+
   services.xserver = {
     dpi = 150;
     videoDrivers = ["modesetting"];
     deviceSection = ''
       Option "DRI" "3"
       Option "TearFree" "true"
+    '';
+    serverFlagsSection = ''
+      Option "BlankTime" "5"
     '';
     enable = true;
     layout = "us";

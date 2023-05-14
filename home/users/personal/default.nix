@@ -93,12 +93,7 @@ in {
   };
 
   wm = {
-    general = {
-      displayManager = "xinit";
-      screenLock.enable = true;
-      # TODO: xresources module
-      # xresources.enable = true;
-    };
+    general.displayManager = "xinit";
     bspwm = {
       enable = true;
       numDesktops = 6;

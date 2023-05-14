@@ -8,11 +8,6 @@ with lib; let
 in {
   options.misc.services.picom = {
     enable = mkEnableOption "picom";
-    backend = mkOption {
-      description = "Backend to use";
-      default = "xrender";
-      type = types.str;
-    };
     extraArgs = mkOption {
       description = "extra arguments to pass to picom binary";
       default = [];
@@ -24,6 +19,7 @@ in {
       services.picom = {
         enable = true;
         extraArgs = cfg.extraArgs;
+        backend = "glx";
         shadow = false;
         shadowOpacity = 0.6;
         shadowExclude = [
@@ -44,6 +40,7 @@ in {
           wm-ignore = false;
         };
         fade = true;
+        fadeExclude = ["class_g = 'xsecurelock'"];
         fadeDelta = 4;
         fadeSteps = [
           0.05 # fade-in
