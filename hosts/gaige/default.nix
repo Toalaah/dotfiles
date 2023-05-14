@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  imports = [./hardware-configuration.nix ../../nixos-modules/nordvpn];
+  imports = [./hardware-configuration.nix ../../nixos/modules];
 
   services.locate.enable = true;
   services.nordvpn.enable = true;
