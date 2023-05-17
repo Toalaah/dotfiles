@@ -79,15 +79,17 @@ in {
           signByDefault = true;
         };
         extraConfig = {
-          user = {
-            email = user.email;
-            name = user.fullName;
-          };
+          user.email = user.email;
+          user.name = user.fullName;
           core.editor = builtins.toString (lib.findFirst (x: x != null) pkgs.neovim [
             (config.home.shellAliases.EDITOR or null)
             user.editor
           ]);
           init.defaultBranch = "master";
+          url."https://github.com/".insteadOf = [
+            "gh:"
+            "github:"
+          ];
           pull.rebase = true;
           push.autoSetupRemote = true;
           rebase.autoStash = true;
@@ -111,7 +113,7 @@ in {
       assertions = [
         {
           assertion = cfg.enable;
-          message = "Git needs to be enabled for this service to work";
+          message = "git needs to be enabled for this service to work";
         }
       ];
       home.packages = with pkgs; [gitleaks];
