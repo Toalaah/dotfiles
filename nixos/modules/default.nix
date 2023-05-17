@@ -1,5 +1,6 @@
 {
   imports = [
     ./nordvpn
+    ./graphical/xorg
   ];
 }

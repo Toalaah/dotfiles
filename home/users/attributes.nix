@@ -64,5 +64,10 @@ with lib; {
       default = "en_US.UTF-8";
       type = types.str;
     };
+    primaryUser.timeZone = mkOption {
+      description = "User's timezone";
+      default = null;
+      type = types.nullOr types.str;
+    };
   };
 }

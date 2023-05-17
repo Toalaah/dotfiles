@@ -39,7 +39,7 @@ in {
   i18n = let
     locale = user.locale;
   in {
-    defaultLocale = user.locale;
+    defaultLocale = locale;
     supportedLocales = ["all"];
     extraLocaleSettings = {
       LC_ADDRESS = locale;
@@ -59,9 +59,12 @@ in {
     uid = 1000;
     shell = user.shell;
     description = user.fullName;
-    extraGroups = ["wheel" "video" "audio"] ++ user.additionalGroups;
+    extraGroups = ["wheel"] ++ user.additionalGroups;
     openssh.authorizedKeys.keys = user.sshKeys;
   };
+
+  security.sudo.enable = true;
+  security.sudo.wheelNeedsPassword = false;
 
   environment.systemPackages = with pkgs; let
     # override nix-shell builtin with cached implementation. this allows for
@@ -99,9 +102,12 @@ in {
     zip
   ];
 
+  environment.pathsToLink = ["/"];
+
   documentation.enable = true;
   documentation.man.enable = true;
 
+  programs.zsh.enable = true;
   programs.bash.interactiveShellInit = lib.optionalString (user.shell == pkgs.zsh) ''
     if [ ! -z ''${SIMPLE_ZSH_NIX_SHELL_BASH+x} ] ;
       then source $SIMPLE_ZSH_NIX_SHELL_BASH
@@ -119,6 +125,9 @@ in {
       publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf";
     };
   };
+
+  time.timeZone = user.timeZone;
+  time.hardwareClockInLocalTime = lib.mkDefault true;
 
   # convenient little oneliner to print system changes on rebuilds
   system.activationScripts.diff = ''
