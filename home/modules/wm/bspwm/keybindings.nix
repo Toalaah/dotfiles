@@ -25,6 +25,7 @@ in {
   "super + ctrl + shift + {h,j,k,l}" = "${./scripts/bspwm_resize} contract {left, down, up, right}";
   "super + alt + {h,j,k,l}" = "${bspc} node -v {-15 0,0 15,0 -15,15 0}";
   "super + shift + space" = "${flameshot} gui -c";
+  "super + space" = "${bspc} node -t '~fullscreen'";
   "super + comma" = ''
     if [ $(${eww} get control-panel-visible) = "true" ]; then a=false; else a=true; fi; ${eww} update control-panel-visible=$a;
   '';
