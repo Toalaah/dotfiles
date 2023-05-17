@@ -29,6 +29,7 @@ in {
         "..." = "cd ../../";
         "...." = "cd ../../../";
         "....." = "cd ../../../../";
+        ps = "ps -aef --forest";
         pw = "${pkgs.pass}/bin/pass -c";
         cp = "cp -iv";
         df = "df --block-size=1K --human-readable";
