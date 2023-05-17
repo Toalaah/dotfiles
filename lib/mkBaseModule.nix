@@ -80,6 +80,9 @@ in {
   in [
     # some basic packages you would expect to find on a  new system
     cached-nix-shell
+    file
+    man-pages
+    man-pages-posix
     fx
     gcc
     gnutar
@@ -95,6 +98,9 @@ in {
     wget
     zip
   ];
+
+  documentation.enable = true;
+  documentation.man.enable = true;
 
   programs.bash.interactiveShellInit = lib.optionalString (user.shell == pkgs.zsh) ''
     if [ ! -z ''${SIMPLE_ZSH_NIX_SHELL_BASH+x} ] ;
