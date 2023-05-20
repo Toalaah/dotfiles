@@ -34,6 +34,10 @@
   services.fprintd.tod.enable = true;
   services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090;
 
+  # enable intel mipi camera
+  hardware.ipu6.enable = true;
+  hardware.ipu6.platform = "ipu6ep";
+
   services.nordvpn.enable = true;
 
   environment.systemPackages = with pkgs; [
