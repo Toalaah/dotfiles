@@ -17,6 +17,8 @@
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_6_2;
+  boot.kernelParams = ["i915.enable_psr=0"];
+  boot.kernelModules = ["i915"];
   boot.tmp.cleanOnBoot = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot = {
@@ -47,6 +49,18 @@
     '')
   ];
 
+  nixpkgs.config.packageOverrides = pkgs: {
+    vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
+  };
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      vaapiIntel
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  };
   graphical.xorg.enable = true;
   graphical.xorg.windowManager = "bspwm";
   graphical.xorg.screenLocker.enable = true;
