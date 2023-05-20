@@ -84,18 +84,20 @@ in {
     # some basic packages you would expect to find on a  new system
     cached-nix-shell
     file
-    man-pages
-    man-pages-posix
     fx
     gcc
+    gnumake
     gnutar
     jq
+    man-pages
+    man-pages-posix
     ncdu
     netcat-openbsd
     nix-shell-override
     pass
     python3
     tcpdump
+    traceroute
     tree
     unzip
     wget
