@@ -8,40 +8,26 @@
     nur.url = "github:nix-community/nur";
     firefox-nightly.url = "github:colemickens/flake-firefox-nightly";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    st = {
-      url = "github:toalaah/st";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    st.url = "github:toalaah/st";
+    st.inputs.nixpkgs.follows = "nixpkgs";
 
-    spicetify-nix = {
-      url = "github:the-argus/spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    spicetify-nix.url = "github:the-argus/spicetify-nix";
+    spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    dmenu = {
-      url = "github:toalaah/dmenu";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    dmenu.url = "github:toalaah/dmenu";
+    dmenu.inputs.nixpkgs.follows = "nixpkgs";
 
-    fzf-tab = {
-      url = "github:aloxaf/fzf-tab";
-      flake = false;
-    };
+    fzf-tab.url = "github:aloxaf/fzf-tab";
+    fzf-tab.flake = false;
 
-    zsh-nix-shell = {
-      url = "github:goolord/simple-zsh-nix-shell";
-      flake = false;
-    };
+    zsh-nix-shell.url = "github:goolord/simple-zsh-nix-shell";
+    zsh-nix-shell.flake = false;
 
-    neovim-nightly = {
-      url = "github:neovim/neovim/nightly/?dir=contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    neovim-nightly.url = "github:neovim/neovim/nightly/?dir=contrib";
+    neovim-nightly.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
