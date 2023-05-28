@@ -151,6 +151,7 @@ return {
           nls.builtins.formatting.stylua,
           nls.builtins.formatting.shfmt,
           nls.builtins.formatting.black,
+          nls.builtins.formatting.gofmt,
 
           nls.builtins.diagnostics.shellcheck,
           nls.builtins.diagnostics.flake8,

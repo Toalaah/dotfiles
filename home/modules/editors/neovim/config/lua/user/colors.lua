@@ -1,5 +1,4 @@
-require('rose-pine').setup {}
-vim.cmd [[ colorscheme rose-pine ]]
+vim.o.background = "dark"
 vim.api.nvim_set_hl(0, 'WinSeperator', { bg = 'None' })
 
 -- apply border to builtin lsp hover
