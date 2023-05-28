@@ -86,6 +86,7 @@
       Option "DRI" "3"
       Option "TearFree" "true"
     '';
+    xkbOptions = "ctrl:swapcaps";
   };
 
   # custom per-host home-manager overrides

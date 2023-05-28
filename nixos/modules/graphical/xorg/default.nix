@@ -25,7 +25,7 @@ in {
       default = "bspwm";
     };
     settings = {
-      inherit (options.services.xserver) dpi videoDrivers xrandrHeads resolutions deviceSection serverFlagsSection;
+      inherit (options.services.xserver) dpi videoDrivers xrandrHeads resolutions deviceSection serverFlagsSection xkbOptions;
     };
   };
   config = mkMerge [
@@ -34,13 +34,12 @@ in {
       services.xserver = {
         enable = true;
 
-        inherit (cfg.settings) dpi videoDrivers xrandrHeads resolutions deviceSection serverFlagsSection;
+        inherit (cfg.settings) dpi videoDrivers xrandrHeads resolutions deviceSection serverFlagsSection xkbOptions;
         exportConfiguration = true;
 
         displayManager.gdm.enable = true;
 
         layout = "us";
-        xkbOptions = "ctrl:swapcaps";
 
         autoRepeatDelay = 300;
         autoRepeatInterval = 30;
