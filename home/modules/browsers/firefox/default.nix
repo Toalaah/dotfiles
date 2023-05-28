@@ -13,6 +13,7 @@ in {
     browsers.firefox = {
       enable = mkEnableOption "firefox";
       useNightly = mkEnableOption "use nightly firefox build";
+      passIntegration = mkEnableOption "integration with unix pass utility" // {default = true;};
       additionalExtensions = mkOption {
         default = [];
         description = "additional extensions to install";
@@ -30,17 +31,26 @@ in {
       ];
       attributes.primaryUser.browser = "${config.programs.firefox.package}/bin/firefox";
       home.sessionVariables.BROWSER = "${config.programs.firefox.package}/bin/firefox";
-      programs.firefox = {
-        enable = true;
-        package =
+      home.file = mkIf cfg.passIntegration {".mozilla/native-messaging-hosts/passff.json".source = "${pkgs.passff-host}/share/passff-host/passff.json";};
+      programs.firefox = let
+        pkg =
           if cfg.useNightly
           then firefoxNightlyPkg
           else pkgs.firefox;
+        package = pkg.override {
+          cfg = {
+            extraNativeMessagingHosts = lib.optional cfg.passIntegration pkgs.passff-host;
+          };
+        };
+      in {
+        enable = true;
+        inherit package;
         profiles."default" = {
           id = 0;
           isDefault = true;
           name = "Default";
           extensions = with pkgs.nur.repos.rycee.firefox-addons; let
+            # manifest URLs can be found here: about:debugging#/runtime/this-firefox
             https-everywhere =
               buildFirefoxXpiAddon
               {
@@ -52,6 +62,20 @@ in {
                 meta = with lib; {
                   homepage = "https://www.eff.org/https-everywhere";
                   description = "__MSG_about_ext_description__";
+                  platforms = platforms.all;
+                };
+              };
+            passff =
+              buildFirefoxXpiAddon
+              {
+                pname = "passff";
+                version = "1.14.1";
+                addonId = "passff@invicem.pro";
+                url = "https://addons.mozilla.org/firefox/downloads/file/4069548/passff-1.14.1.xpi";
+                sha256 = "sha256-RlwgQhK5NUbSDcj+8smayLBrLYhM0tOKr3PYJci+c4M=";
+                meta = with lib; {
+                  homepage = "https://github.com/passff/passff";
+                  description = "Integrates your zx2c4 password store into Firefox";
                   platforms = platforms.all;
                 };
               };
@@ -67,7 +91,8 @@ in {
               https-everywhere
               privacy-badger
             ]
-            ++ cfg.additionalExtensions;
+            ++ cfg.additionalExtensions
+            ++ lib.optional cfg.passIntegration passff;
           userChrome = builtins.readFile ./userChrome.css;
           userContent = builtins.readFile ./userContent.css;
           settings = {
