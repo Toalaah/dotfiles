@@ -16,9 +16,10 @@ in {
   };
 
   home.packages = with pkgs; [
-    (nerdfonts.override {fonts = ["JetBrainsMono"];})
+    (nerdfonts.override {fonts = ["JetBrainsMono" "Iosevka"];})
     jetbrains-mono
     sf-mono
+    iosevka-comfy.comfy
     xclip # fix clipboard not interoping w/ vim
   ];
 
@@ -51,6 +52,7 @@ in {
   };
 
   terminals.st.enable = true;
+  terminals.alacritty.fontFamily = "Iosevka Comfy";
 
   tools = {
     dmenu = {
