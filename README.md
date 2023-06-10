@@ -34,3 +34,4 @@ nix run nixpkgs'#'home-manager -- \
 - Profiles
 - `./home/modules` should only contain `~/.config`-related setup, services and
   etc should be handled by NixOS-specific modules
+- Flake / shell templates for common projects (python, go, c, node, etc.)

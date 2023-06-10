@@ -13,6 +13,7 @@
     ./productivity/zathura
     ./security/gpg
     ./shells/aliases
+    ./shells/common/xdg.nix
     ./shells/zsh
     ./terminals/alacritty
     ./terminals/st

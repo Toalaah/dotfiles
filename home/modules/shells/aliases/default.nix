@@ -35,6 +35,7 @@ in {
         df = "df --block-size=1K --human-readable";
         mv = "mv -iv";
         rm = "rm -i";
+        wget = "${pkgs.wget}/bin/wget --hsts-file=\"$XDG_DATA_HOME/wget-hsts\"";
         grep = "${pkgs.ripgrep}/bin/rg -i --color=auto";
         ls = "${pkgs.exa}/bin/exa -ah  --color=auto --icons --group-directories-first";
         ll = "${pkgs.exa}/bin/exa -lah --color=auto --icons --group-directories-first";
