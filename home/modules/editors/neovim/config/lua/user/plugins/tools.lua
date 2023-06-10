@@ -14,22 +14,22 @@ return {
     cmd = { 'Bdelete', 'Bwipeout' },
   },
   {
-    'numToStr/Navigator.nvim',
+    'alexghergh/nvim-tmux-navigation',
     cmd = {
-      'NavigatorLeft',
-      'NavigatorRight',
-      'NavigatorUp',
-      'NavigatorDown',
-      'NavigatorPrevious',
+      'NvimTmuxNavigateLeft',
+      'NvimTmuxNavigateDown',
+      'NvimTmuxNavigateUp',
+      'NvimTmuxNavigateRight',
     },
-    init = function()
-      local nnomap = require('util.keybindings').nnoremap
-      nnomap('<C-h>', '<Cmd>NavigatorLeft<CR>', 'Navigate left')
-      nnomap('<C-l>', '<Cmd>NavigatorRight<CR>', 'Navigate right')
-      nnomap('<C-k>', '<Cmd>NavigatorUp<CR>', 'Navigate up')
-      nnomap('<C-j>', '<Cmd>NavigatorDown<CR>', 'Navigate down')
-    end,
-    config = function() require('Navigator').setup() end,
+    opts = {
+      disable_when_zoomed = true,
+    },
+    keys = {
+      { '<C-h>', '<Cmd>NvimTmuxNavigateLeft<CR>', desc = 'Navigate left' },
+      { '<C-j>', '<Cmd>NvimTmuxNavigateDown<CR>', desc = 'Navigate down' },
+      { '<C-k>', '<Cmd>NvimTmuxNavigateUp<CR>', desc = 'Navigate up' },
+      { '<C-l>', '<Cmd>NvimTmuxNavigateRight<CR>', desc = 'Navigate right' },
+    },
   },
   {
     'akinsho/toggleterm.nvim',
