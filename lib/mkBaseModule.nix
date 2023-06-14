@@ -83,6 +83,7 @@ in {
   in [
     # some basic packages you would expect to find on a  new system
     cached-nix-shell
+    dnsutils
     file
     fx
     gcc
