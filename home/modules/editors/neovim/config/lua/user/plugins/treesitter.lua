@@ -2,10 +2,11 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     event = 'BufReadPost',
-    dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
+    dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring', 'nvim-treesitter/playground' },
     build = function() require('nvim-treesitter.install').update { with_sync = true }() end,
     config = function()
       require('nvim-treesitter.configs').setup {
+        playground = { enable = true, },
         ensure_installed = {
           'bash',
           'go',
