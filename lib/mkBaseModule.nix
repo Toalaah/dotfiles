@@ -65,6 +65,9 @@ in {
 
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = false;
+  environment.shellInit = ''
+    umask 077
+  '';
 
   environment.systemPackages = with pkgs; let
     # override nix-shell builtin with cached implementation. this allows for
