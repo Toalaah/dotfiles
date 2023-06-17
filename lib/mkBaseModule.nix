@@ -64,7 +64,7 @@ in {
   };
 
   security.sudo.enable = true;
-  security.sudo.wheelNeedsPassword = false;
+  security.sudo.wheelNeedsPassword = true;
   environment.shellInit = ''
     umask 077
   '';
