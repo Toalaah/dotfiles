@@ -69,5 +69,10 @@ with lib; {
       default = null;
       type = types.nullOr types.str;
     };
+    primaryUser.smartcard.id = mkOption {
+      description = "User's smartcard ID (ex from a Yubikey)";
+      default = null;
+      type = types.nullOr types.str;
+    };
   };
 }

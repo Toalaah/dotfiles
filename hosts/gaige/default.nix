@@ -23,6 +23,12 @@
 
   environment.systemPackages = with pkgs; [nodejs];
 
+  security.yubikey = {
+    enable = true;
+    id = config.attributes.primaryUser.smartcard.id;
+    pam.enable = true;
+  };
+
   graphical.xorg.enable = true;
   graphical.xorg.windowManager = "bspwm";
   hardware.nvidia.modesetting.enable = true;
