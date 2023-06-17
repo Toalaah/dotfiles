@@ -24,8 +24,8 @@ in {
           else "manual";
         settings = {
           redshift = {
-            temp-day = lib.mkForce 5300;
-            temp-night = lib.mkForce 3500;
+            temp-day = lib.mkForce 6500;
+            temp-night = lib.mkForce 4500;
             fade = 1;
             brightness-day = 1.0;
             brightness-night = 0.9;
