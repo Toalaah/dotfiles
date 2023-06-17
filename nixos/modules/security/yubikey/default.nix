@@ -55,7 +55,7 @@ in {
 
       security.pam.yubico = {
         enable = true;
-        debug = true;
+        debug = false;
         mode = "challenge-response";
         inherit (cfg) id;
       };
