@@ -19,6 +19,7 @@
     (bar-section :alignment "end" :style "margin-right: ${side-padding}"
       (control-panel :open-from "right" (layout))
       (battery)
-      (volume))))
+      (volume)
+      (systray :pack-direction "rtl"))))
 
 
