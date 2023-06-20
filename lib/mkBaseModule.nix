@@ -105,6 +105,7 @@ in {
     tree
     unzip
     wget
+    xxd
     zip
   ];
 
