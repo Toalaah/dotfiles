@@ -13,9 +13,10 @@ in {
       globalIgnores = mkOption {
         description = "global ignores";
         default = [
-          "node_modules"
-          ".DS_Store"
           "!.env"
+          ".DS_Store"
+          ".direnv"
+          "node_modules"
         ];
         type = types.listOf types.str;
       };
