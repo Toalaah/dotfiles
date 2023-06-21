@@ -99,6 +99,7 @@ in {
     netcat-openbsd
     nix-shell-override
     pass
+    pciutils
     python3
     tcpdump
     traceroute
