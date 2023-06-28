@@ -1,0 +1,16 @@
+(defpoll time :interval "30s" :initial "" `date '+%H:%M'`)
+(defwidget clock [] (box time))
+
+(defpoll battery :interval "30s" :initial "null" "widgets/control-panel/get-battery-level.sh")
+(defwidget battery [] (box :visible "${battery?.charge_percent != 0}" "BAT ${battery?.charge_percent}%"))
+
+(deflisten volume :initial '{"muted": true, "volume": 0}' "widgets/control-panel/get-volume.sh")
+(defwidget volume []
+  (box {volume.muted ? "VOL MUTE" : "VOL ${volume.volume}%"}))
+
+(defwidget control-panel []
+    (box :class "control-panel" :space-evenly false :spacing 12
+      (volume)
+      (battery)
+      (clock)
+      (systray :icon-size 16 :pack-direction "rtl")))

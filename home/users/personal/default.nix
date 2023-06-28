@@ -19,6 +19,7 @@ in {
     (nerdfonts.override {fonts = ["JetBrainsMono" "Iosevka"];})
     jetbrains-mono
     sf-mono
+    terminus-nerdfont
     iosevka-comfy.comfy
     xclip # fix clipboard not interoping w/ vim
   ];
@@ -103,7 +104,9 @@ in {
       statusBar = "eww";
     };
     sxhkd.enable = true;
+    eww.configuration = "minimal";
   };
+
 
   xsession = {
     enable = true;

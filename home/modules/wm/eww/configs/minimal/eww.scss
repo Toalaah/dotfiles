@@ -1,0 +1,24 @@
+$fg: #FFFFFF;
+$fgSecondary: #FFFFFF;
+
+$bg: #000000;
+$bgSecondary: #000000;
+
+$grey: grey;
+$white: white;
+
+@mixin taskbar-item {
+  background-color: $bg;
+  color: $fg;
+  background-color: $bg;
+}
+
+* {
+  font-family: "Terminess Nerd Font Mono";
+  font-size: 1.1rem;
+}
+
+@import "./widgets/windows/styles";
+@import "./widgets/taskbar/styles";
+@import "./widgets/control-panel/styles";
+@import "./widgets/workspaces/styles";

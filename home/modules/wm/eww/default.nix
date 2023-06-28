@@ -6,9 +6,17 @@
 }:
 with lib; let
   cfg = config.wm.eww;
+  ewwConfig = builtins.attrNames (builtins.readDir ./configs);
 in {
   options = {
-    wm.eww.enable = mkEnableOption "eww";
+    wm.eww = {
+      enable = mkEnableOption "eww";
+      configuration = mkOption {
+        default = "default";
+        description = "eww confgiuration to apply";
+        type = types.enum ewwConfig;
+      };
+    };
   };
 
   config = mkMerge [
@@ -17,7 +25,7 @@ in {
       programs.eww = {
         enable = true;
         package = pkgs.eww;
-        configDir = ./config;
+        configDir = ./configs + "/${cfg.configuration}";
       };
     })
   ];

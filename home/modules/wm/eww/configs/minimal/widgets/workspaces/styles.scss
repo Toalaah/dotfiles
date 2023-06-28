@@ -1,0 +1,24 @@
+.workspaces {
+  @include taskbar-item;
+
+  .workspace {
+    color: $grey;
+    font-weight: lighter;
+  }
+
+  .workspace-occupied, .workspace-focused {
+    font-weight: 800;
+    color: $fg;
+  }
+
+  .workspace-focused {
+    border-bottom: 1px solid $white;
+  }
+
+  .workspace-name {
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+  }
+
+}
+

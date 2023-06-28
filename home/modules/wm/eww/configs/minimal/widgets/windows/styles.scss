@@ -1,0 +1,19 @@
+.windows {
+  @include taskbar-item;
+  font-weight: lighter;
+  color: $grey;
+  .window-focused {
+    color: $fg;
+    border-bottom: 1px solid $white;
+    font-weight: bold;
+
+  }
+
+  .window-item {
+    .contents {
+      padding-left: 0.4em;
+      padding-right: 0.4em;
+    }
+  }
+}
+

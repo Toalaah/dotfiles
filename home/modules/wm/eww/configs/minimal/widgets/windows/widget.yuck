@@ -1,0 +1,7 @@
+(deflisten windows :initial "[]" "widgets/windows/get-windows.sh")
+(defwidget windows [ ?max-title-length ]
+  (box :class "windows" :spacing 8 :space-evenly false :visible {arraylength(windows) != 0} :halign "center"
+    (for window in windows
+      (eventbox :class "window-item ${window.focused ? "window-focused": ""}" :onclick "bspc node -f ${window.id}"
+        (box :space-evenly false :class "contents" :spacing 4
+          (label :limit-width {max-title-length?:5} :valign "center" :text "${window.name}"))))))

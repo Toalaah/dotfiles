@@ -1,25 +1,19 @@
 (defwidget bar-section [alignment ?style]
   (box :orientation "h"
        :spacing 10
-       :space-evenly "false"
+       :space-evenly false
        :halign alignment
        :style style
        (children)))
 
-(defwidget bar [ side-padding ]
-  (centerbox :class "bar" :orientation "h"
+(defwidget taskbar [ side-padding ]
+  (centerbox :class "taskbar" :orientation "h"
     ; left widgets
     (bar-section :alignment "start" :style "margin-left: ${side-padding}"
-      (workspaces)
-      (windows))
+      (workspaces))
     ; center widgets
     (bar-section :alignment "center"
-      (date))
+      (windows :max-title-length 20))
     ; right widgets
     (bar-section :alignment "end" :style "margin-right: ${side-padding}"
-      (control-panel :open-from "right" (layout))
-      (battery)
-      (volume)
-      (systray :pack-direction "rtl"))))
-
-
+      (control-panel))))
