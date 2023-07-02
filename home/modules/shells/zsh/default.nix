@@ -52,6 +52,8 @@ in {
         bindkey "^n" down-history
         ${lib.optionalString cfg.enableAutosuggestions "bindkey '^ ' autosuggest-accept"}
         ${lib.strings.concatMapStringsSep "\n" (opt: "setopt ${opt}") cfg.options}
+        precmd () { print -Pn "\e]2;%n@%m: %~\a" }
+        preexec () { print -Pn "\e]2;%n@%m: $1\a" }
       '';
       profileExtra = "";
       history = {
