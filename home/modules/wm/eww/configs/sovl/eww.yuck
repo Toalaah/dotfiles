@@ -1,0 +1,17 @@
+(include "./widgets/battery/widget.yuck")
+(include "./widgets/clock/widget.yuck")
+(include "./widgets/control-panel/widget.yuck")
+(include "./widgets/network/widget.yuck")
+(include "./widgets/separator/widget.yuck")
+(include "./widgets/start-button/widget.yuck")
+(include "./widgets/taskbar/widget.yuck")
+(include "./widgets/volume/widget.yuck")
+(include "./widgets/windows/widget.yuck")
+(include "./widgets/workspaces/widget.yuck")
+
+(defwindow bar
+  :geometry (geometry :x "0px" :y "0px" :width "100%" :height "2.2%" :anchor "bottom center")
+  :reserve (struts :distance "2.2%" :side "bottom")
+  :windowtype "dock"
+  :wm-ignore false
+  (taskbar :side-padding "0.2em"))

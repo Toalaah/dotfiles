@@ -1,0 +1,27 @@
+.workspaces {
+  @include taskbar-item;
+
+  .workspace {
+    font-weight: lighter;
+    background-color: $bg;
+
+  }
+
+  .workspace-occupied {
+    font-weight: bold;
+  }
+
+  .workspace-focused, .workspace:hover {
+    border: ridge 2px $grey;
+    background-color: $bgSecondary;
+    font-weight: bold;
+  }
+
+  .workspace-name {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+}
+
+

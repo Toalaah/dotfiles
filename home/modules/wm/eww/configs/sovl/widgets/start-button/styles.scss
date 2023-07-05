@@ -1,0 +1,10 @@
+.start-button {
+  @include taskbar-item;
+  font-weight: bold;
+}
+
+.start-button-eventbox:hover {
+  .start-button {
+    background-color: $bgSecondary;
+  }
+}

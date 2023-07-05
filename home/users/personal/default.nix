@@ -17,6 +17,7 @@ in {
 
   home.packages = with pkgs; [
     (nerdfonts.override {fonts = ["JetBrainsMono" "Iosevka"];})
+    corefonts
     jetbrains-mono
     sf-mono
     terminus-nerdfont
@@ -104,7 +105,7 @@ in {
       statusBar = "eww";
     };
     sxhkd.enable = true;
-    eww.configuration = "minimal";
+    eww.configuration = "sovl";
   };
 
 

@@ -1,0 +1,21 @@
+(defwidget bar-section [alignment ?style]
+  (box :orientation "h"
+       :spacing 10
+       :space-evenly false
+       :halign alignment
+       :style style
+       (children)))
+
+(defwidget taskbar [ side-padding ]
+  (centerbox :class "taskbar" :orientation "h"
+    ; left widgets
+    (bar-section :alignment "start" :style "margin-left: ${side-padding}"
+      (start-button :icon "default")
+      (workspaces)
+      (separator)
+      (windows :show-icons true))
+    ; center widgets
+    (bar-section :alignment "center")
+    ; right widgets
+    (bar-section :alignment "end" :style "margin-right: ${side-padding}"
+      (control-panel))))

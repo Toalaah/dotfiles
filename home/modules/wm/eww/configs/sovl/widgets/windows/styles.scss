@@ -1,0 +1,16 @@
+.windows {
+  .window {
+    @include taskbar-item;
+    font-weight: lighter;
+  }
+  .window-focused {
+    background-color: $bgSecondary;
+    font-weight: bold;
+  }
+}
+
+.windows:hover {
+  .window {
+    background-color: $bgSecondary;
+  }
+}

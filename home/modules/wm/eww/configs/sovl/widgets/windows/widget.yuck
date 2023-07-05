@@ -1,0 +1,8 @@
+(deflisten windows :initial "[]" "widgets/windows/get-windows.sh")
+(defwidget windows [ ?show-icons ?length ]
+  (box :spacing 4 :space-evenly false :visible {arraylength(windows) != 0}
+    (for window in windows
+      (eventbox :class "windows" :onclick "bspc node -f ${window.id}"
+        (box :width 220 :class "window ${window.focused ? "window-focused": ""}" :space-evenly false :spacing 4
+          (image :visible {show-icons?:true} :path "widgets/windows/icons/window_icon.png" :image-width 20 :image-height 20)
+          (label :limit-width {length?:30} :text "${window.name}"))))))

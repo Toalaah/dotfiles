@@ -1,0 +1,1 @@
+(defwidget separator [ ?width ] (box :width {width?:2} :class "separator"))

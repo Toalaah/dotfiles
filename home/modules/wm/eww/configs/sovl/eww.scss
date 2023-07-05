@@ -1,0 +1,42 @@
+$fg: #b6beca;
+$fgSecondary: #e5e5e5;
+
+$bg: #c0c0c0;
+$bgSecondary: lighten($bg, 10%);
+// $bgSecondary: #d4d0c8;
+
+$grey: #7c7c7c;
+$white: white;
+$red: red;
+$blue: blue;
+$green: green;
+$black: black;
+
+@mixin taskbar-item {
+  padding-left: 4px;
+  padding-right: 4px;
+
+  margin-top: 2px;
+  margin-bottom: 2px;
+  background-color: $bg;
+
+  border: 2px solid $grey;
+  border-left-color: $white;
+  border-top-color: $white;
+}
+
+* {
+  font-family: "FreeSans";
+  font-size: 1em;
+  letter-spacing: 0.001em;
+}
+
+@import "./widgets/battery/styles";
+@import "./widgets/clock/styles";
+@import "./widgets/control-panel/styles";
+@import "./widgets/separator/styles";
+@import "./widgets/start-button/styles";
+@import "./widgets/taskbar/styles";
+@import "./widgets/volume/styles";
+@import "./widgets/windows/styles";
+@import "./widgets/workspaces/styles";

@@ -21,7 +21,14 @@
   virtualisation.docker.enable = true;
   users.extraGroups.docker.members = [config.attributes.primaryUser.name];
 
-  environment.systemPackages = with pkgs; [nodejs];
+  environment.systemPackages = with pkgs; [
+    nodejs
+    networkmanagerapplet
+    hicolor-icon-theme
+    adapta-gtk-theme
+    gnome3.adwaita-icon-theme
+    xorg.xcursorthemes
+  ];
 
   security.yubikey = {
     enable = true;

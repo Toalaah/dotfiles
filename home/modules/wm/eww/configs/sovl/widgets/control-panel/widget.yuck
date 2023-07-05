@@ -1,0 +1,8 @@
+(defwidget control-panel []
+    (box :class "control-panel" :space-evenly false :spacing 4
+      (systray :icon-size 16 :pack-direction "ltr")
+      (wg-status)
+      (volume)
+      (battery)
+      (separator)
+      (clock)))

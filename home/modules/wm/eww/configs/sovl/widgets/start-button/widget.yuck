@@ -1,0 +1,5 @@
+(defwidget start-button [ ?icon ]
+  (eventbox :class "start-button-eventbox" :onclick "dmenu_run -l 20 -c"
+   (box :class "start-button" :space-evenly false :spacing 2
+    (image :path "widgets/start-button/icons/icon-${icon?:"default"}.png" :image-width 20 :image-height 20)
+    (label :text "Start"))))

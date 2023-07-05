@@ -1,0 +1,8 @@
+(deflisten volume :initial '{"muted": true, "volume": 0}' "widgets/volume/get-volume.sh")
+(defwidget volume []
+  (box :class "volume ${volume.muted ? "volume-muted" : ""}" :space-evenly false :spacing 4
+    (image :path {volume.muted ?
+      "widgets/volume/loudspeaker_muted-0.png" :
+      "widgets/volume/loudspeaker_rays-0.png" }
+      :image-width 20 :image-height 20)
+    (label :class "content ${volume.muted ? "content-muted" : ""}" :text "${volume.volume}%")))

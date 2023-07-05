@@ -13,6 +13,8 @@
   xrdb -merge ${config.xresources.path} &
 
   [ -f ${config.home.homeDirectory}/.fehbg ] && nix-shell -p feh --command ${config.home.homeDirectory}/.fehbg &
+  # ${pkgs.hsetroot}/bin/hsetroot -solid "#3D405B"
+  ${pkgs.networkmanagerapplet}/bin/nm-applet --indicator &
 
   ${
     lib.optionalString config.misc.services.dunst.enable

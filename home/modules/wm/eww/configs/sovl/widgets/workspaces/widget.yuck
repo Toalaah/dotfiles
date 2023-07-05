@@ -1,0 +1,6 @@
+(deflisten workspaces :initial "[]" "widgets/workspaces/get-workspaces.sh")
+(defwidget workspaces []
+  (box :class "workspaces" :spacing 4 :orientation "h" :space-evenly "false"
+    (for workspace in workspaces
+      (eventbox :class "workspace ${workspace.focused ? "workspace-focused" : ""} ${workspace.occupied ? "workspace-occupied" : ""}"
+                :onclick "bspc desktop -f ${workspace.name}" (label :class "workspace-name" :valign "center" :text "${workspace.name}")))))

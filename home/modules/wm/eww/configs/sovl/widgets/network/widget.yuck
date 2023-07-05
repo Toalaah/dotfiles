@@ -1,0 +1,31 @@
+(deflisten network-info :initial '{}' "widgets/network/get-network-info.sh")
+
+;; generic network status widget; basically a worse alternative to nm-applet
+(defvar icon-eth-connected "widgets/network/icons/conn_pcs_on_on.png")
+(defvar icon-eth-disconnected "widgets/network/icons/conn_pcs_no_network.png")
+(defvar icon-wifi-connected "widgets/network/icons/conn_cloud_ok.png")
+(defvar icon-wifi-disconnected "widgets/network/icons/conn_cloud.png")
+(defvar icon-network-unknown "widgets/network/icons/msg_error-0.png")
+(defwidget network-status [ type state ]
+  (image :image-width 20 :image-height 20 :tooltip "${network-info?.default}"
+    :path {
+      (type == "ethernet") ? ( (state == "connected") ? "${icon-eth-connected}"  : "${icon-eth-disconnected}"  )
+      : (type == "wifi")   ? ( (state == "connected") ? "${icon-wifi-connected}" : "${icon-wifi-disconnected}" )
+      : "${icon-network-unknown}"
+    }))
+
+
+;; wireguard-info module
+(defvar icon-wg-active "widgets/network/icons/key_padlock-0.png")
+(defvar icon-wg-off "widgets/network/icons/msg_warning-0.png")
+(defwidget wg-status []
+  (image :visible "${network-info?.wg != "null"}" :image-width 20 :image-height 20 :tooltip "${network-info?.wg}"
+         :path { matches(network-info?.wg?.state, "connected") ? "${icon-wg-active}" : "${icon-wg-off}"}))
+
+
+;; combined network status + wg widget
+(defwidget network-status []
+  (eventbox
+  (box :class "network" :spacing 4
+    (wg-icon :visible "${network-info?.wg != "null"}" :state "${ matches(network-info?.wg?.state, "connected") }" )
+    (network-icon :type "${network-info?.default?.type}" :state "${network-info?.default?.state_text}"))))
