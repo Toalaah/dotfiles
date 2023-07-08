@@ -97,6 +97,9 @@ in {
             Zathura = {
               state = "tiled";
             };
+            Scratchpad = {
+              state = "floating";
+            };
           };
           monitors = with lib.lists; let
             desktops = range 1 cfg.numDesktops;

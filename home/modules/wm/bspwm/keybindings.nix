@@ -4,7 +4,6 @@
   ...
 }: let
   bspc = "${pkgs.bspwm}/bin/bspc";
-  eww = "${pkgs.eww}/bin/eww";
   flameshot = "${pkgs.flameshot}/bin/flameshot";
   bsp-layout = "${pkgs.bsp-layout}/bin/bsp-layout";
   notify-send = "${pkgs.libnotify}/bin/notify-send";
@@ -12,6 +11,7 @@ in {
   "super + shift + {q,r}" = "${bspc} {quit,wm -r}";
   "super + q" = "${bspc} node -c";
   "super + shift + b" = "${./scripts/bspwm_toggle_bar}";
+  "super + e" = "${pkgs.tdrop}/bin/tdrop -ma -w -4 -h 45% st -c Scratchpad";
   "super + Tab" = "${bspc} desktop --focus last";
   "super + shift + Return" = "${./scripts/bspwm_swap_master}";
   "super + l; {t,space,f}" = "${bspc} node -t {tiled,floating,fullscreen}";
@@ -26,9 +26,6 @@ in {
   "super + alt + {h,j,k,l}" = "${bspc} node -v {-15 0,0 15,0 -15,15 0}";
   "super + shift + space" = "${flameshot} gui -c";
   "super + space" = "${bspc} node -t '~fullscreen'";
-  "super + comma" = ''
-    if [ $(${eww} get control-panel-visible) = "true" ]; then a=false; else a=true; fi; ${eww} update control-panel-visible=$a;
-  '';
   "super + period" = ''
     ${bsp-layout} next --layouts ${builtins.concatStringsSep "," cfg.enabledLayouts}; ${notify-send} "BSPWM" "Set layout to: $(${bsp-layout} get)" -t 800
   '';

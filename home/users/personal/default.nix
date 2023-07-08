@@ -108,7 +108,6 @@ in {
     eww.configuration = "sovl";
   };
 
-
   xsession = {
     enable = true;
     initExtra = ''
