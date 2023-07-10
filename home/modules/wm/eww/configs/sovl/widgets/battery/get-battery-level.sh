@@ -1,11 +1,14 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i bash -p eww jq
+#! nix-shell -i bash -p acpi jc jq
 # shellcheck shell=bash
 # vim: ft=sh
 
-info=$(eww get EWW_BATTERY | jq '.[keys[0]]')
-if [ -z "$info" ]; then
-  echo 'null'
-else
+info=$(acpi | jc --acpi | jq '.[0]')
+# filter power supplies (which always give charge of 0). This only breaks when the
+# laptop battery is empty, but this would also imply that the laptop (and thus
+# this script) is dead
+if [ $(jq '.charge_percent != 0' <<< $info) == "true" ]; then
   echo $info
+else
+  echo 'null'
 fi

@@ -2,13 +2,13 @@
 
 (defwidget battery []
   (box :visible "${battery != "null"}"
-       :class "battery ${(battery?.status == "Charging") ? "battery-charging" : ""}"
+       :class "battery ${(battery?.state == "Charging") ? "battery-charging" : ""}"
        :space-evenly false :spacing 4 :tooltip battery
          (image :path {
-                  (battery?.status == "Charging") ?
+                  (battery?.state == "Charging") ?
                   "widgets/battery/icons/battery_alt-0.png" :
                   "widgets/battery/icons/battery.png"
                 }
                 :image-width 20 :image-height 20)
-         (label :class "content" :text "${battery?.capacity}%")))
+         (label :class "content" :text "${battery?.charge_percent}%")))
 
