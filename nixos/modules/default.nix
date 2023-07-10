@@ -1,7 +1,8 @@
 {
   imports = [
-    ./nordvpn
     ./graphical/xorg
+    ./networking/wireguard
+    ./nordvpn
     ./security/yubikey
   ];
 }

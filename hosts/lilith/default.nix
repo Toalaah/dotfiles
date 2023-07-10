@@ -43,6 +43,11 @@
 
   services.nordvpn.enable = true;
 
+  networking.wg = {
+    enable = true;
+    passwordless = true;
+  };
+
   environment.systemPackages = with pkgs; [
     autorandr
     virt-manager
