@@ -15,7 +15,7 @@ prev.eww.overrideAttrs (old: rec {
       owner = "ralismark";
       repo = "eww";
       inherit rev;
-      sha256 = "sha256-o38cXPG296Ojyg7QN4SyVg4HqdO1s8Y1Pei4N5PcMGo=";
+      sha256 = "sha256-b/ipIavlmnEq4f1cQOrOCZRnIly3uXEgFbWiREKsh20=";
     };
   cargoDeps = old.cargoDeps.overrideAttrs (_old': {
     inherit src;
