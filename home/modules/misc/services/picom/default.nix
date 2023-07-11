@@ -32,6 +32,7 @@ in {
         settings = {
           shadow-radius = 10;
           shadow-red = 0.0;
+          vsync = true;
           shadow-green = 0.0;
           shadow-blue = 0.0;
           shadow-ignore-shaped = false;
