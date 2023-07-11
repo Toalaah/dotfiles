@@ -6,7 +6,7 @@
 }:
 with lib; let
   user = config.attributes.primaryUser;
-  cfg = config.networking.wg.enable;
+  cfg = config.networking.wg;
 in {
   options.networking.wg = {
     enable = mkEnableOption "serviceless (classic) wireguard support";
