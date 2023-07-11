@@ -64,6 +64,9 @@ in {
   };
 
   security.sudo.enable = true;
+  security.sudo.extraConfig = ''
+    Defaults timestamp_type=global
+  '';
   security.sudo.wheelNeedsPassword = true;
   environment.shellInit = ''
     umask 077
