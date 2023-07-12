@@ -28,6 +28,8 @@
 
     neovim-nightly.url = "github:neovim/neovim/nightly/?dir=contrib";
     neovim-nightly.inputs.nixpkgs.follows = "nixpkgs";
+
+    nvim-flake.url = "git+ssh://git@github.com/toalaah/neovim-flake";
   };
 
   outputs = {
@@ -56,6 +58,13 @@
         gaige = makeHost {
           hostname = "gaige";
           primaryUser = users.personal;
+          specialArgs = inputs;
+          config = {allowUnfree = true;};
+          inherit overlays;
+        };
+        zer0 = makeHost {
+          hostname = "zer0";
+          primaryUser = users.vm;
           specialArgs = inputs;
           config = {allowUnfree = true;};
           inherit overlays;

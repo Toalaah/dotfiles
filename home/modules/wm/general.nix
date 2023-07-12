@@ -9,7 +9,7 @@ with lib; let
 in {
   options.wm.general = {
     displayManager = mkOption {
-      type = types.enum ["xinit"];
+      type = types.enum ["none" "xinit"];
       default = "xinit";
       description = "display manager to use";
     };
