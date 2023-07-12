@@ -16,6 +16,7 @@ in {
           "!.env"
           ".DS_Store"
           ".direnv"
+          ".git"
           "node_modules"
         ];
         type = types.listOf types.str;
