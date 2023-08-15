@@ -22,8 +22,10 @@ in {
   systemd.services.systemd-networkd.stopIfChanged = false;
   systemd.services.systemd-resolved.stopIfChanged = false;
 
+  nix.channel.enable = false;
   # set nixpkgs in NIX_PATH to currently pinned flake input
-  nix.nixPath = ["nixpkgs=${builtins.toString pkgs.path}"];
+  nix.nixPath = ["nixpkgs=/etc/nixpkgs"];
+  environment.etc.nixpkgs.source = (builtins.toString pkgs.path);
   # make nixpkgs registry use current flake input
   nix.registry.nixpkgs.flake = nixpkgs;
   nix.package = pkgs.nixFlakes;
