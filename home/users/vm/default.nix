@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}: let
+{config, ...}: let
   user = config.attributes.primaryUser;
 in {
   imports = [

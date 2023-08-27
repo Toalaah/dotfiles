@@ -18,7 +18,7 @@
   ];
 
   networking.nameservers = ["1.1.1.1" "8.8.8.8"];
-  boot.kernelPackages = pkgs.linuxPackages_6_3;
+  boot.kernelPackages = pkgs.linuxPackages_6_4;
   boot.kernelParams = ["i915.enable_psr=0"];
   boot.kernelModules = ["i915"];
   boot.tmp.cleanOnBoot = true;

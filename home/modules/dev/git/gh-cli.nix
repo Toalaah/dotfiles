@@ -16,7 +16,7 @@ in {
         description = "protocol to use";
       };
       extensions = mkOption {
-        type = with types; listOf string;
+        type = with types; listOf str;
         default = [];
         description = "extensions to enable";
       };

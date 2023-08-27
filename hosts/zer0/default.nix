@@ -10,7 +10,7 @@
     nvim-flake.nixosModules.nvim
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_6_3;
+  boot.kernelPackages = pkgs.linuxPackages_6_4;
   environment.systemPackages = [];
 
   programs.nvim = {
@@ -20,7 +20,6 @@
     ];
     configuration = import ./config.nix;
   };
-
 
   users.users.${config.attributes.primaryUser.name}.password = "password";
 

@@ -29,7 +29,7 @@
     neovim-nightly.url = "github:neovim/neovim/nightly/?dir=contrib";
     neovim-nightly.inputs.nixpkgs.follows = "nixpkgs";
 
-    nvim-flake.url = "git+ssh://git@github.com/toalaah/neovim-flake";
+    nvim-flake.url = "github:toalaah/neovim-flake";
 
     eww.url = "github:ralismark/eww/tray-3";
   };

@@ -39,7 +39,7 @@ in {
       enable = lib.mkForce true;
       enableCompletion = true;
       dotDir = ".config/zsh";
-      enableSyntaxHighlighting = cfg.enableSyntaxHighlighting;
+      syntaxHighlighting.enable = cfg.enableSyntaxHighlighting;
       enableAutosuggestions = cfg.enableAutosuggestions;
       autocd = true;
       initExtra = ''
