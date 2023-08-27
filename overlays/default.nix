@@ -1,4 +1,4 @@
-{...}: (final: prev: let
+{...}: (final: _prev: let
   customPkgs = import ../pkgs {pkgs = final;};
 in {
   # custom package declarations
