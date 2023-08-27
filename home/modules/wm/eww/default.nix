@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  eww,
   ...
 }:
 with lib; let
@@ -24,7 +25,7 @@ in {
       assertions = [];
       programs.eww = {
         enable = true;
-        package = pkgs.eww;
+        package = eww.packages.${pkgs.system}.default;
         configDir = ./configs + "/${cfg.configuration}";
       };
     })
