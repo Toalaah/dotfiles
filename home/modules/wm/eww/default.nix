@@ -25,7 +25,6 @@ in {
       assertions = [];
       programs.eww = {
         enable = true;
-        package = eww.packages.${pkgs.system}.default;
         configDir = ./configs + "/${cfg.configuration}";
       };
     })

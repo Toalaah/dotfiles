@@ -46,6 +46,9 @@
     overlays = [
       (import ./overlays inputs)
       nur.overlay
+      (final: prev: {
+        eww = inputs.eww.packages.${prev.system}.default;
+      })
     ];
   in
     {
