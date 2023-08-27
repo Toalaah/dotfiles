@@ -25,7 +25,7 @@ in {
   nix.channel.enable = false;
   # set nixpkgs in NIX_PATH to currently pinned flake input
   nix.nixPath = ["nixpkgs=/etc/nixpkgs"];
-  environment.etc.nixpkgs.source = (builtins.toString pkgs.path);
+  environment.etc.nixpkgs.source = builtins.toString pkgs.path;
   # make nixpkgs registry use current flake input
   nix.registry.nixpkgs.flake = nixpkgs;
   nix.package = pkgs.nixFlakes;
@@ -74,6 +74,8 @@ in {
     umask 077
   '';
 
+  environment.binbash = "${pkgs.bashInteractive}/bin/bash";
+
   environment.systemPackages = with pkgs; let
     # override nix-shell builtin with cached implementation. this allows for
     # using nix-shell in script shebangs while retaining caching functionality,
@@ -89,7 +91,7 @@ in {
       '';
     };
   in [
-    # some basic packages you would expect to find on a  new system
+    # some basic packages you would expect to find on a new system
     cached-nix-shell
     dnsutils
     file
@@ -103,7 +105,8 @@ in {
     ncdu
     netcat-openbsd
     nix-shell-override
-    pass
+    psmisc
+    tldr
     pciutils
     python3
     tcpdump
