@@ -17,15 +17,10 @@ in {
   networking.useDHCP = false;
   networking.useNetworkd = true;
 
-  systemd.services.NetworkManager-wait-online.enable = false;
-  systemd.network.wait-online.enable = false;
-  systemd.services.systemd-networkd.stopIfChanged = false;
-  systemd.services.systemd-resolved.stopIfChanged = false;
-
-  nix.channel.enable = false;
+  # nix.channel.enable = false;
   # set nixpkgs in NIX_PATH to currently pinned flake input
-  nix.nixPath = ["nixpkgs=/etc/nixpkgs"];
   environment.etc.nixpkgs.source = builtins.toString pkgs.path;
+  nix.nixPath = ["nixpkgs=/etc/nixpkgs"];
   # make nixpkgs registry use current flake input
   nix.registry.nixpkgs.flake = nixpkgs;
   nix.package = pkgs.nixFlakes;
@@ -67,6 +62,7 @@ in {
 
   security.sudo.enable = true;
   security.sudo.extraConfig = ''
+    Defaults timestamp_timeout=30
     Defaults timestamp_type=global
   '';
   security.sudo.wheelNeedsPassword = true;
