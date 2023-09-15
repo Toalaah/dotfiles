@@ -25,7 +25,10 @@
   ${pkgs.unclutter}/bin/unclutter -idle 2 &
 
   ${lib.optionalString (cfg.statusBar == "eww") ''
-    ${pkgs.eww}/bin/eww daemon &
-    ${pkgs.eww}/bin/eww open bar &
+    {
+      ${pkgs.eww}/bin/eww daemon
+      ${pkgs.eww}/bin/eww open bar
+      ${pkgs.xdo}/bin/xdo above -t ''$(${pkgs.xdo}/bin/xdo id -n root) -n eww
+    } &
   ''}
 ''
