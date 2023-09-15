@@ -1,5 +1,3 @@
-/* User changable variables */
-
 :root {
   --tab-font-size: 0.8em; /* Font size of the tab labels */
   --tab-font-family: -apple-system, BlinkMacSystemFont, "JetBrains Mono", Roboto, Helvetica, Arial, sans-serif; /* The font used for the tab labels */
@@ -11,9 +9,6 @@
 .titlebar-buttonbox-container {
   display: var(--show-titlebar-buttons);
 }
-
-.titlebar-spacer[type="pre-tabs"] { display: none; }
-.titlebar-spacer[type="post-tabs"] { display: none; }
 
 :root:not([customizing]) #TabsToolbar {
   margin-left: 1px !important;
@@ -30,6 +25,7 @@
   height: var(--tab-height);
   font-size: var(--tab-font-size) !important;
   min-height: 0 !important;
+  align-items: center !important;
 }
 .tabbrowser-tab[fadein]:not([pinned]) {
   max-width: var(--max-tab-width) !important;
