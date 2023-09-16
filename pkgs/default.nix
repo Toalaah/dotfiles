@@ -1,5 +1,5 @@
-{pkgs}: {
-  sf-mono = pkgs.callPackage ./sf-mono {};
-  league-mono = pkgs.callPackage ./league-mono {};
-  pass-gen = pkgs.callPackage ./pass-gen {};
-}
+{pkgs}: let
+  allPackages = builtins.removeAttrs (builtins.readDir ./.) ["default.nix"];
+  mapToDerivation = pkgName: _: pkgs.callPackage ./${pkgName} {};
+in
+  builtins.mapAttrs mapToDerivation allPackages
