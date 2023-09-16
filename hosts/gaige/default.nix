@@ -83,7 +83,7 @@
   services.unclutter.enable = true;
   services.geoclue2.enable = true;
   services.locate.enable = true;
-  services.nordvpn.enable = true;
+  services.mullvad-vpn.enable = true;
 
   system.stateVersion = "22.11";
 }

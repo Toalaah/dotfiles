@@ -41,7 +41,7 @@
   hardware.ipu6.enable = true;
   hardware.ipu6.platform = "ipu6ep";
 
-  services.nordvpn.enable = true;
+  services.mullvad-vpn.enable = true;
 
   networking.wg = {
     enable = true;
