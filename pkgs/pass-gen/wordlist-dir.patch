@@ -1,0 +1,16 @@
+diff --git a/pass-gen b/pass-gen
+index 45ae9dd..3cbad32 100755
+--- a/pass-gen
++++ b/pass-gen
+@@ -7,9 +7,9 @@
+ 
+ 
+ #  Default settings (unless overridden by command-line options or .passgenrc)
+-WORDLIST=/usr/local/lib/pass-gen/wordlists/EFF_wordlist_total
++WORDLIST=@out@/lib/pass-gen/wordlists/EFF_wordlist_total
+ SIZE_OF_WORDLIST="not set"  # Not a user-set value; computed based on supplied list
+-CHARLIST=/usr/local/lib/pass-gen/character-lists/default_character_list
++CHARLIST=@out@/lib/pass-gen/character-lists/default_character_list
+ SIZE_OF_CHARLIST="not set"  # Not a user-set value; computed based on supplied list
+ PADDING_LENGTH_BEFORE=0
+ PADDING_LENGTH_AFTER=3

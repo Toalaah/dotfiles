@@ -1,0 +1,32 @@
+diff --git a/makefile b/makefile
+index 1ac3dc8..7a240fa 100644
+--- a/makefile
++++ b/makefile
+@@ -1,15 +1,16 @@
++PREFIX ?= /usr
+ .PHONY : install
+-install : 
+-	install -m 0644 -v ./man/pass-gen.1 /usr/local/share/man/man1/pass-gen.1 
+-	install -m 0755 -v ./pass-gen /usr/local/bin/pass-gen
+-	install -d /usr/local/lib/pass-gen
+-	install -d /usr/share/zsh/site-functions
+-	install -m 0755 -v ./_pass-gen /usr/share/zsh/site-functions/_pass-gen
+-	cp -r ./character-lists /usr/local/lib/pass-gen
+-	cp -r ./wordlists /usr/local/lib/pass-gen
++install :
++	install -D -m 0644 -v ./man/pass-gen.1 $(PREFIX)/share/man/man1/pass-gen.1
++	install -D -m 0755 -v ./pass-gen $(PREFIX)/bin/pass-gen
++	install -D -m 0755 -v ./_pass-gen $(PREFIX)/share/zsh/site-functions/_pass-gen
++	# create char/word-lists
++	mkdir -p $(PREFIX)/lib/pass-gen
++	cp -r ./character-lists $(PREFIX)/lib/pass-gen
++	cp -r ./wordlists $(PREFIX)/lib/pass-gen
+ 
+ .PHONY : uninstall
+ uninstall :
+-	rm -f /usr/local/bin/pass-gen
+-	rm -rf /usr/local/lib/pass-gen
+-	rm -f /usr/local/share/man/man1/pass-gen.1
++	rm -f $(PREFIX)/bin/pass-gen
++	rm -rf $(PREFIX)/lib/pass-gen
++	rm -f $(PREFIX)/share/man/man1/pass-gen.1
