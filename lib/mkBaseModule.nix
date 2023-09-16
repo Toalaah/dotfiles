@@ -14,8 +14,6 @@ in {
   networking.hostName = lib.mkForce hostname;
   networking.firewall.allowPing = true;
   networking.networkmanager.enable = true;
-  networking.useDHCP = false;
-  networking.useNetworkd = true;
 
   # nix.channel.enable = false;
   # set nixpkgs in NIX_PATH to currently pinned flake input
