@@ -33,6 +33,8 @@
   boot.initrd.luks.devices."luks-2f2ee1d7-2a5a-4f01-b1ee-c28121cac2d4".device = "/dev/disk/by-uuid/2f2ee1d7-2a5a-4f01-b1ee-c28121cac2d4";
   boot.initrd.luks.devices."luks-2f2ee1d7-2a5a-4f01-b1ee-c28121cac2d4".keyFile = "/crypto_keyfile.bin";
 
+  boot.swraid.enable = false;
+
   fileSystems."/boot/efi" = {
     device = "/dev/disk/by-uuid/3310-CD7C";
     fsType = "vfat";
