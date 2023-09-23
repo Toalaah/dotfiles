@@ -27,8 +27,6 @@ in {
     umask 077
   '';
 
-  environment.binbash = "${pkgs.bashInteractive}/bin/bash";
-
   environment.systemPackages = with pkgs; let
     # override nix-shell builtin with cached implementation. this allows for
     # using nix-shell in script shebangs while retaining caching functionality,

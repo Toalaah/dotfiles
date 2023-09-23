@@ -10,17 +10,20 @@
     ../../nixos/profiles/gpg-auth-agent
     ../../nixos/profiles/graphical
 
-    ../../roles/tor.nix
-    ../../roles/nfs.nix
-    ../../roles/nvidia.nix
     ../../roles/docker.nix
-    ../../roles/nix.nix
     ../../roles/libvirt.nix
-    ../../roles/sudo.nix
-    ../../roles/ssh.nix
-    ../../roles/vpn.nix
-    ../../roles/networking.nix
     ../../roles/locale.nix
+    ../../roles/misc.nix
+    ../../roles/networking.nix
+    ../../roles/nfs.nix
+    ../../roles/nix.nix
+    ../../roles/nvidia.nix
+    ../../roles/ssh.nix
+    ../../roles/sudo.nix
+    ../../roles/tor.nix
+    ../../roles/vpn.nix
+    ../../roles/wireguard.nix
+    ../../roles/yubikey.nix
   ];
 
   security.pass.enable = true;
@@ -42,11 +45,11 @@
     xorg.xcursorthemes
   ];
 
-  security.yubikey = {
-    enable = true;
-    id = config.attributes.primaryUser.smartcard.id;
-    pam.enable = false;
-  };
+  # security.yubikey = {
+  #   enable = true;
+  #   id = config.attributes.primaryUser.smartcard.id;
+  #   pam.enable = false;
+  # };
 
   graphical.xorg.enable = true;
   graphical.xorg.windowManager = "bspwm";
