@@ -19,7 +19,6 @@ in {
     (nerdfonts.override {fonts = ["JetBrainsMono" "Iosevka"];})
     corefonts
     jetbrains-mono
-    sf-mono
     terminus-nerdfont
     iosevka-comfy.comfy
     xclip # fix clipboard not interoping w/ vim
