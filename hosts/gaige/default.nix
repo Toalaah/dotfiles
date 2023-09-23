@@ -9,7 +9,18 @@
 
     ../../nixos/profiles/gpg-auth-agent
     ../../nixos/profiles/graphical
-    ../../nixos/profiles/libvirt
+
+    ../../roles/tor.nix
+    ../../roles/nfs.nix
+    ../../roles/nvidia.nix
+    ../../roles/docker.nix
+    ../../roles/nix.nix
+    ../../roles/libvirt.nix
+    ../../roles/sudo.nix
+    ../../roles/ssh.nix
+    ../../roles/vpn.nix
+    ../../roles/networking.nix
+    ../../roles/locale.nix
   ];
 
   security.pass.enable = true;
@@ -20,29 +31,31 @@
   boot.kernelPackages = pkgs.linuxPackages_6_4;
   boot.tmp.cleanOnBoot = true;
 
-  virtualisation.docker.enable = true;
-  users.extraGroups.docker.members = [config.attributes.primaryUser.name];
+  programs.steam.enable = true;
 
   environment.systemPackages = with pkgs; [
-    nodejs
-    networkmanagerapplet
-    hicolor-icon-theme
     adapta-gtk-theme
     gnome3.adwaita-icon-theme
+    hicolor-icon-theme
+    networkmanagerapplet
+    nodejs
     xorg.xcursorthemes
   ];
 
   security.yubikey = {
     enable = true;
     id = config.attributes.primaryUser.smartcard.id;
-    pam.enable = true;
+    pam.enable = false;
   };
 
   graphical.xorg.enable = true;
   graphical.xorg.windowManager = "bspwm";
-  hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia.nvidiaPersistenced = true;
   hardware.nvidia.forceFullCompositionPipeline = true;
   graphical.xorg.screenLocker.enable = true;
+  hardware.opengl.driSupport32Bit = true;
+  services.xserver.layout = "us";
+  services.xserver.xkbVariant = "altgr-intl";
   graphical.xorg.settings = {
     videoDrivers = ["nvidia"];
     serverFlagsSection = ''
@@ -81,11 +94,9 @@
     };
   };
 
-  services.openssh.enable = true;
   services.unclutter.enable = true;
   services.geoclue2.enable = true;
   services.locate.enable = true;
-  services.mullvad-vpn.enable = true;
 
   system.stateVersion = "22.11";
 }
