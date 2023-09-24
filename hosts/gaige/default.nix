@@ -5,12 +5,12 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../nixos/modules
-
+    ../../nixos/modules/security/pass
     ../../nixos/profiles/gpg-auth-agent
-    ../../nixos/profiles/graphical
 
     ../../roles/docker.nix
+    ../../roles/xorg.nix
+    ../../roles/bspwm.nix
     ../../roles/libvirt.nix
     ../../roles/locale.nix
     ../../roles/misc.nix
@@ -22,45 +22,24 @@
     ../../roles/sudo.nix
     ../../roles/tor.nix
     ../../roles/vpn.nix
+    ../../roles/pipewire.nix
     ../../roles/wireguard.nix
     ../../roles/yubikey.nix
   ];
 
   security.pass.enable = true;
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  boot.kernelPackages = pkgs.linuxPackages_6_4;
-  boot.tmp.cleanOnBoot = true;
+  boot.blacklistedKernelModules = ["i915"];
 
   programs.steam.enable = true;
 
   environment.systemPackages = with pkgs; [
-    adapta-gtk-theme
-    gnome3.adwaita-icon-theme
-    hicolor-icon-theme
     networkmanagerapplet
     nodejs
-    xorg.xcursorthemes
   ];
 
-  # security.yubikey = {
-  #   enable = true;
-  #   id = config.attributes.primaryUser.smartcard.id;
-  #   pam.enable = false;
-  # };
-
-  graphical.xorg.enable = true;
-  graphical.xorg.windowManager = "bspwm";
-  hardware.nvidia.nvidiaPersistenced = true;
-  hardware.nvidia.forceFullCompositionPipeline = true;
-  graphical.xorg.screenLocker.enable = true;
-  hardware.opengl.driSupport32Bit = true;
-  services.xserver.layout = "us";
-  services.xserver.xkbVariant = "altgr-intl";
-  graphical.xorg.settings = {
-    videoDrivers = ["nvidia"];
+  services.xserver = {
+    xkbVariant = "altgr-intl";
     serverFlagsSection = ''
       Option "BlankTime" "0"
       Option "StandbyTime" "0"

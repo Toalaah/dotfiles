@@ -12,11 +12,15 @@
     vulkan-tools
   ];
 
+  # hardware.nvidia.nvidiaPersistenced = true;
+  # hardware.nvidia.forceFullCompositionPipeline = true;
+
   hardware.nvidia = {
     powerManagement.enable = true;
     modesetting.enable = true;
     nvidiaSettings = true;
   };
 
+  # hardware.opengl.driSupport32Bit = true;
   hardware.opengl.extraPackages = with pkgs; [nvidia-vaapi-driver];
 }
