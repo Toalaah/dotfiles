@@ -101,7 +101,7 @@ in {
       enable = true;
       numDesktops = 6;
       # desktops."1".name = "web";
-      statusBar = "eww";
+      statusBar = "tint2";
     };
     sxhkd.enable = true;
     eww.configuration = "sovl";

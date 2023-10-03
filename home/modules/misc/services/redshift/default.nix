@@ -17,6 +17,7 @@ in {
     (mkIf cfg.enable {
       home.packages = lib.optional cfg.autoDetermineLocation pkgs.geoclue2;
       services.redshift = {
+        tray = true;
         enable = true;
         provider =
           if cfg.autoDetermineLocation

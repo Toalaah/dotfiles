@@ -1,0 +1,14 @@
+diff --git a/config.h b/config.h
+index c312cfc..6742e8c 100644
+--- a/config.h
++++ b/config.h
+@@ -10,7 +10,7 @@
+ // The number of rows you want the workspaces circles to be spread across.
+ // If NUM_ROWS does not divide your number of workspaces evenly, the
+ // final row will have fewer circles.
+-#define NUM_ROWS 3
++#define NUM_ROWS 2
+ 
+ // If your WM/DE does not expose or otherwise correctly report the
+ // '_NET_NUMBER_OF_DESKTOPS' atom, you may opt to manually specify the number of
+

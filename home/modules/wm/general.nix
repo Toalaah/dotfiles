@@ -7,6 +7,7 @@ with lib; let
   cfg = config.wm.general;
   currentWindowManager = config.attributes.primaryUser.windowManager;
 in {
+  imports = [./tint2];
   options.wm.general = {
     displayManager = mkOption {
       type = types.enum ["none" "xinit"];

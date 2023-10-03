@@ -45,7 +45,7 @@ in {
       default = {};
     };
     statusBar = mkOption {
-      type = types.enum ["none" "eww"];
+      type = types.enum ["none" "eww" "tint2"];
       default = "eww";
       description = "which status bar to use";
     };
@@ -68,6 +68,7 @@ in {
         attributes.primaryUser.windowManager = bspwm;
         # enable services required for bspwm to function
         wm.eww.enable = mkDefault (cfg.statusBar == "eww");
+        programs.tint2.enable = mkDefault (cfg.statusBar == "tint2");
         wm.sxhkd.enable = mkDefault true;
         home.packages = with pkgs; [bsp-layout bc];
         # bspwm config

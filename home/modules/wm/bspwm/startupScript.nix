@@ -6,15 +6,18 @@
 }: ''
   pkill bspc
   ${lib.optionalString (cfg.statusBar == "eww") "pkill eww"}
+  ${lib.optionalString (cfg.statusBar == "tint2") "pgrep tint2 | xargs kill"}
   pkill sxhkd
 
   xset r rate 200 30 &
   xrdb -merge ${config.xdg.cacheHome}/wal/colors.Xresources &
   xrdb -merge ${config.xresources.path} &
 
-  # [ -f ${config.home.homeDirectory}/.fehbg ] && nix-shell -p feh --command ${config.home.homeDirectory}/.fehbg &
   ${pkgs.hsetroot}/bin/hsetroot -solid "#3D405B"
-  ${pkgs.networkmanagerapplet}/bin/nm-applet --indicator &
+
+  ${lib.optionalString (cfg.statusBar == "tint2") "${pkgs.tint2}/bin/tint2 &"}
+  ${pkgs.networkmanagerapplet}/bin/nm-applet &
+  ${pkgs.volumeicon}/bin/volumeicon &
 
   ${
     lib.optionalString config.misc.services.dunst.enable

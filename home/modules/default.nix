@@ -24,6 +24,7 @@
     ./tools/zoxide
     ./wm/bspwm
     ./wm/eww
+    ./wm/tint2
     ./wm/general.nix
     ./wm/sxhkd
   ];
