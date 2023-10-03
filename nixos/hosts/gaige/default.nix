@@ -5,8 +5,8 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../nixos/modules/security/pass
-    ../../nixos/profiles/gpg-auth-agent
+    ../../modules/security/pass
+    ../../profiles/gpg-auth-agent
 
     ../../roles/docker.nix
     ../../roles/xorg.nix

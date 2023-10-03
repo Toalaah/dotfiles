@@ -8,13 +8,13 @@
   imports = [
     ./hardware-configuration.nix
     nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
-    ../../nixos/modules
+    ../../modules
 
-    ../../nixos/profiles/gpg-auth-agent
-    ../../nixos/profiles/graphical
-    ../../nixos/profiles/laptop
-    ../../nixos/profiles/hidpi
-    ../../nixos/profiles/libvirt
+    ../../profiles/gpg-auth-agent
+    ../../profiles/graphical
+    ../../profiles/laptop
+    ../../profiles/hidpi
+    ../../profiles/libvirt
   ];
 
   networking.nameservers = ["1.1.1.1" "8.8.8.8"];

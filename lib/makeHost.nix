@@ -12,7 +12,7 @@
   };
   baseModule = import ./mkBaseModule.nix {inherit hostname;};
   userModule = primaryUser.attributes;
-  hostModule = ../hosts/${hostname};
+  hostModule = ../nixos/hosts/${hostname};
 in
   nixpkgs.lib.nixosSystem {
     inherit pkgs system specialArgs;

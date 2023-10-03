@@ -6,7 +6,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../nixos/modules
+    ../../modules
     nvim-flake.nixosModules.nvim
   ];
 
