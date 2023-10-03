@@ -8,6 +8,7 @@
   ${lib.optionalString (cfg.statusBar == "eww") "pkill eww"}
   ${lib.optionalString (cfg.statusBar == "tint2") "pgrep tint2 | xargs kill"}
   pkill sxhkd
+  pgrep volumeicon | xargs kill
 
   xset r rate 200 30 &
   xrdb -merge ${config.xdg.cacheHome}/wal/colors.Xresources &
@@ -17,7 +18,15 @@
 
   ${lib.optionalString (cfg.statusBar == "tint2") "${pkgs.tint2}/bin/tint2 &"}
   ${pkgs.networkmanagerapplet}/bin/nm-applet &
-  ${pkgs.volumeicon}/bin/volumeicon &
+  {
+    for i in ''$(seq 5); do
+      if [ ''$(${pkgs.volumeicon}/bin/volumeicon) ]; then
+        break
+      else
+        sleep 1.5
+      fi
+    done
+  } &
 
   ${
     lib.optionalString config.misc.services.dunst.enable
