@@ -20,6 +20,7 @@ in {
         };
         mappings = {
           f = "toggle_fullscreen";
+          "[fullscreen] f" = "toggle_fullscreen";
           R = "rotate";
           i = "recolor";
         };
