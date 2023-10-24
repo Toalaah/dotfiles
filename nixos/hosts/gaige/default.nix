@@ -1,16 +1,11 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/security/pass
-    ../../profiles/gpg-auth-agent
 
-    ../../roles/docker.nix
-    ../../roles/xorg.nix
     ../../roles/bspwm.nix
+    ../../roles/docker.nix
+    ../../roles/gpg.nix
     ../../roles/libvirt.nix
     ../../roles/locale.nix
     ../../roles/misc.nix
@@ -18,12 +13,13 @@
     ../../roles/nfs.nix
     ../../roles/nix.nix
     ../../roles/nvidia.nix
+    ../../roles/pipewire.nix
     ../../roles/ssh.nix
     ../../roles/sudo.nix
     ../../roles/tor.nix
     ../../roles/vpn.nix
-    ../../roles/pipewire.nix
     ../../roles/wireguard.nix
+    ../../roles/xorg.nix
     ../../roles/yubikey.nix
   ];
 
@@ -36,6 +32,8 @@
   environment.systemPackages = with pkgs; [
     networkmanagerapplet
     nodejs
+    mpv
+    yt-dlp
   ];
 
   services.xserver = {
