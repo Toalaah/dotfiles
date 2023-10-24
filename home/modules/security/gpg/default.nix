@@ -38,7 +38,7 @@ in {
         enable = true;
         enableSshSupport = cfg.sshSupport;
         sshKeys = config.attributes.primaryUser.sshKeys;
-        pinentryFlavor = "gtk2";
+        pinentryFlavor = "gnome3";
         maxCacheTtl = 120;
         defaultCacheTtl = 60;
       };
