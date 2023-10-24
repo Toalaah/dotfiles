@@ -7,5 +7,6 @@
     netcat-openbsd
     tcpdump
     traceroute
+    openssl
   ];
 }
