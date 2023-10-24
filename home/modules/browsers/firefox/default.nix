@@ -14,6 +14,7 @@ in {
       enable = mkEnableOption "firefox";
       useNightly = mkEnableOption "use nightly firefox build";
       passIntegration = mkEnableOption "integration with unix pass utility" // {default = true;};
+      mpvIntegration = mkEnableOption "integration with ff2mpv" // {default = true;};
       additionalExtensions = mkOption {
         default = [];
         description = "additional extensions to install";
@@ -29,9 +30,13 @@ in {
           message = "firefox: only one browser should be enabled";
         }
       ];
+      home.packages = lib.optionals cfg.mpvIntegration [pkgs.ff2mpv];
       attributes.primaryUser.browser = "${config.programs.firefox.package}/bin/firefox";
       home.sessionVariables.BROWSER = "${config.programs.firefox.package}/bin/firefox";
-      home.file = mkIf cfg.passIntegration {".mozilla/native-messaging-hosts/passff.json".source = "${pkgs.passff-host}/share/passff-host/passff.json";};
+      home.file = {
+        ".mozilla/native-messaging-hosts/passff.json" = mkIf cfg.passIntegration {source = "${pkgs.passff-host}/share/passff-host/passff.json";};
+        ".mozilla/native-messaging-hosts/ff2mpv.json" = mkIf cfg.mpvIntegration {source = "${pkgs.ff2mpv}/lib/mozilla/native-messaging-hosts/ff2mpv.json";};
+      };
       programs.firefox = let
         pkg =
           if cfg.useNightly
@@ -92,7 +97,8 @@ in {
               privacy-badger
             ]
             ++ cfg.additionalExtensions
-            ++ lib.optional cfg.passIntegration passff;
+            ++ lib.optional cfg.passIntegration passff
+            ++ lib.optional cfg.mpvIntegration ff2mpv;
           userChrome = builtins.readFile ./userChrome.css;
           userContent = builtins.readFile ./userContent.css;
           settings = {
