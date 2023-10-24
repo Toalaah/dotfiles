@@ -3,10 +3,15 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     nixos-hardware.url = "github:nixos/nixos-hardware";
+
     flake-utils.url = "github:numtide/flake-utils";
+
     nur.url = "github:nix-community/nur";
+
     firefox-nightly.url = "github:colemickens/flake-firefox-nightly";
+    firefox-nightly.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
