@@ -6,8 +6,6 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
-    flake-utils.url = "github:numtide/flake-utils";
-
     nur.url = "github:nix-community/nur";
 
     firefox-nightly.url = "github:colemickens/flake-firefox-nightly";
@@ -40,7 +38,6 @@
   };
 
   outputs = {
-    flake-utils,
     home-manager,
     nixpkgs,
     nur,
@@ -55,50 +52,54 @@
         eww = inputs.eww.packages.${prev.system}.default;
       })
     ];
-  in
-    {
-      nixosConfigurations = with self.lib; {
-        lilith = makeHost {
-          hostname = "lilith";
-          primaryUser = users.personal;
-          specialArgs = inputs;
-          config = {allowUnfree = true;};
-          inherit overlays;
-        };
-        gaige = makeHost {
-          hostname = "gaige";
-          primaryUser = users.personal;
-          specialArgs = inputs;
-          config = {allowUnfree = true;};
-          inherit overlays;
-        };
-        zer0 = makeHost {
-          hostname = "zer0";
-          primaryUser = users.vm;
-          specialArgs = inputs;
-          config = {allowUnfree = true;};
-          inherit overlays;
-        };
+    eachSystem = f:
+      nixpkgs.lib.genAttrs [
+        "aarch64-darwin"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "x86_64-linux"
+      ] (system: let pkgs = import nixpkgs {inherit system;}; in f {inherit system pkgs;});
+  in {
+    nixosConfigurations = with self.lib; {
+      lilith = makeHost {
+        hostname = "lilith";
+        primaryUser = users.personal;
+        specialArgs = inputs;
+        config = {allowUnfree = true;};
+        inherit overlays;
       };
-    }
-    // flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {
-        inherit system overlays;
-        config = {};
+      gaige = makeHost {
+        hostname = "gaige";
+        primaryUser = users.personal;
+        specialArgs = inputs;
+        config = {allowUnfree = true;};
+        inherit overlays;
       };
-    in {
-      formatter = pkgs.alejandra;
-      devShells.default = with pkgs;
-        mkShell {
-          buildInputs = [
-            alejandra
-            deadnix
-            git-crypt
-            just
-          ];
-        };
+      zer0 = makeHost {
+        hostname = "zer0";
+        primaryUser = users.vm;
+        specialArgs = inputs;
+        config = {allowUnfree = true;};
+        inherit overlays;
+      };
+    };
 
-      legacyPackages.homeConfigurations = self.lib.makeHomeConfigurations {
+    formatter = eachSystem ({pkgs, ...}: pkgs.alejandra);
+
+    devShells = eachSystem ({pkgs, ...}: {
+      default = pkgs.mkShell {
+        buildInputs = with pkgs; [
+          alejandra
+          deadnix
+          git-crypt
+          just
+        ];
+      };
+    });
+
+    # use legacyPackages to expose hm-config for each system type
+    legacyPackages = eachSystem ({system, ...}: {
+      homeConfigurations = self.lib.makeHomeConfigurations {
         inherit home-manager;
         users = {
           personal = {
@@ -109,6 +110,8 @@
           };
         };
       };
-      packages.default = pkgs.hello;
     });
+
+    packages = eachSystem ({pkgs, ...}: {default = pkgs.hello;});
+  };
 }
