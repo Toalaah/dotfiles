@@ -31,8 +31,8 @@ in {
         }
       ];
       home.packages = lib.optionals cfg.mpvIntegration [pkgs.ff2mpv];
-      attributes.primaryUser.browser = "${config.programs.firefox.package}/bin/firefox";
-      home.sessionVariables.BROWSER = "${config.programs.firefox.package}/bin/firefox";
+      attributes.primaryUser.browser = "${config.programs.firefox.package}/bin/firefox${lib.optionalString cfg.useNightly "-nightly"}";
+      home.sessionVariables.BROWSER = "${config.programs.firefox.package}/bin/firefox${lib.optionalString cfg.useNightly "-nightly"}";
       home.file = {
         ".mozilla/native-messaging-hosts/passff.json" = mkIf cfg.passIntegration {source = "${pkgs.passff-host}/share/passff-host/passff.json";};
         ".mozilla/native-messaging-hosts/ff2mpv.json" = mkIf cfg.mpvIntegration {source = "${pkgs.ff2mpv}/lib/mozilla/native-messaging-hosts/ff2mpv.json";};

@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  eww,
   ...
 }:
 lib.mkIf config.programs.tint2.enable {
@@ -137,7 +136,7 @@ lib.mkIf config.programs.tint2.enable {
     task_icon = 1
     task_centered = 1
     urgent_nb_of_blink = 100000
-    task_maximum_size = 150 35
+    task_maximum_size = 200 35
     task_padding = 2 2 4
     task_tooltip = 1
     task_thumbnail = 0
