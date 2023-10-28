@@ -73,6 +73,26 @@
         primaryUser = users.personal;
         specialArgs = inputs;
         config = {allowUnfree = true;};
+        roles = [
+          "bspwm"
+          "docker"
+          "gpg"
+          "libvirt"
+          "locale"
+          "misc"
+          "networking"
+          "nfs"
+          "nix"
+          "nvidia"
+          "pipewire"
+          "ssh"
+          "sudo"
+          "tor"
+          "vpn"
+          "wireguard"
+          "xorg"
+          "yubikey"
+        ];
         inherit overlays;
       };
       zer0 = makeHost {

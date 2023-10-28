@@ -2,25 +2,6 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/security/pass
-
-    ../../roles/bspwm.nix
-    ../../roles/docker.nix
-    ../../roles/gpg.nix
-    ../../roles/libvirt.nix
-    ../../roles/locale.nix
-    ../../roles/misc.nix
-    ../../roles/networking.nix
-    ../../roles/nfs.nix
-    ../../roles/nix.nix
-    ../../roles/nvidia.nix
-    ../../roles/pipewire.nix
-    ../../roles/ssh.nix
-    ../../roles/sudo.nix
-    ../../roles/tor.nix
-    ../../roles/vpn.nix
-    ../../roles/wireguard.nix
-    ../../roles/xorg.nix
-    ../../roles/yubikey.nix
   ];
 
   security.pass.enable = true;

@@ -6,6 +6,7 @@
   specialArgs ? {},
   useHomeManager ? true,
   config ? {},
+  roles ? [],
 }: let
   pkgs = import nixpkgs {
     inherit system overlays config;
@@ -22,6 +23,19 @@ in
         hostModule
         userModule
       ]
+      ++ (builtins.map (
+          r: let
+            inherit (nixpkgs.lib) pathExists path;
+            pathMaybeDir = path.append ../nixos/roles r;
+            pathMaybeFile = path.append ../nixos/roles "${r}.nix";
+          in
+            if pathExists pathMaybeDir
+            then pathMaybeDir
+            else if pathExists pathMaybeFile
+            then pathMaybeFile
+            else throw "Could not import role '${r}'"
+        )
+        roles)
       ++ pkgs.lib.optional useHomeManager (
         {
           config,
