@@ -8,5 +8,6 @@
     tcpdump
     traceroute
     openssl
+    socat
   ];
 }
