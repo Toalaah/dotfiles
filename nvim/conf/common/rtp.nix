@@ -1,0 +1,3 @@
+{
+  rtp = [./ftplugin ./lua];
+}

@@ -21,7 +21,7 @@ in {
         v = (
           if user.editor != null
           then user.editor
-          else "${pkgs.neovim}/bin/nvim"
+          else "${pkgs.vim}/bin/vim"
         );
         "ns" = "nix-shell -p";
         ":wq" = "exit";

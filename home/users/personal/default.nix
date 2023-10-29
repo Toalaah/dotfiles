@@ -65,11 +65,7 @@ in {
     zoxide.enable = true;
   };
 
-  editors.neovim = {
-    enable = true;
-    useNightly = true;
-    setManpager = true;
-  };
+  editors.neovim.enable = true;
 
   dev = {
     tmux.enable = true;

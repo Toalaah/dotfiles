@@ -290,7 +290,7 @@
       "inputs": {
         "flake-utils": "flake-utils_4",
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-libvterm"
         ]
       },
       "locked": {
@@ -353,6 +353,22 @@
       "original": {
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
+    "nixpkgs-libvterm": {
+      "locked": {
+        "lastModified": 1698553102,
+        "narHash": "sha256-2/OpGzwyfh7/WGS1vkmLxS0cx90hruRueIbKVrDO1yM=",
+        "owner": "mrtnvgr",
+        "repo": "nixpkgs",
+        "rev": "2e5606745539e05e426d4b72c5cb612d234c73a4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mrtnvgr",
+        "ref": "update-libvterm-neovim-to-v0.3.3",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -420,6 +436,26 @@
         "type": "github"
       }
     },
+    "nvim-utils": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1698478165,
+        "narHash": "sha256-KR6r+sVkDvMHf95s1Ow/qe40Evz5szoIEbArfSWZ7k8=",
+        "owner": "toalaah",
+        "repo": "nvim-utils",
+        "rev": "98f7b2036849cec53e6e3f397c3aaceb42b454b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "toalaah",
+        "repo": "nvim-utils",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "dmenu": "dmenu",
@@ -430,8 +466,10 @@
         "neovim-nightly": "neovim-nightly",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs-libvterm": "nixpkgs-libvterm",
         "nur": "nur",
         "nvim-flake": "nvim-flake",
+        "nvim-utils": "nvim-utils",
         "spicetify-nix": "spicetify-nix",
         "st": "st",
         "zsh-nix-shell": "zsh-nix-shell"

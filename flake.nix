@@ -29,8 +29,12 @@
     zsh-nix-shell.url = "github:goolord/simple-zsh-nix-shell";
     zsh-nix-shell.flake = false;
 
-    neovim-nightly.url = "github:neovim/neovim/nightly/?dir=contrib";
-    neovim-nightly.inputs.nixpkgs.follows = "nixpkgs";
+    nvim-utils.url = "github:toalaah/nvim-utils";
+    nvim-utils.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixpkgs-libvterm.url = "github:mrtnvgr/nixpkgs/update-libvterm-neovim-to-v0.3.3";
+    neovim-nightly.url = "github:neovim/neovim/nightly?dir=contrib";
+    neovim-nightly.inputs.nixpkgs.follows = "nixpkgs-libvterm";
 
     nvim-flake.url = "github:toalaah/neovim-flake";
 
@@ -38,18 +42,22 @@
   };
 
   outputs = {
+    self,
     home-manager,
     nixpkgs,
     nur,
+    nvim-utils,
+    neovim-nightly,
     ...
   } @ inputs: let
     users = import ./home/users;
-    self.lib = import ./lib {inherit nixpkgs;};
+    lib' = import ./lib {inherit nixpkgs;};
     overlays = [
       (import ./overlays inputs)
       nur.overlay
       (_final: prev: {
         eww = inputs.eww.packages.${prev.system}.default;
+        nvim = self.packages.${prev.system}.nvim;
       })
     ];
     eachSystem = f:
@@ -60,7 +68,7 @@
         "x86_64-linux"
       ] (system: let pkgs = import nixpkgs {inherit system;}; in f {inherit system pkgs;});
   in {
-    nixosConfigurations = with self.lib; {
+    nixosConfigurations = with lib'; {
       lilith = makeHost {
         hostname = "lilith";
         primaryUser = users.personal;
@@ -119,7 +127,7 @@
 
     # use legacyPackages to expose hm-config for each system type
     legacyPackages = eachSystem ({system, ...}: {
-      homeConfigurations = self.lib.makeHomeConfigurations {
+      homeConfigurations = lib'.makeHomeConfigurations {
         inherit home-manager;
         users = {
           personal = {
@@ -132,6 +140,19 @@
       };
     });
 
-    packages = eachSystem ({pkgs, ...}: {default = pkgs.hello;});
+    packages = eachSystem ({
+      pkgs,
+      system,
+      ...
+    }: {
+      default = pkgs.hello;
+      nvim = with nvim-utils.lib;
+        mkNvimPkg {
+          inherit pkgs;
+          configuration = ./nvim/conf;
+          modules = [baseModules.all ./nvim/modules];
+          package = neovim-nightly.packages.${system}.default;
+        };
+    });
   };
 }
