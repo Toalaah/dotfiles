@@ -96,6 +96,7 @@ in {
     bspwm = {
       enable = true;
       numDesktops = 6;
+      defaultLayout = "even";
       # desktops."1".name = "web";
       statusBar = "tint2";
     };

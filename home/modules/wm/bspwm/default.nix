@@ -80,12 +80,17 @@ in {
             for desktop in $(${pkgs.bspwm}/bin/bspc query -D --names); do
               ${pkgs.bsp-layout}/bin/bsp-layout set ${cfg.defaultLayout} $desktop &
             done
+
+            BW=2
+            ${pkgs.bspwm}/bin/bspc config border_width $BW
+            ${pkgs.bspwm}/bin/bspc config window_gap -$BW
+            for side in top right left ; do
+              ${pkgs.bspwm}/bin/bspc config ''${side}_padding $BW
+            done
           '';
           alwaysResetDesktops = true;
           settings = {
-            border_width = 2;
             focused_border_color = "#FFFFFF";
-            window_gap = 4;
             split_ratio = 0.50;
             focus_follows_pointer = true;
             borderless_monocle = true;
