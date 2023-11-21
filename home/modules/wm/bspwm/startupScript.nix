@@ -6,15 +6,22 @@
 }: ''
   pkill bspc
   ${lib.optionalString (cfg.statusBar == "eww") "pkill eww"}
-  ${lib.optionalString (cfg.statusBar == "tint2") "pgrep tint2 | xargs kill"}
+  ${lib.optionalString (cfg.statusBar == "tint2") "pkill tint2"}
   pkill sxhkd
-  pgrep volumeicon | xargs kill
+  pkill volumeicon
 
   xset r rate 200 30 &
   xrdb -merge ${config.xdg.cacheHome}/wal/colors.Xresources &
   xrdb -merge ${config.xresources.path} &
 
   ${pkgs.hsetroot}/bin/hsetroot -solid "#3D405B"
+
+  if test -d ${config.home.homeDirectory}/.local/startup.d; then
+    for f in ${config.home.homeDirectory}/.local/startup.d/*; do
+      echo $f
+      test -x $f && . $f
+    done
+  fi
 
   ${lib.optionalString (cfg.statusBar == "tint2") "${pkgs.tint2}/bin/tint2 &"}
   ${pkgs.networkmanagerapplet}/bin/nm-applet &
