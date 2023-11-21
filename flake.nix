@@ -36,9 +36,9 @@
     neovim-nightly.url = "github:neovim/neovim/nightly?dir=contrib";
     neovim-nightly.inputs.nixpkgs.follows = "nixpkgs-libvterm";
 
-    nvim-flake.url = "github:toalaah/neovim-flake";
-
     eww.url = "github:ralismark/eww/tray-3";
+
+    gulp.url = "/home/samuel/src/github/toalaah/gulp";
   };
 
   outputs = {
@@ -48,6 +48,7 @@
     nur,
     nvim-utils,
     neovim-nightly,
+    gulp,
     ...
   } @ inputs: let
     users = import ./home/users;
