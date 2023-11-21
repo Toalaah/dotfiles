@@ -7,7 +7,7 @@ with lib; let
   cfg = config.security.gpg;
   user = config.attributes.primaryUser;
   hasGpgKey = user.gpgKey != null;
-  hasSshKeys = user.sshKeys != [];
+  hasSshKeys = user.gpg.sshKeys != [];
 in {
   options.security.gpg = {
     enable = mkEnableOption "gpg and gpg-agent";
@@ -37,7 +37,7 @@ in {
       services.gpg-agent = {
         enable = true;
         enableSshSupport = cfg.sshSupport;
-        sshKeys = config.attributes.primaryUser.sshKeys;
+        sshKeys = config.attributes.primaryUser.gpg.sshKeys;
         pinentryFlavor = "gnome3";
         maxCacheTtl = 120;
         defaultCacheTtl = 60;

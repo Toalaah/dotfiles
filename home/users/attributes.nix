@@ -24,8 +24,13 @@ with lib; {
       default = null;
       type = types.nullOr types.str;
     };
-    primaryUser.sshKeys = mkOption {
-      description = "Primary user's ssh keys";
+    primaryUser.gpg.sshKeys = mkOption {
+      description = "GPG keys (by keygrip) to use for ssh";
+      default = [];
+      type = types.listOf types.str;
+    };
+    primaryUser.authorizedKeys = mkOption {
+      description = "List of authorized keys for user";
       default = [];
       type = types.listOf types.str;
     };

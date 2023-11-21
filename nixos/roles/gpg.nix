@@ -23,7 +23,7 @@
 
   programs.gnupg.agent = {
     enable = true;
-    enableSSHSupport = config.attributes.primaryUser.sshKeys != [];
+    enableSSHSupport = config.attributes.primaryUser.gpg.sshKeys != [];
     enableBrowserSocket = true;
     pinentryFlavor = "gnome3";
   };

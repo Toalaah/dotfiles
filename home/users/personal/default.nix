@@ -52,7 +52,8 @@ in {
     dunst.enable = true;
   };
 
-  terminals.st.enable = true;
+  # terminals.st.enable = true;
+  terminals.alacritty.enable = true;
   terminals.alacritty.fontFamily = "Iosevka Comfy";
 
   tools = {

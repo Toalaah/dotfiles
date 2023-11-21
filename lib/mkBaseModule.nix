@@ -20,7 +20,7 @@ in {
     shell = user.shell;
     description = user.fullName;
     extraGroups = ["wheel"] ++ user.additionalGroups;
-    openssh.authorizedKeys.keys = user.sshKeys;
+    openssh.authorizedKeys.keys = user.authorizedKeys;
   };
 
   environment.shellInit = ''
