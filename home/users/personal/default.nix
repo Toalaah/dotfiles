@@ -34,8 +34,8 @@ in {
   misc.applications.spotify = {
     enable = true;
     windowManagerSupport = true;
-    theme = "catppuccin-mocha";
-    colorScheme = "flamingo";
+    theme = "catppuccin";
+    colorScheme = "mocha";
   };
 
   security.gpg = {
