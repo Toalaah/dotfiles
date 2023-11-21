@@ -9,8 +9,8 @@ lib.vim.mkSimplePlugin {
   plugin = pkgs.fetchFromGitHub {
     owner = "mfussenegger";
     repo = "nvim-dap";
-    rev = "92dc531eea2c9a3ef504a5c8ac0decd1fa59a6a3";
-    sha256 = "sha256-25n3gNbuhF+CaBRcbcWzhFkvF1HRCns1GEYGF0lSmp4=";
+    rev = "9d81c11fd185a131f81841e64941859305f6c42d";
+    sha256 = "1pwn5c0hjm3wpzzybbakxgpq4bd7f6aygvslhivi4inzn48dla90";
   };
   category = ["lsp"];
   noSetup = true;
@@ -21,7 +21,7 @@ lib.vim.mkSimplePlugin {
           owner = "rcarriga";
           repo = "nvim-dap-ui";
           rev = "34160a7ce6072ef332f350ae1d4a6a501daf0159";
-          sha256 = "sha256-IdWPzLpNH0fkubELr2uTI7UnB0Yaf/zCkF8WUWBtyaM=";
+          sha256 = "18y9dmh525jzj31gqzqs8q3jgd93jdmsy2xip7j4f7sdpb68zm91";
         };
         config =
           lib.lua.rawLua

@@ -9,8 +9,8 @@ lib.vim.mkSimplePlugin {
   plugin = pkgs.fetchFromGitHub {
     owner = "ellisonleao";
     repo = "gruvbox.nvim";
-    rev = "477c62493c82684ed510c4f70eaf83802e398898";
-    sha256 = "0250c24c6n6yri48l288irdawhqs16qna3y74rdkgjd2jvh66vdm";
+    rev = "517b012757fbe7a4d6e507baf5cc75837e62734f";
+    sha256 = "1ndbd6mn19g3wiqshw9wckkl976kjvgy2dc3lmb92cyxjni8a507";
   };
   category = "colorschemes";
   extraPluginConfig = _cfg: {

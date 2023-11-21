@@ -12,8 +12,8 @@ in {
       plugin = pkgs.fetchFromGitHub {
         owner = "lewis6991";
         repo = "gitsigns.nvim";
-        rev = "5a9a6ac29a7805c4783cda21b80a1e361964b3f2";
-        sha256 = "sha256-9DIfUVcU5aZXPUGueBnUlv2IgUh69bDx4vGnGeNJ+u0=";
+        rev = "af0f583cd35286dd6f0e3ed52622728703237e50";
+        sha256 = "04qr0zm8cfrsf306jswah4cja8dsih3b41ikakcbvgq08qsngj86";
       };
       category = "git";
       extraPluginConfig = cfg: {
@@ -26,8 +26,8 @@ in {
       plugin = pkgs.fetchFromGitHub {
         owner = "tpope";
         repo = "vim-fugitive";
-        rev = "cbe9dfa162c178946afa689dd3f42d4ea8bf89c1";
-        sha256 = "sha256-poNiZqRMuw2+xlPsY8BIA3OCjRCpbh7uAyaWmlgPCUs=";
+        rev = "46eaf8918b347906789df296143117774e827616";
+        sha256 = "b6x8suCHRMYzqu/PGlt5FPg+7/CilkjWzlkBZ3i3H/c=";
       };
       category = "git";
       noSetup = true;
@@ -43,7 +43,7 @@ in {
         owner = "rhysd";
         repo = "committia.vim";
         rev = "0b4df1a7f48ffbc23b009bd14d58ee1be541917c";
-        sha256 = "sha256-aXCkJxsQoa8JjYqL/l/lZ7Rep9xPs0lOwxkLb6won+k=";
+        sha256 = "1scz52n6y2qrqd74kcsgvjkmxd37wmgzx2wail4sz88h3cks8w39";
       };
       category = "git";
       noSetup = true;

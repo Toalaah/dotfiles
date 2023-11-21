@@ -39,5 +39,10 @@ in {
     (inoremap "<A-j>" "<Esc>:m .+1<CR>==gi" {desc = "Move line down";})
     (vnoremap "<A-j>" ":m '>+1<CR>gv=gv" {desc = "Move line up";})
     (vnoremap "<A-k>" ":m '<-2<CR>gv=gv" {desc = "Move line down";})
+    # move between splits
+    (nnoremap "<C-h>" "<C-w>h" {desc = "Move to left split";})
+    (nnoremap "<C-j>" "<C-w>j" {desc = "Move to bottom split";})
+    (nnoremap "<C-k>" "<C-w>k" {desc = "Move to upper split";})
+    (nnoremap "<C-l>" "<C-w>l" {desc = "Move to right split";})
   ];
 }

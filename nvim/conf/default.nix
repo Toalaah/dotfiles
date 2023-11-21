@@ -49,6 +49,7 @@ in {
 
   # tools / miscellaneous
   tools.markdown-preview.enable = true;
+  tools.clipboard-image.enable = true;
   tools.mini-ai.enable = true;
   tools.mini-pairs.enable = true;
   tools.nvim-surround.enable = true;
@@ -226,8 +227,8 @@ in {
     [
       (nnmap "<leader>m" "<cmd>lua require('harpoon.mark').add_file()<cr>" {desc = "[M]ark file";})
       (nnmap "<leader>h" "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>" {desc = "[O]pen harpoon menu";})
-      (nnmap "<M-;>" "<cmd>lua require('harpoon.ui').nav_prev()<cr>" {desc = "Navigate to previous file";})
-      (nnmap "<M-'>" "<cmd>lua require('harpoon.ui').nav_next()<cr>" {desc = "Navigate to next file";})
+      (nnmap "<M-k>" "<cmd>lua require('harpoon.ui').nav_prev()<cr>" {desc = "Navigate to previous file";})
+      (nnmap "<M-j>" "<cmd>lua require('harpoon.ui').nav_next()<cr>" {desc = "Navigate to next file";})
     ]
     ++ builtins.map
     mkIndexKeymap

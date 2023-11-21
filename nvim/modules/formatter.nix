@@ -9,8 +9,8 @@ lib.vim.mkSimplePlugin {
   plugin = pkgs.fetchFromGitHub {
     owner = "stevearc";
     repo = "conform.nvim";
-    rev = "1281e26948fc06994e0e0cdcaafdd9bbd28929e7";
-    sha256 = "0drm8jfnfw5p2g3g69akgjyz5nkx72lnx6fc4b8s2ycvzn89zj3x";
+    rev = "e76ad83e4a3e303ccf50104a251118613162f8a8";
+    sha256 = "11ki7cz0wl11k6b0lz9217vgyz3sbdgg50y8azb1n2405731sm10";
   };
   category = ["editor"];
   extraPluginConfig = _: {

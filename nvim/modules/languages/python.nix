@@ -44,7 +44,7 @@ in {
             owner = "mfussenegger";
             repo = "nvim-dap-python";
             rev = "37b4cba02e337a95cb62ad1609b3d1dccb2e5d42";
-            sha256 = "sha256-wT1OLg4gpKaeqcrSgef/aKmB3+IFPB5fF0OOUtVuyqA=";
+            sha256 = "186advam53j32xgiwg05wbgq3ab8zzkq3lnam6gad9101qp4wgf1";
           };
           ft = "python";
           dependencies = ["mfussenegger/nvim-dap"];
