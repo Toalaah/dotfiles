@@ -7,6 +7,7 @@
   vim.opt.confirm = true;
   vim.opt.cursorline = true;
   vim.opt.diffopt = "vertical";
+  vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:blinkon1,r-cr-o:hor20";
   vim.opt.expandtab = true;
   vim.opt.foldlevel = 99;
   vim.opt.hidden = true;

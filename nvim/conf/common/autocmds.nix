@@ -30,6 +30,16 @@ in {
       inherit group;
     }
     {
+      event = "RecordingEnter";
+      pattern = "*";
+      command = "set cmdheight=1";
+    }
+    {
+      event = "RecordingLeave";
+      pattern = "*";
+      command = "set cmdheight=0";
+    }
+    {
       event = "BufWritePre";
       pattern = "*";
       callback =
