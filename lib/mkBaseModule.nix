@@ -57,7 +57,7 @@ in {
     psmisc
     tldr
     pciutils
-    python3
+    (python3.withPackages (ps: [ps.requests]))
     tree
     unzip
     wget
