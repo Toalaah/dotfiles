@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/security/pass
@@ -15,6 +19,8 @@
     nodejs
     mpv
     yt-dlp
+    cifs-utils
+    samba
   ];
 
   services.xserver = {
