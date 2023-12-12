@@ -233,18 +233,23 @@
     },
     "gulp": {
       "inputs": {
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1699808334,
-        "narHash": "sha256-kXutpZ3CpacuAIlWWvchBd/WjR9DtBb3BuAAqkFGaCo=",
-        "path": "/home/samuel/src/github/toalaah/gulp",
-        "type": "path"
+        "lastModified": 1702394864,
+        "narHash": "sha256-t6zgaMJkX9bo91OKxDwF7Aonnfmqht4FWz1sO4hewXE=",
+        "owner": "toalaah",
+        "repo": "gulp",
+        "rev": "39ef9f4bacd855cfd83da38e05c1c84cea971952",
+        "type": "github"
       },
       "original": {
-        "path": "/home/samuel/src/github/toalaah/gulp",
-        "type": "path"
+        "owner": "toalaah",
+        "repo": "gulp",
+        "type": "github"
       }
     },
     "home-manager": {
@@ -390,21 +395,6 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1699701766,
-        "narHash": "sha256-hw06jtI/IZH8TKTa7Cz8qtP8z9Tef9VX84I7hc2aww4=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "008d84ab67c4f4ccbd7c0996005e46c8bd32d675",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
         "lastModified": 1699099776,
         "narHash": "sha256-X09iKJ27mGsGambGfkKzqvw5esP1L/Rf8H3u3fCqIiU=",
         "owner": "nixos",
@@ -464,7 +454,7 @@
         "home-manager": "home-manager",
         "neovim-nightly": "neovim-nightly",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_2",
         "nixpkgs-libvterm": "nixpkgs-libvterm",
         "nur": "nur",
         "nvim-utils": "nvim-utils",

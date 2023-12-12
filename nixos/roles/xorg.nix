@@ -1,4 +1,12 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  gulp,
+  ...
+}: {
+  imports = [
+    gulp.nixosModules.default
+  ];
+  services.gulp.enable = true;
   services.xserver = {
     enable = true;
     layout = "us";
@@ -19,7 +27,7 @@
     vSync = true;
     shadowOpacity = 0.6;
     settings = {
-      frame-opacity = 0.25;
+      frame-opacity = 0.7;
       # inactive-opacity-override = false;
       # wm-ignore = false;
     };

@@ -38,7 +38,8 @@
 
     eww.url = "github:ralismark/eww/tray-3";
 
-    gulp.url = "/home/samuel/src/github/toalaah/gulp";
+    gulp.url = "github:toalaah/gulp";
+    gulp.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
