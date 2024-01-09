@@ -55,7 +55,6 @@ in {
               shape = "Block";
             };
           };
-          draw_bold_text_with_bright_colors = true;
           font = {
             size = cfg.fontSize;
             bold = {
@@ -70,16 +69,12 @@ in {
               family = cfg.fontFamily;
               style = "Italic";
             };
-            light = {
-              family = cfg.fontFamily;
-              style = "Light";
-            };
             normal = {
               family = cfg.fontFamily;
               style = "Regular";
             };
           };
-          key_bindings =
+          keyboard.bindings =
             []
             ++ lib.optional pkgs.stdenv.isDarwin {
               action = "ToggleFullscreen";
@@ -87,7 +82,7 @@ in {
               mods = "Command|Shift";
             };
           scrolling.history = 10000;
-          colors = colorScheme;
+          colors.draw_bold_text_with_bright_colors = true;
           window = {
             decorations = "none";
             dimensions = {
