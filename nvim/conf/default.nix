@@ -76,9 +76,9 @@ in {
   };
 
   # colorschemes
-  colorschemes.gruvbox.enable = true;
+  # colorschemes.gruvbox.enable = true;
   postHooks = ''
-    vim.cmd.colorscheme "gruvbox"
+    vim.cmd.colorscheme "slate"
   '';
 
   # git integration
@@ -160,6 +160,7 @@ in {
   languages.python.enable = true;
   languages.c.enable = true;
   languages.terraform.enable = true;
+  languages.typst.enable = true;
   languages.terraform.settings = {};
   languages.rust.enable = true;
   languages.yaml.enable = true;

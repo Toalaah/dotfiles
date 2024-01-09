@@ -32,9 +32,8 @@
     nvim-utils.url = "github:toalaah/nvim-utils";
     nvim-utils.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixpkgs-libvterm.url = "github:mrtnvgr/nixpkgs/update-libvterm-neovim-to-v0.3.3";
     neovim-nightly.url = "github:neovim/neovim/nightly?dir=contrib";
-    neovim-nightly.inputs.nixpkgs.follows = "nixpkgs-libvterm";
+    neovim-nightly.inputs.nixpkgs.follows = "nixpkgs";
 
     eww.url = "github:ralismark/eww/tray-3";
 

@@ -8,6 +8,7 @@ in {
   imports = [../../modules ../attributes.nix ./secrets];
 
   # xresources.properties."Xft.dpi" = 144;
+  services.syncthing.enable = true;
 
   home = {
     username = user.name;
